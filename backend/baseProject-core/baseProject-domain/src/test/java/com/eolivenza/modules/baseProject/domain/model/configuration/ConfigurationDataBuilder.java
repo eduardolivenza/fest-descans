@@ -21,7 +21,7 @@ public class ConfigurationDataBuilder {
                 .withDemographicIdentifier(1)
                 .withAutomaticExportEnabled(true)
                 .withLocalExecutionTime(LocalTime.NOON)
-                .withReportFrequency(ProductType.ReportFrequency.WEEKLY)
+                .withReportFrequency(Configuration.ReportFrequency.WEEKLY)
                 .withDayOfWeek(DayOfWeek.SATURDAY)
                 .withMonthDay(null);
     }

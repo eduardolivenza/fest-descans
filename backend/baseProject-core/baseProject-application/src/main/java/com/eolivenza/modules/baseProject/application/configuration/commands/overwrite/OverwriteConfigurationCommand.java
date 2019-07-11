@@ -2,7 +2,7 @@ package com.eolivenza.modules.baseProject.application.configuration.commands.ove
 
 
 import com.eolivenza.modules.baseProject.application.Command;
-import com.eolivenza.modules.baseProject.domain.model.configuration.ProductType;
+import com.eolivenza.modules.baseProject.domain.model.configuration.Configuration;
 
 import java.time.DayOfWeek;
 import java.time.LocalTime;
@@ -15,7 +15,7 @@ public class OverwriteConfigurationCommand implements Command {
     private int demographicIdentifier;
     private boolean enableAutomaticExport;
     private LocalTime localExecutionTime;
-    private ProductType.ReportFrequency reportFrequency;
+    private Configuration.ReportFrequency reportFrequency;
     private DayOfWeek dayOfWeek;
     private Integer monthDay;
 
@@ -47,7 +47,7 @@ public class OverwriteConfigurationCommand implements Command {
         return localExecutionTime;
     }
 
-    public ProductType.ReportFrequency getReportFrequency() {
+    public Configuration.ReportFrequency getReportFrequency() {
         return reportFrequency;
     }
 
@@ -84,7 +84,7 @@ public class OverwriteConfigurationCommand implements Command {
         return this;
     }
 
-    public OverwriteConfigurationCommand setReportFrequency(ProductType.ReportFrequency reportFrequency) {
+    public OverwriteConfigurationCommand setReportFrequency(Configuration.ReportFrequency reportFrequency) {
         this.reportFrequency = reportFrequency;
         return this;
     }

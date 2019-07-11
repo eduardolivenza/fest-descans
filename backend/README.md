@@ -14,7 +14,7 @@ Project goal goes here.
 * **Java Development Kit**: https://drive.google.com/open?id=1vKeS7olEr9nmoA3m31gmEhNoa8kztyI5
 * **Maven**: https://maven.apache.org/download.cgi
 
-**Environment productType document:**
+**Environment configuration document:**
  https://docs.google.com/document/d/1DQOgXCFFceTuGrLeBTaCPYPAzfud5XUpk5RbGGiuZ4g/edit#
 
 

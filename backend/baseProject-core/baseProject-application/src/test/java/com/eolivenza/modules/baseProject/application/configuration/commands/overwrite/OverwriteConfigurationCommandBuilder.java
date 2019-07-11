@@ -1,6 +1,6 @@
 package com.eolivenza.modules.baseProject.application.configuration.commands.overwrite;
 
-import com.eolivenza.modules.baseProject.domain.model.configuration.ProductType;
+import com.eolivenza.modules.baseProject.domain.model.configuration.Configuration;
 
 import java.time.DayOfWeek;
 import java.time.LocalTime;
@@ -12,7 +12,7 @@ public final class OverwriteConfigurationCommandBuilder {
     private Integer demographicIdentifier;
     private boolean enableAutomaticExport;
     private LocalTime executionTime;
-    private ProductType.ReportFrequency reportFrequency;
+    private Configuration.ReportFrequency reportFrequency;
     private DayOfWeek dayOfWeek;
     private Integer monthDay;
 
@@ -53,7 +53,7 @@ public final class OverwriteConfigurationCommandBuilder {
         return this;
     }
 
-    public OverwriteConfigurationCommandBuilder withReportFrequency(ProductType.ReportFrequency reportFrequency) {
+    public OverwriteConfigurationCommandBuilder withReportFrequency(Configuration.ReportFrequency reportFrequency) {
         this.reportFrequency = reportFrequency;
         return this;
     }

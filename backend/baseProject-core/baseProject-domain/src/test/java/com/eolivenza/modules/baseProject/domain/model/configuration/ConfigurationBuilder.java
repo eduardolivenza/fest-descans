@@ -10,7 +10,7 @@ public final class ConfigurationBuilder {
     private Integer demographicIdentifier;
     private boolean automaticExportEnabled;
     private LocalTime localExecutionTime;
-    private ProductType.ReportFrequency reportFrequency;
+    private Configuration.ReportFrequency reportFrequency;
     private DayOfWeek dayOfWeek;
     private Integer monthDay;
 
@@ -51,7 +51,7 @@ public final class ConfigurationBuilder {
         return this;
     }
 
-    public ConfigurationBuilder withReportFrequency(ProductType.ReportFrequency reportFrequency) {
+    public ConfigurationBuilder withReportFrequency(Configuration.ReportFrequency reportFrequency) {
         this.reportFrequency = reportFrequency;
         return this;
     }
@@ -66,7 +66,7 @@ public final class ConfigurationBuilder {
         return this;
     }
 
-    public ProductType build() {
-        return new ProductType(clientIdentifier, exportPath, countryIdentifier, demographicIdentifier, automaticExportEnabled, localExecutionTime, reportFrequency, dayOfWeek, monthDay);
+    public Configuration build() {
+        return new Configuration(clientIdentifier, exportPath, countryIdentifier, demographicIdentifier, automaticExportEnabled, localExecutionTime, reportFrequency, dayOfWeek, monthDay);
     }
 }

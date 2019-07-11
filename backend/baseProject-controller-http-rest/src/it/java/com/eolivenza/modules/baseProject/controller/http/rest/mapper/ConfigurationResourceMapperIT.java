@@ -2,7 +2,7 @@ package com.eolivenza.modules.baseProject.controller.http.rest.mapper;
 
 import com.eolivenza.modules.baseProject.controller.http.rest.resources.ConfigurationResource;
 import com.eolivenza.modules.baseProject.controller.http.rest.resources.ConfigurationResourceDataBuilder;
-import com.eolivenza.modules.baseProject.domain.model.configuration.ProductType;
+import com.eolivenza.modules.baseProject.domain.model.configuration.Configuration;
 import com.eolivenza.modules.baseProject.domain.model.configuration.ConfigurationDataBuilder;
 import org.junit.Before;
 import org.junit.Test;
@@ -20,22 +20,22 @@ public class ConfigurationResourceMapperIT {
 
     @Test
     public void fromDomainToResource() {
-        ProductType productType = ConfigurationDataBuilder
+        Configuration configuration = ConfigurationDataBuilder
                 .defaultWithAutomaticExportEnabledBuilder()
                 .build();
 
-        ConfigurationResource configurationResource = configurationResourceMapper.toSecondType(productType);
+        ConfigurationResource configurationResource = configurationResourceMapper.toSecondType(configuration);
 
-        assertThat(configurationResource.uuid).isEqualTo(productType.getUUID().toString());
-        assertThat(configurationResource.clientIdentifier).isEqualTo(productType.getClientIdentifier());
-        assertThat(configurationResource.exportPath).isEqualTo(productType.getExportPath());
-        assertThat(configurationResource.countryIdentifier).isEqualTo(productType.getCountryIdentifier());
-        assertThat(configurationResource.demographicIdentifier).isEqualTo(productType.getDemographicIdentifier());
-        assertThat(configurationResource.automaticExportEnabled).isEqualTo(productType.isAutomaticExportEnabled());
-        assertThat(configurationResource.localExecutionTime).isEqualTo(productType.getLocalExecutionTime().toString());
-        assertThat(configurationResource.reportFrequency).isEqualTo(productType.getReportFrequency().toString());
-        assertThat(configurationResource.dayOfWeek).isEqualTo(productType.getDayOfWeek().toString());
-        assertThat(configurationResource.monthDay).isEqualTo(productType.getMonthDay());
+        assertThat(configurationResource.uuid).isEqualTo(configuration.getUUID().toString());
+        assertThat(configurationResource.clientIdentifier).isEqualTo(configuration.getClientIdentifier());
+        assertThat(configurationResource.exportPath).isEqualTo(configuration.getExportPath());
+        assertThat(configurationResource.countryIdentifier).isEqualTo(configuration.getCountryIdentifier());
+        assertThat(configurationResource.demographicIdentifier).isEqualTo(configuration.getDemographicIdentifier());
+        assertThat(configurationResource.automaticExportEnabled).isEqualTo(configuration.isAutomaticExportEnabled());
+        assertThat(configurationResource.localExecutionTime).isEqualTo(configuration.getLocalExecutionTime().toString());
+        assertThat(configurationResource.reportFrequency).isEqualTo(configuration.getReportFrequency().toString());
+        assertThat(configurationResource.dayOfWeek).isEqualTo(configuration.getDayOfWeek().toString());
+        assertThat(configurationResource.monthDay).isEqualTo(configuration.getMonthDay());
     }
 
     @Test
@@ -44,16 +44,16 @@ public class ConfigurationResourceMapperIT {
                 .defaultBuilder()
                 .build();
 
-        ProductType productType = configurationResourceMapper.toFirstType(configurationResource);
+        Configuration configuration = configurationResourceMapper.toFirstType(configurationResource);
 
-        assertThat(configurationResource.clientIdentifier).isEqualTo(productType.getClientIdentifier());
-        assertThat(configurationResource.exportPath).isEqualTo(productType.getExportPath());
-        assertThat(configurationResource.countryIdentifier).isEqualTo(productType.getCountryIdentifier());
-        assertThat(configurationResource.demographicIdentifier).isEqualTo(productType.getDemographicIdentifier());
-        assertThat(configurationResource.automaticExportEnabled).isEqualTo(productType.isAutomaticExportEnabled());
-        assertThat(configurationResource.localExecutionTime).isEqualTo(productType.getLocalExecutionTime().toString());
-        assertThat(configurationResource.reportFrequency).isEqualTo(productType.getReportFrequency().toString());
-        assertThat(configurationResource.dayOfWeek).isEqualTo(productType.getDayOfWeek().toString());
-        assertThat(configurationResource.monthDay).isEqualTo(productType.getMonthDay());
+        assertThat(configurationResource.clientIdentifier).isEqualTo(configuration.getClientIdentifier());
+        assertThat(configurationResource.exportPath).isEqualTo(configuration.getExportPath());
+        assertThat(configurationResource.countryIdentifier).isEqualTo(configuration.getCountryIdentifier());
+        assertThat(configurationResource.demographicIdentifier).isEqualTo(configuration.getDemographicIdentifier());
+        assertThat(configurationResource.automaticExportEnabled).isEqualTo(configuration.isAutomaticExportEnabled());
+        assertThat(configurationResource.localExecutionTime).isEqualTo(configuration.getLocalExecutionTime().toString());
+        assertThat(configurationResource.reportFrequency).isEqualTo(configuration.getReportFrequency().toString());
+        assertThat(configurationResource.dayOfWeek).isEqualTo(configuration.getDayOfWeek().toString());
+        assertThat(configurationResource.monthDay).isEqualTo(configuration.getMonthDay());
     }
 }

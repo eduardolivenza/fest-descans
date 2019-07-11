@@ -4,5 +4,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface ProductTypeJpaSpringData extends JpaRepository<ProductTypeJpa, String> {
+public interface ConfigurationRepositoryJpaSpringData extends JpaRepository<ConfigurationJpa, String> {
 }

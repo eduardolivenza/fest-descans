@@ -1,8 +1,8 @@
 package com.eolivenza.modules.baseProject.application.configuration.commands.overwrite;
 
 import com.eolivenza.modules.baseProject.application.configuration.FileNameNotValidException;
-import com.eolivenza.modules.baseProject.application.repositories.ProductTypeRepository;
-import com.eolivenza.modules.baseProject.domain.model.configuration.ProductType;
+import com.eolivenza.modules.baseProject.application.repositories.ConfigurationRepository;
+import com.eolivenza.modules.baseProject.domain.model.configuration.Configuration;
 import org.assertj.core.api.AssertionsForClassTypes;
 import org.junit.Before;
 import org.junit.Test;
@@ -15,12 +15,12 @@ import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
-public class OverwriteProductTypeCommandHandlerTest {
+public class OverwriteConfigurationCommandHandlerTest {
     @Mock
-    private ProductTypeRepository productTypeRepositoryMock;
+    private ConfigurationRepository configurationRepositoryMock;
 
     @Mock
-    private ProductType productTypeMock;
+    private Configuration configurationMock;
 
     private OverwriteConfigurationCommandHandler overwriteConfigurationCommandHandler;
 
@@ -28,7 +28,7 @@ public class OverwriteProductTypeCommandHandlerTest {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
 
-        overwriteConfigurationCommandHandler = new OverwriteConfigurationCommandHandler(productTypeRepositoryMock);
+        overwriteConfigurationCommandHandler = new OverwriteConfigurationCommandHandler(configurationRepositoryMock);
     }
 
 
@@ -37,15 +37,15 @@ public class OverwriteProductTypeCommandHandlerTest {
         String exportPath = "c:";
         OverwriteConfigurationCommand overwriteConfigurationCommand = OverwriteConfigurationCommandDataBuilder.defaultBuilder().withExportPath(exportPath).build();
 
-        when(productTypeRepositoryMock.exists(ProductType.CONFIGURATION_UUID)).thenReturn(true);
-        when(productTypeRepositoryMock.retrieve(ProductType.CONFIGURATION_UUID)).thenReturn(productTypeMock);
+        when(configurationRepositoryMock.exists(Configuration.CONFIGURATION_UUID)).thenReturn(true);
+        when(configurationRepositoryMock.retrieve(Configuration.CONFIGURATION_UUID)).thenReturn(configurationMock);
 
         overwriteConfigurationCommandHandler.accept(overwriteConfigurationCommand);
 
 
-        Mockito.verify(productTypeRepositoryMock).exists(ProductType.CONFIGURATION_UUID);
-        Mockito.verify(productTypeRepositoryMock).retrieve(ProductType.CONFIGURATION_UUID);
-        Mockito.verify(productTypeRepositoryMock).update(any(ProductType.class));
+        Mockito.verify(configurationRepositoryMock).exists(Configuration.CONFIGURATION_UUID);
+        Mockito.verify(configurationRepositoryMock).retrieve(Configuration.CONFIGURATION_UUID);
+        Mockito.verify(configurationRepositoryMock).update(any(Configuration.class));
     }
 
     @Test
@@ -55,8 +55,8 @@ public class OverwriteProductTypeCommandHandlerTest {
                 withClientIdentifier(configName).
                 build();
 
-        when(productTypeRepositoryMock.exists(ProductType.CONFIGURATION_UUID)).thenReturn(true);
-        when(productTypeRepositoryMock.retrieve(ProductType.CONFIGURATION_UUID)).thenReturn(productTypeMock);
+        when(configurationRepositoryMock.exists(Configuration.CONFIGURATION_UUID)).thenReturn(true);
+        when(configurationRepositoryMock.retrieve(Configuration.CONFIGURATION_UUID)).thenReturn(configurationMock);
 
         assertThatExceptionOfType(FileNameNotValidException.class)
                 .isThrownBy(() -> overwriteConfigurationCommandHandler.accept(overwriteConfigurationCommand))
@@ -69,12 +69,12 @@ public class OverwriteProductTypeCommandHandlerTest {
         String exportPath = "c:";
         OverwriteConfigurationCommand overwriteConfigurationCommand = OverwriteConfigurationCommandDataBuilder.defaultBuilder().withExportPath(exportPath).build();
 
-        when(productTypeRepositoryMock.exists(ProductType.CONFIGURATION_UUID)).thenReturn(false);
+        when(configurationRepositoryMock.exists(Configuration.CONFIGURATION_UUID)).thenReturn(false);
 
         overwriteConfigurationCommandHandler.accept(overwriteConfigurationCommand);
 
-        Mockito.verify(productTypeRepositoryMock).exists(ProductType.CONFIGURATION_UUID);
-        Mockito.verify(productTypeRepositoryMock).create(any(ProductType.class));
+        Mockito.verify(configurationRepositoryMock).exists(Configuration.CONFIGURATION_UUID);
+        Mockito.verify(configurationRepositoryMock).create(any(Configuration.class));
     }
 
     @Test

@@ -4,7 +4,6 @@ import com.eolivenza.modules.baseProject.application.QueryHandler;
 import com.eolivenza.modules.baseProject.application.QueryLogger;
 import com.eolivenza.modules.baseProject.application.configuration.queries.GetConfigurationQueryHandler;
 import com.eolivenza.modules.baseProject.application.users.queries.GetUserQueryHandler;
-import com.eolivenza.modules.baseProject.domain.model.configuration.ProductType;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
@@ -16,7 +15,7 @@ public class QueryHandlerConfiguration {
 
     @Bean
     @Primary
-    public QueryHandler<Class<Void>, Optional<ProductType>> GetConfigurationQueryHandler(GetConfigurationQueryHandler handler) {
+    public QueryHandler<Class<Void>, Optional<com.eolivenza.modules.baseProject.domain.model.configuration.Configuration>> GetConfigurationQueryHandler(GetConfigurationQueryHandler handler) {
         return new QueryLogger(handler);
     }
 
