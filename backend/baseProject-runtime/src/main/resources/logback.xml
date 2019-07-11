@@ -4,7 +4,7 @@
     <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
             <pattern>%d{HH:mm:ss.SSS} [%t] %-5level %logger - %msg%n</pattern>
-            <!--<pattern>%d{HH:mm:ss.SSS} [%t] %-5level %logger - RequestId:%X{request-id} - Remote-Address:%X{remote-address} - User:%X{user} - CommandId:%X{command-id} - Command-Type:%X{command-type} %msg%n</pattern>-->
+            <!--<pattern>%d{HH:mm:ss.SSS} [%t] %-5level %logger - RequestId:%X{request-id} - Remote-Address:%X{remote-address} - Product:%X{user} - CommandId:%X{command-id} - Command-Type:%X{command-type} %msg%n</pattern>-->
         </encoder>
     </appender>
 

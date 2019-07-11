@@ -3,7 +3,7 @@ package com.eolivenza.modules.baseProject.controller.http.rest.resources;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
-@ApiModel(value = "User", description = "Text for describing the user")
+@ApiModel(value = "Product", description = "Text for describing the user")
 public class UserResource {
 
 

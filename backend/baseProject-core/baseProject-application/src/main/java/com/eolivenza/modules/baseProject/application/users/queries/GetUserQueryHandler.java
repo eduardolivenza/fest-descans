@@ -29,7 +29,7 @@ public class GetUserQueryHandler implements QueryHandler<Class<String>, Optional
     }
 
     @Override
-    public String getName() { return "Get User"; }
+    public String getName() { return "Get Product"; }
 
 
 }
