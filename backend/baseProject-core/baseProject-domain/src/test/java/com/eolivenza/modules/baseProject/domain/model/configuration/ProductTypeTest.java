@@ -8,38 +8,38 @@ import java.time.LocalTime;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
-public class ConfigurationTest {
+public class ProductTypeTest {
     @Test
     public void all_instances_of_configuration_should_have_correct_configuration_id() {
-        Configuration configuration = new Configuration();
+        ProductType productType = new ProductType();
 
-        assertThat(configuration.getUUID()).isEqualTo(Configuration.CONFIGURATION_UUID);
+        assertThat(productType.getUUID()).isEqualTo(ProductType.CONFIGURATION_UUID);
     }
 
     @Test
     public void check_report_frequency_is_set_correctly() {
-        Configuration configuration = ConfigurationDataBuilder.defaultWithAutomaticExportEnabledBuilder()
+        ProductType productType = ConfigurationDataBuilder.defaultWithAutomaticExportEnabledBuilder()
                 .build();
 
-        configuration.setDailyFrequency(LocalTime.NOON);
-        assertThat(configuration.getReportFrequency()).isEqualTo(Configuration.ReportFrequency.DAILY);
+        productType.setDailyFrequency(LocalTime.NOON);
+        assertThat(productType.getReportFrequency()).isEqualTo(ProductType.ReportFrequency.DAILY);
 
-        configuration.setWeeklyFrequency(DayOfWeek.MONDAY, LocalTime.NOON);
-        assertThat(configuration.getReportFrequency()).isEqualTo(Configuration.ReportFrequency.WEEKLY);
+        productType.setWeeklyFrequency(DayOfWeek.MONDAY, LocalTime.NOON);
+        assertThat(productType.getReportFrequency()).isEqualTo(ProductType.ReportFrequency.WEEKLY);
 
-        configuration.setMonthlyFrequency(1, LocalTime.NOON);
-        assertThat(configuration.getReportFrequency()).isEqualTo(Configuration.ReportFrequency.MONTHLY);
+        productType.setMonthlyFrequency(1, LocalTime.NOON);
+        assertThat(productType.getReportFrequency()).isEqualTo(ProductType.ReportFrequency.MONTHLY);
     }
 
     @Test
     public void disable_automatic_export() {
-        Configuration configuration = ConfigurationDataBuilder.defaultWithAutomaticExportEnabledBuilder()
+        ProductType productType = ConfigurationDataBuilder.defaultWithAutomaticExportEnabledBuilder()
                 .withAutomaticExportEnabled(true)
                 .build();
 
-        configuration.disableAutomaticExport();
+        productType.disableAutomaticExport();
 
-        assertThat(configuration.isAutomaticExportEnabled()).isEqualTo(false);
+        assertThat(productType.isAutomaticExportEnabled()).isEqualTo(false);
     }
 
     @Test
@@ -50,11 +50,11 @@ public class ConfigurationTest {
         int demographicIdentifier = 1;
         boolean automaticExportEnabled = true;
         LocalTime executionTime = LocalTime.MIDNIGHT;
-        Configuration.ReportFrequency reportFrequency = Configuration.ReportFrequency.WEEKLY;
+        ProductType.ReportFrequency reportFrequency = ProductType.ReportFrequency.WEEKLY;
         DayOfWeek dayOfWeek = DayOfWeek.MONDAY;
         Integer monthDay = null;
 
-        Configuration configuration1 = ConfigurationDataBuilder
+        ProductType productType1 = ConfigurationDataBuilder
                 .defaultBuilder()
                 .withClientIdentifier("client")
                 .withExportPath("aPath")
@@ -62,12 +62,12 @@ public class ConfigurationTest {
                 .withDemographicIdentifier(2)
                 .withAutomaticExportEnabled(true)
                 .withLocalExecutionTime(LocalTime.NOON)
-                .withReportFrequency(Configuration.ReportFrequency.DAILY)
+                .withReportFrequency(ProductType.ReportFrequency.DAILY)
                 .withDayOfWeek(null)
                 .withMonthDay(null)
                 .build();
 
-        Configuration configuration2 = ConfigurationDataBuilder
+        ProductType productType2 = ConfigurationDataBuilder
                 .defaultBuilder()
                 .withClientIdentifier(clientId)
                 .withExportPath(exportPath)
@@ -80,17 +80,17 @@ public class ConfigurationTest {
                 .withMonthDay(monthDay)
                 .build();
 
-        configuration1.overwriteWith(configuration2);
+        productType1.overwriteWith(productType2);
 
-        assertThat(configuration1).isEqualToIgnoringGivenFields(configuration2, "uuid");
+        assertThat(productType1).isEqualToIgnoringGivenFields(productType2, "uuid");
     }
 
     @Test
     public void hasSameIdentity_returns_true() {
-        Configuration configuration1 = ConfigurationDataBuilder.defaultWithAutomaticExportEnabledBuilder().build();
-        Configuration configuration2 = ConfigurationDataBuilder.defaultWithAutomaticExportEnabledBuilder().build();
+        ProductType productType1 = ConfigurationDataBuilder.defaultWithAutomaticExportEnabledBuilder().build();
+        ProductType productType2 = ConfigurationDataBuilder.defaultWithAutomaticExportEnabledBuilder().build();
 
-        assertThat(configuration1.hasSameIdentity(configuration2)).isTrue();
+        assertThat(productType1.hasSameIdentity(productType2)).isTrue();
     }
 
     @Test
@@ -100,14 +100,14 @@ public class ConfigurationTest {
         String countryIdentifier = "ESP";
         Integer demographicIdentifier = 1;
 
-        Configuration configuration = ConfigurationDataBuilder.defaultWithAutomaticExportEnabledBuilder()
+        ProductType productType = ConfigurationDataBuilder.defaultWithAutomaticExportEnabledBuilder()
                 .withClientIdentifier(clientIdentifier)
                 .withExportPath(exportPath)
                 .withCountryIdentifier(countryIdentifier)
                 .withDemographicIdentifier(demographicIdentifier)
                 .build();
 
-        assertThat(configuration.hashCodeCalculation()).isNotNull();
+        assertThat(productType.hashCodeCalculation()).isNotNull();
     }
 
     @Test
@@ -124,7 +124,7 @@ public class ConfigurationTest {
         assertThatExceptionOfType(InvalidConfigurationStateException.class)
                 .isThrownBy(() -> ConfigurationDataBuilder.defaultWithAutomaticExportEnabledBuilder()
                         .withAutomaticExportEnabled(true)
-                        .withReportFrequency(Configuration.ReportFrequency.DAILY)
+                        .withReportFrequency(ProductType.ReportFrequency.DAILY)
                         .withDayOfWeek(null)
                         .withMonthDay(null)
                         .withLocalExecutionTime(null)
@@ -136,7 +136,7 @@ public class ConfigurationTest {
         assertThatExceptionOfType(InvalidConfigurationStateException.class)
                 .isThrownBy(() -> ConfigurationDataBuilder.defaultWithAutomaticExportEnabledBuilder()
                         .withAutomaticExportEnabled(false)
-                        .withReportFrequency(Configuration.ReportFrequency.WEEKLY)
+                        .withReportFrequency(ProductType.ReportFrequency.WEEKLY)
                         .build());
     }
 
@@ -144,7 +144,7 @@ public class ConfigurationTest {
     public void create_a_configuration_with_daily_report_frequency_and_dayOfWeek_as_not_null_should_throw_exception() {
         assertThatExceptionOfType(InvalidConfigurationStateException.class)
                 .isThrownBy(() -> ConfigurationDataBuilder.defaultWithAutomaticExportEnabledBuilder()
-                        .withReportFrequency(Configuration.ReportFrequency.DAILY)
+                        .withReportFrequency(ProductType.ReportFrequency.DAILY)
                         .withDayOfWeek(DayOfWeek.MONDAY)
                         .build());
     }
@@ -153,7 +153,7 @@ public class ConfigurationTest {
     public void create_a_configuration_with_daily_report_frequency_and_monthDay_as_not_null_should_throw_exception() {
         assertThatExceptionOfType(InvalidConfigurationStateException.class)
                 .isThrownBy(() -> ConfigurationDataBuilder.defaultWithAutomaticExportEnabledBuilder()
-                        .withReportFrequency(Configuration.ReportFrequency.DAILY)
+                        .withReportFrequency(ProductType.ReportFrequency.DAILY)
                         .withMonthDay(1)
                         .build());
     }
@@ -162,7 +162,7 @@ public class ConfigurationTest {
     public void create_a_configuration_with_weekly_report_frequency_and_dayOfWeek_as_null_should_throw_exception() {
         assertThatExceptionOfType(InvalidConfigurationStateException.class)
                 .isThrownBy(() -> ConfigurationDataBuilder.defaultWithAutomaticExportEnabledBuilder()
-                        .withReportFrequency(Configuration.ReportFrequency.WEEKLY)
+                        .withReportFrequency(ProductType.ReportFrequency.WEEKLY)
                         .withDayOfWeek(null)
                         .build());
     }
@@ -171,7 +171,7 @@ public class ConfigurationTest {
     public void create_a_configuration_with_weekly_report_frequency_and_monthDay_as_not_null_should_throw_exception() {
         assertThatExceptionOfType(InvalidConfigurationStateException.class)
                 .isThrownBy(() -> ConfigurationDataBuilder.defaultWithAutomaticExportEnabledBuilder()
-                        .withReportFrequency(Configuration.ReportFrequency.WEEKLY)
+                        .withReportFrequency(ProductType.ReportFrequency.WEEKLY)
                         .withMonthDay(1)
                         .build());
     }
@@ -180,7 +180,7 @@ public class ConfigurationTest {
     public void create_a_configuration_with_monthly_report_frequency_and_dayOfWeek_as_not_null_should_throw_exception() {
         assertThatExceptionOfType(InvalidConfigurationStateException.class)
                 .isThrownBy(() -> ConfigurationDataBuilder.defaultWithAutomaticExportEnabledBuilder()
-                        .withReportFrequency(Configuration.ReportFrequency.MONTHLY)
+                        .withReportFrequency(ProductType.ReportFrequency.MONTHLY)
                         .withDayOfWeek(DayOfWeek.MONDAY)
                         .build());
     }
@@ -189,28 +189,28 @@ public class ConfigurationTest {
     public void create_a_configuration_with_monthly_report_frequency_and_monthDay_as_null_should_throw_exception() {
         assertThatExceptionOfType(InvalidConfigurationStateException.class)
                 .isThrownBy(() -> ConfigurationDataBuilder.defaultWithAutomaticExportEnabledBuilder()
-                        .withReportFrequency(Configuration.ReportFrequency.MONTHLY)
+                        .withReportFrequency(ProductType.ReportFrequency.MONTHLY)
                         .withMonthDay(null)
                         .build());
     }
 
     @Test
     public void set_weekly_frequency_with_dayOfWeek_as_null_should_throw_exception() {
-        Configuration configuration = ConfigurationDataBuilder
+        ProductType productType = ConfigurationDataBuilder
                 .defaultBuilder()
                 .build();
 
         assertThatExceptionOfType(InvalidConfigurationStateException.class)
-                .isThrownBy(() -> configuration.setWeeklyFrequency(null, LocalTime.NOON));
+                .isThrownBy(() -> productType.setWeeklyFrequency(null, LocalTime.NOON));
     }
 
     @Test
     public void set_monthly_frequency_with_monthDay_as_null_should_throw_exception() {
-        Configuration configuration = ConfigurationDataBuilder
+        ProductType productType = ConfigurationDataBuilder
                 .defaultBuilder()
                 .build();
 
         assertThatExceptionOfType(InvalidConfigurationStateException.class)
-                .isThrownBy(() -> configuration.setMonthlyFrequency(null, LocalTime.NOON));
+                .isThrownBy(() -> productType.setMonthlyFrequency(null, LocalTime.NOON));
     }
 }

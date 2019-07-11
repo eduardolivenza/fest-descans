@@ -2,9 +2,7 @@ package com.eolivenza.modules.baseProject.application.users.queries;
 
 import com.eolivenza.modules.baseProject.application.QueryHandler;
 import com.eolivenza.modules.baseProject.application.annotations.DomainStrictTransactional;
-import com.eolivenza.modules.baseProject.application.repositories.ConfigurationRepository;
 import com.eolivenza.modules.baseProject.application.repositories.UsersRepository;
-import com.eolivenza.modules.baseProject.domain.model.configuration.Configuration;
 import com.eolivenza.modules.baseProject.domain.model.user.User;
 
 import javax.inject.Inject;

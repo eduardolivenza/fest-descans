@@ -4,7 +4,7 @@ import com.eolivenza.modules.baseProject.configuration.SwaggerUIConfiguration;
 import org.junit.Before;
 import org.junit.Test;
 
-public class SwaggerUIConfigurationTest {
+public class SwaggerUIProductTypeTest {
 
     private SwaggerUIConfiguration swaggerUIConfiguration;
 

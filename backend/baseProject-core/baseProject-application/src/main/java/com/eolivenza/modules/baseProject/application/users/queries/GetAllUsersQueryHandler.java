@@ -2,15 +2,13 @@ package com.eolivenza.modules.baseProject.application.users.queries;
 
 import com.eolivenza.modules.baseProject.application.QueryHandler;
 import com.eolivenza.modules.baseProject.application.annotations.DomainStrictTransactional;
-import com.eolivenza.modules.baseProject.application.repositories.ConfigurationRepository;
 import com.eolivenza.modules.baseProject.application.repositories.UsersRepository;
-import com.eolivenza.modules.baseProject.domain.model.configuration.Configuration;
+import com.eolivenza.modules.baseProject.domain.model.configuration.ProductType;
 import com.eolivenza.modules.baseProject.domain.model.user.User;
 
 import javax.inject.Inject;
 import javax.inject.Named;
 import java.util.List;
-import java.util.Optional;
 
 @Named
 public class GetAllUsersQueryHandler implements QueryHandler<Class<Void>, List<User>> {
@@ -23,10 +21,10 @@ public class GetAllUsersQueryHandler implements QueryHandler<Class<Void>, List<U
     }
 
     /**
-     * Retrieve the {@link Configuration}
+     * Retrieve the {@link ProductType}
      *
      * @param getConfigurationRequest void class
-     * @return a {@link Configuration}
+     * @return a {@link ProductType}
      **/
     @DomainStrictTransactional
     @Override

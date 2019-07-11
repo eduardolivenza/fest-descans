@@ -6,7 +6,7 @@ import com.eolivenza.modules.baseProject.application.configuration.commands.over
 import com.eolivenza.modules.baseProject.application.security.BaseProjectGrantPermission;
 import com.eolivenza.modules.baseProject.controller.http.rest.mapper.ConfigurationResourceMapper;
 import com.eolivenza.modules.baseProject.controller.http.rest.resources.ConfigurationResource;
-import com.eolivenza.modules.baseProject.domain.model.configuration.Configuration;
+import com.eolivenza.modules.baseProject.domain.model.configuration.ProductType;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,12 +21,12 @@ import javax.annotation.security.RolesAllowed;
 import java.util.Optional;
 
 
-@Api(value = "Configuration")
+@Api(value = "ProductType")
 @RestController
 public class ConfigurationController {
 
     private final ConfigurationResourceMapper configurationResourceMapper;
-    private final QueryHandler<Class<Void>, Optional<Configuration>> getConfigurationQueryHandler;
+    private final QueryHandler<Class<Void>, Optional<ProductType>> getConfigurationQueryHandler;
     private final CommandHandler<OverwriteConfigurationCommand> overwriteConfigurationCommandHandler;
 
     /**
@@ -38,7 +38,7 @@ public class ConfigurationController {
      */
     @Autowired
     public ConfigurationController(
-            QueryHandler<Class<Void>, Optional<Configuration>> getConfigurationQueryHandler,
+            QueryHandler<Class<Void>, Optional<ProductType>> getConfigurationQueryHandler,
             ConfigurationResourceMapper configurationResourceMapper,
             CommandHandler<OverwriteConfigurationCommand> overwriteConfigurationCommandHandler) {
         this.getConfigurationQueryHandler = getConfigurationQueryHandler;
@@ -55,14 +55,14 @@ public class ConfigurationController {
     @GetMapping(path = "/configurations", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     @RolesAllowed(BaseProjectGrantPermission.baseProject_SCREEN)
     public ResponseEntity<ConfigurationResource> retrieveConfiguration() {
-        Optional<Configuration> maybeConfiguration = getConfigurationQueryHandler.apply(Void.TYPE);
+        Optional<ProductType> maybeConfiguration = getConfigurationQueryHandler.apply(Void.TYPE);
 
         if (!maybeConfiguration.isPresent()) {
             return ResponseEntity.ok().build();
         }
 
-        Configuration configuration = maybeConfiguration.get();
-        ConfigurationResource configurationResource = configurationResourceMapper.toSecondType(configuration);
+        ProductType productType = maybeConfiguration.get();
+        ConfigurationResource configurationResource = configurationResourceMapper.toSecondType(productType);
         return ResponseEntity.ok(configurationResource);
     }
 
@@ -76,16 +76,16 @@ public class ConfigurationController {
     @RolesAllowed(BaseProjectGrantPermission.MASTER_FILE_EDITION)
     public void overwriteConfiguration(
             @RequestBody ConfigurationResource configurationResource) {
-        Configuration configuration = configurationResourceMapper.toFirstType(configurationResource);
-        OverwriteConfigurationCommand command = new OverwriteConfigurationCommand(configuration.getClientIdentifier())
-                .setCountryIdentifier(configuration.getCountryIdentifier())
-                .setExportPath(configuration.getExportPath())
-                .setDemographicIdentifier(configuration.getDemographicIdentifier())
-                .setEnableAutomaticExport(configuration.isAutomaticExportEnabled())
-                .setDayOfWeek(configuration.getDayOfWeek())
-                .setLocalExecutionTime(configuration.getLocalExecutionTime())
-                .setReportFrequency(configuration.getReportFrequency())
-                .setMonthDay(configuration.getMonthDay());
+        ProductType productType = configurationResourceMapper.toFirstType(configurationResource);
+        OverwriteConfigurationCommand command = new OverwriteConfigurationCommand(productType.getClientIdentifier())
+                .setCountryIdentifier(productType.getCountryIdentifier())
+                .setExportPath(productType.getExportPath())
+                .setDemographicIdentifier(productType.getDemographicIdentifier())
+                .setEnableAutomaticExport(productType.isAutomaticExportEnabled())
+                .setDayOfWeek(productType.getDayOfWeek())
+                .setLocalExecutionTime(productType.getLocalExecutionTime())
+                .setReportFrequency(productType.getReportFrequency())
+                .setMonthDay(productType.getMonthDay());
         overwriteConfigurationCommandHandler.accept(command);
     }
 

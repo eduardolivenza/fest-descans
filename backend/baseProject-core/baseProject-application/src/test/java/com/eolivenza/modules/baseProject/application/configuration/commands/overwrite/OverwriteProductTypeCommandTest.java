@@ -4,7 +4,7 @@ import org.junit.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class OverwriteConfigurationCommandTest {
+public class OverwriteProductTypeCommandTest {
     @Test
     public void call_to_constructor() {
         OverwriteConfigurationCommand overwriteConfigurationCommand = OverwriteConfigurationCommandDataBuilder.defaultBuilder().build();

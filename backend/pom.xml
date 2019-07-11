@@ -105,12 +105,12 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <configuration>
+                <productType>
                     <!--compile-->
                     <!--test-compile-->
                     <source>1.8</source>
                     <target>1.8</target>
-                </configuration>
+                </productType>
             </plugin>
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
@@ -123,11 +123,11 @@
                         <goals>
                             <goal>add-test-source</goal>
                         </goals>
-                        <configuration>
+                        <productType>
                             <sources>
                                 <source>${test.integration.dir}/java</source>
                             </sources>
-                        </configuration>
+                        </productType>
                     </execution>
                 </executions>
             </plugin>
@@ -140,13 +140,13 @@
                             <!--process-test-resources-->
                             <goal>testResources</goal>
                         </goals>
-                        <configuration>
+                        <productType>
                             <resources>
                                 <resource>
                                     <directory>${test.integration.dir}/resources</directory>
                                 </resource>
                             </resources>
-                        </configuration>
+                        </productType>
                     </execution>
                 </executions>
             </plugin>
@@ -260,10 +260,10 @@
                 <version>${spring.boot.version}</version>
                 <scope>test</scope>
             </dependency>
-            <!--spring-boot-configuration-processor-->
+            <!--spring-boot-productType-processor-->
             <dependency>
                 <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-configuration-processor</artifactId>
+                <artifactId>spring-boot-productType-processor</artifactId>
                 <version>${spring.boot.version}</version>
             </dependency>
             <!--Spring Data JPA-->
@@ -408,9 +408,9 @@
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-failsafe-plugin</artifactId>
-                        <configuration>
+                        <productType>
                             <skipITs>true</skipITs>
-                        </configuration>
+                        </productType>
                     </plugin>
                 </plugins>
             </build>
@@ -422,9 +422,9 @@
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-surefire-plugin</artifactId>
-                        <configuration>
+                        <productType>
                             <skipTests>true</skipTests>
-                        </configuration>
+                        </productType>
                     </plugin>
                 </plugins>
             </build>
@@ -436,16 +436,16 @@
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-surefire-plugin</artifactId>
-                        <configuration>
+                        <productType>
                             <skipTests>false</skipTests>
-                        </configuration>
+                        </productType>
                     </plugin>
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-failsafe-plugin</artifactId>
-                        <configuration>
+                        <productType>
                             <skipITs>true</skipITs>
-                        </configuration>
+                        </productType>
                     </plugin>
                 </plugins>
             </build>

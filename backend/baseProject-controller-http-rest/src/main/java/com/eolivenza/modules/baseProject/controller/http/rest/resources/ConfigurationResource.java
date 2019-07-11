@@ -3,7 +3,7 @@ package com.eolivenza.modules.baseProject.controller.http.rest.resources;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
-@ApiModel(value = "Configuration", description = "Text for describing the configuration")
+@ApiModel(value = "ProductType", description = "Text for describing the configuration")
 public class ConfigurationResource {
 
     @ApiModelProperty(value = "UUID", example = "cce8a203-e594-4c18-96bb-cc21eb2ab773", readOnly = true)

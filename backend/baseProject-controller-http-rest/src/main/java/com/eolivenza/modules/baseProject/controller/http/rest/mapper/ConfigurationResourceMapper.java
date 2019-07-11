@@ -1,7 +1,7 @@
 package com.eolivenza.modules.baseProject.controller.http.rest.mapper;
 
 import com.eolivenza.modules.baseProject.controller.http.rest.resources.ConfigurationResource;
-import com.eolivenza.modules.baseProject.domain.model.configuration.Configuration;
+import com.eolivenza.modules.baseProject.domain.model.configuration.ProductType;
 import org.springframework.stereotype.Component;
 
 import java.time.DayOfWeek;
@@ -9,13 +9,13 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
 @Component
-public class ConfigurationResourceMapper implements ResourceMapper<Configuration, ConfigurationResource> {
-    public Configuration toFirstType(ConfigurationResource object) {
+public class ConfigurationResourceMapper implements ResourceMapper<ProductType, ConfigurationResource> {
+    public ProductType toFirstType(ConfigurationResource object) {
         LocalTime localExecutionTime = (object.localExecutionTime == null) ? null : LocalTime.parse(object.localExecutionTime, DateTimeFormatter.ofPattern("HH:mm"));
         DayOfWeek dayOfWeek = (object.dayOfWeek == null) ? null : DayOfWeek.valueOf(object.dayOfWeek);
-        Configuration.ReportFrequency reportFrequency = (object.reportFrequency == null) ? null : Configuration.ReportFrequency.valueOf(object.reportFrequency);
+        ProductType.ReportFrequency reportFrequency = (object.reportFrequency == null) ? null : ProductType.ReportFrequency.valueOf(object.reportFrequency);
 
-        return new Configuration(
+        return new ProductType(
                 object.clientIdentifier,
                 object.exportPath,
                 object.countryIdentifier,
@@ -28,7 +28,7 @@ public class ConfigurationResourceMapper implements ResourceMapper<Configuration
     }
 
     @Override
-    public ConfigurationResource toSecondType(Configuration object) {
+    public ConfigurationResource toSecondType(ProductType object) {
         String dayOfWeek = (object.getDayOfWeek() == null) ? null : object.getDayOfWeek().toString();
         String reportFrequency = (object.getReportFrequency() == null) ? null : object.getReportFrequency().toString();
         String localExecutionTime = (object.getLocalExecutionTime() == null) ? null : object.getLocalExecutionTime().format(DateTimeFormatter.ofPattern("HH:mm"));

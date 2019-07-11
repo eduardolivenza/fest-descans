@@ -5,7 +5,7 @@ import com.eolivenza.modules.baseProject.application.configuration.commands.over
 import com.eolivenza.modules.baseProject.application.configuration.commands.overwrite.OverwriteConfigurationCommandHandler;
 import com.eolivenza.modules.baseProject.controller.http.rest.mapper.ConfigurationResourceMapper;
 import com.eolivenza.modules.baseProject.controller.http.rest.resources.ConfigurationResource;
-import com.eolivenza.modules.baseProject.domain.model.configuration.Configuration;
+import com.eolivenza.modules.baseProject.domain.model.configuration.ProductType;
 import com.eolivenza.modules.baseProject.domain.model.configuration.ConfigurationDataBuilder;
 import org.junit.Before;
 import org.junit.Test;
@@ -25,10 +25,10 @@ import static org.mockito.Mockito.when;
 
 @RunWith(PowerMockRunner.class)
 @PrepareForTest({OverwriteConfigurationCommand.class})
-public class ConfigurationControllerTest {
+public class ProductTypeControllerTest {
 
     @Mock
-    private QueryHandler<Class<Void>, Optional<Configuration>> getConfigurationQueryHandlerMock;
+    private QueryHandler<Class<Void>, Optional<ProductType>> getConfigurationQueryHandlerMock;
 
     @Mock
     private OverwriteConfigurationCommandHandler overwriteConfigurationCommandHandlerMock;
@@ -49,9 +49,9 @@ public class ConfigurationControllerTest {
 
     @Test
     public void retrieveConfiguration() {
-        Configuration configuration = ConfigurationDataBuilder.defaultWithAutomaticExportEnabledBuilder().build();
+        ProductType productType = ConfigurationDataBuilder.defaultWithAutomaticExportEnabledBuilder().build();
 
-        when(getConfigurationQueryHandlerMock.apply(any(Void.TYPE.getClass()))).thenReturn(Optional.of(configuration));
+        when(getConfigurationQueryHandlerMock.apply(any(Void.TYPE.getClass()))).thenReturn(Optional.of(productType));
 
         configurationController.retrieveConfiguration();
 
@@ -68,7 +68,7 @@ public class ConfigurationControllerTest {
         configurationResource.demographicIdentifier = 1;
         configurationResource.automaticExportEnabled = true;
         configurationResource.localExecutionTime = "09:00";
-        configurationResource.reportFrequency = Configuration.ReportFrequency.WEEKLY.toString();
+        configurationResource.reportFrequency = ProductType.ReportFrequency.WEEKLY.toString();
         configurationResource.monthDay = null;
         configurationResource.dayOfWeek = DayOfWeek.SATURDAY.toString();
 

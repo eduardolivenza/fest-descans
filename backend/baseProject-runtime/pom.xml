@@ -13,9 +13,9 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
-                <configuration>
+                <productType>
                     <maxAttempts>120</maxAttempts>
-                </configuration>
+                </productType>
                 <version>${spring.boot.maven.plugin.version}</version>
                 <executions>
                     <execution>
@@ -42,12 +42,12 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-assembly-plugin</artifactId>
-                <configuration>
+                <productType>
                     <descriptors>
                         <descriptor>src/main/resources/assembly/templateConfigZipDefinition.xml</descriptor>
                     </descriptors>
                     <finalName>profiles</finalName>
-                </configuration>
+                </productType>
                 <executions>
                     <execution>
                         <id>make-zip</id>
@@ -96,7 +96,7 @@
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-configuration-processor</artifactId>
+            <artifactId>spring-boot-productType-processor</artifactId>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>

@@ -4,8 +4,8 @@ package com.eolivenza.modules.baseProject.application.configuration.commands.ove
 import com.eolivenza.modules.baseProject.application.CommandHandler;
 import com.eolivenza.modules.baseProject.application.annotations.DomainStrictTransactional;
 import com.eolivenza.modules.baseProject.application.configuration.FileNameNotValidException;
-import com.eolivenza.modules.baseProject.application.repositories.ConfigurationRepository;
-import com.eolivenza.modules.baseProject.domain.model.configuration.Configuration;
+import com.eolivenza.modules.baseProject.application.repositories.ProductTypeRepository;
+import com.eolivenza.modules.baseProject.domain.model.configuration.ProductType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -14,13 +14,13 @@ import javax.inject.Named;
 
 @Named
 public class OverwriteConfigurationCommandHandler implements CommandHandler<OverwriteConfigurationCommand> {
-    private final ConfigurationRepository configurationRepository;
+    private final ProductTypeRepository productTypeRepository;
 
     private Logger logger = LoggerFactory.getLogger(OverwriteConfigurationCommandHandler.class);
 
     @Inject
-    public OverwriteConfigurationCommandHandler(ConfigurationRepository configurationRepository) {
-        this.configurationRepository = configurationRepository;
+    public OverwriteConfigurationCommandHandler(ProductTypeRepository productTypeRepository) {
+        this.productTypeRepository = productTypeRepository;
     }
 
     @DomainStrictTransactional
@@ -31,29 +31,22 @@ public class OverwriteConfigurationCommandHandler implements CommandHandler<Over
         if (overwriteConfigurationCommand.getClientIdentifier().matches(".*[/\n\r\t\0\f`?*\\<>|\":].*")) {
             throw new FileNameNotValidException(overwriteConfigurationCommand.getClientIdentifier());
         }
-        Configuration configurationWithNewValues = toDomain(overwriteConfigurationCommand);
+        ProductType productTypeWithNewValues = toDomain(overwriteConfigurationCommand);
         logger.debug(" Element configuration validated");
-        if (configurationRepository.exists(Configuration.CONFIGURATION_UUID)) {
-            Configuration actualConfiguration = configurationRepository.retrieve(Configuration.CONFIGURATION_UUID);
-            actualConfiguration.overwriteWith(configurationWithNewValues);
-            configurationRepository.update(actualConfiguration);
+        if (productTypeRepository.exists(ProductType.CONFIGURATION_UUID)) {
+            ProductType actualProductType = productTypeRepository.retrieve(ProductType.CONFIGURATION_UUID);
+            actualProductType.overwriteWith(productTypeWithNewValues);
+            productTypeRepository.update(actualProductType);
         }
         else {
-            configurationRepository.create(configurationWithNewValues);
+            productTypeRepository.create(productTypeWithNewValues);
         }
     }
 
-    private Configuration toDomain(OverwriteConfigurationCommand overwriteConfigurationCommand) {
-        return new Configuration(
-                overwriteConfigurationCommand.getClientIdentifier(),
-                overwriteConfigurationCommand.getExportPath(),
-                overwriteConfigurationCommand.getCountryIdentifier(),
-                overwriteConfigurationCommand.getDemographicIdentifier(),
-                overwriteConfigurationCommand.isEnableAutomaticExport(),
-                overwriteConfigurationCommand.getLocalExecutionTime(),
-                overwriteConfigurationCommand.getReportFrequency(),
-                overwriteConfigurationCommand.getDayOfWeek(),
-                overwriteConfigurationCommand.getMonthDay());
+    private ProductType toDomain(OverwriteConfigurationCommand overwriteConfigurationCommand) {
+        return new ProductType(
+                overwriteConfigurationCommand.getClientIdentifier());
+
     }
 
     @Override
