@@ -1,4 +1,4 @@
-# baseProject (electronic Pay Per Reportable)
+# baseProject 
 
 Project goal goes here.
 
@@ -83,51 +83,6 @@ Those tags can be added at Class level, and then will apply to all the tests met
 
 See README at https://stash.intranet.eolivenza.com/stash/projects/RDA/repos/test-definition-annotations/browse
 
-Sample of all tags in a test method:
-```java
-  @Test
-  @ALM(internalID = "5465644-65464-4554", requirements = {"req-1", "req-2"}, nics={"nic-1", "nic-2"})
-  @Creation(owner = "kimJong", date = "2017-10-22")
-  @Approval(user = "nMaduro")
-  @Review(user = "dTrump", date = "2018-10-03")
-  @Definition(name="test2",
-          verify = {
-            @Verification(when = "Every time I grow up", then = "I fall")
-          }
-  )
-  public void test3() {
-      assertTrue(true);
-    }
-```
-
-Or we can put some tags at class level and the rest at method level:
-Sample:
-```java
-@Creation(owner = "kimJong", date = "2017-10-22")
-@Review(user = "dTrump", date = "2018-10-03")
-@Approval(user = "nMaduro")
-@Narrative(description = "As a user I want to break free")
-public class DummyTest {
-
- @Test
-  @ALM(internalID = "5465644-65464-4554", requirements = {"req-1", "req-2"}, nics={"nic-1", "nic-2"})
-  @Definition(name="test1", given = "I'm the best", verify = {@Verification(when = "Every time I grow up", then = "I fall")})
-  public void test1() {
-    assertTrue(true);
-  }
-```
-  
-## Contributing
-
-### Branch strategy 
- ![branch strategy](/docs/branching-strategy/branching-strategy-img.png)
-
-####Branches:
- There will be two types of branches: 
- * **Task branch**: Created from PBI branch. It will contain all commits needed to finish a task. Once all the features, UTs and ITs 
-  related to the task are finished, the branch will be reintegrated into its parent PBI through a pull request.
- * **PBI branch**: Created from master branch. It will contain all the different tasks from a given PBI and once all 
- the tasks related to this PBI are finished and merged into PBI branch, it will be merged into master. 
 
 ##### Rules:
  1. A task branch can only be merged into a PBI branch after a pull request
@@ -144,13 +99,3 @@ the creation of task branches.
 1. Commit your changes to the task branch: `git commit -am 'Add some feature'`
 1. Push to the task branch: `git push origin feature/PBI/my-new-task`
 1. Submit a pull request from task branch to 'master' branch in TFS and add a reviewer :D
-
-## Ubiquitous language
-
-* **Analyzer code number**: 
-* **Result**:
-* **Reagent consumer**:
-* **Instrument**:
-* **Module**:
-* **Activity**:
-* **Configuration**:
