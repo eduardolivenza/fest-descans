@@ -6,7 +6,7 @@ import javax.persistence.Table;
 
 
 @Entity
-@Table(schema = "baseproject_dm_tables", name = "USERS")
+@Table(schema = "baseproject_dm_tables", name = "PRODUCTS")
 public class ProductJpa {
     @Id
     private String email;
