@@ -1,0 +1,1 @@
+CREATE SCHEMA IF NOT EXISTS ica_baseproject_dm_tables
