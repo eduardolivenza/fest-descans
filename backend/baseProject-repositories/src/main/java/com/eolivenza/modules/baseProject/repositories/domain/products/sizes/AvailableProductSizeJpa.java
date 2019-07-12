@@ -28,7 +28,8 @@ public class AvailableProductSizeJpa {
         //JPA demands it
     }
 
-    public AvailableProductSizeJpa(String size, Integer value) {
+    public AvailableProductSizeJpa(String identifier, String size, Integer value) {
+        setIdentifier(identifier);
         setSize(size);
         setValue(value);
     }

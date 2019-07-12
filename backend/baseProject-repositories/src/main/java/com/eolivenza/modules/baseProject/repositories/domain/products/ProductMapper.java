@@ -37,14 +37,17 @@ public class ProductMapper implements Mapper<Product, ProductJpa> {
     @Override
     public ProductJpa fromDomain(Product object) {
         HashSet<AvailableProductSizeJpa> sizesList = new HashSet<AvailableProductSizeJpa>();
-        for (AvailableProduct size : object.getAvailableProducts())
-        {
-            sizesList.add(this.availableProductSizeMapper.fromDomain(size));
-        }
-        return new ProductJpa(
+        ProductJpa productJpa = new ProductJpa(
                 object.getUuid().toString(),
                 object.getProductIdentifier(),
                 sizesList
         );
+        for (AvailableProduct size : object.getAvailableProducts())
+        {
+            AvailableProductSizeJpa availableProduct = this.availableProductSizeMapper.fromDomain(size);
+            availableProduct.productJpa = productJpa;
+            sizesList.add(availableProduct);
+        }
+        return productJpa;
     }
 }

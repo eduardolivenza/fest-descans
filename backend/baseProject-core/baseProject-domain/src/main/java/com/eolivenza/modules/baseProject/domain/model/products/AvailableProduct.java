@@ -8,4 +8,11 @@ public class AvailableProduct {
 
     public Integer price;
 
+    public AvailableProduct(String identifer, String size, Integer price){
+        this.identifier = identifer;
+        this.size = size;
+        this.price = price;
+    }
+
+
 }

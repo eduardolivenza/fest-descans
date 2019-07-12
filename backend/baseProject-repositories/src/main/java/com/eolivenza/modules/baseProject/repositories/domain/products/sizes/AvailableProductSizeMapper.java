@@ -22,23 +22,23 @@ public class AvailableProductSizeMapper implements Mapper<AvailableProduct, Avai
 
     @Override
     public AvailableProduct toDomain(AvailableProductSizeJpa object) {
-        AvailableProduct domainProduct = new AvailableProduct();
-        domainProduct.size = object.getSize();
-        domainProduct.price = object.getValue();
+        AvailableProduct domainProduct = new AvailableProduct(object.getIdentifier(), object.getSize(), object.getValue());
         return domainProduct;
     }
 
     @Override
     public AvailableProductSizeJpa fromDomain(AvailableProduct object) {
-        Optional<AvailableProductSizeJpa> alarmJpaOptional = availableProductJpaSpringData.findById(object.identifier);
-        return alarmJpaOptional.orElseGet(() -> availableProductJpaSpringData.save(new AvailableProductSizeJpa(object.size, object.price)));
+        AvailableProductSizeJpa alarmJpaOptional = new AvailableProductSizeJpa(object.identifier, object.size, object.price);
+
+        return alarmJpaOptional;
     }
 
+    /*
     public AvailableProductSizeJpa fromDomain(Product reagentConsumer, AvailableProduct value) {
         List<AvailableProductSizeJpa> alarmJpaList = availableProductJpaSpringData.findAllByValue(value.identifier);
         Optional<AvailableProductSizeJpa> optionalAlarmJpa = alarmJpaList.stream()
                 .filter(alarmJpa -> alarmJpa.productJpa.getUuid().equals(reagentConsumer.getUuid().toString())).findFirst();
         return optionalAlarmJpa.orElseGet(() -> new AvailableProductSizeJpa(value.size, value.price));
-    }
+    }*/
 
 }

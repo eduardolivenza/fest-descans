@@ -52,9 +52,15 @@ public class ProductsRepositoryImpl implements ProductsRepository {
 
     @Override
     public Product create(Product entity) {
-        ProductJpa productJpa = productMapper.fromDomain(entity);
-        productJpa = productsRepositoryJpaSpringData.saveAndFlush(productJpa);
-        return productMapper.toDomain(productJpa);
+        try {
+            ProductJpa productJpa = productMapper.fromDomain(entity);
+            productJpa = productsRepositoryJpaSpringData.saveAndFlush(productJpa);
+            return productMapper.toDomain(productJpa);
+        }catch(Exception e)
+        {
+            System.out.println(e.getMessage());
+        }
+        return null;
     }
 
     @Override
