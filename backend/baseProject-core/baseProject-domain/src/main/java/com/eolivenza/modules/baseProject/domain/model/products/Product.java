@@ -4,49 +4,60 @@ import com.eolivenza.modules.baseProject.domain.model.Entity;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
 
 public class Product extends Entity<Product> {
 
-    @NotBlank
-    private String email;
     @NotNull
-    private String password;
-    private String name;
+    private UUID uuid;
 
+    @NotBlank
+    private String productIdentifier;
 
-    public Product(){ }
+    @NotNull
+    private Set<@NotBlank AvailableProduct> availableProducts;
 
-    public String getEmail() {
-        return email;
+    public Product(String productIdentifier, HashSet<AvailableProduct> availableProducts){
+        this(UUID.randomUUID(), productIdentifier, new HashSet<>());
     }
 
-    public Product setEmail(String email) {
-        this.email = email;
+    public Product(UUID uuid, String productIdentifier, HashSet<AvailableProduct> availableProducts){
+       this.uuid = uuid;
+       this.productIdentifier= productIdentifier;
+       this.availableProducts = availableProducts;
+    }
+
+    public UUID getUuid() {
+        return uuid;
+    }
+
+    public Product setUuid(UUID uuid) {
+        this.uuid = uuid;
         return this;
     }
 
-    public String getPassword() {
-        return password;
+    public String getProductIdentifier() {
+        return productIdentifier;
     }
 
-    public Product setPassword(String password) {
-        this.password = password;
+    public Product setProductIdentifier(String productIdentifier) {
+        this.productIdentifier = productIdentifier;
         return this;
     }
 
-    public String getName() {
-        return name;
+    public Set<AvailableProduct> getAvailableProducts() {
+        return availableProducts;
     }
 
-    public Product setName(String name) {
-        this.name = name;
-        return this;
+    public void setAvailableProducts(Set<AvailableProduct> availableProducts) {
+        this.availableProducts = availableProducts;
     }
-
 
     public void overwriteWith(Product otherProduct) {
-        setName(otherProduct.getName());
-        setPassword(otherProduct.getPassword());
+        setUuid(otherProduct.getUuid());
+        setProductIdentifier(otherProduct.getProductIdentifier());
     }
 
     @Override

@@ -1,54 +1,53 @@
 package com.eolivenza.modules.baseProject.repositories.domain.products;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import com.eolivenza.modules.baseProject.repositories.domain.products.sizes.AvailableProductSizeJpa;
+import javax.persistence.*;
+import java.util.Set;
 
 
 @Entity
 @Table(schema = "baseproject_dm_tables", name = "PRODUCTS")
 public class ProductJpa {
-    @Id
-    private String email;
-    private String name;
-    private String password;
 
+    @Id
+    public String uuid;
+
+    private String productIdentifier;
+
+    @OneToMany(orphanRemoval = true, cascade = CascadeType.ALL, mappedBy = "productJpa", fetch = FetchType.EAGER)
+    public Set<AvailableProductSizeJpa> productSizes;
 
     public ProductJpa() {
         //JPA demands it
     }
 
-    public ProductJpa(String email, String name, String password ) {
-        this.email = email;
-        this.name = name;
-
-        this.password = password;
-
+    public ProductJpa(String uuid,  String productIdentifier, Set<AvailableProductSizeJpa> productSizes ) {
+        this.uuid = uuid;
+        this.productIdentifier = productIdentifier;
+        this.productSizes = productSizes;
     }
 
-    public String getEmail() {
-        return email;
+    public String getUuid() {
+        return uuid;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setUuid(String uuid) {
+        this.uuid = uuid;
     }
 
-    public String getName() {
-        return name;
+    public String getProductIdentifier() {
+        return productIdentifier;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setProductIdentifier(String productIdentifier) {
+        this.productIdentifier = productIdentifier;
     }
 
-    public String getPassword() {
-        return password;
+    public Set<AvailableProductSizeJpa> getProductSizes() {
+        return productSizes;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setProductSizes(Set<AvailableProductSizeJpa> productSizes) {
+        this.productSizes = productSizes;
     }
-
-
 }
