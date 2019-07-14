@@ -20,12 +20,10 @@ import java.util.Optional;
 public class GetAllUsersQueryHandler implements QueryHandler<Class<Void>, List<User>> {
 
     private final UsersRepository usersRepository;
-    private final ProductsRepository pRepository;
 
     @Inject
-    public GetAllUsersQueryHandler(UsersRepository usersRepository, ProductsRepository pRepository) {
+    public GetAllUsersQueryHandler(UsersRepository usersRepository) {
         this.usersRepository = usersRepository;
-        this.pRepository = pRepository;
     }
 
     /**
@@ -37,26 +35,11 @@ public class GetAllUsersQueryHandler implements QueryHandler<Class<Void>, List<U
     @DomainStrictTransactional
     @Override
     public List<User> apply(Class<Void> getConfigurationRequest) {
-        test();
-
         return (usersRepository.retrieveAll());
     }
 
     @Override
     public String getName() { return "GetAllUsers"; }
 
-
-    public void test(){
-        Product p = new Product("My Identifier", new HashSet<AvailableProduct>());
-        HashSet<AvailableProduct> list = new HashSet<>();
-        AvailableProduct size = new AvailableProduct();
-        //<TODO> this is not correct. it could be same identifier as parent
-        size.identifier = p.getUuid().toString();
-        size.size = "135x200";
-        size.price = 400;
-        list.add(size);
-        //p.setAvailableProducts(list);
-        this.pRepository.create(p);
-    }
 
 }

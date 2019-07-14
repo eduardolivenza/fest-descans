@@ -20,10 +20,10 @@ public class Product extends Entity<Product> {
     private Set<@NotBlank AvailableProduct> availableProducts;
 
     public Product(String productIdentifier, HashSet<AvailableProduct> availableProducts){
-        this(UUID.randomUUID(), productIdentifier, new HashSet<>());
+        this(UUID.randomUUID(), productIdentifier, availableProducts);
     }
 
-    public Product(UUID uuid, String productIdentifier, HashSet<AvailableProduct> availableProducts){
+    public Product(UUID uuid, String productIdentifier, Set<AvailableProduct> availableProducts){
        this.uuid = uuid;
        this.productIdentifier= productIdentifier;
        this.availableProducts = availableProducts;

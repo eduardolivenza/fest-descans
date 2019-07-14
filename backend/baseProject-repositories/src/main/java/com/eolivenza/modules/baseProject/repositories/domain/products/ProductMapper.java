@@ -10,7 +10,9 @@ import com.eolivenza.modules.baseProject.repositories.domain.products.sizes.Avai
 import org.springframework.stereotype.Component;
 
 import java.util.HashSet;
+import java.util.Set;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Component
 public class ProductMapper implements Mapper<Product, ProductJpa> {
@@ -24,8 +26,9 @@ public class ProductMapper implements Mapper<Product, ProductJpa> {
 
     @Override
     public Product toDomain(ProductJpa object) {
-        return new Product(UUID.fromString(object.getUuid()), object.getProductIdentifier(), new HashSet<AvailableProduct>() );
+        Set<AvailableProduct> availableProducts = object.productSizes.stream().map(availableProductSizeMapper::toDomain).collect(Collectors.toSet());
 
+        return new Product(UUID.fromString(object.getUuid()), object.getProductIdentifier(), availableProducts );
     }
 
     /**
