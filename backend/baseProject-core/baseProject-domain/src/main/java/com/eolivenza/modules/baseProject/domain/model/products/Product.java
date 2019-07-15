@@ -14,18 +14,25 @@ public class Product extends Entity<Product> {
     private UUID uuid;
 
     @NotBlank
+    private Category category;
+
+    @NotBlank
     private String productIdentifier;
+
+    private String description;
 
     @NotNull
     private Set<@NotBlank AvailableProduct> availableProducts;
 
-    public Product(String productIdentifier, HashSet<AvailableProduct> availableProducts){
-        this(UUID.randomUUID(), productIdentifier, availableProducts);
+    public Product(Category category, String productIdentifier, String description, HashSet<AvailableProduct> availableProducts){
+        this(UUID.randomUUID(), category, productIdentifier, description, availableProducts);
     }
 
-    public Product(UUID uuid, String productIdentifier, Set<AvailableProduct> availableProducts){
+    public Product(UUID uuid,  Category category, String productIdentifier,String description, Set<AvailableProduct> availableProducts){
        this.uuid = uuid;
+       this.category = category;
        this.productIdentifier= productIdentifier;
+       this.description = description;
        this.availableProducts = availableProducts;
     }
 
@@ -53,6 +60,22 @@ public class Product extends Entity<Product> {
 
     public void setAvailableProducts(Set<AvailableProduct> availableProducts) {
         this.availableProducts = availableProducts;
+    }
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public void overwriteWith(Product otherProduct) {

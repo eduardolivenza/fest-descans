@@ -12,16 +12,24 @@ public class ProductResource {
     public String identifier;
 
     @ApiModelProperty(required = true, value = "External identifier", example = "800||1")
+    public String category;
+
+    @ApiModelProperty(required = true, value = "External identifier", example = "800||1")
     public String productIdentifier;
+
+    @ApiModelProperty(required = true, value = "External identifier", example = "800||1")
+    public String productDescription;
 
     @ApiModelProperty(required = false)
     public Set<AvailableSizeResource> sizes;
 
     public ProductResource(){}
 
-    public ProductResource(String identifier, String productIdentifier,  Set<AvailableSizeResource> sizes) {
+    public ProductResource(String identifier, String category, String productIdentifier,  String productDescription, Set<AvailableSizeResource> sizes) {
         this.identifier = identifier;
+        this.category = category;
         this.productIdentifier = productIdentifier;
+        this.productDescription = productDescription;
         this.sizes = sizes;
     }
 }

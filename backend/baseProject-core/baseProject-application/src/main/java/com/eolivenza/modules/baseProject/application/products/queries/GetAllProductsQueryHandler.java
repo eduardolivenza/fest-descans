@@ -5,6 +5,7 @@ import com.eolivenza.modules.baseProject.application.annotations.DomainStrictTra
 import com.eolivenza.modules.baseProject.application.repositories.ProductsRepository;
 import com.eolivenza.modules.baseProject.domain.model.configuration.Configuration;
 import com.eolivenza.modules.baseProject.domain.model.products.AvailableProduct;
+import com.eolivenza.modules.baseProject.domain.model.products.Category;
 import com.eolivenza.modules.baseProject.domain.model.products.Product;
 import com.eolivenza.modules.baseProject.domain.model.user.User;
 
@@ -43,14 +44,15 @@ public class GetAllProductsQueryHandler implements QueryHandler<Class<Void>, Lis
 
     public void test(){
 
+        Category c = new Category("SOFA", "SOFA");
         HashSet<AvailableProduct> list = new HashSet<>();
         list.add(new AvailableProduct("","135x200", 400));
         list.add(new AvailableProduct("","150x200", 500));
-        Product p = new Product("My Identifier", list);
+        Product p = new Product(c, "My Identifier", "product description", list);
         this.pRepository.create(p);
 
         list.add(new AvailableProduct("","90x190", 250));
-        Product p2 = new Product("My Identifier2", list);
+        Product p2 = new Product(c, "My Identifier2", "product 2 description", list);
         this.pRepository.create(p2);
     }
 
