@@ -5,9 +5,12 @@ import com.eolivenza.modules.baseProject.application.repositories.generics.Repos
 import com.eolivenza.modules.baseProject.application.repositories.generics.RetrieveAllRepository;
 import com.eolivenza.modules.baseProject.application.repositories.generics.RetrieveRepository;
 import com.eolivenza.modules.baseProject.domain.model.products.Product;
-import com.eolivenza.modules.baseProject.domain.model.user.User;
+
+import java.util.Optional;
 
 public interface ProductsRepository extends Repository<Product, String>, RetrieveRepository<Product, String>, RetrieveAllRepository<Product> {
+    boolean exists(String externalIdentifier);
 
-    boolean exists(String email);
+
+    Optional<Product> retrieveByProductIdentifier(String productIdentifier);
 }

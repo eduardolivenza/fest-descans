@@ -7,53 +7,39 @@ import com.eolivenza.modules.baseProject.domain.model.configuration.Configuratio
 import com.eolivenza.modules.baseProject.domain.model.products.AvailableProduct;
 import com.eolivenza.modules.baseProject.domain.model.products.Category;
 import com.eolivenza.modules.baseProject.domain.model.products.Product;
-
+import com.eolivenza.modules.baseProject.domain.model.user.User;
 
 import javax.inject.Inject;
 import javax.inject.Named;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Optional;
 
 @Named
-public class GetAllProductsQueryHandler implements QueryHandler<Class<Void>, List<Product>> {
+public class GetProductQueryHandler implements QueryHandler<String, Product> {
 
     private final ProductsRepository pRepository;
 
     @Inject
-    public GetAllProductsQueryHandler( ProductsRepository pRepository) {
+    public GetProductQueryHandler(ProductsRepository pRepository) {
         this.pRepository = pRepository;
     }
 
     /**
      * Retrieve the {@link Configuration}
      *
-     * @param getProductsRequest void class
+     * @param productIdentifier string class
      * @return a {@link Configuration}
      **/
     @DomainStrictTransactional
     @Override
-    public List<Product> apply(Class<Void> getProductsRequest) {
-        test();
-
-        return (pRepository.retrieveAll());
+    public Product apply(String productIdentifier) {
+        Optional<Product> optionalProduct = pRepository.retrieveByProductIdentifier(productIdentifier);
+        return optionalProduct.orElseThrow(() -> new ProductNotFoundException(productIdentifier));
     }
 
     @Override
-    public String getName() { return "GetAllProducts"; }
+    public String getName() { return "GetProduct"; }
 
-
-    public void test(){
-
-        Category c = new Category("SOFA", "SOFA");
-        HashSet<AvailableProduct> list = new HashSet<>();
-        list.add(new AvailableProduct("","135x200", 400));
-        list.add(new AvailableProduct("","150x200", 500));
-        Product p = new Product(c, "Iden1", "product description", list);
-        this.pRepository.create(p);
-        Category c2 = new Category("SOFA2", "SOFA");
-        list.add(new AvailableProduct("","90x190", 250));
-        Product p2 = new Product(c2, "Iden2", "product 2 description", list);
-        this.pRepository.create(p2);
-    }
 
 }

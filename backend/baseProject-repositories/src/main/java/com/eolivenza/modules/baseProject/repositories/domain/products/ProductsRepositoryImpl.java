@@ -30,10 +30,10 @@ public class ProductsRepositoryImpl implements ProductsRepository {
     }
 
     @Override
-    public Product retrieve(String email) {
+    public Product retrieve(String uuid) {
         Product user = null;
         Optional<ProductJpa> optionalUserJpa =
-                productsRepositoryJpaSpringData.findById(email);
+                productsRepositoryJpaSpringData.findById(uuid);
         if (optionalUserJpa.isPresent())
             user = productMapper.toDomain(optionalUserJpa.get());
         return user;
@@ -43,6 +43,12 @@ public class ProductsRepositoryImpl implements ProductsRepository {
     public List<Product> retrieveAll() {
         List<ProductJpa> usersJpaList = productsRepositoryJpaSpringData.findAll();
         return usersJpaList.stream().map(productMapper::toDomain).collect(Collectors.toList());
+    }
+
+    public Optional<Product> retrieveByProductIdentifier(String externalIdentifier)
+    {
+        Optional<ProductJpa> optionalProductJpa = productsRepositoryJpaSpringData.findByProductIdentifier(externalIdentifier);
+        return optionalProductJpa.map(productMapper::toDomain);
     }
 
     @Override
