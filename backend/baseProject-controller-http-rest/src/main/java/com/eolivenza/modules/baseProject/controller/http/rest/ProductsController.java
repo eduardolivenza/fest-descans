@@ -2,10 +2,12 @@ package com.eolivenza.modules.baseProject.controller.http.rest;
 
 import com.eolivenza.modules.baseProject.application.CommandHandler;
 import com.eolivenza.modules.baseProject.application.QueryHandler;
+import com.eolivenza.modules.baseProject.application.categories.commands.AddCategoryCommand;
 import com.eolivenza.modules.baseProject.application.products.commands.AddProductCommand;
 import com.eolivenza.modules.baseProject.application.security.BaseProjectGrantPermission;
 import com.eolivenza.modules.baseProject.controller.http.rest.mapper.AvailableProductResourceMapper;
 import com.eolivenza.modules.baseProject.controller.http.rest.mapper.ProductsResourceMapper;
+import com.eolivenza.modules.baseProject.controller.http.rest.resources.CategoryResource;
 import com.eolivenza.modules.baseProject.controller.http.rest.resources.ProductResource;
 import com.eolivenza.modules.baseProject.domain.model.products.AvailableProduct;
 import com.eolivenza.modules.baseProject.domain.model.products.Product;
@@ -34,6 +36,7 @@ public class ProductsController {
     private final QueryHandler<Class<Void>, List<Product>> getAllProductsQueryHandler;
     private final QueryHandler<String, Product> getProductQueryHandler;
     private final CommandHandler<AddProductCommand> addProductCommandHandler;
+    private final CommandHandler<AddCategoryCommand> addCategoryCommandHandler;
 
 
     @Autowired
@@ -41,6 +44,7 @@ public class ProductsController {
             ProductsResourceMapper productsResourceMapper,
             AvailableProductResourceMapper availableProductResourceMapper,
             CommandHandler<AddProductCommand> addProductCommandHandler,
+            CommandHandler<AddCategoryCommand> addCategoryCommandHandler,
             QueryHandler<Class<Void>, List<Product>> getAllProductsQueryHandler,
             QueryHandler<String, Product> getProductQueryHandler)
     {
@@ -49,6 +53,7 @@ public class ProductsController {
         this.getAllProductsQueryHandler = getAllProductsQueryHandler;
         this.getProductQueryHandler = getProductQueryHandler;
         this.addProductCommandHandler = addProductCommandHandler;
+        this.addCategoryCommandHandler = addCategoryCommandHandler;
     }
 
     @ApiOperation(value = "Adds a new product")
@@ -61,12 +66,23 @@ public class ProductsController {
         }
 
         AddProductCommand addProductCommand = new AddProductCommand(
-                productResource.productDescription,
+                productResource.productIdentifier,
                 productResource.category,
                 productResource.productDescription,
                 sizesSet);
 
         addProductCommandHandler.accept(addProductCommand);
+    }
+
+    @ApiOperation(value = "Adds a new category")
+    @PostMapping(path = "/categories")
+    public void addCategory(@RequestBody final CategoryResource categoryResource) {
+
+        AddCategoryCommand addCategoryCommand = new AddCategoryCommand(
+                categoryResource.identifier ,
+                categoryResource.description );
+
+        addCategoryCommandHandler.accept(addCategoryCommand);
     }
 
     @ApiOperation(value = "Get all products of the system")

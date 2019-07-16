@@ -8,8 +8,8 @@ public class AddAvailableSizeToProductCommand {
 
     public Integer price;
 
-    public AddAvailableSizeToProductCommand(String identifer, String size, Integer price){
-        this.identifier = identifer;
+    public AddAvailableSizeToProductCommand(String productIdentifier, String size, Integer price){
+        this.identifier = productIdentifier;
         this.size = size;
         this.price = price;
     }

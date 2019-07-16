@@ -1,10 +1,7 @@
-package com.eolivenza.modules.baseProject.repositories.domain.products.categories;
+package com.eolivenza.modules.baseProject.repositories.domain.categories;
 
 import com.eolivenza.modules.baseProject.application.Mapper;
-import com.eolivenza.modules.baseProject.domain.model.products.AvailableProduct;
 import com.eolivenza.modules.baseProject.domain.model.products.Category;
-import com.eolivenza.modules.baseProject.repositories.domain.products.sizes.AvailableProductJpaSpringData;
-import com.eolivenza.modules.baseProject.repositories.domain.products.sizes.AvailableProductSizeJpa;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

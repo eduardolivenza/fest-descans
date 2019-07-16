@@ -1,6 +1,6 @@
 package com.eolivenza.modules.baseProject.repositories.domain.products;
 
-import com.eolivenza.modules.baseProject.repositories.domain.products.categories.CategoryJpa;
+import com.eolivenza.modules.baseProject.repositories.domain.categories.CategoryJpa;
 import com.eolivenza.modules.baseProject.repositories.domain.products.sizes.AvailableProductSizeJpa;
 import javax.persistence.*;
 import java.util.Set;

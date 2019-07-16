@@ -1,4 +1,4 @@
-package com.eolivenza.modules.baseProject.repositories.domain.products.categories;
+package com.eolivenza.modules.baseProject.repositories.domain.categories;
 
 import com.eolivenza.modules.baseProject.repositories.domain.products.ProductJpa;
 

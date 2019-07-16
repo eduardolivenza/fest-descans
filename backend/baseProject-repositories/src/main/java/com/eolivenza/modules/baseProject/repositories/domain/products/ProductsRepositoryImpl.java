@@ -1,6 +1,7 @@
 package com.eolivenza.modules.baseProject.repositories.domain.products;
 
 import com.eolivenza.modules.baseProject.application.repositories.ProductsRepository;
+import com.eolivenza.modules.baseProject.domain.model.products.Category;
 import com.eolivenza.modules.baseProject.domain.model.products.Product;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -62,8 +63,8 @@ public class ProductsRepositoryImpl implements ProductsRepository {
             ProductJpa productJpa = productMapper.fromDomain(entity);
             productJpa = productsRepositoryJpaSpringData.saveAndFlush(productJpa);
             return productMapper.toDomain(productJpa);
-        }catch(Exception e)
-        {
+        }
+        catch(Exception e) {
             System.out.println(e.getMessage());
         }
         return null;

@@ -71,7 +71,7 @@ Application is deployed at `[scheme]://[host]:8090`
 Typical example in a development environment: `http://localhost:8090`
 ### Web API
 * You can find the Web API documentation in JSON format at `[scheme]://[host]:9191/v2/api-docs`.
-* You can find a simple client (also the documentation) at `[scheme]://[host]:91917swagger-ui.html`
+* You can find a simple client (also the documentation) at `[scheme]://[host]:9191/swagger-ui.html`
 
 
 

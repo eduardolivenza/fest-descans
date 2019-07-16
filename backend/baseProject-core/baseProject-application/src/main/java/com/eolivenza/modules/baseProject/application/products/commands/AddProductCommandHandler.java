@@ -3,12 +3,10 @@ package com.eolivenza.modules.baseProject.application.products.commands;
 
 import com.eolivenza.modules.baseProject.application.CommandHandler;
 import com.eolivenza.modules.baseProject.application.annotations.DomainStrictTransactional;
-import com.eolivenza.modules.baseProject.application.configuration.FileNameNotValidException;
-import com.eolivenza.modules.baseProject.application.configuration.commands.overwrite.OverwriteConfigurationCommand;
 import com.eolivenza.modules.baseProject.application.products.commands.availableSizes.AddAvailableSizeToProductCommand;
-import com.eolivenza.modules.baseProject.application.repositories.ConfigurationRepository;
+import com.eolivenza.modules.baseProject.application.products.queries.ProductNotFoundException;
+import com.eolivenza.modules.baseProject.application.repositories.CategoriesRepository;
 import com.eolivenza.modules.baseProject.application.repositories.ProductsRepository;
-import com.eolivenza.modules.baseProject.domain.model.configuration.Configuration;
 import com.eolivenza.modules.baseProject.domain.model.products.Category;
 import com.eolivenza.modules.baseProject.domain.model.products.Product;
 import org.slf4j.Logger;
@@ -17,11 +15,14 @@ import org.slf4j.LoggerFactory;
 import javax.inject.Inject;
 import javax.inject.Named;
 import java.util.HashSet;
+import java.util.Optional;
 
 @Named
 public class AddProductCommandHandler implements CommandHandler<AddProductCommand> {
 
     private final ProductsRepository productsRepository;
+
+    private final CategoriesRepository categoriesRepository;
 
     private final CommandHandler<AddAvailableSizeToProductCommand> addAvailableSizeCommandHandler;
 
@@ -29,8 +30,10 @@ public class AddProductCommandHandler implements CommandHandler<AddProductComman
 
     @Inject
     public AddProductCommandHandler(ProductsRepository productsRepository,
+                                    CategoriesRepository categoriesRepository,
                                     CommandHandler<AddAvailableSizeToProductCommand> addAvailableSizeCommandHandler) {
         this.productsRepository = productsRepository;
+        this.categoriesRepository = categoriesRepository;
         this.addAvailableSizeCommandHandler = addAvailableSizeCommandHandler;
     }
 
@@ -38,12 +41,16 @@ public class AddProductCommandHandler implements CommandHandler<AddProductComman
     @Override
     public void accept(AddProductCommand addProductCommand) {
 
-
+        Category category = null;
         if (productsRepository.existsByProductIdentifier(addProductCommand.productIdentifier)) {
             //throw new ReagentConsumerAlreadyExistsException(addProductCommand.externalIdentifier);
         }
-        Category category = new Category("","");
-
+        if (categoriesRepository.existsByIdentifier(addProductCommand.category)){
+            category = categoriesRepository.retrieve(addProductCommand.category);
+        }
+        else{
+            // throw exception
+        }
         Product product = new Product(
                 category,
                 addProductCommand.productIdentifier,
@@ -56,7 +63,7 @@ public class AddProductCommandHandler implements CommandHandler<AddProductComman
         addProductCommand.sizes.forEach(size ->
         {
             AddAvailableSizeToProductCommand addAvailableSizeToProductCommand = new AddAvailableSizeToProductCommand(
-                    "",
+                    addProductCommand.productIdentifier,
                     size.size,
                     size.price
             );
