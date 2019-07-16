@@ -9,8 +9,9 @@ import com.eolivenza.modules.baseProject.domain.model.products.Product;
 import java.util.Optional;
 
 public interface ProductsRepository extends Repository<Product, String>, RetrieveRepository<Product, String>, RetrieveAllRepository<Product> {
-    boolean exists(String externalIdentifier);
 
+    boolean existsByProductIdentifier(String externalIdentifier);
 
     Optional<Product> retrieveByProductIdentifier(String productIdentifier);
+
 }

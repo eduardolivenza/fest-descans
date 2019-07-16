@@ -70,32 +70,8 @@ Application is deployed at `[scheme]://[host]:8090`
 
 Typical example in a development environment: `http://localhost:8090`
 ### Web API
-* You can find the Web API documentation in JSON format at `[scheme]://[host]:8090/v2/api-docs`.
-* You can find a simple client (also the documentation) at `[scheme]://[host]:8090/swagger-ui.html`
-
-### Continuous integration
-
-http://jenkins.kiosk.eolivenza.com/job/Projects/job/eolivenza.DE.LIS/job/infinity-baseProject/
-
-### Test annotation
-In order to synchronize the IT to HPALM we can add tags to our tests. 
-Those tags can be added at Class level, and then will apply to all the tests methods of the class.
-
-See README at https://stash.intranet.eolivenza.com/stash/projects/RDA/repos/test-definition-annotations/browse
+* You can find the Web API documentation in JSON format at `[scheme]://[host]:9191/v2/api-docs`.
+* You can find a simple client (also the documentation) at `[scheme]://[host]:91917swagger-ui.html`
 
 
-##### Rules:
- 1. A task branch can only be merged into a PBI branch after a pull request
- 1. PBI branches will only be merged into master once all tasks are finished (including functional reviews, acceptance tests and development tasks)
- 1. Once a pull request is approved and completed, the source branch must be deleted 
- 1. Be aware of remote branches changes (i.e. often do fetch and merge if necessary as well as to review often the status of the ancestors branches)
- 
-##### Best scenario
-In order to minimize the synchronization overhead between branches, each PBI branch should be smaller enough to avoid
-the creation of task branches.
- 
-###Step by step
-1. Create a 'feature/PBI/my-new-task' branch from master in TFS. Example: `feature/PBI12345/AddInstrumentTobaseProject`
-1. Commit your changes to the task branch: `git commit -am 'Add some feature'`
-1. Push to the task branch: `git push origin feature/PBI/my-new-task`
-1. Submit a pull request from task branch to 'master' branch in TFS and add a reviewer :D
+

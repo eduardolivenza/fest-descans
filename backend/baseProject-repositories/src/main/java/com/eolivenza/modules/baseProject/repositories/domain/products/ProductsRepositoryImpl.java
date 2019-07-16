@@ -45,15 +45,15 @@ public class ProductsRepositoryImpl implements ProductsRepository {
         return usersJpaList.stream().map(productMapper::toDomain).collect(Collectors.toList());
     }
 
-    public Optional<Product> retrieveByProductIdentifier(String externalIdentifier)
-    {
-        Optional<ProductJpa> optionalProductJpa = productsRepositoryJpaSpringData.findByProductIdentifier(externalIdentifier);
-        return optionalProductJpa.map(productMapper::toDomain);
+    @Override
+    public boolean existsByProductIdentifier(String externalIdentifier) {
+        return productsRepositoryJpaSpringData.existsByProductIdentifier(externalIdentifier);
     }
 
     @Override
-    public boolean exists(String email) {
-        return productsRepositoryJpaSpringData.existsById(email);
+    public Optional<Product> retrieveByProductIdentifier(String externalIdentifier) {
+        Optional<ProductJpa> optionalProductJpa = productsRepositoryJpaSpringData.findByProductIdentifier(externalIdentifier);
+        return optionalProductJpa.map(productMapper::toDomain);
     }
 
     @Override
