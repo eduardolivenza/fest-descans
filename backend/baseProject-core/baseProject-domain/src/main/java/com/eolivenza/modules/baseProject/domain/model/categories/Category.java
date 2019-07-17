@@ -1,4 +1,4 @@
-package com.eolivenza.modules.baseProject.domain.model.products;
+package com.eolivenza.modules.baseProject.domain.model.categories;
 
 public class Category {
 

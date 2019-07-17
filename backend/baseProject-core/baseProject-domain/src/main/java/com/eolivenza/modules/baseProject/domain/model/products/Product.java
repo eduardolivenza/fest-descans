@@ -1,6 +1,7 @@
 package com.eolivenza.modules.baseProject.domain.model.products;
 
 import com.eolivenza.modules.baseProject.domain.model.Entity;
+import com.eolivenza.modules.baseProject.domain.model.categories.Category;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -85,11 +86,15 @@ public class Product extends Entity<Product> {
 
     @Override
     public int hashCodeCalculation() {
-        return 0;
+        return super.hashCode();
     }
 
     @Override
     public boolean hasSameIdentity(Product other) {
-        return false;
+        return super.equals(other) && hasSameIdentity((Product) other);
+    }
+
+    public void addAvailableSize(AvailableProduct availableProduct) {
+        this.availableProducts.add(availableProduct);
     }
 }

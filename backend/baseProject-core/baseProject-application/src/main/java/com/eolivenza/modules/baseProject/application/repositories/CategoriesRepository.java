@@ -2,7 +2,7 @@ package com.eolivenza.modules.baseProject.application.repositories;
 
 
 import com.eolivenza.modules.baseProject.application.repositories.generics.Repository;
-import com.eolivenza.modules.baseProject.domain.model.products.Category;
+import com.eolivenza.modules.baseProject.domain.model.categories.Category;
 
 public interface CategoriesRepository  extends Repository<Category, String> {
     boolean existsByIdentifier(String identifer);

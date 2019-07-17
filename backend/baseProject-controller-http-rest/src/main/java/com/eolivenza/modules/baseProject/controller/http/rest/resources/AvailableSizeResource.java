@@ -2,14 +2,12 @@ package com.eolivenza.modules.baseProject.controller.http.rest.resources;
 
 import io.swagger.annotations.ApiModelProperty;
 
-import java.util.Set;
-
 public class AvailableSizeResource {
 
-    @ApiModelProperty(required = false, value = "Size", example = "", readOnly = true)
+    @ApiModelProperty(required = true, value = "Size", example = "90x190x20")
     public String size;
 
-    @ApiModelProperty(required = true, value = "Price", example = "")
+    @ApiModelProperty(required = true, value = "Price", example = "200")
     public Integer price;
 
     public AvailableSizeResource(){}

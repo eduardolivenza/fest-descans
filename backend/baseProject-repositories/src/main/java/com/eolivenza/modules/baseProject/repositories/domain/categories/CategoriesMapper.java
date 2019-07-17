@@ -1,7 +1,7 @@
 package com.eolivenza.modules.baseProject.repositories.domain.categories;
 
 import com.eolivenza.modules.baseProject.application.Mapper;
-import com.eolivenza.modules.baseProject.domain.model.products.Category;
+import com.eolivenza.modules.baseProject.domain.model.categories.Category;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

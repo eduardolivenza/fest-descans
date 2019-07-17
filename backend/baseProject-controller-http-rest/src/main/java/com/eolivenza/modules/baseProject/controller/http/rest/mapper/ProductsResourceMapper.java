@@ -2,7 +2,7 @@ package com.eolivenza.modules.baseProject.controller.http.rest.mapper;
 
 import com.eolivenza.modules.baseProject.controller.http.rest.resources.ProductResource;
 import com.eolivenza.modules.baseProject.domain.model.products.AvailableProduct;
-import com.eolivenza.modules.baseProject.domain.model.products.Category;
+import com.eolivenza.modules.baseProject.domain.model.categories.Category;
 import com.eolivenza.modules.baseProject.domain.model.products.Product;
 import org.springframework.stereotype.Component;
 

@@ -1,19 +1,15 @@
 package com.eolivenza.modules.baseProject.application.products.commands.availableSizes;
 
-
 import com.eolivenza.modules.baseProject.application.CommandHandler;
 import com.eolivenza.modules.baseProject.application.annotations.DomainStrictTransactional;
-import com.eolivenza.modules.baseProject.application.products.commands.AddProductCommand;
 import com.eolivenza.modules.baseProject.application.repositories.ProductsRepository;
 import com.eolivenza.modules.baseProject.domain.model.products.AvailableProduct;
-import com.eolivenza.modules.baseProject.domain.model.products.Category;
 import com.eolivenza.modules.baseProject.domain.model.products.Product;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.inject.Inject;
 import javax.inject.Named;
-import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
 
@@ -37,8 +33,7 @@ public class AddAvailableSizeCommandHandler implements CommandHandler<AddAvailab
         if (optionalProduct.isPresent())
         {
             Product product = optionalProduct.get();
-            Set<AvailableProduct> list = product.getAvailableProducts();
-            list.add(new AvailableProduct("",addProductCommand.size, addProductCommand.price));
+            product.addAvailableSize(new AvailableProduct("",addProductCommand.size, addProductCommand.price));
             productsRepository.update(product);
         }
     }

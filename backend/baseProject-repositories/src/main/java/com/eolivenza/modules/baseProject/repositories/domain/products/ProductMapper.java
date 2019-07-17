@@ -2,7 +2,7 @@ package com.eolivenza.modules.baseProject.repositories.domain.products;
 
 import com.eolivenza.modules.baseProject.application.Mapper;
 import com.eolivenza.modules.baseProject.domain.model.products.AvailableProduct;
-import com.eolivenza.modules.baseProject.domain.model.products.Category;
+import com.eolivenza.modules.baseProject.domain.model.categories.Category;
 import com.eolivenza.modules.baseProject.domain.model.products.Product;
 import com.eolivenza.modules.baseProject.repositories.domain.categories.CategoriesMapper;
 import com.eolivenza.modules.baseProject.repositories.domain.categories.CategoryJpa;

@@ -7,13 +7,11 @@ import io.swagger.annotations.ApiModelProperty;
 public class CategoryResource {
 
 
-    @ApiModelProperty(required = true, value = "Relates to the highest level customer identification. The CustomerID value can come from a global SAP, customer master record, local identifier", example = "Bayley")
+    @ApiModelProperty(required = true, value = " Product type identifier", example = "SOFA")
     public String identifier;
 
-    @ApiModelProperty(required = true, value = "The path on the filesystem where to generate the report file. It must exists.", example = "d:")
+    @ApiModelProperty(required = true, value = " Category description.", example = " sofas & canapes")
     public String description;
-
-
 
     public CategoryResource(){}
 

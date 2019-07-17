@@ -2,12 +2,12 @@ package com.eolivenza.modules.baseProject.controller.http.rest;
 
 import com.eolivenza.modules.baseProject.application.CommandHandler;
 import com.eolivenza.modules.baseProject.application.QueryHandler;
-import com.eolivenza.modules.baseProject.application.categories.commands.AddCategoryCommand;
 import com.eolivenza.modules.baseProject.application.products.commands.AddProductCommand;
+import com.eolivenza.modules.baseProject.application.products.commands.availableSizes.AddAvailableSizeToProductCommand;
 import com.eolivenza.modules.baseProject.application.security.BaseProjectGrantPermission;
 import com.eolivenza.modules.baseProject.controller.http.rest.mapper.AvailableProductResourceMapper;
 import com.eolivenza.modules.baseProject.controller.http.rest.mapper.ProductsResourceMapper;
-import com.eolivenza.modules.baseProject.controller.http.rest.resources.CategoryResource;
+import com.eolivenza.modules.baseProject.controller.http.rest.resources.AvailableSizeResource;
 import com.eolivenza.modules.baseProject.controller.http.rest.resources.ProductResource;
 import com.eolivenza.modules.baseProject.domain.model.products.AvailableProduct;
 import com.eolivenza.modules.baseProject.domain.model.products.Product;
@@ -36,7 +36,7 @@ public class ProductsController {
     private final QueryHandler<Class<Void>, List<Product>> getAllProductsQueryHandler;
     private final QueryHandler<String, Product> getProductQueryHandler;
     private final CommandHandler<AddProductCommand> addProductCommandHandler;
-    private final CommandHandler<AddCategoryCommand> addCategoryCommandHandler;
+    private final CommandHandler<AddAvailableSizeToProductCommand> addAvailableSizeToProductCommandCommandHandler;
 
 
     @Autowired
@@ -44,7 +44,7 @@ public class ProductsController {
             ProductsResourceMapper productsResourceMapper,
             AvailableProductResourceMapper availableProductResourceMapper,
             CommandHandler<AddProductCommand> addProductCommandHandler,
-            CommandHandler<AddCategoryCommand> addCategoryCommandHandler,
+            CommandHandler<AddAvailableSizeToProductCommand> addAvailableSizeToProductCommandHandler,
             QueryHandler<Class<Void>, List<Product>> getAllProductsQueryHandler,
             QueryHandler<String, Product> getProductQueryHandler)
     {
@@ -53,10 +53,11 @@ public class ProductsController {
         this.getAllProductsQueryHandler = getAllProductsQueryHandler;
         this.getProductQueryHandler = getProductQueryHandler;
         this.addProductCommandHandler = addProductCommandHandler;
-        this.addCategoryCommandHandler = addCategoryCommandHandler;
+        this.addAvailableSizeToProductCommandCommandHandler = addAvailableSizeToProductCommandHandler;
+
     }
 
-    @ApiOperation(value = "Adds a new product")
+    @ApiOperation(value = " Adds a new product")
     @PostMapping(path = "/products")
     public void addProduct(@RequestBody final ProductResource productResource) {
         Set<AvailableProduct> sizesSet = new HashSet<>();
@@ -74,18 +75,22 @@ public class ProductsController {
         addProductCommandHandler.accept(addProductCommand);
     }
 
-    @ApiOperation(value = "Adds a new category")
-    @PostMapping(path = "/categories")
-    public void addCategory(@RequestBody final CategoryResource categoryResource) {
+    @ApiOperation(value = " Adds a new available size to an existing product")
+    @PostMapping(path = "/products/sizes/{productIdentifier}")
+    public void addAvailableSizeToExistingProduct(
+            @ApiParam(required = true, value = "External identifier of the instrument", example = "800||1")
+            @PathVariable final String productIdentifier,
+            @RequestBody final AvailableSizeResource availableSizeResource) {
 
-        AddCategoryCommand addCategoryCommand = new AddCategoryCommand(
-                categoryResource.identifier ,
-                categoryResource.description );
+        AddAvailableSizeToProductCommand addAvailableSizeToProductCommand = new AddAvailableSizeToProductCommand(
+                productIdentifier,
+                availableSizeResource.size,
+                availableSizeResource.price);
 
-        addCategoryCommandHandler.accept(addCategoryCommand);
+        addAvailableSizeToProductCommandCommandHandler.accept(addAvailableSizeToProductCommand);
     }
 
-    @ApiOperation(value = "Get all products of the system")
+    @ApiOperation(value = " Get all products of the system")
     @GetMapping(path = "/products", produces = {MediaType.APPLICATION_JSON_UTF8_VALUE})
     @RolesAllowed(BaseProjectGrantPermission.MASTER_FILE_EDITION)
     public List<ProductResource> getAllProducts() {
@@ -93,7 +98,7 @@ public class ProductsController {
         return productList.stream().map(productsResourceMapper::toSecondType).collect(Collectors.toList());
     }
 
-    @ApiOperation(value = "Retrieve one product by its external identifier")
+    @ApiOperation(value = " Retrieve one product by its external identifier")
     @GetMapping(path = "/products/{productIdentifier}", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
    public ProductResource retrieveProduct(
             @ApiParam(required = true, value = "External identifier of the instrument", example = "800||1")

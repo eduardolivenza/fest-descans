@@ -5,7 +5,7 @@ import com.eolivenza.modules.baseProject.application.annotations.DomainStrictTra
 import com.eolivenza.modules.baseProject.application.repositories.ProductsRepository;
 import com.eolivenza.modules.baseProject.domain.model.configuration.Configuration;
 import com.eolivenza.modules.baseProject.domain.model.products.AvailableProduct;
-import com.eolivenza.modules.baseProject.domain.model.products.Category;
+import com.eolivenza.modules.baseProject.domain.model.categories.Category;
 import com.eolivenza.modules.baseProject.domain.model.products.Product;
 
 
@@ -33,8 +33,6 @@ public class GetAllProductsQueryHandler implements QueryHandler<Class<Void>, Lis
     @DomainStrictTransactional
     @Override
     public List<Product> apply(Class<Void> getProductsRequest) {
-        test();
-
         return (pRepository.retrieveAll());
     }
 
@@ -42,18 +40,5 @@ public class GetAllProductsQueryHandler implements QueryHandler<Class<Void>, Lis
     public String getName() { return "GetAllProducts"; }
 
 
-    public void test(){
-
-        Category c = new Category("SOFA", "SOFA");
-        HashSet<AvailableProduct> list = new HashSet<>();
-        list.add(new AvailableProduct("","135x200", 400));
-        list.add(new AvailableProduct("","150x200", 500));
-        Product p = new Product(c, "Iden1", "product description", list);
-        this.pRepository.create(p);
-        Category c2 = new Category("SOFA2", "SOFA");
-        list.add(new AvailableProduct("","90x190", 250));
-        Product p2 = new Product(c2, "Iden2", "product 2 description", list);
-        this.pRepository.create(p2);
-    }
 
 }

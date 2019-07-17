@@ -4,15 +4,12 @@ package com.eolivenza.modules.baseProject.application.categories.commands;
 import com.eolivenza.modules.baseProject.application.CommandHandler;
 import com.eolivenza.modules.baseProject.application.annotations.DomainStrictTransactional;
 import com.eolivenza.modules.baseProject.application.repositories.CategoriesRepository;
-import com.eolivenza.modules.baseProject.application.repositories.ProductsRepository;
-import com.eolivenza.modules.baseProject.domain.model.products.Category;
-import com.eolivenza.modules.baseProject.domain.model.products.Product;
+import com.eolivenza.modules.baseProject.domain.model.categories.Category;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.inject.Inject;
 import javax.inject.Named;
-import java.util.HashSet;
 
 @Named
 public class AddCategoryCommandHandler implements CommandHandler<AddCategoryCommand> {
