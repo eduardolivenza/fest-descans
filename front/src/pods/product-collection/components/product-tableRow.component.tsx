@@ -24,13 +24,11 @@ const ProductRowComponentInner: React.FunctionComponent<Props> = (props) => {
     const { classes, product, editHotel } = props;
 
     return (
-        <TableRow key={product.email} onDoubleClick={() => editHotel(product.email)} className={classes.tableRowHover}>
-            <TableCell align="right" >
-                <img  className={classes.picture} src={product.picture} />
-            </TableCell>
-            <TableCell align="right">{product.firstName}</TableCell>
-            <TableCell align="right">{product.lastName}</TableCell>
-            <TableCell align="right">{product.email}</TableCell>
+        <TableRow key={product.productIdentifier} onDoubleClick={() => editHotel(product.productIdentifier)} className={classes.tableRowHover}>
+     
+            <TableCell align="right">{product.category}</TableCell>
+            <TableCell align="right">{product.productIdentifier}</TableCell>
+            <TableCell align="right">{product.productDescription}</TableCell>
         </TableRow>
     );
 };

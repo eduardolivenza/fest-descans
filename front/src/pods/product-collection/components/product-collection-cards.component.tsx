@@ -22,7 +22,7 @@ export const HotelCollectionCardsComponentInner : React.FunctionComponent<Props>
   return (
     <div className={classes.listLayout}>
       {productCollection.map(product => (
-        <ProductCard product={product} key={product.email} editHotel={editHotel}/>
+        <ProductCard product={product} key={product.productIdentifier} editHotel={editHotel}/>
       ))}
     </div>
   );

@@ -2,9 +2,9 @@ import Axios from "axios";
 import {baseApiUrl} from 'core'
 
 export interface ProductEntityApi {
-  email: string;
-  firstName: string;
-  lastName: string;
+  category: string;
+  productIdentifier: string;
+  productDescription: string;
 }
 
 const getProductsUrl = `${baseApiUrl}/products`;

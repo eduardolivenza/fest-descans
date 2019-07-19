@@ -20,17 +20,15 @@ const ProductCollectionTableComponentInner = (props: Props) => {
     return (
         <Table className={classes.table}>
             <TableHead>
-                <TableRow>
-                    <TableCell align="right">Picture</TableCell>
-                    
-                    <TableCell align="right">First name</TableCell>
-                    <TableCell align="right">Last name</TableCell>
-                    <TableCell align="right">Email</TableCell>
+                <TableRow>    
+                    <TableCell align="right">Category</TableCell>
+                    <TableCell align="right">Product identifier</TableCell>
+                    <TableCell align="right">Product description</TableCell>
                 </TableRow>
             </TableHead>
             <TableBody>
             {
-                productCollection.map(product => (<ProductRowComponent key={product.email} product={product} editHotel={editHotel}/>)   )
+                productCollection.map(product => (<ProductRowComponent key={product.productIdentifier} product={product} editHotel={editHotel}/>)   )
             }
             </TableBody>
         </Table>

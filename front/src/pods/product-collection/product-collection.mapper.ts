@@ -3,12 +3,11 @@ import {ProductEntityVm} from './product-collection.vm';
 import {basePicturesUrl} from 'core';
 
 export const mapFromApiToVm = (apiEntity : ProductEntityApi) : ProductEntityVm => ({
-  email : apiEntity.email,
-  picture : `${basePicturesUrl}`,
-  firstName : apiEntity.firstName,
-  lastName : apiEntity.lastName,
+  category : apiEntity.category,
+  productIdentifier : apiEntity.productIdentifier,
+  productDescription : apiEntity.productDescription,
 });
 
- // picture : `${basePicturesUrl}${apiEntity.thumbNailUrl}`,
+ 
 
 

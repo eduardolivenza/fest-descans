@@ -40,8 +40,8 @@ export const ProductCardInner = (props: Props) => {
             <MoreVertIcon />
           </IconButton>
         }
-        title={product.firstName}
-        subheader={product.email}
+        title={product.productIdentifier}
+        subheader={product.category}
       />
       <CardContent>
         <div
@@ -52,17 +52,17 @@ export const ProductCardInner = (props: Props) => {
           }}
         >
           <CardMedia
-            image={product.picture}
-            title={product.firstName}
+            //image={product.picture}
+            title={product.productIdentifier}
             style={{ height: 0, paddingTop: "56.25%" }}
           />
           <Typography variant="subtitle1" gutterBottom>
-            Description
+           {product.productDescription}
           </Typography>
         </div>
       </CardContent>
       <CardActions disableActionSpacing>
-        <IconButton aria-label="Add to favorites" onClick={() => editHotel(product.email)}>
+        <IconButton aria-label="Add to favorites" onClick={() => editHotel(product.productIdentifier)}>
           <EditIcon />
         </IconButton>
         <IconButton aria-label="Share">
