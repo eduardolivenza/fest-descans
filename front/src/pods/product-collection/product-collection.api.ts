@@ -5,6 +5,7 @@ export interface ProductEntityApi {
   category: string;
   productIdentifier: string;
   productDescription: string;
+  picture: string;
 }
 
 const getProductsUrl = `${baseApiUrl}/products`;

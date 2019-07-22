@@ -1,2 +1,2 @@
-export const basePicturesUrl = 'http://localhost:3000';
+export const basePicturesUrl = 'http://localhost:9191/';
 export const baseApiUrl = 'http://localhost:9191';

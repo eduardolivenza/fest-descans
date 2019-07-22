@@ -21,6 +21,7 @@ const ProductCollectionTableComponentInner = (props: Props) => {
         <Table className={classes.table}>
             <TableHead>
                 <TableRow>    
+                    <TableCell align="right">Picture</TableCell>
                     <TableCell align="right">Category</TableCell>
                     <TableCell align="right">Product identifier</TableCell>
                     <TableCell align="right">Product description</TableCell>

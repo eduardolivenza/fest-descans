@@ -52,7 +52,7 @@ export const ProductCardInner = (props: Props) => {
           }}
         >
           <CardMedia
-            //image={product.picture}
+            image={product.picture}
             title={product.productIdentifier}
             style={{ height: 0, paddingTop: "56.25%" }}
           />

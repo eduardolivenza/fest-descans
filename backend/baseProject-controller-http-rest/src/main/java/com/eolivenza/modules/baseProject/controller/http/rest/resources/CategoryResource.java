@@ -7,7 +7,7 @@ import io.swagger.annotations.ApiModelProperty;
 public class CategoryResource {
 
 
-    @ApiModelProperty(required = true, value = " Product type identifier", example = "SOFA")
+    @ApiModelProperty(required = true, value = " Product type identifier", example = "BED")
     public String identifier;
 
     @ApiModelProperty(required = true, value = " Category description.", example = " sofas & canapes")
