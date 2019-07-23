@@ -15,15 +15,10 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.ClassPathResource;
-import org.springframework.core.io.Resource;
 import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
-import org.springframework.util.StreamUtils;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.security.RolesAllowed;
-import java.io.IOException;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -108,23 +103,8 @@ public class ProductsController {
    public ProductResource retrieveProduct(
             @ApiParam(required = true, value = "External identifier of the instrument", example = "800||1")
             @PathVariable final String productIdentifier) {
-
         Product product = getProductQueryHandler.apply(productIdentifier);
         return productsResourceMapper.toSecondType(product);
     }
-
-    @RequestMapping(value = "/sid", method = RequestMethod.GET,
-            produces = MediaType.IMAGE_JPEG_VALUE)
-    public ResponseEntity<byte[]> getImage() throws IOException {
-
-        Resource imgFile = new ClassPathResource("image/sid.jpg");
-        byte[] bytes = StreamUtils.copyToByteArray(imgFile.getInputStream());
-
-        return ResponseEntity
-                .ok()
-                .contentType(MediaType.IMAGE_JPEG)
-                .body(bytes);
-    }
-
 
 }
