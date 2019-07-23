@@ -6,6 +6,12 @@ export interface ProductEntityApi {
   productIdentifier: string;
   productDescription: string;
   picture: string;
+  sizes: ProductSizeEntityApi[];
+}
+
+export interface ProductSizeEntityApi {
+  size: string;
+  price : string;
 }
 
 const getProductsUrl = `${baseApiUrl}/products`;

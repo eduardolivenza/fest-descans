@@ -1,6 +1,6 @@
 import * as React from "react";
 import { ProductCollectionComponent } from "./product-collection.component";
-import { ProductEntityVm } from "./product-collection.vm";
+import { ProductEntityVm, ProductEntitySizeVm} from "./product-collection.vm";
 import { routesLinks } from "core";
 import { withRouter, RouteComponentProps } from "react-router-dom";
 import { getProductsCollection } from "./product-collection.api";
@@ -12,12 +12,14 @@ const useProductCollection = () => {
     []
   );
 
+
+
   const loadProductsCollection = () =>
   getProductsCollection().then(result =>
     setProductsCollection(mapFromAToBCollection(mapFromApiToVm, result))
     );
 
-  return { productsCollection, loadProductsCollection };
+  return { productsCollection, loadProductsCollection};
 };
 
 interface Props extends RouteComponentProps {}
@@ -36,6 +38,7 @@ export const ProductCollectionContainerInner = (props : Props) => {
   return  <ProductCollectionComponent 
             productCollection={productsCollection} 
             editHotel = {editHotel}
+           
           />;
 };
 

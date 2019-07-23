@@ -1,5 +1,5 @@
 import * as React from "react";
-import { ProductEntityVm } from "./product-collection.vm";
+import { ProductEntityVm, ProductEntitySizeVm } from "./product-collection.vm";
 import { HotelCollectionCardsComponent } from "./components/product-collection-cards.component";
 import { ProductCollectionTableComponent } from "./components/product-collection-table.component";
 import { HotelCollectionViewSelectorComponent, Layout } from "./components/product-collection-view-selector.component";
@@ -11,7 +11,7 @@ interface Props {
 }
 
 export const ProductCollectionComponent: React.FunctionComponent<Props> = (props) => {
-  const { productCollection, editHotel, layout } = props;
+  const { productCollection, editHotel, layout} = props;
   const [componetLayout, setComponentLayout] = React.useState(layout);
 
   let hotelCollectionComponent;

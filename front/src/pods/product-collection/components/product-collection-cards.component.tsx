@@ -1,6 +1,6 @@
 import * as React from "react";
 import { withStyles, createStyles, WithStyles } from "@material-ui/core/styles";
-import { ProductEntityVm } from "../product-collection.vm";
+import { ProductEntityVm, ProductEntitySizeVm } from "../product-collection.vm";
 import { ProductCard } from "./product-card.component"; // on next step we will create this component
 
 interface Props extends WithStyles<typeof styles> {  
@@ -17,7 +17,7 @@ const styles = theme => createStyles({
   });
 
 export const HotelCollectionCardsComponentInner : React.FunctionComponent<Props> = (props) => {
-  const { productCollection, classes, editHotel } = props;
+  const { productCollection, classes, editHotel} = props;
 
   return (
     <div className={classes.listLayout}>
