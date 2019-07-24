@@ -19,7 +19,8 @@ public class SupplierResource {
 
     public SupplierResource(){}
 
-    public SupplierResource(String companyName, String country) {
+    public SupplierResource(String companyId, String companyName, String country) {
+        this.companyId = companyId;
         this.companyName = companyName;
         this.country = country;
     }
