@@ -55,7 +55,7 @@ const AppLayoutInner: React.FunctionComponent<Props> = (props) => {
 
   return (
     <div >
-      <AppBar position="static">
+      <AppBar position="static"  >
         <Toolbar variant="dense">    
           <MainMenu
             handleMenu={handleMenu}
@@ -64,6 +64,7 @@ const AppLayoutInner: React.FunctionComponent<Props> = (props) => {
             anchorMenu={anchorEl}
             goToDefault={goToDefault}
             goToProductsList={goToProductsList} />
+          <img src="https://unsplash.it/80/80"/>
           <Typography style={growStyle} variant="h6" color="inherit" >
             {loginContext.login}
           </Typography>

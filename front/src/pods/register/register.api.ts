@@ -2,11 +2,11 @@ import Axios, { AxiosResponse } from "axios";
 import {baseApiUrl} from 'core'
 import { RegisterEntityVm } from "./register.vm"
 
-const backendProducts = `${baseApiUrl}/products`;
+const backendUsers = `${baseApiUrl}/users`;
 
 export const registerNewProduct = (registerData: RegisterEntityVm) : Promise<AxiosResponse> => {  
     const promise = new Promise<AxiosResponse>((resolve, reject) => 
-      Axios.post(backendProducts, registerData).then((response) => resolve(response)
+      Axios.post(backendUsers, registerData).then((response) => resolve(response)
     ));  
     return promise;
 }

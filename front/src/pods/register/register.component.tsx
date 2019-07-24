@@ -43,7 +43,7 @@ export const RegisterComponentInner = (props: Props) => {
   return (
     <>
       <Card>
-        <CardHeader title="Register new product" />
+        <CardHeader title="Register new user" />
         <CardContent>
           <div className={classes.formContainer}>
             <TextFieldForm

@@ -87,10 +87,10 @@ export const ProductCardInner = (props: Props) => {
           <Typography variant="subtitle1" gutterBottom>
             {product.productDescription}
           </Typography>
-          <Typography className={classes.price}>{currentPrice}</Typography>
+          <Typography className={classes.price}>{currentPrice}€</Typography>
           <div>
             {product.sizes.map(size => (
-              <Chip className={classes.chip} label={size.size} onClick={() => onSizeSelected(size)} />
+              <Chip className={classes.chip} color="primary" label={size.size} onClick={() => onSizeSelected(size)} />
             ))}
           </div>
 

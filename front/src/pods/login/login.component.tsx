@@ -73,7 +73,7 @@ export const LoginComponentInner = (props: Props) => {
             </div>
             <div className={classes.buttonContainer} >
               <Button  className={classes.button} variant="contained" color="primary" onClick={onRegister}>
-                Register new product
+                Register new user
             </Button>
             </div>
           </div>
