@@ -7,6 +7,10 @@ import { LoginMenu } from "./loginMenu.layout";
 import { MainMenu } from "./mainMenu.layout";
 import { withRouter, RouteComponentProps } from "react-router-dom";
 
+
+const logo = require("./../images/logo.jpg")
+
+
 const growStyle = {
   flexGrow: 1,
 };
@@ -64,7 +68,9 @@ const AppLayoutInner: React.FunctionComponent<Props> = (props) => {
             anchorMenu={anchorEl}
             goToDefault={goToDefault}
             goToProductsList={goToProductsList} />
-          <img src="https://unsplash.it/80/80"/>
+          <img src="https://unsplash.it/300/120"/>
+          <img src={logo} alt="Logo" height="100"/>;
+        
           <Typography style={growStyle} variant="h6" color="inherit" >
             {loginContext.login}
           </Typography>

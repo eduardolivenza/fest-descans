@@ -17,7 +17,8 @@
       "@scenes": ["./scenes/*"],
       "@core": ["./core/*"],
       "@pods": ["./pods/*"],
-      "@common": ["./common/*"]
+      "@common": ["./common/*"],
+      "@images": ["./images/*"],
     }
   },
   "compileOnSave": false,
