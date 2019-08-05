@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>DomainDatabaseConfiguration.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">baseProject-runtime</a> &gt; <a href="index.source.html" class="el_package">com.eolivenza.modules.baseProject.configuration.persistence.databases</a> &gt; <span class="el_source">DomainDatabaseConfiguration.java</span></div><h1>DomainDatabaseConfiguration.java</h1><pre class="source lang-java linenums">package com.eolivenza.modules.baseProject.configuration.persistence.databases;
+
+import com.eolivenza.modules.baseProject.application.TransactionManagerNames;
+import com.eolivenza.modules.baseProject.configuration.ProfileNames;
+import com.eolivenza.modules.baseProject.configuration.persistence.datasources.DomainDataSourceConfiguration;
+import com.eolivenza.modules.baseProject.properties.hibernate.*;
+import com.eolivenza.modules.baseProject.properties.jpa.JavaxPersistenceSchemaGenerationDatabaseAction;
+import com.eolivenza.modules.baseProject.repositories.domain.DomainRepositoriesBasePackage;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.orm.jpa.EntityManagerFactoryBuilder;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
+import org.springframework.orm.jpa.JpaTransactionManager;
+import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
+import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
+import org.springframework.transaction.PlatformTransactionManager;
+
+import javax.persistence.EntityManagerFactory;
+import javax.sql.DataSource;
+import java.util.HashMap;
+import java.util.Map;
+
+@Configuration
+<span class="fc" id="L26">public class DomainDatabaseConfiguration {</span>
+    public static final String DOMAIN_ENTITY_MANAGER_FACTORY_NAME = &quot;domainEntityManagerFactory&quot;;
+    private static final String DOMAIN_PERSISTENCE_UNIT_NAME = &quot;domainPersistenceUnit&quot;;
+    private static final String DOMAIN_JPA_PROPERTIES_NAME = &quot;domainJpaProperties&quot;;
+
+    @Profile(ProfileNames.DEVELOPMENT)
+    @Bean(DOMAIN_JPA_PROPERTIES_NAME)
+    public Map&lt;String, Object&gt; jpaPropertiesDevelopment() {
+<span class="nc" id="L34">        Map&lt;String, Object&gt; properties = new HashMap&lt;&gt;();</span>
+<span class="nc" id="L35">        properties.put(JavaxPersistenceSchemaGenerationDatabaseAction.KEY, JavaxPersistenceSchemaGenerationDatabaseAction.DROP_AND_CREATE.getValue());</span>
+<span class="nc" id="L36">        properties.put(HibernateShowSql.KEY, HibernateShowSql.TRUE.getValue());</span>
+<span class="nc" id="L37">        properties.put(HibernateDialect.KEY, &quot;org.hibernate.dialect.H2Dialect&quot;);</span>
+<span class="nc" id="L38">        properties.put(HibernateFormatSql.KEY, HibernateFormatSql.TRUE.getValue());</span>
+<span class="nc" id="L39">        properties.put(HibernateUseSqlComments.KEY, HibernateUseSqlComments.TRUE.getValue());</span>
+<span class="nc" id="L40">        properties.put(HibernateHqlBulkIdStrategy.KEY, HibernateHqlBulkIdStrategy.INILINE_IDS_OR_BULK_IDS.getValue());</span>
+<span class="nc" id="L41">        return properties;</span>
+    }
+
+    @Profile(ProfileNames.CONTROLLER_TO_SECONDARY_ADAPTERS_WITH_IN_MEMORY_H2)
+    @Bean(DOMAIN_JPA_PROPERTIES_NAME)
+    public Map&lt;String, Object&gt; jpaPropertiesControllerToSecondaryAdaptersWithInMemoryH2() {
+<span class="fc" id="L47">        Map&lt;String, Object&gt; properties = new HashMap&lt;&gt;();</span>
+<span class="fc" id="L48">        properties.put(JavaxPersistenceSchemaGenerationDatabaseAction.KEY, JavaxPersistenceSchemaGenerationDatabaseAction.CREATE.getValue());</span>
+<span class="fc" id="L49">        properties.put(HibernateDialect.KEY, &quot;org.hibernate.dialect.H2Dialect&quot;);</span>
+<span class="fc" id="L50">        properties.put(HibernateHqlBulkIdStrategy.KEY, HibernateHqlBulkIdStrategy.INILINE_IDS_OR_BULK_IDS.getValue());</span>
+<span class="fc" id="L51">        return properties;</span>
+    }
+
+    @Profile({ ProfileNames.PRODUCTION, ProfileNames.DEBUG })
+    @Bean(DOMAIN_JPA_PROPERTIES_NAME)
+    public Map&lt;String, Object&gt; jpaPropertiesProduction() {
+<span class="nc" id="L57">        Map&lt;String, Object&gt; properties = new HashMap&lt;&gt;();</span>
+<span class="nc" id="L58">        properties.put(JavaxPersistenceSchemaGenerationDatabaseAction.KEY, JavaxPersistenceSchemaGenerationDatabaseAction.NONE.getValue());</span>
+<span class="nc" id="L59">        properties.put(HibernateDialect.KEY, HibernateDialect.CUSTOM_CACHE71_DIALECT);</span>
+<span class="nc" id="L60">        properties.put(HibernateHqlBulkIdStrategy.KEY, HibernateHqlBulkIdStrategy.INILINE_IDS_OR_BULK_IDS.getValue());</span>
+<span class="nc" id="L61">        return properties;</span>
+    }
+
+    @Bean(DOMAIN_ENTITY_MANAGER_FACTORY_NAME)
+    public LocalContainerEntityManagerFactoryBean entityManagerFactory(EntityManagerFactoryBuilder builder, @Qualifier(DomainDataSourceConfiguration.DOMAIN_DATA_SOURCE_NAME) DataSource dataSource, @Value(&quot;#{&quot; + DOMAIN_JPA_PROPERTIES_NAME + &quot;}&quot;) Map&lt;String, Object&gt; properties) {
+<span class="fc" id="L66">        return builder</span>
+<span class="fc" id="L67">                .dataSource(dataSource)</span>
+<span class="fc" id="L68">                .packages(DomainRepositoriesBasePackage.class)</span>
+<span class="fc" id="L69">                .persistenceUnit(DOMAIN_PERSISTENCE_UNIT_NAME)</span>
+<span class="fc" id="L70">                .properties(properties)</span>
+<span class="fc" id="L71">                .build();</span>
+    }
+
+    @Bean(TransactionManagerNames.DOMAIN)
+    public PlatformTransactionManager transactionManager(@Qualifier(DOMAIN_ENTITY_MANAGER_FACTORY_NAME) EntityManagerFactory entityManagerFactory) {
+<span class="fc" id="L76">        return new JpaTransactionManager(entityManagerFactory);</span>
+    }
+
+    @Bean
+    public EntityManagerFactoryBuilder entityManagerFactoryBuilder() {
+<span class="fc" id="L81">        return new EntityManagerFactoryBuilder(new HibernateJpaVendorAdapter(), new HashMap&lt;&gt;(), null);</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.1.201803210924</span></div></body></html>

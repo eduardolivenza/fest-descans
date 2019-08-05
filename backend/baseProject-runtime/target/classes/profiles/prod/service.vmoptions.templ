@@ -1,0 +1,15 @@
+-server
+-d64
+-XX:+UseStringDeduplication
+-XX:+UseStringCache
+-XX:+OptimizeStringConcat
+-Xloggc:logs/gc.log
+-verbose:gc
+-XX:+PrintGCDetails
+-XX:+HeapDumpOnOutOfMemoryError
+-XX:HeapDumpPath=logs
+-XX:OnOutOfMemoryError="shutdown -r"
+-Dspring.config.additional-location=conf/
+-Dlogging.config=conf/logback.xml
+-Dspring.profiles.active=prod
+-Dloader.main=Application

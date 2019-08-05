@@ -1,0 +1,16 @@
+com\eolivenza\modules\baseProject\domain\model\ModelValidationException.class
+com\eolivenza\modules\baseProject\domain\model\user\UserRights.class
+com\eolivenza\modules\baseProject\domain\IdentityComparable.class
+com\eolivenza\modules\baseProject\domain\ValidatorWrapper.class
+com\eolivenza\modules\baseProject\domain\Validateable.class
+com\eolivenza\modules\baseProject\domain\model\user\User.class
+com\eolivenza\modules\baseProject\domain\model\categories\Category.class
+com\eolivenza\modules\baseProject\domain\model\ModelObject.class
+com\eolivenza\modules\baseProject\domain\ValueComparable.class
+com\eolivenza\modules\baseProject\domain\model\Entity.class
+com\eolivenza\modules\baseProject\domain\model\products\Product.class
+com\eolivenza\modules\baseProject\domain\HashCodeCalculator.class
+com\eolivenza\modules\baseProject\domain\model\ModelExceptionCodes.class
+com\eolivenza\modules\baseProject\domain\model\ValueObject.class
+com\eolivenza\modules\baseProject\domain\model\products\AvailableProduct.class
+com\eolivenza\modules\baseProject\domain\model\suppliers\Supplier.class

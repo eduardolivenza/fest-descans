@@ -1,0 +1,8 @@
+LoadModule proxy_module modules/mod_proxy.so
+LoadModule proxy_http_module modules/mod_proxy_http.so
+LoadModule proxy_html_module modules/mod_proxy_html.so
+
+<Location /baseProject >
+  ProxyPassReverse http://${installer:config.javaservice.servicename}:${installer:config.javaservice.serviceport}
+  ProxyPass http://${installer:config.javaservice.servicename}:${installer:config.javaservice.serviceport}
+</Location>

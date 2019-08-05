@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>DomainDataSourceConfiguration.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">baseProject-runtime</a> &gt; <a href="index.source.html" class="el_package">com.eolivenza.modules.baseProject.configuration.persistence.datasources</a> &gt; <span class="el_source">DomainDataSourceConfiguration.java</span></div><h1>DomainDataSourceConfiguration.java</h1><pre class="source lang-java linenums">package com.eolivenza.modules.baseProject.configuration.persistence.datasources;
+
+import com.eolivenza.modules.baseProject.properties.ApplicationPropertyPrefixes;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.boot.autoconfigure.jdbc.DataSourceProperties;
+import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
+
+import javax.sql.DataSource;
+
+@Configuration
+<span class="fc" id="L14">public class DomainDataSourceConfiguration {</span>
+    private static final String DOMAIN_DATA_SOURCE_PROPERTIES_NAME = &quot;domainDataSourceProperties&quot;;
+    public static final String DOMAIN_DATA_SOURCE_NAME = &quot;domainDataSource&quot;;
+
+    @Bean(DOMAIN_DATA_SOURCE_PROPERTIES_NAME)
+    @ConfigurationProperties(ApplicationPropertyPrefixes.DOMAIN_DATA_SOURCE)
+    @Primary
+    public DataSourceProperties domainAcbDataSourceProperties() {
+<span class="fc" id="L22">        return new DataSourceProperties();</span>
+    }
+
+    @Bean(DOMAIN_DATA_SOURCE_NAME)
+    @ConfigurationProperties(ApplicationPropertyPrefixes.DOMAIN_DATA_SOURCE)
+    public DataSource domainAcbDataSource(@Qualifier(DOMAIN_DATA_SOURCE_PROPERTIES_NAME) DataSourceProperties dataSourceProperties) {
+<span class="fc" id="L28">        return dataSourceProperties.initializeDataSourceBuilder().build();</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.1.201803210924</span></div></body></html>

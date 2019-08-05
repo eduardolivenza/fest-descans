@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Product.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">baseProject-domain</a> &gt; <a href="index.source.html" class="el_package">com.eolivenza.modules.baseProject.domain.model.products</a> &gt; <span class="el_source">Product.java</span></div><h1>Product.java</h1><pre class="source lang-java linenums">package com.eolivenza.modules.baseProject.domain.model.products;
+
+import com.eolivenza.modules.baseProject.domain.model.Entity;
+import com.eolivenza.modules.baseProject.domain.model.categories.Category;
+
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
+
+public class Product extends Entity&lt;Product&gt; {
+
+    @NotNull
+    private UUID uuid;
+
+    @NotBlank
+    private Category category;
+
+    @NotBlank
+    private String productIdentifier;
+
+    private String description;
+
+    @NotNull
+    private Set&lt;@NotBlank AvailableProduct&gt; availableProducts;
+
+    public Product(Category category, String productIdentifier, String description, HashSet&lt;AvailableProduct&gt; availableProducts){
+<span class="nc" id="L29">        this(UUID.randomUUID(), category, productIdentifier, description, availableProducts);</span>
+<span class="nc" id="L30">    }</span>
+
+<span class="nc" id="L32">    public Product(UUID uuid,  Category category, String productIdentifier,String description, Set&lt;AvailableProduct&gt; availableProducts){</span>
+<span class="nc" id="L33">       this.uuid = uuid;</span>
+<span class="nc" id="L34">       this.category = category;</span>
+<span class="nc" id="L35">       this.productIdentifier= productIdentifier;</span>
+<span class="nc" id="L36">       this.description = description;</span>
+<span class="nc" id="L37">       this.availableProducts = availableProducts;</span>
+<span class="nc" id="L38">    }</span>
+
+    public UUID getUuid() {
+<span class="nc" id="L41">        return uuid;</span>
+    }
+
+    public Product setUuid(UUID uuid) {
+<span class="nc" id="L45">        this.uuid = uuid;</span>
+<span class="nc" id="L46">        return this;</span>
+    }
+
+    public String getProductIdentifier() {
+<span class="nc" id="L50">        return productIdentifier;</span>
+    }
+
+    public Product setProductIdentifier(String productIdentifier) {
+<span class="nc" id="L54">        this.productIdentifier = productIdentifier;</span>
+<span class="nc" id="L55">        return this;</span>
+    }
+
+    public Set&lt;AvailableProduct&gt; getAvailableProducts() {
+<span class="nc" id="L59">        return availableProducts;</span>
+    }
+
+    public void setAvailableProducts(Set&lt;AvailableProduct&gt; availableProducts) {
+<span class="nc" id="L63">        this.availableProducts = availableProducts;</span>
+<span class="nc" id="L64">    }</span>
+
+    public Category getCategory() {
+<span class="nc" id="L67">        return category;</span>
+    }
+
+    public void setCategory(Category category) {
+<span class="nc" id="L71">        this.category = category;</span>
+<span class="nc" id="L72">    }</span>
+
+    public String getDescription() {
+<span class="nc" id="L75">        return description;</span>
+    }
+
+    public void setDescription(String description) {
+<span class="nc" id="L79">        this.description = description;</span>
+<span class="nc" id="L80">    }</span>
+
+    public void overwriteWith(Product otherProduct) {
+<span class="nc" id="L83">        setUuid(otherProduct.getUuid());</span>
+<span class="nc" id="L84">        setProductIdentifier(otherProduct.getProductIdentifier());</span>
+<span class="nc" id="L85">    }</span>
+
+    @Override
+    public int hashCodeCalculation() {
+<span class="nc" id="L89">        return super.hashCode();</span>
+    }
+
+    @Override
+    public boolean hasSameIdentity(Product other) {
+<span class="nc bnc" id="L94" title="All 4 branches missed.">        return super.equals(other) &amp;&amp; hasSameIdentity((Product) other);</span>
+    }
+
+    public void addAvailableSize(AvailableProduct availableProduct) {
+<span class="nc" id="L98">        this.availableProducts.add(availableProduct);</span>
+<span class="nc" id="L99">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.1.201803210924</span></div></body></html>

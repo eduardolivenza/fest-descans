@@ -1,0 +1,16 @@
+
+domain:
+  datasource:
+    url: "jdbc:h2:mem:domain;INIT=create schema if not exists ica_baseproject_dm_tables;"
+    platform: h2
+    driver-class-name: "org.h2.Driver"
+    username: ""
+    password: ""
+
+spring:
+  #DB management
+  flyway:
+    enabled: false
+
+  cache:
+    type: none

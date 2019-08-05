@@ -1,0 +1,16 @@
+com\eolivenza\modules\baseProject\controller\http\rest\resources\CategoryResource.class
+com\eolivenza\modules\baseProject\controller\http\rest\mapper\AvailableProductResourceMapper.class
+com\eolivenza\modules\baseProject\controller\http\rest\mapper\ResourceMapper.class
+com\eolivenza\modules\baseProject\controller\http\rest\resources\AvailableSizeResource.class
+com\eolivenza\modules\baseProject\controller\http\rest\resources\ProductResource.class
+com\eolivenza\modules\baseProject\controller\http\rest\mapper\ProductsResourceMapper.class
+com\eolivenza\modules\baseProject\controller\http\rest\mapper\SupplierResourceMapper.class
+com\eolivenza\modules\baseProject\controller\http\rest\resources\SupplierResource.class
+com\eolivenza\modules\baseProject\controller\http\rest\UsersController.class
+com\eolivenza\modules\baseProject\controller\http\rest\CategoriesController.class
+com\eolivenza\modules\baseProject\controller\http\rest\ImagesController.class
+com\eolivenza\modules\baseProject\controller\http\rest\ProductsController.class
+com\eolivenza\modules\baseProject\controller\http\rest\mapper\CategoryResourceMapper.class
+com\eolivenza\modules\baseProject\controller\http\rest\SuppliersController.class
+com\eolivenza\modules\baseProject\controller\http\rest\mapper\UsersResourceMapper.class
+com\eolivenza\modules\baseProject\controller\http\rest\resources\UserResource.class

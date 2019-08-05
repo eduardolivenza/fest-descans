@@ -1,0 +1,10 @@
+server:
+  port: ${installer:config.javaservice.serviceport}
+
+infinity:
+    acb:
+        datasource:
+            url: "jdbc:Cache://${installer:config.healthshare.ip}:${installer:config.healthshare.port}/ACB"
+    domain:
+        datasource:
+            url: jdbc:Cache://${eolivenza.infinity.instance.ip}:${eolivenza.infinity.instance.jdbc-port}/baseProject

@@ -1,0 +1,36 @@
+
+h2:
+  server:
+    port: 9092
+  databases:
+    path: /~/local_evironment/baseProject/databases
+    domain:
+      path: /domain
+
+domain:
+  datasource:
+    url: "jdbc:h2:tcp://localhost:${h2.server.port}${h2.databases.path}${h2.databases.domain.path};INIT=create schema if not exists baseproject_dm_tables;"
+    username: admin
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health, flyway
+
+spring:
+  application:
+    name: baseProject
+  csrf-configuration:
+    activateCsrf: false
+
+  #DB management
+  flyway:
+    enabled: false
+
+server:
+  port: 9191
+
+jasypt:
+  encryptor:
+    bean: encryptorBean

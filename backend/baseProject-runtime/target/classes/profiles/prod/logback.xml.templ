@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+	<appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+		<encoder>
+			<pattern>%d{HH:mm:ss.SSS} [%t] %-5level %logger - %msg%n</pattern>
+		</encoder>
+	</appender>
+
+	<appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<fileNamePattern>${installer:sys.installationDir}/logs/baseProject-module.%d{yyyy-MM-dd}.log</fileNamePattern>
+			<maxHistory>180</maxHistory>--> <!-- Agree with GCS on max number of days -->
+		</rollingPolicy>
+		<append>true</append>
+		<immediateFlush>false</immediateFlush>
+		<encoder>
+			<pattern>%d{HH:mm:ss.SSS} [%t] %-5level %logger - %msg%n</pattern>
+		</encoder>
+	</appender>
+
+	<root level="INFO">
+		<appender-ref ref="FILE" />
+		<appender-ref ref="CONSOLE" />
+	</root>
+</configuration>

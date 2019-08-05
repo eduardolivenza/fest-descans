@@ -1,0 +1,16 @@
+C:\Git\fest-descans\backend\baseProject-core\baseProject-domain\src\main\java\com\eolivenza\modules\baseProject\domain\Validateable.java
+C:\Git\fest-descans\backend\baseProject-core\baseProject-domain\src\main\java\com\eolivenza\modules\baseProject\domain\model\ModelObject.java
+C:\Git\fest-descans\backend\baseProject-core\baseProject-domain\src\main\java\com\eolivenza\modules\baseProject\domain\model\products\Product.java
+C:\Git\fest-descans\backend\baseProject-core\baseProject-domain\src\main\java\com\eolivenza\modules\baseProject\domain\model\products\AvailableProduct.java
+C:\Git\fest-descans\backend\baseProject-core\baseProject-domain\src\main\java\com\eolivenza\modules\baseProject\domain\ValidatorWrapper.java
+C:\Git\fest-descans\backend\baseProject-core\baseProject-domain\src\main\java\com\eolivenza\modules\baseProject\domain\model\suppliers\Supplier.java
+C:\Git\fest-descans\backend\baseProject-core\baseProject-domain\src\main\java\com\eolivenza\modules\baseProject\domain\IdentityComparable.java
+C:\Git\fest-descans\backend\baseProject-core\baseProject-domain\src\main\java\com\eolivenza\modules\baseProject\domain\model\ValueObject.java
+C:\Git\fest-descans\backend\baseProject-core\baseProject-domain\src\main\java\com\eolivenza\modules\baseProject\domain\model\ModelExceptionCodes.java
+C:\Git\fest-descans\backend\baseProject-core\baseProject-domain\src\main\java\com\eolivenza\modules\baseProject\domain\model\ModelValidationException.java
+C:\Git\fest-descans\backend\baseProject-core\baseProject-domain\src\main\java\com\eolivenza\modules\baseProject\domain\model\Entity.java
+C:\Git\fest-descans\backend\baseProject-core\baseProject-domain\src\main\java\com\eolivenza\modules\baseProject\domain\model\user\UserRights.java
+C:\Git\fest-descans\backend\baseProject-core\baseProject-domain\src\main\java\com\eolivenza\modules\baseProject\domain\model\user\User.java
+C:\Git\fest-descans\backend\baseProject-core\baseProject-domain\src\main\java\com\eolivenza\modules\baseProject\domain\HashCodeCalculator.java
+C:\Git\fest-descans\backend\baseProject-core\baseProject-domain\src\main\java\com\eolivenza\modules\baseProject\domain\model\categories\Category.java
+C:\Git\fest-descans\backend\baseProject-core\baseProject-domain\src\main\java\com\eolivenza\modules\baseProject\domain\ValueComparable.java
