@@ -39,10 +39,6 @@
             <artifactId>springfox-swagger2</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.github.sarxos</groupId>
-            <artifactId>webcam-capture</artifactId>
-        </dependency>
-        <dependency>
             <groupId>com.eolivenza.modules.baseProject</groupId>
             <artifactId>baseProject-application</artifactId>
         </dependency>
