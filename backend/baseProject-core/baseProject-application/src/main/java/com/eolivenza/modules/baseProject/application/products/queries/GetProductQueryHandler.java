@@ -3,7 +3,6 @@ package com.eolivenza.modules.baseProject.application.products.queries;
 import com.eolivenza.modules.baseProject.application.QueryHandler;
 import com.eolivenza.modules.baseProject.application.annotations.DomainStrictTransactional;
 import com.eolivenza.modules.baseProject.application.repositories.ProductsRepository;
-import com.eolivenza.modules.baseProject.domain.model.configuration.Configuration;
 import com.eolivenza.modules.baseProject.domain.model.products.Product;
 
 import javax.inject.Inject;
@@ -21,10 +20,10 @@ public class GetProductQueryHandler implements QueryHandler<String, Product> {
     }
 
     /**
-     * Retrieve the {@link Configuration}
+     * Retrieve the {@link Product}
      *
      * @param productIdentifier string class
-     * @return a {@link Configuration}
+     * @return a {@link Product}
      **/
     @DomainStrictTransactional
     @Override

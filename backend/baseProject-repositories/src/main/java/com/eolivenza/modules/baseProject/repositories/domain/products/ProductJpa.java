@@ -14,7 +14,9 @@ public class ProductJpa {
     public String uuid;
 
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinColumn(name = "categoryJpa_id", nullable = false)
+    @JoinColumn(name = "categoryJpa_id",
+                nullable = false,
+                foreignKey = @ForeignKey(name = "FK_PRODUCT_CATEGORY"))
     private CategoryJpa categoryJpa;
 
     private String productIdentifier;
