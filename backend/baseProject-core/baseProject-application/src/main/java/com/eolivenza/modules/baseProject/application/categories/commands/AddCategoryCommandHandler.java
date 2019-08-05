@@ -29,9 +29,12 @@ public class AddCategoryCommandHandler implements CommandHandler<AddCategoryComm
         Category category = new Category(
                 addProductCommand.identifier,
                 addProductCommand.description
+
         );
         categoriesRepository.create(category);
     }
+
+
 
     @Override
     public String getName() { return "Add available size to a product"; }
