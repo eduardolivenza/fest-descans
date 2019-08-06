@@ -31,7 +31,6 @@ public class UsersController {
     private final CommandHandler<ValidateUserCommand> validateUserCommandCommandHandler;
     private final CommandHandler<RemoveUserCommand> removeUserCommandHandler;
 
-
     @Autowired
     public UsersController(
             QueryHandler<Class<String>, Optional<User>> getUserQueryHandler,

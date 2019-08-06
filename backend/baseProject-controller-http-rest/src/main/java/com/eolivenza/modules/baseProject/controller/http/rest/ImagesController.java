@@ -8,10 +8,7 @@ import org.springframework.core.io.Resource;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.StreamUtils;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
 
@@ -23,11 +20,9 @@ public class ImagesController {
     public ImagesController(){
     }
 
-    @RequestMapping(value = "/{imageIdentifier}", method = RequestMethod.GET,
-            produces = MediaType.IMAGE_JPEG_VALUE)
-    public ResponseEntity<byte[]> getImage(@ApiParam(required = true, value = "External identifier of the picture", example = "sid")
-                                               @PathVariable final String imageIdentifier) throws IOException {
-        Resource imgFile = new ClassPathResource("image/"+ imageIdentifier +".jpg");
+    @GetMapping(path = "/{imageIdentifier}", produces = MediaType.IMAGE_JPEG_VALUE)
+    public ResponseEntity<byte[]> getImage(@ApiParam(required = true, value = "External identifier of the picture", example = "sid")  @PathVariable final String imageIdentifier) throws IOException {
+         Resource imgFile = new ClassPathResource("image/"+ imageIdentifier +".jpg");
         byte[] bytes = StreamUtils.copyToByteArray(imgFile.getInputStream());
 
         return ResponseEntity
@@ -35,6 +30,5 @@ public class ImagesController {
                 .contentType(MediaType.IMAGE_JPEG)
                 .body(bytes);
     }
-
 
 }
