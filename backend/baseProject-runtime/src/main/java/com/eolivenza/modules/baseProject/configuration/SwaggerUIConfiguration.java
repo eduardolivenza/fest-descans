@@ -45,7 +45,7 @@ public class SwaggerUIConfiguration {
                 .globalResponseMessage(RequestMethod.PATCH, defaultErrorList)
                 .globalResponseMessage(RequestMethod.DELETE, defaultErrorList)
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("com.eolivenza"))
+                .apis(RequestHandlerSelectors.basePackage("com.eolivenza.modules.baseProject.controller"))
                 .paths(PathSelectors.any())
                 .build()
                 .apiInfo(buildApiInfo())

@@ -6,10 +6,9 @@ export const mapFromApiToVm = (apiEntity : ProductEntityApi) : ProductEntityVm =
   category : apiEntity.category,
   productIdentifier : apiEntity.productIdentifier,
   productDescription : apiEntity.productDescription,
-  picture : `${basePicturesUrl}` + "/" + apiEntity.productIdentifier,
+  picture : `${basePicturesUrl}` + "/images/" + apiEntity.productIdentifier,
   sizes: apiEntity.sizes,
 });
 
-//picture : `${basePicturesUrl}${apiEntity.thumbNailUrl}`,
 
 

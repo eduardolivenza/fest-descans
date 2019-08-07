@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
 
-@Api(value = "Images")
 @RestController
 public class ImagesController {
 
@@ -20,15 +19,17 @@ public class ImagesController {
     public ImagesController(){
     }
 
-    @GetMapping(path = "/{imageIdentifier}", produces = MediaType.IMAGE_JPEG_VALUE)
-    public ResponseEntity<byte[]> getImage(@ApiParam(required = true, value = "External identifier of the picture", example = "sid")  @PathVariable final String imageIdentifier) throws IOException {
-         Resource imgFile = new ClassPathResource("image/"+ imageIdentifier +".jpg");
-        byte[] bytes = StreamUtils.copyToByteArray(imgFile.getInputStream());
-
+    @GetMapping(path = "/images/{imageIdentifier}", produces = MediaType.IMAGE_JPEG_VALUE)
+    public ResponseEntity<byte[]> getFileImage(@ApiParam(required = true, value = "External identifier of the picture", example = "sid")  @PathVariable final String imageIdentifier) throws IOException {
+        byte[] bytes = new byte[0];
+        Resource imgFile = new ClassPathResource("image/"+ imageIdentifier +".jpg");
+        bytes = StreamUtils.copyToByteArray(imgFile.getInputStream());
         return ResponseEntity
                 .ok()
                 .contentType(MediaType.IMAGE_JPEG)
                 .body(bytes);
+
+
     }
 
 }
