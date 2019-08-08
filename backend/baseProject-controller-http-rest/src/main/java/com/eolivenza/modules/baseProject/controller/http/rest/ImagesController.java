@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import java.io.IOException;
 
 @RestController
+@Api("Images")
 public class ImagesController {
 
     @Autowired
@@ -28,8 +29,6 @@ public class ImagesController {
                 .ok()
                 .contentType(MediaType.IMAGE_JPEG)
                 .body(bytes);
-
-
     }
 
 }
