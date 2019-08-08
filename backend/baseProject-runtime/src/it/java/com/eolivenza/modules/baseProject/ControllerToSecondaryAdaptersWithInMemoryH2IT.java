@@ -18,6 +18,8 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.net.URI;
+import java.util.ArrayList;
+import java.util.List;
 
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.is;
@@ -57,17 +59,28 @@ public class ControllerToSecondaryAdaptersWithInMemoryH2IT {
         CategoryResource addedCategoryResource = CategoryResourceDataBuilder
                 .defaultBuilder()
                 .build();
-        ProductResource addProductResource = ProductResourceDataBuilder
+        ProductResource addedProductResource = ProductResourceDataBuilder
                 .defaultBuilder()
+                .withDescription("desc1")
                 .build();
+        String url = "/categories";
         given().contentType(APPLICATION_JSON_VALUE)
                 .body(addedCategoryResource)
-                .when().post("/categories")
+                .when().post(url)
                 .then().log().all().assertThat().statusCode(HttpStatus.OK.value());
+        url = "/products";
         given().contentType(APPLICATION_JSON_VALUE)
-                .body(addProductResource)
+                .body(addedProductResource)
                 .when().post("/products")
                 .then().log().all().assertThat().statusCode(HttpStatus.OK.value());
+        List<String> expectedReturnedList = new ArrayList();
+        expectedReturnedList.add("desc1");
+        given().contentType(APPLICATION_JSON_VALUE)
+                //.pathParams(pathVariables)
+                .when().get(url)
+                .then().log().all().assertThat()
+                .statusCode(HttpStatus.OK.value())
+                .and().body("productDescription", is(expectedReturnedList));
     }
 
 }
