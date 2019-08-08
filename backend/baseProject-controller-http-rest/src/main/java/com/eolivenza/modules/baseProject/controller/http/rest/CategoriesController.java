@@ -32,7 +32,6 @@ public class CategoriesController {
         AddCategoryCommand addCategoryCommand = new AddCategoryCommand(
                 categoryResource.identifier ,
                 categoryResource.description );
-
         addCategoryCommandHandler.accept(addCategoryCommand);
     }
 
