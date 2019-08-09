@@ -1,6 +1,11 @@
 package com.eolivenza.modules.baseProject;
 
 import com.eolivenza.modules.baseProject.configuration.ProfileNames;
+
+import com.eolivenza.modules.baseProject.controller.http.rest.resources.CategoryResource;
+import com.eolivenza.modules.baseProject.controller.http.rest.resources.ProductResource;
+import com.eolivenza.modules.baseProject.resources.CategoryResourceDataBuilder;
+import com.eolivenza.modules.baseProject.resources.ProductResourceDataBuilder;
 import io.restassured.RestAssured;
 import io.restassured.http.Header;
 import org.junit.Before;
@@ -14,6 +19,8 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.net.URI;
+import java.util.ArrayList;
+import java.util.List;
 
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.is;
@@ -25,13 +32,12 @@ import static org.springframework.test.annotation.DirtiesContext.ClassMode.BEFOR
 @DirtiesContext(classMode = BEFORE_EACH_TEST_METHOD)
 @ActiveProfiles(value = ProfileNames.CONTROLLER_TO_SECONDARY_ADAPTERS_WITH_IN_MEMORY_H2)
 public class ControllerToSecondaryAdaptersWithInMemoryH2IT {
+
     @LocalServerPort
     private int port;
 
     private final String HEALTH_UP = "UP";
-    private final String tokenSuperUser =       "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJST0NIRSIsInRlbmFudElkIjoiMzA1MzhGRkYtRDE2RC0xMUUzLTkwNzgtNTYzNDEyMDAwMEZGIiwibGFuZyI6ImVuIiwiaWF0IjoxNTM3OTc2MDU0LCJhdXRoIjoiUk9DSEUiLCJzdXBlcnVzZXIiOiJ0cnVlIiwicmlnaHRzIjp7ImFjdGlvbnMiOltdLCJyZXNvdXJjZXMiOltdfX0.mP5QrDTdZJNzNTG8JdprGknGLtegXuGlW_zQmVubp50";
-    private final String tokenNormalUser =      "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJOT05BRE1JTiIsInRlbmFudElkIjoiMzA1MzhGRkYtRDE2RC0xMUUzLTkwNzgtNTYzNDEyMDAwMEZGIiwibGFuZyI6ImVuIiwiaWF0IjoxNTQxNzYyMDgwLCJhdXRoIjoiUEhMRUJPVE9NSVNUIiwic3VwZXJ1c2VyIjoiZmFsc2UiLCJjb3VudHJ5IjoiIiwicmlnaHRzIjp7ImFjdGlvbnMiOlsiNjUiLCIyIiwiMjciLCIzIiwiMjMiLCIyMiIsIjI2IiwiMjAiLCIzMyIsIjQiLCIxIiwiNTgiLCI2MCJdLCJyZXNvdXJjZXMiOlsiMzA5IiwiNjMxIiwiNjgzIl19LCJsb2NhdGlvbnMiOlsiMCIsIkxPQzEiLCJMT0MyIiwiTE9DMyJdfQ._xczo1TCaGR8ln_nBTOyQckf0ZetsI-gNBCLCnMGFp0";
-    private final String tokenWithoutRights =   "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJST0NIRSIsInRlbmFudElkIjoiMzA1MzhGRkYtRDE2RC0xMUUzLTkwNzgtNTYzNDEyMDAwMEZGIiwibGFuZyI6ImVuIiwiaWF0IjoxNTM3OTc2MDU0LCJhdXRoIjoiUk9DSEUiLCJzdXBlcnVzZXIiOiJmYWxzZSIsInJpZ2h0cyI6eyJhY3Rpb25zIjpbXSwicmVzb3VyY2VzIjpbXX19.rl-vw4wERBMOVyRMjMv98s3We8JQRCCBUH8ufSrzlyQ";
+    private final String tokenSuperUser = "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJST0NIRSIsInRlbmFudElkIjoiMzA1MzhGRkYtRDE2RC0xMUUzLTkwNzgtNTYzNDEyMDAwMEZGIiwibGFuZyI6ImVuIiwiaWF0IjoxNTM3OTc2MDU0LCJhdXRoIjoiUk9DSEUiLCJzdXBlcnVzZXIiOiJ0cnVlIiwicmlnaHRzIjp7ImFjdGlvbnMiOltdLCJyZXNvdXJjZXMiOltdfX0.mP5QrDTdZJNzNTG8JdprGknGLtegXuGlW_zQmVubp50";
     private Header header;
 
     @Before
@@ -47,6 +53,35 @@ public class ControllerToSecondaryAdaptersWithInMemoryH2IT {
                 .when().get(URI.create("/actuator/health"))
                 .then().log().all().statusCode(HttpStatus.OK.value())
                 .and().body("status", is(HEALTH_UP));
+    }
+
+    @Test
+    public void whenAProductIsAdded_ThenWeCanRetrieveIt() {
+        CategoryResource addedCategoryResource = CategoryResourceDataBuilder
+                .defaultBuilder()
+                .build();
+        ProductResource addedProductResource = ProductResourceDataBuilder
+                .defaultBuilder()
+                .withDescription("desc1")
+                .build();
+        String url = "/categories";
+        given().contentType(APPLICATION_JSON_VALUE)
+                .body(addedCategoryResource)
+                .when().post(url)
+                .then().log().all().assertThat().statusCode(HttpStatus.OK.value());
+        url = "/products";
+        given().contentType(APPLICATION_JSON_VALUE)
+                .body(addedProductResource)
+                .when().post("/products")
+                .then().log().all().assertThat().statusCode(HttpStatus.OK.value());
+        List<String> expectedReturnedList = new ArrayList();
+        expectedReturnedList.add("desc1");
+        given().contentType(APPLICATION_JSON_VALUE)
+                //.pathParams(pathVariables)
+                .when().get(url)
+                .then().log().all().assertThat()
+                .statusCode(HttpStatus.OK.value())
+                .and().body("productDescription", is(expectedReturnedList));
     }
 
 }

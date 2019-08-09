@@ -10,21 +10,26 @@
         <test.integration.dir>${project.basedir}/src/it</test.integration.dir>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <spring.boot.version>2.0.5.RELEASE</spring.boot.version>
-        <spring.boot.maven.plugin.version>2.0.5.RELEASE</spring.boot.maven.plugin.version>
+        <spring.boot.version>2.1.5.RELEASE</spring.boot.version>
+        <spring.boot.maven.plugin.version>2.1.5.RELEASE</spring.boot.maven.plugin.version>
         <hibernate.core>5.3.0.Final</hibernate.core>
         <springfox.version>2.7.0</springfox.version>
         <test.integration.dir>${project.basedir}/src/it</test.integration.dir>
-        <vnv.dependencies.test.version>3.3.0</vnv.dependencies.test.version>
         <org.slf4j.api.version>1.7.25</org.slf4j.api.version>
         <serenity.maven.plugin.version>1.9.4</serenity.maven.plugin.version>
-        <vnv.core.version>3.8.0</vnv.core.version>
         <powermock.version>1.7.4</powermock.version>
         <mockito.core.version>2.8.9</mockito.core.version>
         <cukeGenerator-maven-plugin.version>3.0.1</cukeGenerator-maven-plugin.version>
         <rest.assured.version>3.1.0</rest.assured.version>
         <pl.pragmatists.junitparams.version>1.0.4</pl.pragmatists.junitparams.version>
         <jasypt-spring-boot-starter.version>2.1.0</jasypt-spring-boot-starter.version>
+        <maven.surefire.plugin.version>2.19.1</maven.surefire.plugin.version>
+        <maven.compiler.plugin.version>3.8.1</maven.compiler.plugin.version>
+        <maven.failsafe.plugin.version>2.18.1</maven.failsafe.plugin.version>
+        <maven.jar.plugin.version>3.1.1</maven.jar.plugin.version>
+        <junit.version>4.12</junit.version>
+        <assertj.core.version>3.10.0</assertj.core.version>
+        <build.helper.maven.plugin.version>3.0.0</build.helper.maven.plugin.version>
     </properties>
 
     <modules>
@@ -42,77 +47,28 @@
         <pluginManagement>
             <plugins>
                 <plugin>
-                    <groupId>org.jacoco</groupId>
-                    <artifactId>jacoco-maven-plugin</artifactId>
-                    <version>0.8.1</version>
-                </plugin>
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-resources-plugin</artifactId>
-                    <version>3.0.2</version>
-                </plugin>
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-compiler-plugin</artifactId>
-                    <version>3.7.0</version>
-                </plugin>
-                <plugin>
-                    <groupId>org.codehaus.mojo</groupId>
-                    <artifactId>build-helper-maven-plugin</artifactId>
-                    <version>3.0.0</version>
-                </plugin>
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-failsafe-plugin</artifactId>
-                    <version>2.22.0</version>
-                </plugin>
-                <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-surefire-plugin</artifactId>
-                    <version>2.19.1</version>
-                    <dependencies>
-                        <dependency>
-                            <groupId>org.junit.platform</groupId>
-                            <artifactId>junit-platform-surefire-provider</artifactId>
-                            <version>1.1.0</version>
-                        </dependency>
-                        <dependency>
-                            <groupId>org.junit.jupiter</groupId>
-                            <artifactId>junit-jupiter-engine</artifactId>
-                            <version>5.1.0</version>
-                        </dependency>
-                    </dependencies>
+                    <version>${maven.surefire.plugin.version}</version>
                 </plugin>
             </plugins>
         </pluginManagement>
         <plugins>
             <plugin>
-                <groupId>org.jacoco</groupId>
-                <artifactId>jacoco-maven-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <goals>
-                            <!--initialize-->
-                            <goal>prepare-agent</goal>
-                            <!--verify-->
-                            <goal>report</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
+                <version>${maven.compiler.plugin.version}</version>
                 <configuration>
                     <!--compile-->
                     <!--test-compile-->
-                    <source>1.8</source>
-                    <target>1.8</target>
+                    <source>12</source>
+                    <target>12</target>
                 </configuration>
             </plugin>
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>build-helper-maven-plugin</artifactId>
+                <version>${build.helper.maven.plugin.version}</version>
                 <executions>
                     <execution>
                         <id>add-integration-test-sources</id>
@@ -131,27 +87,8 @@
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-resources-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <goals>
-                            <!--process-test-resources-->
-                            <goal>testResources</goal>
-                        </goals>
-                        <configuration>
-                            <resources>
-                                <resource>
-                                    <directory>${test.integration.dir}/resources</directory>
-                                </resource>
-                            </resources>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
-                <version>3.1.0</version>
+                <version>${maven.jar.plugin.version}</version>
                 <executions>
                     <execution>
                         <goals>
@@ -161,15 +98,25 @@
                     </execution>
                 </executions>
             </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-failsafe-plugin</artifactId>
+                <version>${maven.failsafe.plugin.version}</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <!--integration-test-->
+                            <goal>integration-test</goal>
+                            <!--verify-->
+                            <goal>verify</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
         </plugins>
     </build>
     <dependencyManagement>
         <dependencies>
-            <dependency>
-                <groupId>org.junit.jupiter</groupId>
-                <artifactId>junit-jupiter-api</artifactId>
-                <version>5.3.1</version>
-            </dependency>
             <dependency>
                 <!-- Import dependency management from Spring Boot -->
                 <groupId>org.springframework.boot</groupId>
@@ -188,7 +135,7 @@
             <dependency>
                 <groupId>junit</groupId>
                 <artifactId>junit</artifactId>
-                <version>4.12</version>
+                <version>${junit.version}</version>
                 <scope>test</scope>
             </dependency>
             <!--Mockito-->
@@ -238,7 +185,6 @@
                 <artifactId>hibernate-core</artifactId>
                 <version>${hibernate.core}</version>
             </dependency>
-
             <!--spring-boot-test-autoconfigure-->
             <dependency>
                 <groupId>org.springframework.boot</groupId>
@@ -309,11 +255,6 @@
                 <artifactId>hibernate-validator</artifactId>
                 <version>6.0.9.Final</version>
             </dependency>
-            <dependency>
-                <groupId>org.glassfish</groupId>
-                <artifactId>javax.el</artifactId>
-                <version>3.0.1-b10</version>
-            </dependency>
             <!--Java standard injection-->
             <dependency>
                 <groupId>javax.inject</groupId>
@@ -343,12 +284,6 @@
                 <groupId>io.springfox</groupId>
                 <artifactId>springfox-swagger-ui</artifactId>
                 <version>${springfox.version}</version>
-            </dependency>
-            <!--jackson-dataformat-xml-->
-            <dependency>
-                <groupId>com.fasterxml.jackson.dataformat</groupId>
-                <artifactId>jackson-dataformat-xml</artifactId>
-                <version>2.9.6</version>
             </dependency>
             <dependency>
                 <groupId>pl.pragmatists</groupId>
@@ -403,27 +338,6 @@
                         <artifactId>maven-surefire-plugin</artifactId>
                         <configuration>
                             <skipTests>true</skipTests>
-                        </configuration>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
-        <profile>
-            <id>acceptance-test</id>
-            <build>
-                <plugins>
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-surefire-plugin</artifactId>
-                        <configuration>
-                            <skipTests>false</skipTests>
-                        </configuration>
-                    </plugin>
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-failsafe-plugin</artifactId>
-                        <configuration>
-                            <skipITs>true</skipITs>
                         </configuration>
                     </plugin>
                 </plugins>
