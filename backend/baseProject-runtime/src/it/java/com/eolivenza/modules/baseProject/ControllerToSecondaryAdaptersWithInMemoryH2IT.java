@@ -4,6 +4,8 @@ import com.eolivenza.modules.baseProject.configuration.ProfileNames;
 
 import com.eolivenza.modules.baseProject.controller.http.rest.resources.CategoryResource;
 import com.eolivenza.modules.baseProject.controller.http.rest.resources.ProductResource;
+import com.eolivenza.modules.baseProject.resources.CategoryResourceDataBuilder;
+import com.eolivenza.modules.baseProject.resources.ProductResourceDataBuilder;
 import io.restassured.RestAssured;
 import io.restassured.http.Header;
 import org.junit.Before;

@@ -1,4 +1,4 @@
-package com.eolivenza.modules.baseProject;
+package com.eolivenza.modules.baseProject.resources;
 
 import com.eolivenza.modules.baseProject.controller.http.rest.resources.AvailableSizeResource;
 import com.eolivenza.modules.baseProject.controller.http.rest.resources.ProductResource;
