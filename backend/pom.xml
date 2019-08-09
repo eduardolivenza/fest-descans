@@ -23,6 +23,13 @@
         <rest.assured.version>3.1.0</rest.assured.version>
         <pl.pragmatists.junitparams.version>1.0.4</pl.pragmatists.junitparams.version>
         <jasypt-spring-boot-starter.version>2.1.0</jasypt-spring-boot-starter.version>
+        <maven.surefire.plugin.version>2.19.1</maven.surefire.plugin.version>
+        <maven.compiler.plugin.version>3.8.1</maven.compiler.plugin.version>
+        <maven.failsafe.plugin.version>2.18.1</maven.failsafe.plugin.version>
+        <maven.jar.plugin.version>3.1.1</maven.jar.plugin.version>
+        <junit.version>4.12</junit.version>
+        <assertj.core.version>3.10.0</assertj.core.version>
+        <build.helper.maven.plugin.version>3.0.0</build.helper.maven.plugin.version>
     </properties>
 
     <modules>
@@ -42,6 +49,7 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-surefire-plugin</artifactId>
+                    <version>${maven.surefire.plugin.version}</version>
                 </plugin>
             </plugins>
         </pluginManagement>
@@ -49,18 +57,38 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.8.1</version>
+                <version>${maven.compiler.plugin.version}</version>
                 <configuration>
                     <!--compile-->
                     <!--test-compile-->
-                    <source>1.8</source>
-                    <target>1.8</target>
+                    <source>12</source>
+                    <target>12</target>
                 </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>build-helper-maven-plugin</artifactId>
+                <version>${build.helper.maven.plugin.version}</version>
+                <executions>
+                    <execution>
+                        <id>add-integration-test-sources</id>
+                        <!--generate-test-sources-->
+                        <phase>process-test-sources</phase>
+                        <goals>
+                            <goal>add-test-source</goal>
+                        </goals>
+                        <configuration>
+                            <sources>
+                                <source>${test.integration.dir}/java</source>
+                            </sources>
+                        </configuration>
+                    </execution>
+                </executions>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
-                <version>3.1.1</version>
+                <version>${maven.jar.plugin.version}</version>
                 <executions>
                     <execution>
                         <goals>
@@ -73,10 +101,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-failsafe-plugin</artifactId>
-                <version>3.0.0-M3</version>
-                <configuration>
-                    <runOrder>alphabetical</runOrder>
-                </configuration>
+                <version>${maven.failsafe.plugin.version}</version>
                 <executions>
                     <execution>
                         <goals>
@@ -92,11 +117,6 @@
     </build>
     <dependencyManagement>
         <dependencies>
-            <dependency>
-                <groupId>org.junit.jupiter</groupId>
-                <artifactId>junit-jupiter-api</artifactId>
-                <version>5.3.1</version>
-            </dependency>
             <dependency>
                 <!-- Import dependency management from Spring Boot -->
                 <groupId>org.springframework.boot</groupId>
@@ -115,7 +135,7 @@
             <dependency>
                 <groupId>junit</groupId>
                 <artifactId>junit</artifactId>
-                <version>4.12</version>
+                <version>${junit.version}</version>
                 <scope>test</scope>
             </dependency>
             <!--Mockito-->
@@ -165,7 +185,6 @@
                 <artifactId>hibernate-core</artifactId>
                 <version>${hibernate.core}</version>
             </dependency>
-
             <!--spring-boot-test-autoconfigure-->
             <dependency>
                 <groupId>org.springframework.boot</groupId>
@@ -235,11 +254,6 @@
                 <groupId>org.hibernate.validator</groupId>
                 <artifactId>hibernate-validator</artifactId>
                 <version>6.0.9.Final</version>
-            </dependency>
-            <dependency>
-                <groupId>org.glassfish</groupId>
-                <artifactId>javax.el</artifactId>
-                <version>3.0.1-b10</version>
             </dependency>
             <!--Java standard injection-->
             <dependency>
