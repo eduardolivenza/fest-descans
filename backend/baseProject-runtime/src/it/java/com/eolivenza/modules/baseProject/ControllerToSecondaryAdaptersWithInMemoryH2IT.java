@@ -1,10 +1,9 @@
 package com.eolivenza.modules.baseProject;
 
 import com.eolivenza.modules.baseProject.configuration.ProfileNames;
+
 import com.eolivenza.modules.baseProject.controller.http.rest.resources.CategoryResource;
 import com.eolivenza.modules.baseProject.controller.http.rest.resources.ProductResource;
-import com.eolivenza.modules.baseProject.resources.CategoryResourceDataBuilder;
-import com.eolivenza.modules.baseProject.resources.ProductResourceDataBuilder;
 import io.restassured.RestAssured;
 import io.restassured.http.Header;
 import org.junit.Before;
@@ -36,7 +35,7 @@ public class ControllerToSecondaryAdaptersWithInMemoryH2IT {
     private int port;
 
     private final String HEALTH_UP = "UP";
-    private final String tokenSuperUser =       "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJST0NIRSIsInRlbmFudElkIjoiMzA1MzhGRkYtRDE2RC0xMUUzLTkwNzgtNTYzNDEyMDAwMEZGIiwibGFuZyI6ImVuIiwiaWF0IjoxNTM3OTc2MDU0LCJhdXRoIjoiUk9DSEUiLCJzdXBlcnVzZXIiOiJ0cnVlIiwicmlnaHRzIjp7ImFjdGlvbnMiOltdLCJyZXNvdXJjZXMiOltdfX0.mP5QrDTdZJNzNTG8JdprGknGLtegXuGlW_zQmVubp50";
+    private final String tokenSuperUser = "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJST0NIRSIsInRlbmFudElkIjoiMzA1MzhGRkYtRDE2RC0xMUUzLTkwNzgtNTYzNDEyMDAwMEZGIiwibGFuZyI6ImVuIiwiaWF0IjoxNTM3OTc2MDU0LCJhdXRoIjoiUk9DSEUiLCJzdXBlcnVzZXIiOiJ0cnVlIiwicmlnaHRzIjp7ImFjdGlvbnMiOltdLCJyZXNvdXJjZXMiOltdfX0.mP5QrDTdZJNzNTG8JdprGknGLtegXuGlW_zQmVubp50";
     private Header header;
 
     @Before

@@ -1,4 +1,4 @@
-package com.eolivenza.modules.baseProject.resources;
+package com.eolivenza.modules.baseProject;
 
 import com.eolivenza.modules.baseProject.controller.http.rest.resources.CategoryResource;
 

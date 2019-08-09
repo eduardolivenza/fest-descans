@@ -1,7 +1,6 @@
-package com.eolivenza.modules.baseProject.resources;
+package com.eolivenza.modules.baseProject;
 
 import com.eolivenza.modules.baseProject.controller.http.rest.resources.AvailableSizeResource;
-import com.eolivenza.modules.baseProject.controller.http.rest.resources.CategoryResource;
 import com.eolivenza.modules.baseProject.controller.http.rest.resources.ProductResource;
 
 import java.util.HashSet;

@@ -1,4 +1,4 @@
-package com.eolivenza.modules.baseProject.resources;
+package com.eolivenza.modules.baseProject;
 
 public class ProductResourceDataBuilder {
 
