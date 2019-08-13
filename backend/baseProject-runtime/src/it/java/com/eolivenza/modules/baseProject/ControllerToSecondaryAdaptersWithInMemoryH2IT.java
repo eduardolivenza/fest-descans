@@ -1,10 +1,7 @@
 package com.eolivenza.modules.baseProject;
 
 import com.eolivenza.modules.baseProject.configuration.ProfileNames;
-
-import com.eolivenza.modules.baseProject.controller.http.rest.resources.CategoryResource;
 import com.eolivenza.modules.baseProject.controller.http.rest.resources.ProductResource;
-import com.eolivenza.modules.baseProject.resources.CategoryResourceDataBuilder;
 import com.eolivenza.modules.baseProject.resources.ProductResourceDataBuilder;
 import io.restassured.RestAssured;
 import io.restassured.http.Header;
@@ -57,19 +54,22 @@ public class ControllerToSecondaryAdaptersWithInMemoryH2IT {
 
     @Test
     public void whenAProductIsAdded_ThenWeCanRetrieveIt() {
-        CategoryResource addedCategoryResource = CategoryResourceDataBuilder
+        /*CategoryResource addedCategoryResource = CategoryResourceDataBuilder
                 .defaultBuilder()
                 .build();
+
+         */
         ProductResource addedProductResource = ProductResourceDataBuilder
                 .defaultBuilder()
                 .withDescription("desc1")
                 .build();
+         /*
         String url = "/categories";
         given().contentType(APPLICATION_JSON_VALUE)
                 .body(addedCategoryResource)
                 .when().post(url)
-                .then().log().all().assertThat().statusCode(HttpStatus.OK.value());
-        url = "/products";
+                .then().log().all().assertThat().statusCode(HttpStatus.OK.value());*/
+        String url = "/products";
         given().contentType(APPLICATION_JSON_VALUE)
                 .body(addedProductResource)
                 .when().post("/products")

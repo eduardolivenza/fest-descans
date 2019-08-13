@@ -3,11 +3,7 @@ package com.eolivenza.modules.baseProject.application.suppliers.commands.command
 
 import com.eolivenza.modules.baseProject.application.CommandHandler;
 import com.eolivenza.modules.baseProject.application.annotations.DomainStrictTransactional;
-import com.eolivenza.modules.baseProject.application.categories.commands.AddCategoryCommand;
-import com.eolivenza.modules.baseProject.application.categories.commands.AddCategoryCommandHandler;
-import com.eolivenza.modules.baseProject.application.repositories.CategoriesRepository;
 import com.eolivenza.modules.baseProject.application.repositories.SuppliersRepository;
-import com.eolivenza.modules.baseProject.domain.model.categories.Category;
 import com.eolivenza.modules.baseProject.domain.model.suppliers.Supplier;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,7 +16,7 @@ public class AddSupplierCommandHandler implements CommandHandler<AddSupplierComm
 
     private final SuppliersRepository suppliersRepository;
 
-    private Logger logger = LoggerFactory.getLogger(AddCategoryCommandHandler.class);
+    private Logger logger = LoggerFactory.getLogger(AddSupplierCommandHandler.class);
 
     @Inject
     public AddSupplierCommandHandler(SuppliersRepository suppliersRepository) {
