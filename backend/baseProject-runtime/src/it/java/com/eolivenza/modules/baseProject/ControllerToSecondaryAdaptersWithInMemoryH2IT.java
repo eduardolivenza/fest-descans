@@ -2,7 +2,9 @@ package com.eolivenza.modules.baseProject;
 
 import com.eolivenza.modules.baseProject.configuration.ProfileNames;
 import com.eolivenza.modules.baseProject.controller.http.rest.resources.ProductResource;
+import com.eolivenza.modules.baseProject.controller.http.rest.resources.SupplierResource;
 import com.eolivenza.modules.baseProject.resources.ProductResourceDataBuilder;
+import com.eolivenza.modules.baseProject.resources.SupplierResourceDataBuilder;
 import io.restassured.RestAssured;
 import io.restassured.http.Header;
 import org.junit.Before;
@@ -54,34 +56,36 @@ public class ControllerToSecondaryAdaptersWithInMemoryH2IT {
 
     @Test
     public void whenAProductIsAdded_ThenWeCanRetrieveIt() {
-        /*CategoryResource addedCategoryResource = CategoryResourceDataBuilder
-                .defaultBuilder()
-                .build();
-
-         */
+        String url = "/products";
+        String expectedDescriptionValue = "My own description";
         ProductResource addedProductResource = ProductResourceDataBuilder
                 .defaultBuilder()
-                .withDescription("desc1")
+                .withDescription(expectedDescriptionValue)
                 .build();
-         /*
-        String url = "/categories";
-        given().contentType(APPLICATION_JSON_VALUE)
-                .body(addedCategoryResource)
-                .when().post(url)
-                .then().log().all().assertThat().statusCode(HttpStatus.OK.value());*/
-        String url = "/products";
         given().contentType(APPLICATION_JSON_VALUE)
                 .body(addedProductResource)
-                .when().post("/products")
+                .when().post(url)
                 .then().log().all().assertThat().statusCode(HttpStatus.OK.value());
         List<String> expectedReturnedList = new ArrayList();
-        expectedReturnedList.add("desc1");
+        expectedReturnedList.add(expectedDescriptionValue);
         given().contentType(APPLICATION_JSON_VALUE)
                 //.pathParams(pathVariables)
                 .when().get(url)
                 .then().log().all().assertThat()
                 .statusCode(HttpStatus.OK.value())
                 .and().body("productDescription", is(expectedReturnedList));
+    }
+
+    @Test
+    public void whenASupplierIsAdded_ThenWeCanRetrieveIt() {
+        String url = "/suppliers";
+        SupplierResource addedSupplierResource = SupplierResourceDataBuilder
+                .defaultBuilder()
+                .build();
+        given().contentType(APPLICATION_JSON_VALUE)
+                .body(addedSupplierResource)
+                .when().post(url)
+                .then().log().all().assertThat().statusCode(HttpStatus.OK.value());
     }
 
 }
