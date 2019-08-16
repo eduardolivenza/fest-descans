@@ -3,6 +3,7 @@ package com.eolivenza.modules.baseProject.application.products.commands;
 
 import com.eolivenza.modules.baseProject.application.CommandHandler;
 import com.eolivenza.modules.baseProject.application.annotations.DomainStrictTransactional;
+import com.eolivenza.modules.baseProject.application.products.ProductExistsException;
 import com.eolivenza.modules.baseProject.application.products.commands.availableSizes.AddAvailableSizeToProductCommand;
 import com.eolivenza.modules.baseProject.application.repositories.ProductsRepository;
 import com.eolivenza.modules.baseProject.domain.model.products.AvailableProduct;
@@ -20,24 +21,19 @@ public class AddProductCommandHandler implements CommandHandler<AddProductComman
 
     private final ProductsRepository productsRepository;
 
-    private final CommandHandler<AddAvailableSizeToProductCommand> addAvailableSizeCommandHandler;
-
     private Logger logger = LoggerFactory.getLogger(AddProductCommandHandler.class);
 
     @Inject
-    public AddProductCommandHandler(ProductsRepository productsRepository,
-                                    CommandHandler<AddAvailableSizeToProductCommand> addAvailableSizeCommandHandler) {
+    public AddProductCommandHandler(ProductsRepository productsRepository) {
         this.productsRepository = productsRepository;
-        this.addAvailableSizeCommandHandler = addAvailableSizeCommandHandler;
     }
 
     @DomainStrictTransactional
     @Override
     public void accept(AddProductCommand addProductCommand) {
-
         Category category = Category.valueOf(addProductCommand.category);
         if (productsRepository.existsByProductIdentifier(addProductCommand.productIdentifier)) {
-            //throw new ReagentConsumerAlreadyExistsException(addProductCommand.externalIdentifier);
+            throw new ProductExistsException(addProductCommand.productIdentifier);
         }
         Product product = new Product(
                 category,
