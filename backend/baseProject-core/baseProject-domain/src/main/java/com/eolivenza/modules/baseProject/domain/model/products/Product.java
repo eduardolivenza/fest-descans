@@ -1,7 +1,8 @@
 package com.eolivenza.modules.baseProject.domain.model.products;
 
 import com.eolivenza.modules.baseProject.domain.model.Entity;
-import com.eolivenza.modules.baseProject.domain.model.categories.Category;
+import com.eolivenza.modules.baseProject.domain.model.suppliers.Supplier;
+
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -14,13 +15,14 @@ public class Product extends Entity<Product> {
     @NotNull
     private UUID uuid;
 
-    @NotBlank
     private Category category;
 
     @NotBlank
     private String productIdentifier;
 
     private String description;
+
+    private Supplier supplier;
 
     @NotNull
     private Set<@NotBlank AvailableProduct> availableProducts;

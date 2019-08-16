@@ -1,6 +1,6 @@
 package com.eolivenza.modules.baseProject.repositories.domain.products;
 
-import com.eolivenza.modules.baseProject.repositories.domain.categories.CategoryJpa;
+import com.eolivenza.modules.baseProject.domain.model.products.Category;
 import com.eolivenza.modules.baseProject.repositories.domain.products.sizes.AvailableProductSizeJpa;
 import javax.persistence.*;
 import java.util.Set;
@@ -13,11 +13,7 @@ public class ProductJpa {
     @Id
     public String uuid;
 
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinColumn(name = "categoryJpa_id",
-                nullable = false,
-                foreignKey = @ForeignKey(name = "FK_PRODUCT_CATEGORY"))
-    private CategoryJpa categoryJpa;
+    private Category categoryJpa;
 
     private String productIdentifier;
 
@@ -30,7 +26,7 @@ public class ProductJpa {
         //JPA demands it
     }
 
-    public ProductJpa(String uuid, CategoryJpa categoryJpa, String productIdentifier,String description, Set<AvailableProductSizeJpa> productSizes ) {
+    public ProductJpa(String uuid, Category categoryJpa, String productIdentifier,String description, Set<AvailableProductSizeJpa> productSizes ) {
         this.uuid = uuid;
         this.categoryJpa = categoryJpa;
         this.productIdentifier = productIdentifier;
@@ -46,11 +42,11 @@ public class ProductJpa {
         this.uuid = uuid;
     }
 
-    public CategoryJpa getCategoryJpa() {
+    public Category getCategoryJpa() {
         return categoryJpa;
     }
 
-    public void setCategoryJpa(CategoryJpa categoryJpa) {
+    public void setCategoryJpa(Category categoryJpa) {
         this.categoryJpa = categoryJpa;
     }
 

@@ -11,8 +11,6 @@ public class AddProductCommand {
 
     public String category;
 
-
-
     public String productDescription;
 
     public Set<AvailableProduct> sizes;

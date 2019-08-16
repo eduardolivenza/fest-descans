@@ -1,14 +1,8 @@
 package com.eolivenza.modules.baseProject.domain.model.suppliers;
 
 import com.eolivenza.modules.baseProject.domain.model.Entity;
-import com.eolivenza.modules.baseProject.domain.model.categories.Category;
-import com.eolivenza.modules.baseProject.domain.model.products.AvailableProduct;
-import com.eolivenza.modules.baseProject.domain.model.user.UserRights;
 
-import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-import java.util.HashSet;
-import java.util.Set;
 import java.util.UUID;
 
 public class Supplier extends Entity<Supplier> {
