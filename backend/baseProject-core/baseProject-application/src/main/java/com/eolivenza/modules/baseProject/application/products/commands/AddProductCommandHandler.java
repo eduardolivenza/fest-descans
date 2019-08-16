@@ -5,6 +5,7 @@ import com.eolivenza.modules.baseProject.application.CommandHandler;
 import com.eolivenza.modules.baseProject.application.annotations.DomainStrictTransactional;
 import com.eolivenza.modules.baseProject.application.products.commands.availableSizes.AddAvailableSizeToProductCommand;
 import com.eolivenza.modules.baseProject.application.repositories.ProductsRepository;
+import com.eolivenza.modules.baseProject.domain.model.products.AvailableProduct;
 import com.eolivenza.modules.baseProject.domain.model.products.Category;
 import com.eolivenza.modules.baseProject.domain.model.products.Product;
 import org.slf4j.Logger;
@@ -38,25 +39,17 @@ public class AddProductCommandHandler implements CommandHandler<AddProductComman
         if (productsRepository.existsByProductIdentifier(addProductCommand.productIdentifier)) {
             //throw new ReagentConsumerAlreadyExistsException(addProductCommand.externalIdentifier);
         }
-
         Product product = new Product(
                 category,
                 addProductCommand.productIdentifier,
                 addProductCommand.productDescription,
                 new HashSet<>()
         );
-
-        productsRepository.create(product);
-
         addProductCommand.sizes.forEach(size ->
         {
-            AddAvailableSizeToProductCommand addAvailableSizeToProductCommand = new AddAvailableSizeToProductCommand(
-                    addProductCommand.productIdentifier,
-                    size.size,
-                    size.price
-            );
-            addAvailableSizeCommandHandler.accept(addAvailableSizeToProductCommand);
+            product.addAvailableSize(new AvailableProduct(size.size, size.price));
         });
+        productsRepository.create(product);
     }
 
     @Override
