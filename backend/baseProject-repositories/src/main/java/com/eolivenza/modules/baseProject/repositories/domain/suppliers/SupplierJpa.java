@@ -10,7 +10,7 @@ import javax.persistence.Table;
 public class SupplierJpa {
 
     @Id
-    public String uuid;
+    public String externalIdentifier;
 
     private String companyName;
 
@@ -20,18 +20,18 @@ public class SupplierJpa {
         //JPA demands it
     }
 
-    public SupplierJpa(String uuid, String companyName, String country) {
-        this.uuid = uuid;
+    public SupplierJpa(String externalIdentifier, String companyName, String country) {
+        this.externalIdentifier = externalIdentifier;
         this.companyName = companyName;
         this.country = country;
     }
 
-    public String getUuid() {
-        return uuid;
+    public String getExternalIdentifier() {
+        return externalIdentifier;
     }
 
-    public void setUuid(String uuid) {
-        this.uuid = uuid;
+    public void setExternalIdentifier(String uuid) {
+        this.externalIdentifier = externalIdentifier;
     }
 
     public String getCompanyName() {

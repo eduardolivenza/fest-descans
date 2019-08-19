@@ -27,9 +27,9 @@ public class AddSupplierCommandHandler implements CommandHandler<AddSupplierComm
     @Override
     public void accept(AddSupplierCommand addProductCommand) {
         Supplier supplier = new Supplier(
+                addProductCommand.externalIdentifier,
                 addProductCommand.companyName,
                 addProductCommand.country
-
         );
         suppliersRepository.create(supplier);
     }

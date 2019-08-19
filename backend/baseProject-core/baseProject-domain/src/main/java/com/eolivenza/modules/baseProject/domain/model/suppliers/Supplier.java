@@ -3,35 +3,29 @@ package com.eolivenza.modules.baseProject.domain.model.suppliers;
 import com.eolivenza.modules.baseProject.domain.model.Entity;
 
 import javax.validation.constraints.NotNull;
-import java.util.UUID;
 
 public class Supplier extends Entity<Supplier> {
 
     @NotNull
-    private UUID uuid;
+    private String externalIdentifier;
 
     @NotNull
     private String companyName;
 
     private String country;
 
-    public Supplier( String companyName, String country){
-        this(UUID.randomUUID(),  companyName, country);
-    }
-
-    public Supplier(UUID uuid,   String companyName,String country){
-        this.uuid = uuid;
+    public Supplier(String externalIdentifier,   String companyName,String country){
+        this.externalIdentifier = externalIdentifier;
         this.companyName = companyName;
         this.country= country;
-
     }
 
-    public UUID getUuid() {
-        return uuid;
+    public String getExternalIdentifier() {
+        return externalIdentifier;
     }
 
-    public void setUuid(UUID uuid) {
-        this.uuid = uuid;
+    public void setExternalIdentifier(String externalIdentifier) {
+        this.externalIdentifier = externalIdentifier;
     }
 
     public String getCompanyName() {
@@ -48,12 +42,6 @@ public class Supplier extends Entity<Supplier> {
 
     public void setCountry(String country) {
         this.country = country;
-    }
-
-    public void overwriteWith(Supplier otherUser) {
-        setUuid(otherUser.getUuid());
-        setCompanyName(otherUser.getCompanyName() );
-        setCountry(otherUser.getCountry());
     }
 
     @Override
