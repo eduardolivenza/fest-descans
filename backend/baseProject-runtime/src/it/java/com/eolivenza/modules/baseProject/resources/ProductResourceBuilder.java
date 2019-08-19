@@ -38,7 +38,7 @@ public final class ProductResourceBuilder {
     }
 
     public ProductResource build() {
-        return new ProductResource(category, productIdentifier, description, new HashSet<>());
+        return new ProductResource(category, productIdentifier, description, null, null, new HashSet<>());
     }
 
 }

@@ -22,20 +22,24 @@ public class Product extends Entity<Product> {
 
     private String description;
 
+    private  Integer comfortLevel;
+
     private Supplier supplier;
 
     @NotNull
     private Set<@NotBlank AvailableProduct> availableProducts;
 
-    public Product(Category category, String productIdentifier, String description, HashSet<AvailableProduct> availableProducts){
-        this(UUID.randomUUID(), category, productIdentifier, description, availableProducts);
+    public Product(Category category, String productIdentifier, String description,  Integer comfortLevel, Supplier supplier, HashSet<AvailableProduct> availableProducts){
+        this(UUID.randomUUID(), category, productIdentifier, description, comfortLevel, supplier, availableProducts);
     }
 
-    public Product(UUID uuid,  Category category, String productIdentifier,String description, Set<AvailableProduct> availableProducts){
+    public Product(UUID uuid,  Category category, String productIdentifier,String description,  Integer comfortLevel, Supplier supplier, Set<AvailableProduct> availableProducts){
        this.uuid = uuid;
        this.category = category;
        this.productIdentifier= productIdentifier;
        this.description = description;
+       this.comfortLevel = comfortLevel;
+       this.supplier = supplier;
        this.availableProducts = availableProducts;
     }
 
@@ -81,9 +85,20 @@ public class Product extends Entity<Product> {
         this.description = description;
     }
 
-    public void overwriteWith(Product otherProduct) {
-        setUuid(otherProduct.getUuid());
-        setProductIdentifier(otherProduct.getProductIdentifier());
+    public Integer getComfortLevel() {
+        return comfortLevel;
+    }
+
+    public void setComfortLevel(Integer comfortLevel) {
+        this.comfortLevel = comfortLevel;
+    }
+
+    public Supplier getSupplier() {
+        return supplier;
+    }
+
+    public void setSupplier(Supplier supplier) {
+        this.supplier = supplier;
     }
 
     @Override

@@ -70,6 +70,8 @@ public class ProductsController {
                 productResource.productIdentifier,
                 productResource.category,
                 productResource.productDescription,
+                productResource.comfortLevel,
+                productResource.supplierName,
                 sizesSet);
 
         addProductCommandHandler.accept(addProductCommand);

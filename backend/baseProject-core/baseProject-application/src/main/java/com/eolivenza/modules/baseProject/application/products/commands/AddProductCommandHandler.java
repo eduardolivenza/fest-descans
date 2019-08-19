@@ -9,6 +9,7 @@ import com.eolivenza.modules.baseProject.application.repositories.ProductsReposi
 import com.eolivenza.modules.baseProject.domain.model.products.AvailableProduct;
 import com.eolivenza.modules.baseProject.domain.model.products.Category;
 import com.eolivenza.modules.baseProject.domain.model.products.Product;
+import com.eolivenza.modules.baseProject.domain.model.suppliers.Supplier;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -35,10 +36,13 @@ public class AddProductCommandHandler implements CommandHandler<AddProductComman
         if (productsRepository.existsByProductIdentifier(addProductCommand.productIdentifier)) {
             throw new ProductExistsException(addProductCommand.productIdentifier);
         }
+        Supplier supplier = null; // get it from supplierCode
         Product product = new Product(
                 category,
                 addProductCommand.productIdentifier,
                 addProductCommand.productDescription,
+                addProductCommand.comfortLevel,
+                supplier,
                 new HashSet<>()
         );
         addProductCommand.sizes.forEach(size ->

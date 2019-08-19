@@ -13,13 +13,18 @@ public class AddProductCommand {
 
     public String productDescription;
 
+    public Integer comfortLevel;
+
+    public String supplierCode;
+
     public Set<AvailableProduct> sizes;
 
-    public AddProductCommand(String productIdentifier, String category, String productDescription, Set<AvailableProduct> sizesSet) {
+    public AddProductCommand(String productIdentifier, String category, String productDescription, Integer comfortLevel, String supplierCode, Set<AvailableProduct> sizesSet) {
         this.productIdentifier = productIdentifier;
         this.productDescription = productDescription;
         this.category = category;
+        this.comfortLevel = comfortLevel;
+        this.supplierCode = supplierCode;
         this.sizes = sizesSet;
-
     }
 }
