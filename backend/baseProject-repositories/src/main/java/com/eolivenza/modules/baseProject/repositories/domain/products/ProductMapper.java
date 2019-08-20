@@ -6,6 +6,7 @@ import com.eolivenza.modules.baseProject.domain.model.products.Product;
 import com.eolivenza.modules.baseProject.domain.model.suppliers.Supplier;
 import com.eolivenza.modules.baseProject.repositories.domain.products.sizes.AvailableProductSizeJpa;
 import com.eolivenza.modules.baseProject.repositories.domain.products.sizes.AvailableProductSizeMapper;
+import com.eolivenza.modules.baseProject.repositories.domain.suppliers.SupplierMapper;
 import org.springframework.stereotype.Component;
 
 import java.util.HashSet;
@@ -17,18 +18,19 @@ import java.util.stream.Collectors;
 public class ProductMapper implements Mapper<Product, ProductJpa> {
 
     AvailableProductSizeMapper availableProductSizeMapper;
+    SupplierMapper supplierMapper;
 
 
-    public ProductMapper(AvailableProductSizeMapper availableProductSizeMapper)
+    public ProductMapper(AvailableProductSizeMapper availableProductSizeMapper, SupplierMapper supplierMapper)
     {
         this.availableProductSizeMapper = availableProductSizeMapper;
-
+        this.supplierMapper = supplierMapper;
     }
 
     @Override
     public Product toDomain(ProductJpa object) {
         Set<AvailableProduct> availableProducts = object.getProductSizes().stream().map(availableProductSizeMapper::toDomain).collect(Collectors.toSet());
-        Supplier supplier = null; // get object.getSupplier()
+        Supplier supplier = supplierMapper.toDomain(object.getSupplier());
         return new Product(UUID.fromString(object.getUuid()),object.getCategoryJpa(), object.getProductIdentifier(), object.getDescription(), object.getComfortLevel(), supplier,availableProducts );
     }
 
@@ -46,6 +48,8 @@ public class ProductMapper implements Mapper<Product, ProductJpa> {
                 object.getCategory(),
                 object.getProductIdentifier(),
                 object.getDescription(),
+                object.getComfortLevel(),
+                supplierMapper.fromDomain(object.getSupplier()),
                 sizesList
         );
         for (AvailableProduct size : object.getAvailableProducts())

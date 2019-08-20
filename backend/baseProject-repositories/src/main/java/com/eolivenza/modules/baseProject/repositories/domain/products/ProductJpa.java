@@ -36,11 +36,13 @@ public class ProductJpa {
         //JPA demands it
     }
 
-    public ProductJpa(String uuid, Category categoryJpa, String productIdentifier,String description, Set<AvailableProductSizeJpa> productSizes ) {
+    public ProductJpa(String uuid, Category categoryJpa, String productIdentifier,String description, Integer comfortLevel, SupplierJpa supplierJpa, Set<AvailableProductSizeJpa> productSizes ) {
         this.uuid = uuid;
         this.categoryJpa = categoryJpa;
         this.productIdentifier = productIdentifier;
         this.description = description;
+        this.comfortLevel = comfortLevel;
+        this.supplier = supplierJpa;
         this.productSizes = productSizes;
     }
 

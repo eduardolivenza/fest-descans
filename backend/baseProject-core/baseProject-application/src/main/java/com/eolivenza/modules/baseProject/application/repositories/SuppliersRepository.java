@@ -8,4 +8,6 @@ import com.eolivenza.modules.baseProject.domain.model.suppliers.Supplier;
 
 public interface SuppliersRepository extends Repository<Supplier, String>, RetrieveRepository<Supplier, String>, RetrieveAllRepository<Supplier> {
 
+    boolean existsBySupplierIdentifier(String externalIdentifier);
+
 }

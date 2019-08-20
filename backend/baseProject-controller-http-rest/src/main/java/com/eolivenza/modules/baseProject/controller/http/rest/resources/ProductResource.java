@@ -23,30 +23,30 @@ public class ProductResource {
     @ApiModelProperty(required = true, value = "Comfort level", example = "3")
     public Integer comfortLevel;
 
-    @ApiModelProperty(required = true, value = "Supplier", example = "Poligon")
-    public String supplierName;
+    @ApiModelProperty(required = false)
+    public SupplierResource supplier;
 
     @ApiModelProperty(required = false)
     public Set<AvailableSizeResource> sizes;
 
     public ProductResource(){}
 
-    public ProductResource(String identifier, String category, String productIdentifier,  String productDescription, Integer comfortLevel, String supplierName, Set<AvailableSizeResource> sizes) {
+    public ProductResource(String identifier, String category, String productIdentifier,  String productDescription, Integer comfortLevel, SupplierResource supplierResource, Set<AvailableSizeResource> sizes) {
         this.identifier = identifier;
         this.category = category;
         this.productIdentifier = productIdentifier;
         this.productDescription = productDescription;
         this.sizes = sizes;
         this.comfortLevel = comfortLevel;
-        this.supplierName = supplierName;
+        this.supplier = supplierResource;
     }
 
-    public ProductResource( String category, String productIdentifier,  String productDescription,  Integer comfortLevel,  String supplierName, Set<AvailableSizeResource> sizes) {
+    public ProductResource( String category, String productIdentifier,  String productDescription,  Integer comfortLevel,  SupplierResource supplierResource, Set<AvailableSizeResource> sizes) {
         this.category = category;
         this.productIdentifier = productIdentifier;
         this.productDescription = productDescription;
         this.comfortLevel = comfortLevel;
-        this.supplierName = supplierName;
+        this.supplier = supplierResource;
         this.sizes = sizes;
     }
 }

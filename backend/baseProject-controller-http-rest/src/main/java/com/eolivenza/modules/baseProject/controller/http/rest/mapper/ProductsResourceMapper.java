@@ -14,9 +14,11 @@ import java.util.stream.Collectors;
 public class ProductsResourceMapper implements ResourceMapper<Product, ProductResource> {
 
     private final AvailableProductResourceMapper availableProductResourceMapper;
+    private final SupplierResourceMapper supplierResourceMapper;
 
-    public ProductsResourceMapper(AvailableProductResourceMapper availableProductResourceMapper) {
+    public ProductsResourceMapper(AvailableProductResourceMapper availableProductResourceMapper, SupplierResourceMapper supplierResourceMapper) {
         this.availableProductResourceMapper = availableProductResourceMapper;
+        this.supplierResourceMapper = supplierResourceMapper;
     }
 
     @Override
@@ -32,6 +34,6 @@ public class ProductsResourceMapper implements ResourceMapper<Product, ProductRe
 
     @Override
     public ProductResource toSecondType(Product object) {
-        return new ProductResource(object.getUuid().toString(), object.getCategory().name(), object.getProductIdentifier(), object.getDescription(), object.getComfortLevel(), object.getSupplier().getCompanyName(), object.getAvailableProducts().stream().map(availableProductResourceMapper::toSecondType).collect(Collectors.toSet()));
+        return new ProductResource(object.getUuid().toString(), object.getCategory().name(), object.getProductIdentifier(), object.getDescription(), object.getComfortLevel(), supplierResourceMapper.toSecondType(object.getSupplier()) , object.getAvailableProducts().stream().map(availableProductResourceMapper::toSecondType).collect(Collectors.toSet()));
     }
 }
