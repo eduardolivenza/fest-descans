@@ -9,13 +9,13 @@ public class SupplierResourceMapper implements ResourceMapper<Supplier, Supplier
 
     @Override
     public Supplier toFirstType(SupplierResource object) {
-        return new Supplier(object.companyName, object.country);
+        return new Supplier(object.companyId, object.companyName, object.country);
     }
 
     @Override
     public SupplierResource toSecondType(Supplier object) {
         return new SupplierResource(
-            object.getUuid().toString(),
+            object.getExternalIdentifier(),
             object.getCompanyName(),
             object.getCountry());
     }

@@ -41,8 +41,8 @@ public class ProductsRepositoryImpl implements ProductsRepository {
 
     @Override
     public List<Product> retrieveAll() {
-        List<ProductJpa> usersJpaList = productsRepositoryJpaSpringData.findAll();
-        return usersJpaList.stream().map(productMapper::toDomain).collect(Collectors.toList());
+        List<ProductJpa> productsJpaList = productsRepositoryJpaSpringData.findAll();
+        return productsJpaList.stream().map(productMapper::toDomain).collect(Collectors.toList());
     }
 
     @Override

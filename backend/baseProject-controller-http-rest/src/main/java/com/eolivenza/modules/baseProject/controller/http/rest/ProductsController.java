@@ -7,10 +7,12 @@ import com.eolivenza.modules.baseProject.application.products.commands.available
 import com.eolivenza.modules.baseProject.application.security.BaseProjectGrantPermission;
 import com.eolivenza.modules.baseProject.controller.http.rest.mapper.AvailableProductResourceMapper;
 import com.eolivenza.modules.baseProject.controller.http.rest.mapper.ProductsResourceMapper;
+import com.eolivenza.modules.baseProject.controller.http.rest.mapper.SupplierResourceMapper;
 import com.eolivenza.modules.baseProject.controller.http.rest.resources.AvailableSizeResource;
 import com.eolivenza.modules.baseProject.controller.http.rest.resources.ProductResource;
 import com.eolivenza.modules.baseProject.domain.model.products.AvailableProduct;
 import com.eolivenza.modules.baseProject.domain.model.products.Product;
+import com.eolivenza.modules.baseProject.domain.model.suppliers.Supplier;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -30,31 +32,24 @@ import java.util.stream.Stream;
 @RestController
 public class ProductsController {
 
-    private final ProductsResourceMapper productsResourceMapper;
-    private final AvailableProductResourceMapper availableProductResourceMapper;
-
-    private final QueryHandler<Class<Void>, List<Product>> getAllProductsQueryHandler;
-    private final QueryHandler<String, Product> getProductQueryHandler;
-    private final CommandHandler<AddProductCommand> addProductCommandHandler;
-    private final CommandHandler<AddAvailableSizeToProductCommand> addAvailableSizeToProductCommandCommandHandler;
+    @Autowired
+    private ProductsResourceMapper productsResourceMapper;
+    @Autowired
+    private AvailableProductResourceMapper availableProductResourceMapper;
+    @Autowired
+    private SupplierResourceMapper supplierResourceMapper;
+    @Autowired
+    private QueryHandler<Class<Void>, List<Product>> getAllProductsQueryHandler;
+    @Autowired
+    private QueryHandler<String, Product> getProductQueryHandler;
+    @Autowired
+    private CommandHandler<AddProductCommand> addProductCommandHandler;
+    @Autowired
+    private  CommandHandler<AddAvailableSizeToProductCommand> addAvailableSizeToProductCommandCommandHandler;
 
 
     @Autowired
-    public ProductsController(
-            ProductsResourceMapper productsResourceMapper,
-            AvailableProductResourceMapper availableProductResourceMapper,
-            CommandHandler<AddProductCommand> addProductCommandHandler,
-            CommandHandler<AddAvailableSizeToProductCommand> addAvailableSizeToProductCommandHandler,
-            QueryHandler<Class<Void>, List<Product>> getAllProductsQueryHandler,
-            QueryHandler<String, Product> getProductQueryHandler)
-    {
-        this.productsResourceMapper = productsResourceMapper;
-        this.availableProductResourceMapper = availableProductResourceMapper;
-        this.getAllProductsQueryHandler = getAllProductsQueryHandler;
-        this.getProductQueryHandler = getProductQueryHandler;
-        this.addProductCommandHandler = addProductCommandHandler;
-        this.addAvailableSizeToProductCommandCommandHandler = addAvailableSizeToProductCommandHandler;
-
+    public ProductsController() {
     }
 
     @ApiOperation(value = " Adds a new product")
@@ -65,13 +60,14 @@ public class ProductsController {
             Stream<AvailableProduct> sizesStream = productResource.sizes.stream().map(availableProductResourceMapper::toFirstType);
             sizesSet = sizesStream.collect(Collectors.toSet());
         }
-
+        Supplier supplier = supplierResourceMapper.toFirstType(productResource.supplier);
         AddProductCommand addProductCommand = new AddProductCommand(
                 productResource.productIdentifier,
                 productResource.category,
                 productResource.productDescription,
+                productResource.comfortLevel,
+                supplier,
                 sizesSet);
-
         addProductCommandHandler.accept(addProductCommand);
     }
 

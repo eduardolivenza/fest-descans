@@ -4,6 +4,7 @@ import com.eolivenza.modules.baseProject.controller.http.rest.resources.ProductR
 import com.eolivenza.modules.baseProject.domain.model.products.AvailableProduct;
 import com.eolivenza.modules.baseProject.domain.model.products.Category;
 import com.eolivenza.modules.baseProject.domain.model.products.Product;
+import com.eolivenza.modules.baseProject.domain.model.suppliers.Supplier;
 import org.springframework.stereotype.Component;
 
 import java.util.HashSet;
@@ -13,9 +14,11 @@ import java.util.stream.Collectors;
 public class ProductsResourceMapper implements ResourceMapper<Product, ProductResource> {
 
     private final AvailableProductResourceMapper availableProductResourceMapper;
+    private final SupplierResourceMapper supplierResourceMapper;
 
-    public ProductsResourceMapper(AvailableProductResourceMapper availableProductResourceMapper) {
+    public ProductsResourceMapper(AvailableProductResourceMapper availableProductResourceMapper, SupplierResourceMapper supplierResourceMapper) {
         this.availableProductResourceMapper = availableProductResourceMapper;
+        this.supplierResourceMapper = supplierResourceMapper;
     }
 
     @Override
@@ -24,11 +27,13 @@ public class ProductsResourceMapper implements ResourceMapper<Product, ProductRe
                 Category.valueOf(object.category),
                 object.identifier,
                 object.productDescription,
+                object.comfortLevel,
+                null,
                 new HashSet<AvailableProduct>());
     }
 
     @Override
     public ProductResource toSecondType(Product object) {
-        return new ProductResource(object.getUuid().toString(), object.getCategory().name(), object.getProductIdentifier(), object.getDescription(), object.getAvailableProducts().stream().map(availableProductResourceMapper::toSecondType).collect(Collectors.toSet()));
+        return new ProductResource(object.getUuid().toString(), object.getCategory().name(), object.getProductIdentifier(), object.getDescription(), object.getComfortLevel(), supplierResourceMapper.toSecondType(object.getSupplier()) , object.getAvailableProducts().stream().map(availableProductResourceMapper::toSecondType).collect(Collectors.toSet()));
     }
 }

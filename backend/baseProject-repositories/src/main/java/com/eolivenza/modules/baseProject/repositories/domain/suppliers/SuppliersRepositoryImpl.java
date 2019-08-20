@@ -63,4 +63,8 @@ public class SuppliersRepositoryImpl implements SuppliersRepository {
     public void delete(String uuid) {
         suppliersRepositoryJpaSpringData.deleteById(uuid);
     }
+
+    public boolean existsBySupplierIdentifier(String externalIdentifier){
+        return suppliersRepositoryJpaSpringData.existsById(externalIdentifier);
+    }
 }

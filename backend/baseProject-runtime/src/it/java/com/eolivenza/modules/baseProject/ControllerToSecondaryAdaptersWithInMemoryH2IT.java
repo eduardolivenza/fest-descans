@@ -58,8 +58,10 @@ public class ControllerToSecondaryAdaptersWithInMemoryH2IT {
     public void whenAProductIsAdded_ThenWeCanRetrieveIt() {
         String url = "/products";
         String expectedDescriptionValue = "My own description";
+        SupplierResource supplierResource = SupplierResourceDataBuilder.defaultBuilder().build();
         ProductResource addedProductResource = ProductResourceDataBuilder
                 .defaultBuilder()
+                .withSupplier(supplierResource)
                 .withDescription(expectedDescriptionValue)
                 .build();
         given().contentType(APPLICATION_JSON_VALUE)

@@ -4,8 +4,6 @@ import com.eolivenza.modules.baseProject.application.Mapper;
 import com.eolivenza.modules.baseProject.domain.model.suppliers.Supplier;
 import org.springframework.stereotype.Component;
 
-import java.util.UUID;
-
 @Component
 public class SupplierMapper implements Mapper<Supplier, SupplierJpa> {
 
@@ -16,7 +14,7 @@ public class SupplierMapper implements Mapper<Supplier, SupplierJpa> {
 
     @Override
     public Supplier toDomain(SupplierJpa object) {
-        return new Supplier(UUID.fromString(object.getUuid()), object.getCompanyName(), object.getCountry() );
+        return new Supplier(object.getExternalIdentifier(), object.getCompanyName(), object.getCountry() );
     }
 
     /**
@@ -27,9 +25,8 @@ public class SupplierMapper implements Mapper<Supplier, SupplierJpa> {
      */
     @Override
     public SupplierJpa fromDomain(Supplier object) {
-
         SupplierJpa supplierJpa = new SupplierJpa(
-                object.getUuid().toString(),
+                object.getExternalIdentifier(),
                 object.getCompanyName(),
                 object.getCountry()
         );
