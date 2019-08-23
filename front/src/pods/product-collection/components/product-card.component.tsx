@@ -16,7 +16,12 @@ import {
   Avatar
 } from "@material-ui/core";
 import { withStyles, createStyles, WithStyles } from "@material-ui/core/styles";
-import { tsObjectKeyword } from "@babel/types";
+import { ValueDisplay } from "common/components";
+import AwesomeSlider from 'react-awesome-slider';
+import 'react-awesome-slider/dist/styles.css';
+const logo = require("./../../../images/logo.jpg");
+const imageStranger = require("./../../../images/series/stranger-things-2.jpg");
+
 
 interface Props extends WithStyles<typeof styles> {
   product: ProductEntityVm;
@@ -42,7 +47,7 @@ const styles = (theme: Theme) =>
 
 const manageProductPrice = () => {
   const [currentPrice, setCurrentPrice] = React.useState<string>(
-    "0"
+    "--"
   );
 
   return { currentPrice, setCurrentPrice };
@@ -78,15 +83,26 @@ export const ProductCardInner = (props: Props) => {
             justifyContent: "center"
           }}
         >
-          <CardMedia
-            image={product.picture}
-            title={product.productIdentifier}
-            style={{ height: 0, paddingTop: "56.25%" }}
-          />
-
+          <AwesomeSlider>
+            <div style={{ backgroundImage: `url(${product.picture})`, backgroundColor: '#ffffff', backgroundRepeat: 'no-repeat', backgroundSize: 'contain', backgroundPosition: '50% 50%'}} />
+            <div
+              style={{ backgroundColor: '#f09297' }}
+              data-src={imageStranger}
+            />
+            <div
+              style={{ backgroundColor: '#f09297' }}
+              data-src={logo}
+            />
+          </AwesomeSlider>
+          <div/>
           <Typography variant="subtitle1" gutterBottom>
             {product.productDescription}
           </Typography>
+          <ValueDisplay
+            name="Comfort level"
+            value={product.comfortLevel}
+            max={5}
+          />
           <Typography className={classes.price}>{currentPrice}€</Typography>
           <div>
             {product.sizes.map(size => (

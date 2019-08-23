@@ -6,8 +6,7 @@ import {
   withStyles
 } from "@material-ui/core/styles";
 import { TextFieldForm, DropdownForm, TextAreaForm } from "common/components";
-import { TextField, Button } from "@material-ui/core";
-import Rating from "material-ui-rating";
+import { Button } from "@material-ui/core";
 import { HotelEntityVm, HotelFormErrors } from "./hotel-edit.vm";
 import { LookupEntity } from "core";
 import { RatingForm } from "common/components";
