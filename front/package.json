@@ -44,7 +44,7 @@
     "redux-mock-store": "^1.5.3",
     "style-loader": "^0.23.1",
     "ts-jest": "^24.0.2",
-    "typescript": "^3.4.1",
+    "typescript": "^3.5.1",
     "url-loader": "^1.1.2",
     "webpack": "^4.29.6",
     "webpack-cli": "^3.3.0",
@@ -59,6 +59,7 @@
     "material-ui-dropzone": "^2.3.5",
     "material-ui-rating": "^3.1.0",
     "react": "^16.8.6",
+    "react-awesome-slider": "^1.0.1",
     "react-dom": "^16.8.6",
     "react-router-dom": "^5.0.0"
   }
