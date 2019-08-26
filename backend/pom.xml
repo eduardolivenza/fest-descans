@@ -31,18 +31,15 @@
         <assertj.core.version>3.10.0</assertj.core.version>
         <build.helper.maven.plugin.version>3.0.0</build.helper.maven.plugin.version>
     </properties>
-
     <modules>
         <module>baseProject-runtime</module>
         <module>baseProject-controller-http-rest</module>
         <module>baseProject-repositories</module>
         <module>baseProject-core</module>
     </modules>
-
     <scm>
         <connection>scm:git:ssh://tfsprod.emea.eolivenza.com:22/tfs/SantCugat/eolivenza.DE.LIS/_git/infinity-baseProject</connection>
     </scm>
-
     <build>
         <pluginManagement>
             <plugins>
@@ -308,12 +305,6 @@
             </dependency>
         </dependencies>
     </dependencyManagement>
-    <dependencies>
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-api</artifactId>
-        </dependency>
-    </dependencies>
     <profiles>
         <profile>
             <id>unit-test</id>
