@@ -13,13 +13,7 @@ const growStyle = {
   flexGrow: 1,
 };
 
-const drawerWidth = 240;
-
-
-
-
 interface Props extends RouteComponentProps { }
-
 const AppLayoutInner: React.FunctionComponent<Props> = (props) => {
 
   const { history } = props;
