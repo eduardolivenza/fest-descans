@@ -63,6 +63,7 @@ public class ProductsController {
         Supplier supplier = supplierResourceMapper.toFirstType(productResource.supplier);
         AddProductCommand addProductCommand = new AddProductCommand(
                 productResource.productIdentifier,
+                productResource.productName,
                 productResource.category,
                 productResource.productDescription,
                 productResource.comfortLevel,

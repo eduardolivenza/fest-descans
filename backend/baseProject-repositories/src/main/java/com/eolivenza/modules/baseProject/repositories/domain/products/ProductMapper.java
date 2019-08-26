@@ -31,7 +31,7 @@ public class ProductMapper implements Mapper<Product, ProductJpa> {
     public Product toDomain(ProductJpa object) {
         Set<AvailableProduct> availableProducts = object.getProductSizes().stream().map(availableProductSizeMapper::toDomain).collect(Collectors.toSet());
         Supplier supplier = supplierMapper.toDomain(object.getSupplier());
-        return new Product(UUID.fromString(object.getUuid()),object.getCategoryJpa(), object.getProductIdentifier(), object.getDescription(), object.getComfortLevel(), supplier,availableProducts );
+        return new Product(UUID.fromString(object.getUuid()),object.getCategoryJpa(), object.getProductIdentifier(), object.getProductName(), object.getDescription(), object.getComfortLevel(), supplier,availableProducts );
     }
 
     /**
@@ -47,6 +47,7 @@ public class ProductMapper implements Mapper<Product, ProductJpa> {
                 object.getUuid().toString(),
                 object.getCategory(),
                 object.getProductIdentifier(),
+                object.getProductName(),
                 object.getDescription(),
                 object.getComfortLevel(),
                 supplierMapper.fromDomain(object.getSupplier()),

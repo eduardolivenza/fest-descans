@@ -1,6 +1,5 @@
 package com.eolivenza.modules.baseProject.application.products.commands;
 
-
 import com.eolivenza.modules.baseProject.application.CommandHandler;
 import com.eolivenza.modules.baseProject.application.annotations.DomainStrictTransactional;
 import com.eolivenza.modules.baseProject.application.products.ProductExistsException;
@@ -44,6 +43,7 @@ public class AddProductCommandHandler implements CommandHandler<AddProductComman
         Product product = new Product(
                 category,
                 addProductCommand.productIdentifier,
+                addProductCommand.productName,
                 addProductCommand.productDescription,
                 addProductCommand.comfortLevel,
                 addProductCommand.supplier,

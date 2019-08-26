@@ -26,6 +26,7 @@ public class ProductsResourceMapper implements ResourceMapper<Product, ProductRe
         return new Product(
                 Category.valueOf(object.category),
                 object.identifier,
+                object.productName,
                 object.productDescription,
                 object.comfortLevel,
                 null,

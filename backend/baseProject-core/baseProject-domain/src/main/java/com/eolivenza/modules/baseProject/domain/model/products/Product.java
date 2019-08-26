@@ -12,6 +12,7 @@ import java.util.UUID;
 
 public class Product extends Entity<Product> {
 
+    private String productName;
     @NotNull
     private UUID uuid;
 
@@ -29,14 +30,15 @@ public class Product extends Entity<Product> {
     @NotNull
     private Set<@NotBlank AvailableProduct> availableProducts;
 
-    public Product(Category category, String productIdentifier, String description,  Integer comfortLevel, Supplier supplier, HashSet<AvailableProduct> availableProducts){
-        this(UUID.randomUUID(), category, productIdentifier, description, comfortLevel, supplier, availableProducts);
+    public Product(Category category, String productIdentifier, String productName, String description,  Integer comfortLevel, Supplier supplier, HashSet<AvailableProduct> availableProducts){
+        this(UUID.randomUUID(), category, productIdentifier, productName, description, comfortLevel, supplier, availableProducts);
     }
 
-    public Product(UUID uuid,  Category category, String productIdentifier,String description,  Integer comfortLevel, Supplier supplier, Set<AvailableProduct> availableProducts){
+    public Product(UUID uuid,  Category category, String productIdentifier, String productName, String description,  Integer comfortLevel, Supplier supplier, Set<AvailableProduct> availableProducts){
        this.uuid = uuid;
        this.category = category;
        this.productIdentifier= productIdentifier;
+       this.productName = productName;
        this.description = description;
        this.comfortLevel = comfortLevel;
        this.supplier = supplier;
@@ -59,6 +61,14 @@ public class Product extends Entity<Product> {
     public Product setProductIdentifier(String productIdentifier) {
         this.productIdentifier = productIdentifier;
         return this;
+    }
+
+    public String getProductName() {
+        return productName;
+    }
+
+    public void setProductName(String productName) {
+        this.productName = productName;
     }
 
     public Set<AvailableProduct> getAvailableProducts() {
