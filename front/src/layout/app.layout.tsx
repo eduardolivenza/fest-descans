@@ -7,19 +7,16 @@ import { LoginMenu } from "./loginMenu.layout";
 import { MainMenu } from "./mainMenu.layout";
 import { withRouter, RouteComponentProps } from "react-router-dom";
 
-
 const logo = require("./../images/logo.jpg")
-
 
 const growStyle = {
   flexGrow: 1,
 };
 
 interface Props extends RouteComponentProps { }
-
 const AppLayoutInner: React.FunctionComponent<Props> = (props) => {
 
-  const {history} = props;
+  const { history } = props;
 
   const [anchorEl, setanchorEl] = React.useState(null);
   const openMenu = Boolean(anchorEl);
@@ -60,7 +57,7 @@ const AppLayoutInner: React.FunctionComponent<Props> = (props) => {
   return (
     <div >
       <AppBar position="static"  >
-        <Toolbar variant="dense">    
+        <Toolbar variant="dense">
           <MainMenu
             handleMenu={handleMenu}
             openMenu={openMenu}
@@ -68,20 +65,20 @@ const AppLayoutInner: React.FunctionComponent<Props> = (props) => {
             anchorMenu={anchorEl}
             goToDefault={goToDefault}
             goToProductsList={goToProductsList} />
-          <img src="https://unsplash.it/300/120"/>
-          <img src={logo} alt="Logo" height="100"/>;
-        
+          <img src="https://unsplash.it/300/120" />
+          <img src={logo} alt="Logo" height="100" />;
+
           <Typography style={growStyle} variant="h6" color="inherit" >
             {loginContext.login}
           </Typography>
           <div>
-            <LoginMenu 
+            <LoginMenu
               handleLoginMenu={handleLoginMenu}
               openLoginMenu={openLoginMenu}
               handleClose={handleClose}
               anchorLoginMenu={anchorLoginMenu}
               doLoginLogout={doLoginLogout}
-              />
+            />
           </div>
         </Toolbar>
       </AppBar>

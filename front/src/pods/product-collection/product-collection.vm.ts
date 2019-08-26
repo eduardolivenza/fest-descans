@@ -3,6 +3,7 @@ export interface ProductEntityVm {
   productIdentifier : string;
   productDescription: string;
   sizes: ProductEntitySizeVm[];
+  comfortLevel: number;
   picture: string;
 }
 

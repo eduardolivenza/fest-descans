@@ -5,8 +5,7 @@ import { Theme } from "@material-ui/core/styles";
 import CardHeader from "@material-ui/core/CardHeader/CardHeader";
 import IconButton from "@material-ui/core/IconButton/IconButton";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
-import EditIcon from "@material-ui/icons/edit";
-import DeleteIcon from "@material-ui/icons/delete";
+import DetailsIcon from "@material-ui/icons/details";
 import {
   CardContent,
   CardMedia,
@@ -16,7 +15,12 @@ import {
   Avatar
 } from "@material-ui/core";
 import { withStyles, createStyles, WithStyles } from "@material-ui/core/styles";
-import { tsObjectKeyword } from "@babel/types";
+import { ValueDisplay } from "common/components";
+import AwesomeSlider from 'react-awesome-slider';
+import 'react-awesome-slider/dist/styles.css';
+const logo = require("./../../../images/logo.jpg");
+const imageStranger = require("./../../../images/series/stranger-things-2.jpg");
+
 
 interface Props extends WithStyles<typeof styles> {
   product: ProductEntityVm;
@@ -32,17 +36,25 @@ const styles = (theme: Theme) =>
     chip:
     {
       marginRight: theme.spacing.unit,
+      marginBottom: theme.spacing.unit,
+    },
+    chipParent: {
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'space-between',
+    },
+    chips: {
+      flexBasis: '80%',
     },
     price: {
       fontWeight: 'bold',
       fontSize: 25,
-      textAlign: 'right',
     }
   });
 
 const manageProductPrice = () => {
   const [currentPrice, setCurrentPrice] = React.useState<string>(
-    "0"
+    "--"
   );
 
   return { currentPrice, setCurrentPrice };
@@ -62,11 +74,6 @@ export const ProductCardInner = (props: Props) => {
     <Card className={classes.card}>
       <CardHeader
         avatar={<Avatar aria-label="Product">{product.category}</Avatar>}
-        action={
-          <IconButton>
-            <MoreVertIcon />
-          </IconButton>
-        }
         title={product.productIdentifier}
         subheader={product.category}
       />
@@ -78,30 +85,41 @@ export const ProductCardInner = (props: Props) => {
             justifyContent: "center"
           }}
         >
-          <CardMedia
-            image={product.picture}
-            title={product.productIdentifier}
-            style={{ height: 0, paddingTop: "56.25%" }}
-          />
 
+          <AwesomeSlider style={{ marginBottom: '40px' }}>
+            <div style={{ backgroundImage: `url(${product.picture})`, backgroundColor: '#ffffff', backgroundRepeat: 'no-repeat', backgroundSize: 'contain', backgroundPosition: '50% 50%' }} />
+            <div
+              style={{ backgroundColor: '#ffffff' }}
+              data-src={imageStranger}
+            />
+            <div
+              style={{ backgroundColor: '#ffffff' }}
+              data-src={logo}
+            />
+          </AwesomeSlider>
+
+          <ValueDisplay
+            name="Comfort"
+            value={product.comfortLevel}
+            max={5}
+          />
           <Typography variant="subtitle1" gutterBottom>
             {product.productDescription}
           </Typography>
-          <Typography className={classes.price}>{currentPrice}€</Typography>
-          <div>
+
+          <div className={classes.chipParent}>
+            <div className={classes.chips}>
             {product.sizes.map(size => (
               <Chip className={classes.chip} color="primary" label={size.size} onClick={() => onSizeSelected(size)} />
             ))}
+            </div>
+            <Typography className={classes.price}>{currentPrice}€</Typography>
           </div>
-
         </div>
       </CardContent>
       <CardActions disableActionSpacing>
-        <IconButton aria-label="Add to favorites" onClick={() => editHotel(product.productIdentifier)}>
-          <EditIcon />
-        </IconButton>
-        <IconButton aria-label="Share">
-          <DeleteIcon />
+        <IconButton aria-label="More information" onClick={() => editHotel(product.productIdentifier)}>
+          <DetailsIcon />
         </IconButton>
       </CardActions>
     </Card>
