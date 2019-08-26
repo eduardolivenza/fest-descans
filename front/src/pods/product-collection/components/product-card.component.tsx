@@ -5,8 +5,7 @@ import { Theme } from "@material-ui/core/styles";
 import CardHeader from "@material-ui/core/CardHeader/CardHeader";
 import IconButton from "@material-ui/core/IconButton/IconButton";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
-import EditIcon from "@material-ui/icons/edit";
-import DeleteIcon from "@material-ui/icons/delete";
+import DetailsIcon from "@material-ui/icons/details";
 import {
   CardContent,
   CardMedia,
@@ -37,11 +36,19 @@ const styles = (theme: Theme) =>
     chip:
     {
       marginRight: theme.spacing.unit,
+      marginBottom: theme.spacing.unit,
+    },
+    chipParent: {
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'space-between',
+    },
+    chips: {
+      flexBasis: '80%',
     },
     price: {
       fontWeight: 'bold',
       fontSize: 25,
-      textAlign: 'right',
     }
   });
 
@@ -67,11 +74,6 @@ export const ProductCardInner = (props: Props) => {
     <Card className={classes.card}>
       <CardHeader
         avatar={<Avatar aria-label="Product">{product.category}</Avatar>}
-        action={
-          <IconButton>
-            <MoreVertIcon />
-          </IconButton>
-        }
         title={product.productIdentifier}
         subheader={product.category}
       />
@@ -83,41 +85,41 @@ export const ProductCardInner = (props: Props) => {
             justifyContent: "center"
           }}
         >
-          <AwesomeSlider>
-            <div style={{ backgroundImage: `url(${product.picture})`, backgroundColor: '#ffffff', backgroundRepeat: 'no-repeat', backgroundSize: 'contain', backgroundPosition: '50% 50%'}} />
+
+          <AwesomeSlider style={{ marginBottom: '40px' }}>
+            <div style={{ backgroundImage: `url(${product.picture})`, backgroundColor: '#ffffff', backgroundRepeat: 'no-repeat', backgroundSize: 'contain', backgroundPosition: '50% 50%' }} />
             <div
-              style={{ backgroundColor: '#f09297' }}
+              style={{ backgroundColor: '#ffffff' }}
               data-src={imageStranger}
             />
             <div
-              style={{ backgroundColor: '#f09297' }}
+              style={{ backgroundColor: '#ffffff' }}
               data-src={logo}
             />
           </AwesomeSlider>
-          <div/>
-          <Typography variant="subtitle1" gutterBottom>
-            {product.productDescription}
-          </Typography>
+
           <ValueDisplay
-            name="Comfort level"
+            name="Comfort"
             value={product.comfortLevel}
             max={5}
           />
-          <Typography className={classes.price}>{currentPrice}€</Typography>
-          <div>
+          <Typography variant="subtitle1" gutterBottom>
+            {product.productDescription}
+          </Typography>
+
+          <div className={classes.chipParent}>
+            <div className={classes.chips}>
             {product.sizes.map(size => (
               <Chip className={classes.chip} color="primary" label={size.size} onClick={() => onSizeSelected(size)} />
             ))}
+            </div>
+            <Typography className={classes.price}>{currentPrice}€</Typography>
           </div>
-
         </div>
       </CardContent>
       <CardActions disableActionSpacing>
-        <IconButton aria-label="Add to favorites" onClick={() => editHotel(product.productIdentifier)}>
-          <EditIcon />
-        </IconButton>
-        <IconButton aria-label="Share">
-          <DeleteIcon />
+        <IconButton aria-label="More information" onClick={() => editHotel(product.productIdentifier)}>
+          <DetailsIcon />
         </IconButton>
       </CardActions>
     </Card>

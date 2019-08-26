@@ -11,8 +11,11 @@ import {
 const styles = (theme: Theme) =>
   createStyles({
     ratingComponent: {
-      flex: 3, 
-      flexDirection: 'row'
+      display: 'flex',
+      alignItems: 'center'
+    },
+    textCom: {
+      fontSize: 'medium',
     },
   });
 
@@ -27,7 +30,7 @@ export const ValueDisplayInner: React.StatelessComponent<Props> = props => {
   return (
     <>
     <div className={classes.ratingComponent}>
-        <Typography>{name}</Typography>
+        <Typography className={classes.textCom}>{name}: </Typography>
         <Rating
           value={value}
           max={max} 
