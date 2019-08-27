@@ -104,7 +104,9 @@ export const ProductCardInner = (props: Props) => {
           <Typography variant="subtitle1" gutterBottom>
             {product.productDescription}
           </Typography>
-
+          <Typography variant="subtitle1" gutterBottom>
+            Produced by {product.supplier.companyName} - {product.supplier.country}
+          </Typography> 
           <div className={classes.chipParent}>
             <div className={classes.chips}>
             {product.sizes.map(size => (

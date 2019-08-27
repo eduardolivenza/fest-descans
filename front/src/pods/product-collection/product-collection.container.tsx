@@ -39,5 +39,5 @@ export const ProductCollectionContainerInner = (props : Props) => {
           />;
 };
 
-export const ProductCollectionContainer = withRouter<Props>(ProductCollectionContainerInner);
+export const ProductCollectionContainer = withRouter(ProductCollectionContainerInner);
 

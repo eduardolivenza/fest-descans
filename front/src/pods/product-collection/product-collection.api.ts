@@ -8,7 +8,14 @@ export interface ProductEntityApi {
   productDescription: string;
   comfortLevel: number;
   picture: string;
+  supplier: SupplierApi;
   sizes: ProductSizeEntityApi[];
+}
+
+export interface SupplierApi {
+  companyId: string;
+  companyName: string;
+  country: string;
 }
 
 export interface ProductSizeEntityApi {

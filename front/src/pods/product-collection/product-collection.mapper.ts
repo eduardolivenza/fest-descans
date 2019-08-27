@@ -10,6 +10,7 @@ export const mapFromApiToVm = (apiEntity : ProductEntityApi) : ProductEntityVm =
   comfortLevel: apiEntity.comfortLevel,
   picture : `${basePicturesUrl}` + "/images/" + apiEntity.productIdentifier,
   sizes: apiEntity.sizes,
+  supplier: apiEntity.supplier,
 });
 
 
