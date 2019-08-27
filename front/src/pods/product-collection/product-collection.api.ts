@@ -4,7 +4,9 @@ import {baseApiUrl} from 'core'
 export interface ProductEntityApi {
   category: string;
   productIdentifier: string;
+  productName: string;
   productDescription: string;
+  comfortLevel: number;
   picture: string;
   sizes: ProductSizeEntityApi[];
 }

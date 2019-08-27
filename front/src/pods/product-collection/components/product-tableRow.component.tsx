@@ -6,7 +6,7 @@ import { ProductEntityVm } from "../product-collection.vm";
 
 interface Props extends WithStyles<typeof styles> {
     product: ProductEntityVm;
-    editHotel: (id: string) => void;
+    viewProduct: (id: string) => void;
 }
 
 const styles = theme => createStyles({
@@ -21,10 +21,10 @@ const styles = theme => createStyles({
 });
 
 const ProductRowComponentInner: React.FunctionComponent<Props> = (props) => {
-    const { classes, product, editHotel } = props;
+    const { classes, product, viewProduct } = props;
 
     return (
-        <TableRow key={product.productIdentifier} onDoubleClick={() => editHotel(product.productIdentifier)} className={classes.tableRowHover}>
+        <TableRow key={product.productIdentifier} onDoubleClick={() => viewProduct(product.productIdentifier)} className={classes.tableRowHover}>
              <TableCell align="right" >
                 <img  className={classes.picture} src={product.picture} />
             </TableCell>

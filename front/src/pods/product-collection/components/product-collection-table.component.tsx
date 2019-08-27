@@ -6,7 +6,7 @@ import { ProductRowComponent } from "./product-tableRow.component";
 
 interface Props extends WithStyles<typeof styles> {
     productCollection: ProductEntityVm[];
-    editHotel: (id: string) => void;
+    viewProduct: (id: string) => void;
 }
 
 const styles = theme => createStyles({
@@ -16,7 +16,7 @@ const styles = theme => createStyles({
 });
 
 const ProductCollectionTableComponentInner = (props: Props) => {
-    const { productCollection, classes, editHotel } = props;
+    const { productCollection, classes, viewProduct } = props;
     return (
         <Table className={classes.table}>
             <TableHead>
@@ -29,7 +29,7 @@ const ProductCollectionTableComponentInner = (props: Props) => {
             </TableHead>
             <TableBody>
             {
-                productCollection.map(product => (<ProductRowComponent key={product.productIdentifier} product={product} editHotel={editHotel}/>)   )
+                productCollection.map(product => (<ProductRowComponent key={product.productIdentifier} product={product} viewProduct={viewProduct}/>)   )
             }
             </TableBody>
         </Table>

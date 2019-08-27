@@ -1,14 +1,14 @@
 import * as React from "react";
 import { withStyles, createStyles, WithStyles } from "@material-ui/core/styles";
-import { ProductEntityVm, ProductEntitySizeVm } from "../product-collection.vm";
+import { ProductEntityVm } from "../product-collection.vm";
 import { ProductCard } from "./product-card.component"; // on next step we will create this component
 
 interface Props extends WithStyles<typeof styles> {  
   productCollection: ProductEntityVm[];
-  editHotel : (id : string) => void;
+  viewProduct : (id : string) => void;
 }
 
-const styles = theme => createStyles({
+const styles = () => createStyles({
     listLayout: {
       display: "flex",
       flexWrap: "wrap",
@@ -17,12 +17,12 @@ const styles = theme => createStyles({
   });
 
 export const HotelCollectionCardsComponentInner : React.FunctionComponent<Props> = (props) => {
-  const { productCollection, classes, editHotel} = props;
+  const { productCollection, classes, viewProduct} = props;
 
   return (
     <div className={classes.listLayout}>
       {productCollection.map(product => (
-        <ProductCard product={product} key={product.productIdentifier} editHotel={editHotel}/>
+        <ProductCard product={product} key={product.productIdentifier} viewProduct={viewProduct}/>
       ))}
     </div>
   );

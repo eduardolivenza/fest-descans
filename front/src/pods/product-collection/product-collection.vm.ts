@@ -1,6 +1,7 @@
 export interface ProductEntityVm {
   category: string;
   productIdentifier : string;
+  productName : string;
   productDescription: string;
   sizes: ProductEntitySizeVm[];
   comfortLevel: number;

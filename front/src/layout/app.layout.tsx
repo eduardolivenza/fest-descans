@@ -66,8 +66,7 @@ const AppLayoutInner: React.FunctionComponent<Props> = (props) => {
             anchorMenu={anchorEl}
             goToDefault={goToDefault}
             goToProductsList={goToProductsList} />
-          <img src={logo} alt="Logo" height="100" />;
-
+          <img src={logo} alt="Logo" height="100" />
           <Typography style={growStyle} variant="h6" color="inherit" >
             {loginContext.login}
           </Typography>

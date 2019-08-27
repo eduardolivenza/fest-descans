@@ -4,11 +4,9 @@ import { ProductEntityVm, ProductEntitySizeVm } from "../product-collection.vm";
 import { Theme } from "@material-ui/core/styles";
 import CardHeader from "@material-ui/core/CardHeader/CardHeader";
 import IconButton from "@material-ui/core/IconButton/IconButton";
-import MoreVertIcon from "@material-ui/icons/MoreVert";
 import DetailsIcon from "@material-ui/icons/details";
 import {
   CardContent,
-  CardMedia,
   Typography,
   CardActions,
   Chip,
@@ -24,7 +22,7 @@ const imageStranger = require("./../../../images/series/stranger-things-2.jpg");
 
 interface Props extends WithStyles<typeof styles> {
   product: ProductEntityVm;
-  editHotel: (id: string) => void;
+  viewProduct: (id: string) => void;
 }
 
 const styles = (theme: Theme) =>
@@ -63,7 +61,7 @@ const manageProductPrice = () => {
 
 export const ProductCardInner = (props: Props) => {
 
-  const { product, classes, editHotel } = props;
+  const { product, classes, viewProduct } = props;
   const { currentPrice, setCurrentPrice } = manageProductPrice();
 
   const onSizeSelected = (size: ProductEntitySizeVm) => {
@@ -74,7 +72,7 @@ export const ProductCardInner = (props: Props) => {
     <Card className={classes.card}>
       <CardHeader
         avatar={<Avatar aria-label="Product">{product.category}</Avatar>}
-        title={product.productIdentifier}
+        title={product.productName}
         subheader={product.category}
       />
       <CardContent>
@@ -118,7 +116,7 @@ export const ProductCardInner = (props: Props) => {
         </div>
       </CardContent>
       <CardActions disableActionSpacing>
-        <IconButton aria-label="More information" onClick={() => editHotel(product.productIdentifier)}>
+        <IconButton aria-label="More information" onClick={() => viewProduct(product.productIdentifier)}>
           <DetailsIcon />
         </IconButton>
       </CardActions>
