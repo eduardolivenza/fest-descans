@@ -29,12 +29,12 @@ const styles = (theme: Theme) =>
   createStyles({
     card: {
       width: "500px",
-      marginTop: theme.spacing.unit
+      marginTop: theme.spacing(1)
     },
     chip:
     {
-      marginRight: theme.spacing.unit,
-      marginBottom: theme.spacing.unit,
+      marginRight: theme.spacing(1),
+      marginBottom: theme.spacing(1),
     },
     chipParent: {
       display: 'flex',
@@ -117,7 +117,7 @@ export const ProductCardInner = (props: Props) => {
           </div>
         </div>
       </CardContent>
-      <CardActions disableActionSpacing>
+      <CardActions disableSpacing>
         <IconButton aria-label="More information" onClick={() => viewProduct(product.productIdentifier)}>
           <DetailsIcon />
         </IconButton>
