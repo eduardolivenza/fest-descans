@@ -2,7 +2,7 @@ import * as React from "react";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
-import { SessionContext, routesLinks } from "core";
+import { routesLinks } from "core";
 import { withRouter, RouteComponentProps } from "react-router-dom";
 import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
@@ -12,7 +12,6 @@ import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
 import Badge from '@material-ui/core/Badge';
 import Container from '@material-ui/core/Container';
-import Link from '@material-ui/core/Link';
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import NotificationsIcon from '@material-ui/icons/Notifications';
@@ -20,30 +19,9 @@ import { List, ListItem, ListItemIcon, ListItemText } from "@material-ui/core";
 import DashboardIcon from '@material-ui/icons/Dashboard';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import PeopleIcon from '@material-ui/icons/People';
-import BarChartIcon from '@material-ui/icons/BarChart';
-import LayersIcon from '@material-ui/icons/Layers';
-import AssignmentIcon from '@material-ui/icons/Assignment';
+import { Copyright } from "./Copyright";
 
-//const logo = require("./../images/logo.jpg");
 const logo = require("./../images/FEST_COLOR_3.png");
-
-
-function Copyright() {
-  return (
-    <Typography variant="body2" color="textSecondary" align="center">
-      {'Copyright © '}
-      <Link color="inherit" href="https://material-ui.com/">
-        Your Website
-      </Link>{' '}
-      {new Date().getFullYear()}
-      {'. Built with '}
-      <Link color="inherit" href="https://material-ui.com/">
-        Material-UI.
-      </Link>
-    </Typography>
-  );
-}
-
 const drawerWidth = 240;
 
 const useStyles = makeStyles(theme => ({
@@ -125,9 +103,8 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-
-
 interface Props extends RouteComponentProps { }
+
 const AppLayoutInner: React.FunctionComponent<Props> = (props) => {
 
   const { history } = props;
@@ -216,7 +193,6 @@ const AppLayoutInner: React.FunctionComponent<Props> = (props) => {
       <main className={classes.content}>
         <div className={classes.appBarSpacer} />
         <Container maxWidth="lg" className={classes.container}>
-
           {props.children}
         </Container>
         <Copyright />
