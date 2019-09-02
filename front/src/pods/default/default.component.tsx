@@ -11,7 +11,7 @@ export const DefaultComponent = (props: Props) => {
 
     return (
         <div>
-           
+           This page is still empty
         </div>
 
     );

@@ -15,11 +15,8 @@ import Container from '@material-ui/core/Container';
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import NotificationsIcon from '@material-ui/icons/Notifications';
-import { List, ListItem, ListItemIcon, ListItemText } from "@material-ui/core";
-import DashboardIcon from '@material-ui/icons/Dashboard';
-import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
-import PeopleIcon from '@material-ui/icons/People';
 import { Copyright } from "./Copyright";
+import { MainMenu } from "./mainMenu.layout";
 
 const logo = require("./../images/FEST_COLOR_3.png");
 const drawerWidth = 240;
@@ -89,7 +86,7 @@ const useStyles = makeStyles(theme => ({
     overflow: 'auto',
   },
   container: {
-    paddingTop: theme.spacing(4),
+    paddingTop: theme.spacing(6),
     paddingBottom: theme.spacing(4),
   },
   paper: {
@@ -97,9 +94,6 @@ const useStyles = makeStyles(theme => ({
     display: 'flex',
     overflow: 'auto',
     flexDirection: 'column',
-  },
-  fixedHeight: {
-    height: 240,
   },
 }));
 
@@ -167,32 +161,13 @@ const AppLayoutInner: React.FunctionComponent<Props> = (props) => {
         </div>
         <div style={{ paddingTop: '35px'}}>
           <Divider />
-          <List>
-            <ListItem button onClick={goToDefault}>
-              <ListItemIcon>
-                <DashboardIcon />
-              </ListItemIcon>
-              <ListItemText primary="Dashboard" />
-            </ListItem>
-            <ListItem button onClick={goToProductsList}>
-              <ListItemIcon>
-                <ShoppingCartIcon />
-              </ListItemIcon>
-              <ListItemText primary="Products list" />
-            </ListItem>
-            <ListItem button>
-              <ListItemIcon>
-                <PeopleIcon />
-              </ListItemIcon>
-              <ListItemText primary="Customers" />
-            </ListItem>
-          </List>
+            <MainMenu goToDefault={goToDefault} goToProductsList={goToProductsList} />
           <Divider />
         </div>
       </Drawer>
       <main className={classes.content}>
         <div className={classes.appBarSpacer} />
-        <Container maxWidth="lg" className={classes.container}>
+        <Container maxWidth="xl"  className={classes.container}>
           {props.children}
         </Container>
         <Copyright />
