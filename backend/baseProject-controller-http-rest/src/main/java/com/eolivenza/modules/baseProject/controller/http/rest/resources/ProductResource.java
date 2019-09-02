@@ -17,6 +17,9 @@ public class ProductResource {
     @ApiModelProperty(required = true, value = "Product identifier", example = "Latex01")
     public String productIdentifier;
 
+    @ApiModelProperty(required = true, value = "Product name", example = "Memory restore")
+    public String productName;
+
     @ApiModelProperty(required = true, value = "Product description", example = " Comfortable latex bed ")
     public String productDescription;
 
@@ -31,19 +34,21 @@ public class ProductResource {
 
     public ProductResource(){}
 
-    public ProductResource(String identifier, String category, String productIdentifier,  String productDescription, Integer comfortLevel, SupplierResource supplierResource, Set<AvailableSizeResource> sizes) {
+    public ProductResource(String identifier, String category, String productIdentifier, String productName, String productDescription, Integer comfortLevel, SupplierResource supplierResource, Set<AvailableSizeResource> sizes) {
         this.identifier = identifier;
         this.category = category;
         this.productIdentifier = productIdentifier;
+        this.productName = productName;
         this.productDescription = productDescription;
         this.sizes = sizes;
         this.comfortLevel = comfortLevel;
         this.supplier = supplierResource;
     }
 
-    public ProductResource( String category, String productIdentifier,  String productDescription,  Integer comfortLevel,  SupplierResource supplierResource, Set<AvailableSizeResource> sizes) {
+    public ProductResource( String category, String productIdentifier,  String productName, String productDescription,  Integer comfortLevel,  SupplierResource supplierResource, Set<AvailableSizeResource> sizes) {
         this.category = category;
         this.productIdentifier = productIdentifier;
+        this.productName = productName;
         this.productDescription = productDescription;
         this.comfortLevel = comfortLevel;
         this.supplier = supplierResource;

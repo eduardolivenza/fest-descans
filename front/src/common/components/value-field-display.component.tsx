@@ -1,5 +1,5 @@
 import * as React from "react";
-import Rating from 'material-ui-rating';
+import Rating from '@material-ui/lab/Rating';
 import Typography from "@material-ui/core/Typography";
 import {
   createStyles,
@@ -33,7 +33,7 @@ export const ValueDisplayInner: React.StatelessComponent<Props> = props => {
         <Typography className={classes.textCom}>{name}: </Typography>
         <Rating
           value={value}
-          max={max} 
+          max={max}
           readOnly={true}
         />
     </div>

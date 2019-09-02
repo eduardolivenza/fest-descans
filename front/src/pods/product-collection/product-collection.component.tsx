@@ -6,19 +6,19 @@ import { HotelCollectionViewSelectorComponent, Layout } from "./components/produ
 
 interface Props {
   productCollection: ProductEntityVm[];
-  editHotel: (id: string) => void;
+  viewProduct: (id: string) => void;
   layout?: Layout;
 }
 
 export const ProductCollectionComponent: React.FunctionComponent<Props> = (props) => {
-  const { productCollection, editHotel, layout} = props;
+  const { productCollection, viewProduct, layout} = props;
   const [componetLayout, setComponentLayout] = React.useState(layout);
 
   let hotelCollectionComponent;
   if (componetLayout === Layout.Card) {
-    hotelCollectionComponent = <HotelCollectionCardsComponent productCollection={productCollection} editHotel={editHotel} />;
+    hotelCollectionComponent = <HotelCollectionCardsComponent productCollection={productCollection} viewProduct={viewProduct} />;
   } else if (componetLayout === Layout.Table) {
-    hotelCollectionComponent = <ProductCollectionTableComponent productCollection={productCollection} editHotel={editHotel} />;
+    hotelCollectionComponent = <ProductCollectionTableComponent productCollection={productCollection} viewProduct={viewProduct} />;
   }
 
   return (

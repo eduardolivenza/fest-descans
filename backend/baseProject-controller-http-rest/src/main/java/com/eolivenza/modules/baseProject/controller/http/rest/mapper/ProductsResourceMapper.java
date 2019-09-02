@@ -1,6 +1,8 @@
 package com.eolivenza.modules.baseProject.controller.http.rest.mapper;
 
+import com.eolivenza.modules.baseProject.controller.http.rest.resources.AvailableSizeResource;
 import com.eolivenza.modules.baseProject.controller.http.rest.resources.ProductResource;
+import com.eolivenza.modules.baseProject.controller.http.rest.resources.SupplierResource;
 import com.eolivenza.modules.baseProject.domain.model.products.AvailableProduct;
 import com.eolivenza.modules.baseProject.domain.model.products.Category;
 import com.eolivenza.modules.baseProject.domain.model.products.Product;
@@ -26,6 +28,7 @@ public class ProductsResourceMapper implements ResourceMapper<Product, ProductRe
         return new Product(
                 Category.valueOf(object.category),
                 object.identifier,
+                object.productName,
                 object.productDescription,
                 object.comfortLevel,
                 null,
@@ -34,6 +37,6 @@ public class ProductsResourceMapper implements ResourceMapper<Product, ProductRe
 
     @Override
     public ProductResource toSecondType(Product object) {
-        return new ProductResource(object.getUuid().toString(), object.getCategory().name(), object.getProductIdentifier(), object.getDescription(), object.getComfortLevel(), supplierResourceMapper.toSecondType(object.getSupplier()) , object.getAvailableProducts().stream().map(availableProductResourceMapper::toSecondType).collect(Collectors.toSet()));
+        return new ProductResource(object.getUuid().toString(), object.getCategory().name(), object.getProductIdentifier(), object.getProductName(), object.getDescription(), object.getComfortLevel(), supplierResourceMapper.toSecondType(object.getSupplier()) , object.getAvailableProducts().stream().map(availableProductResourceMapper::toSecondType).collect(Collectors.toSet()));
     }
 }

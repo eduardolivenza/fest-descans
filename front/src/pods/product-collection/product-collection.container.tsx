@@ -1,6 +1,6 @@
 import * as React from "react";
 import { ProductCollectionComponent } from "./product-collection.component";
-import { ProductEntityVm, ProductEntitySizeVm} from "./product-collection.vm";
+import { ProductEntityVm} from "./product-collection.vm";
 import { routesLinks } from "core";
 import { withRouter, RouteComponentProps } from "react-router-dom";
 import { getProductsCollection } from "./product-collection.api";
@@ -11,8 +11,6 @@ const useProductCollection = () => {
   const [productsCollection, setProductsCollection] = React.useState<ProductEntityVm[]>(
     []
   );
-
-
 
   const loadProductsCollection = () =>
   getProductsCollection().then(result =>
@@ -27,8 +25,8 @@ interface Props extends RouteComponentProps {}
 export const ProductCollectionContainerInner = (props : Props) => {
   const {productsCollection, loadProductsCollection} = useProductCollection();
 
-  const editHotel = (hotelId : string) => {      
-    props.history.push(routesLinks.hotelEdit(hotelId));
+  const viewProduct = (productId : string) => {      
+    props.history.push(routesLinks.hotelEdit(productId));
   }
 
   React.useEffect(() => {
@@ -37,10 +35,9 @@ export const ProductCollectionContainerInner = (props : Props) => {
 
   return  <ProductCollectionComponent 
             productCollection={productsCollection} 
-            editHotel = {editHotel}
-           
+            viewProduct = {viewProduct}
           />;
 };
 
-export const ProductCollectionContainer = withRouter<Props>(ProductCollectionContainerInner);
+export const ProductCollectionContainer = withRouter(ProductCollectionContainerInner);
 

@@ -51,13 +51,13 @@
     "webpack-dev-server": "^3.2.1"
   },
   "dependencies": {
-    "@material-ui/core": "^3.9.3",
+    "@material-ui/core": "^4.0.0",
     "@material-ui/icons": "^3.0.2",
+    "@material-ui/lab": "^4.0.0-alpha.25",
+    "@material-ui/styles": "^4.0.0",
     "axios": "^0.18.0",
     "form-data": "^2.3.3",
     "lc-form-validation": "^2.0.0",
-    "material-ui-dropzone": "^2.3.5",
-    "material-ui-rating": "^3.1.0",
     "react": "^16.8.6",
     "react-awesome-slider": "^1.0.1",
     "react-dom": "^16.8.6",

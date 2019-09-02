@@ -1,9 +1,6 @@
 package com.eolivenza.modules.baseProject.resources;
 
-import com.eolivenza.modules.baseProject.controller.http.rest.resources.AvailableSizeResource;
-import com.eolivenza.modules.baseProject.controller.http.rest.resources.ProductResource;
-import com.eolivenza.modules.baseProject.controller.http.rest.resources.SupplierResource;
-
+import com.eolivenza.modules.baseProject.controller.http.rest.resources.*;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -13,6 +10,7 @@ public final class ProductResourceBuilder {
     private String description;
     private String category;
     private String productIdentifier;
+    private String productName;
     private Integer comfortLevel;
     private SupplierResource supplier;
     private Set<AvailableSizeResource> sizes;
@@ -26,6 +24,11 @@ public final class ProductResourceBuilder {
 
     public ProductResourceBuilder withIdentifier(String identifier) {
         this.productIdentifier = identifier;
+        return this;
+    }
+
+    public ProductResourceBuilder withName(String name) {
+        this.productName = name;
         return this;
     }
 
@@ -50,7 +53,7 @@ public final class ProductResourceBuilder {
     }
 
     public ProductResource build() {
-        return new ProductResource(category, productIdentifier, description, comfortLevel, supplier, new HashSet<>());
+        return new ProductResource(category, productIdentifier, productName, description, comfortLevel, supplier, new HashSet<>());
     }
 
 }

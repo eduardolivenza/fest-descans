@@ -62,4 +62,4 @@ export const RegisterContainerInner = (props: Props) => {
   );
 };
 
-export const RegisterContainer = withRouter<Props>(RegisterContainerInner);
+export const RegisterContainer = withRouter(RegisterContainerInner);
