@@ -3,18 +3,30 @@ import { ProductEntityVm, ProductEntitySizeVm } from "./product-collection.vm";
 import { HotelCollectionCardsComponent } from "./components/product-collection-cards.component";
 import { ProductCollectionTableComponent } from "./components/product-collection-table.component";
 import { HotelCollectionViewSelectorComponent, Layout } from "./components/product-collection-view-selector.component";
-import {FilterCard} from "./filter-card.component";
+import { FilterCard } from "./filter-card.component";
 
 interface Props {
   productCollection: ProductEntityVm[];
   viewProduct: (id: string) => void;
   layout?: Layout;
+  handleCheckboxesChange: (string, boolean) => void;
+  comfortLevelState: {
+    veryhard: boolean;
+    hard: boolean;
+    medium: boolean;
+    soft: boolean;
+    verysoft: boolean;
+  }
 }
 
+
+
 export const ProductCollectionComponent: React.FunctionComponent<Props> = (props) => {
-  
-  const { productCollection, viewProduct, layout} = props;
+
+  const { productCollection, viewProduct, layout, comfortLevelState, handleCheckboxesChange } = props;
   const [componentLayout, setComponentLayout] = React.useState(layout);
+
+
 
   let hotelCollectionComponent;
   if (componentLayout === Layout.Card) {
@@ -25,7 +37,7 @@ export const ProductCollectionComponent: React.FunctionComponent<Props> = (props
 
   return (
     <>
-      <FilterCard/>
+      <FilterCard checkBoxState={comfortLevelState} handleChangeCheckbox={handleCheckboxesChange} />
       <HotelCollectionViewSelectorComponent onChangeView={setComponentLayout} layout={componentLayout} />
       {hotelCollectionComponent}
     </>

@@ -1,10 +1,7 @@
 import * as React from "react";
 import Card from "@material-ui/core/Card";
 import { makeStyles } from '@material-ui/core/styles';
-import {
-  CardContent,
-  CardHeader,
-} from "@material-ui/core";
+import {  CardContent, CardHeader, } from "@material-ui/core";
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormControl from '@material-ui/core/FormControl';
 import FormLabel from '@material-ui/core/FormLabel';
@@ -23,23 +20,26 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export const FilterCard = () => {
+interface Props{
+  handleChangeCheckbox: (string, boolean) => void;
+  checkBoxState: {
+    veryhard: boolean;
+    hard: boolean;
+    medium: boolean;
+    soft: boolean;
+    verysoft: boolean;
+  }
+}
+
+export const FilterCard = (props: Props) => {
 
   const classes = useStyles({});
 
-  const [state, setState] = React.useState({
-    veryhard: true,
-    hard: true,
-    medium: true,
-    soft: true,
-    verysoft: true,
-  });
+  const { checkBoxState, handleChangeCheckbox  } = props;
 
-  const handleChange = name => event => {
-    setState({ ...state, [name]: event.target.checked });
+  const handleChange = (fieldId: string) => e => {
+    handleChangeCheckbox(fieldId, e.target.checked);
   };
-
-  const { veryhard, hard, medium, soft, verysoft } = state;
 
   return (
     <Card className={classes.card}>
@@ -57,23 +57,23 @@ export const FilterCard = () => {
             <FormLabel component="legend">Choose the comfort level</FormLabel>
             <FormGroup>
               <FormControlLabel
-                control={<Checkbox checked={veryhard} color="primary" onChange={handleChange('veryhard')} value="veryhard" />}
+                control={<Checkbox checked={checkBoxState.veryhard} color="primary" onChange={handleChange('veryhard')} value="veryhard" />}
                 label="Very hard"
               />
               <FormControlLabel
-                control={<Checkbox checked={hard} color="primary" onChange={handleChange('hard')} value="hard" />}
+                control={<Checkbox checked={checkBoxState.hard} color="primary" onChange={handleChange('hard')} value="hard" />}
                 label="Hard"
               />
               <FormControlLabel
-                control={<Checkbox checked={medium} color="primary" onChange={handleChange('medium')} value="medium" />}
+                control={<Checkbox checked={checkBoxState.medium} color="primary" onChange={handleChange('medium')} value="medium" />}
                 label="Medium"
               />
               <FormControlLabel
-                control={<Checkbox checked={soft} color="primary" onChange={handleChange('soft')} value="soft" />}
+                control={<Checkbox checked={checkBoxState.soft} color="primary" onChange={handleChange('soft')} value="soft" />}
                 label="Soft"
               />
               <FormControlLabel
-                control={<Checkbox checked={verysoft} color="primary" onChange={handleChange('verysoft')} value="verysoft" />}
+                control={<Checkbox checked={checkBoxState.verysoft} color="primary" onChange={handleChange('verysoft')} value="verysoft" />}
                 label="Very soft"
               />
             </FormGroup>
