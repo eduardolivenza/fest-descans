@@ -9,24 +9,18 @@ interface Props {
   productCollection: ProductEntityVm[];
   viewProduct: (id: string) => void;
   layout?: Layout;
-  handleCheckboxesChange: (name: string, value: boolean) => void;
-  comfortLevelState: {
-    veryhard: boolean;
-    hard: boolean;
-    medium: boolean;
-    soft: boolean;
-    verysoft: boolean;
-  }
+  handleChangeCheckboxNew: (positon: number, value: boolean) => void;
+  checkBoxStateNew: boolean[];
 }
 
 
 
 export const ProductCollectionComponent: React.FunctionComponent<Props> = (props) => {
 
-  const { productCollection, viewProduct, layout, comfortLevelState, handleCheckboxesChange } = props;
+  const { productCollection, viewProduct, layout, handleChangeCheckboxNew, checkBoxStateNew } = props;
   const [componentLayout, setComponentLayout] = React.useState(layout);
 
-
+  
 
   let hotelCollectionComponent;
   if (componentLayout === Layout.Card) {
@@ -37,7 +31,7 @@ export const ProductCollectionComponent: React.FunctionComponent<Props> = (props
 
   return (
     <>
-      <FilterCard checkBoxState={comfortLevelState} handleChangeCheckbox={handleCheckboxesChange} />
+      <FilterCard handleChangeCheckboxNew={handleChangeCheckboxNew} checkBoxStateNew={checkBoxStateNew}/>
       <HotelCollectionViewSelectorComponent onChangeView={setComponentLayout} layout={componentLayout} />
       {hotelCollectionComponent}
     </>

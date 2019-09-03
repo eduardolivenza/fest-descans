@@ -18,7 +18,7 @@ const useProductCollection = () => {
       setProductsCollection(products);
       setProductsCollectionFiltered(products);
     }
-  );
+    );
 
   return { productsCollection, loadProductsCollection, productsCollectionFiltered, setProductsCollectionFiltered };
 };
@@ -29,6 +29,12 @@ export const ProductCollectionContainerInner = (props: Props) => {
 
   const { productsCollection, loadProductsCollection, productsCollectionFiltered, setProductsCollectionFiltered } = useProductCollection();
 
+  const [checkedItems, setCheckedItems] = React.useState([true, true, true, true, true]);
+
+  const handleChangeCheckboxNew = (position: number, value: boolean) => {
+    setCheckedItems({...checkedItems, [position]: value });
+  };
+
   const viewProduct = (productId: string) => {
     props.history.push(routesLinks.hotelEdit(productId));
   }
@@ -37,47 +43,25 @@ export const ProductCollectionContainerInner = (props: Props) => {
     loadProductsCollection();
   }, []);
 
-  const [comfortFilterState, setComfortFilter] = React.useState({
-    veryhard: true,
-    hard: true,
-    medium: true,
-    soft: true,
-    verysoft: true,
-  });
-
-  const handleCheckboxesChange = (name: string, value: boolean) => {
-    setComfortFilter({ ...comfortFilterState, [name]: value });
-  };
-
   React.useEffect(() => {
     applyFilter();
-  }, [comfortFilterState])
+  }, [checkedItems])
 
   const applyFilter = () => {
     var newArray = productsCollection;
-    if (comfortFilterState.veryhard === false) {
-      newArray = newArray.filter(result => (result.comfortLevel !== 5));
-    }
-    if (comfortFilterState.hard === false) {
-      newArray = newArray.filter(result => (result.comfortLevel !== 4));
-    }
-    if (comfortFilterState.medium === false) {
-      newArray = newArray.filter(result => (result.comfortLevel !== 3));
-    }
-    if (comfortFilterState.soft === false) {
-      newArray = newArray.filter(result => (result.comfortLevel !== 2));
-    }
-    if (comfortFilterState.verysoft === false) {
-      newArray = newArray.filter(result => (result.comfortLevel !== 1));
-    }
+    Object.keys(checkedItems).forEach(function (position) {
+      if (checkedItems[position] === false) {
+        newArray = newArray.filter(result => (result.comfortLevel != (parseInt(position) + 1)));
+      }
+    });
     setProductsCollectionFiltered(newArray);
   }
 
   return <ProductCollectionComponent
     productCollection={productsCollectionFiltered}
     viewProduct={viewProduct}
-    comfortLevelState={comfortFilterState}
-    handleCheckboxesChange={handleCheckboxesChange}
+    checkBoxStateNew={checkedItems}
+    handleChangeCheckboxNew={handleChangeCheckboxNew}
   />;
 
 };
