@@ -9,34 +9,32 @@ import { mapFromAToBCollection } from "common";
 
 const useProductCollection = () => {
 
-  const [productsCollection, setProductsCollection] = React.useState<ProductEntityVm[]>(
-    []
-  );
+  const [productsCollection, setProductsCollection] = React.useState<ProductEntityVm[]>([]);
+  const [productsCollectionFiltered, setProductsCollectionFiltered] = React.useState<ProductEntityVm[]>([]);
 
   const loadProductsCollection = () =>
-    alert("loaded call");
-    getProductsCollection().then(result =>
-      setProductsCollection(mapFromAToBCollection(mapFromApiToVm, result))
-    );
+    getProductsCollection().then(result => {
+      const products: ProductEntityVm[] = mapFromAToBCollection(mapFromApiToVm, result);
+      setProductsCollection(products);
+      setProductsCollectionFiltered(products);
+    }
+  );
 
-  return { productsCollection, loadProductsCollection };
+  return { productsCollection, loadProductsCollection, productsCollectionFiltered, setProductsCollectionFiltered };
 };
 
 interface Props extends RouteComponentProps { }
 
 export const ProductCollectionContainerInner = (props: Props) => {
-  
-  const { productsCollection, loadProductsCollection } = useProductCollection();
-  const [productsCollectionFiltered, setProductsCollectionFiltered] = React.useState<ProductEntityVm[]>([]);
+
+  const { productsCollection, loadProductsCollection, productsCollectionFiltered, setProductsCollectionFiltered } = useProductCollection();
 
   const viewProduct = (productId: string) => {
     props.history.push(routesLinks.hotelEdit(productId));
   }
 
   React.useEffect(() => {
-    alert("use effect call")
     loadProductsCollection();
-    setProductsCollectionFiltered(productsCollection);
   }, []);
 
   const [comfortFilterState, setComfortFilter] = React.useState({
@@ -49,10 +47,32 @@ export const ProductCollectionContainerInner = (props: Props) => {
 
   const handleCheckboxesChange = (name: string, value: boolean) => {
     setComfortFilter({ ...comfortFilterState, [name]: value });
-    setProductsCollectionFiltered(productsCollection);
   };
 
-  //<TODO> productsCollectionFiltered not loaded correctly
+  React.useEffect(() => {
+    applyFilter();
+  }, [comfortFilterState])
+
+  const applyFilter = () => {
+    var newArray = productsCollection;
+    if (comfortFilterState.veryhard === false) {
+      newArray = newArray.filter(result => (result.comfortLevel !== 5));
+    }
+    if (comfortFilterState.hard === false) {
+      newArray = newArray.filter(result => (result.comfortLevel !== 4));
+    }
+    if (comfortFilterState.medium === false) {
+      newArray = newArray.filter(result => (result.comfortLevel !== 3));
+    }
+    if (comfortFilterState.soft === false) {
+      newArray = newArray.filter(result => (result.comfortLevel !== 2));
+    }
+    if (comfortFilterState.verysoft === false) {
+      newArray = newArray.filter(result => (result.comfortLevel !== 1));
+    }
+    setProductsCollectionFiltered(newArray);
+  }
+
   return <ProductCollectionComponent
     productCollection={productsCollectionFiltered}
     viewProduct={viewProduct}

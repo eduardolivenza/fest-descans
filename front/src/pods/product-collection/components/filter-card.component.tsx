@@ -21,7 +21,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 interface Props{
-  handleChangeCheckbox: (string, boolean) => void;
+  handleChangeCheckbox: (name: string, value: boolean) => void;
   checkBoxState: {
     veryhard: boolean;
     hard: boolean;

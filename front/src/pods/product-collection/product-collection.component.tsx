@@ -3,13 +3,13 @@ import { ProductEntityVm, ProductEntitySizeVm } from "./product-collection.vm";
 import { HotelCollectionCardsComponent } from "./components/product-collection-cards.component";
 import { ProductCollectionTableComponent } from "./components/product-collection-table.component";
 import { HotelCollectionViewSelectorComponent, Layout } from "./components/product-collection-view-selector.component";
-import { FilterCard } from "./filter-card.component";
+import { FilterCard } from "./components/filter-card.component";
 
 interface Props {
   productCollection: ProductEntityVm[];
   viewProduct: (id: string) => void;
   layout?: Layout;
-  handleCheckboxesChange: (string, boolean) => void;
+  handleCheckboxesChange: (name: string, value: boolean) => void;
   comfortLevelState: {
     veryhard: boolean;
     hard: boolean;
