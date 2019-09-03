@@ -7,6 +7,7 @@ import FormControl from '@material-ui/core/FormControl';
 import FormLabel from '@material-ui/core/FormLabel';
 import FormGroup from '@material-ui/core/FormGroup';
 import Checkbox from '@material-ui/core/Checkbox';
+import { CheckBoxConfigValue } from "common/components";
 
 const useStyles = makeStyles(theme => ({
   card: {
@@ -22,41 +23,20 @@ const useStyles = makeStyles(theme => ({
 
 interface Props {
   handleChangeCheckboxNew: (position: number, value: boolean) => void;
-  checkBoxStateNew:boolean[];
+  checkBoxStateNew: boolean[];
+  comfortLevelCheckboxes: CheckBoxConfigValue[];
+  productTypesCheckBoxes: CheckBoxConfigValue[];
 }
 
 export const FilterCard = (props: Props) => {
 
   const classes = useStyles({});
 
-  const { checkBoxStateNew, handleChangeCheckboxNew } = props;
+  const { checkBoxStateNew, handleChangeCheckboxNew, comfortLevelCheckboxes, productTypesCheckBoxes } = props;
 
   const handleChangeNew = (event) => {
     handleChangeCheckboxNew(event.target.name, event.target.checked);
   }
-
-  const checkboxes = [
-    {
-      name: '4',
-      label: 'Very hard',
-    },
-    {
-      name: '3',
-      label: 'Hard',
-    },
-    {
-      name: '2',
-      label: 'Medium',
-    },
-    {
-      name: '1',
-      label: 'Soft',
-    },
-    {
-      name: '0',
-      label: 'Very soft',
-    }
-  ];
 
   return (
     <Card className={classes.card}>
@@ -64,17 +44,20 @@ export const FilterCard = (props: Props) => {
         title="Products filter"
       />
       <CardContent>
+        <div style={{
+            display: "flex",
+            flexDirection: "row",
+          }}>
         <div
           style={{
             display: "flex",
             flexDirection: "column",
-            justifyContent: "center"
           }} >
           <FormControl component="fieldset" className={classes.formControl}>
-            <FormLabel component="legend">Choose the comfort level</FormLabel>
+            <FormLabel component="legend">Filter by products type</FormLabel>
             <FormGroup>
               {
-                checkboxes.map(item => (
+                productTypesCheckBoxes.map(item => (
                   <FormControlLabel
                     control={<Checkbox name={item.name} checked={checkBoxStateNew[parseInt(item.name)]} color="primary" onChange={handleChangeNew} />}
                     label={item.label}
@@ -83,6 +66,26 @@ export const FilterCard = (props: Props) => {
               }
             </FormGroup>
           </FormControl>
+        </div>
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+          }} >
+          <FormControl component="fieldset" className={classes.formControl}>
+            <FormLabel component="legend">Filter by comfort level</FormLabel>
+            <FormGroup>
+              {
+                comfortLevelCheckboxes.map(item => (
+                  <FormControlLabel
+                    control={<Checkbox name={item.name} checked={checkBoxStateNew[parseInt(item.name)]} color="primary" onChange={handleChangeNew} />}
+                    label={item.label}
+                  />
+                ))
+              }
+            </FormGroup>
+          </FormControl>
+        </div>
         </div>
       </CardContent>
     </Card>

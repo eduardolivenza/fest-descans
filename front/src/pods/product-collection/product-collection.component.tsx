@@ -4,6 +4,7 @@ import { HotelCollectionCardsComponent } from "./components/product-collection-c
 import { ProductCollectionTableComponent } from "./components/product-collection-table.component";
 import { HotelCollectionViewSelectorComponent, Layout } from "./components/product-collection-view-selector.component";
 import { FilterCard } from "./components/filter-card.component";
+import { CheckBoxConfigValue } from "common/components";
 
 interface Props {
   productCollection: ProductEntityVm[];
@@ -11,13 +12,15 @@ interface Props {
   layout?: Layout;
   handleChangeCheckboxNew: (positon: number, value: boolean) => void;
   checkBoxStateNew: boolean[];
+  comfortLevelCheckboxes: CheckBoxConfigValue[] ;
+  productTypesCheckBoxes: CheckBoxConfigValue[];
 }
 
 
 
 export const ProductCollectionComponent: React.FunctionComponent<Props> = (props) => {
 
-  const { productCollection, viewProduct, layout, handleChangeCheckboxNew, checkBoxStateNew } = props;
+  const { productCollection, viewProduct, layout, handleChangeCheckboxNew, checkBoxStateNew,comfortLevelCheckboxes, productTypesCheckBoxes } = props;
   const [componentLayout, setComponentLayout] = React.useState(layout);
 
   
@@ -31,7 +34,7 @@ export const ProductCollectionComponent: React.FunctionComponent<Props> = (props
 
   return (
     <>
-      <FilterCard handleChangeCheckboxNew={handleChangeCheckboxNew} checkBoxStateNew={checkBoxStateNew}/>
+      <FilterCard comfortLevelCheckboxes={comfortLevelCheckboxes} productTypesCheckBoxes={productTypesCheckBoxes} handleChangeCheckboxNew={handleChangeCheckboxNew} checkBoxStateNew={checkBoxStateNew}/>
       <HotelCollectionViewSelectorComponent onChangeView={setComponentLayout} layout={componentLayout} />
       {hotelCollectionComponent}
     </>

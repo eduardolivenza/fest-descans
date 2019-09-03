@@ -6,6 +6,7 @@ import { withRouter, RouteComponentProps } from "react-router-dom";
 import { getProductsCollection } from "./product-collection.api";
 import { mapFromApiToVm } from "./product-collection.mapper";
 import { mapFromAToBCollection } from "common";
+import { CheckBoxConfigValue } from "common/components";
 
 const useProductCollection = () => {
 
@@ -30,6 +31,37 @@ export const ProductCollectionContainerInner = (props: Props) => {
   const { productsCollection, loadProductsCollection, productsCollectionFiltered, setProductsCollectionFiltered } = useProductCollection();
 
   const [checkedItems, setCheckedItems] = React.useState([true, true, true, true, true]);
+
+  const comfortLevelCheckboxes: CheckBoxConfigValue[]  = [{
+      name: '4',
+      label: 'Very hard',
+    }, {
+      name: '3',
+      label: 'Hard',
+    }, {
+      name: '2',
+      label: 'Medium',
+    }, {
+      name: '1',
+      label: 'Soft',
+    }, {
+      name: '0',
+      label: 'Very soft',
+  }];
+
+  const productTypesCheckBoxes: CheckBoxConfigValue[]  = [{
+    name: 'BED',
+    label: 'Beds and canapes',
+  }, {
+    name: 'MATTRESS',
+    label: 'Matresses',
+  }, {
+    name: 'SOFA',
+    label: 'Sofas',
+  }, {
+    name: 'OTHER',
+    label: 'Pillows and other products',
+}];
 
   const handleChangeCheckboxNew = (position: number, value: boolean) => {
     setCheckedItems({...checkedItems, [position]: value });
@@ -62,6 +94,8 @@ export const ProductCollectionContainerInner = (props: Props) => {
     viewProduct={viewProduct}
     checkBoxStateNew={checkedItems}
     handleChangeCheckboxNew={handleChangeCheckboxNew}
+    comfortLevelCheckboxes={comfortLevelCheckboxes}
+    productTypesCheckBoxes={productTypesCheckBoxes}
   />;
 
 };

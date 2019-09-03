@@ -4,3 +4,4 @@ export * from "./rating-field-form.component";
 export * from "./text-area-form.component";
 export * from './notification.component';
 export * from './value-field-display.component';
+export * from './checkbox-config-value.component';
