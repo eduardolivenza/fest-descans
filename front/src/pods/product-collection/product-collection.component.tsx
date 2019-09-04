@@ -4,22 +4,23 @@ import { HotelCollectionCardsComponent } from "./components/product-collection-c
 import { ProductCollectionTableComponent } from "./components/product-collection-table.component";
 import { HotelCollectionViewSelectorComponent, Layout } from "./components/product-collection-view-selector.component";
 import { FilterCard } from "./components/filter-card.component";
+import { CheckBoxConfigValue } from "common/components";
 
 
 interface Props {
   productCollection: ProductEntityVm[];
   viewProduct: (id: string) => void;
   layout?: Layout;
-  handleChangeCheckbox: (positon: number, value: boolean) => void;
-  comfortLevelFilterState: boolean[];
+  handleChangeComfortFilter: (name: string, value: boolean) => void;
+  comfortLevelFilterState: CheckBoxConfigValue[];
+  handleProductTypesFilter: (name: string, value: boolean) => void;
+  productTypesFilterState: CheckBoxConfigValue[];
 }
 
 export const ProductCollectionComponent: React.FunctionComponent<Props> = (props) => {
 
-  const { productCollection, viewProduct, layout, handleChangeCheckbox, comfortLevelFilterState } = props;
+  const { productCollection, viewProduct, layout, handleChangeComfortFilter, handleProductTypesFilter, comfortLevelFilterState, productTypesFilterState } = props;
   const [componentLayout, setComponentLayout] = React.useState(layout);
-
-  
 
   let hotelCollectionComponent;
   if (componentLayout === Layout.Card) {
@@ -30,7 +31,11 @@ export const ProductCollectionComponent: React.FunctionComponent<Props> = (props
 
   return (
     <>
-      <FilterCard handleChangeCheckbox={handleChangeCheckbox} comfortLevelFilterState={comfortLevelFilterState}/>
+      <FilterCard 
+        handleChangeComfortFilter={handleChangeComfortFilter} 
+        handleProductTypesFilter={handleProductTypesFilter} 
+        comfortLevelFilterState={comfortLevelFilterState} 
+        productTypesFilterState={productTypesFilterState}/>
       <HotelCollectionViewSelectorComponent onChangeView={setComponentLayout} layout={componentLayout} />
       {hotelCollectionComponent}
     </>

@@ -18,15 +18,14 @@ const useStyles = makeStyles(theme => ({
 
 interface Props {
     label: string;
-    handleChangeCheckbox: (position: number, value: boolean) => void;
-    states: boolean[];
+    handleChangeCheckbox: (name: string, value: boolean) => void;
     items: CheckBoxConfigValue[];
 }
 
 export const CheckBoxGroup = (props: Props) => {
 
     const classes = useStyles({});
-    const { label, states, handleChangeCheckbox, items } = props;
+    const { label, handleChangeCheckbox, items } = props;
 
     const handleChange = (event) => {
         handleChangeCheckbox(event.target.name, event.target.checked);
@@ -43,7 +42,7 @@ export const CheckBoxGroup = (props: Props) => {
                 <FormGroup>
                     {   items.map(item => (
                             <FormControlLabel
-                                control={<Checkbox name={item.name} checked={states[item.name]} color="primary" onChange={handleChange} />}
+                                control={<Checkbox key={item.name} name={item.name} checked={item.value} color="primary" onChange={handleChange} />}
                                 label={item.label}
                             />
                         ))

@@ -24,19 +24,69 @@ const useProductCollection = () => {
   return { productsCollection, loadProductsCollection, productsCollectionFiltered, setProductsCollectionFiltered };
 };
 
+const comfortLevelCheckboxes: CheckBoxConfigValue[] = [{
+  name: '4',
+  label: 'Very hard',
+  value: true,
+}, {
+  name: '3',
+  label: 'Hard',
+  value: true,
+}, {
+  name: '2',
+  label: 'Medium',
+  value: true,
+}, {
+  name: '1',
+  label: 'Soft',
+  value: true,
+}, {
+  name: '0',
+  label: 'Very soft',
+  value: true,
+}];
+
+const productTypesCheckBoxes: CheckBoxConfigValue[] = [{
+  name: 'BED',
+  label: 'Beds and canapes',
+  value: true,
+}, {
+  name: 'MATTRESS',
+  label: 'Matresses',
+  value: true,
+}, {
+  name: 'SOFA',
+  label: 'Sofas',
+  value: true,
+}, {
+  name: 'OTHER',
+  label: 'Pillows and other products',
+  value: true,
+}];
+
 interface Props extends RouteComponentProps { }
 
 export const ProductCollectionContainerInner = (props: Props) => {
 
   const { productsCollection, loadProductsCollection, productsCollectionFiltered, setProductsCollectionFiltered } = useProductCollection();
 
-  const [checkedItems, setCheckedItems] = React.useState([true, true, true, true, true]);
+  const [comfortLevelFilterItems, setComfortLevelFilterItems] = React.useState(comfortLevelCheckboxes);
+  const [productTypesFilterItems, setProductTypesFilterItems] = React.useState(productTypesCheckBoxes);
 
 
-
-  const handleChangeCheckbox = (position: number, value: boolean) => {
-    setCheckedItems({...checkedItems, [position]: value });
+  const handleChangeComfortFilter = (name: string, valueEnter: boolean) => {
+    let itemIndex: number = comfortLevelFilterItems.findIndex((item) => (item.name === name));
+    const newState = [...comfortLevelFilterItems]
+    newState[itemIndex].value = valueEnter
+    setComfortLevelFilterItems(newState);
   };
+
+  const handleChangeProductTypesFilter = (name: string, valueEnter: boolean) => {
+    let itemIndex: number = productTypesFilterItems.findIndex((item) => (item.name === name));
+    const newState = [...productTypesFilterItems]
+    newState[itemIndex].value = valueEnter
+    setProductTypesFilterItems(newState);
+  }
 
   const viewProduct = (productId: string) => {
     props.history.push(routesLinks.hotelEdit(productId));
@@ -48,13 +98,18 @@ export const ProductCollectionContainerInner = (props: Props) => {
 
   React.useEffect(() => {
     applyFilter();
-  }, [checkedItems])
+  }, [comfortLevelFilterItems, productTypesFilterItems])
 
   const applyFilter = () => {
     var newArray = productsCollection;
-    Object.keys(checkedItems).forEach(function (position) {
-      if (checkedItems[position] === false) {
-        newArray = newArray.filter(result => (result.comfortLevel != (parseInt(position) + 1)));
+    Object.keys(comfortLevelFilterItems).forEach(function (position) {
+      if (comfortLevelFilterItems[position].value === false) {
+        newArray = newArray.filter(result => (result.comfortLevel != (parseInt(comfortLevelFilterItems[position].name) + 1)));
+      }
+    });
+    Object.keys(productTypesFilterItems).forEach(function (position) {
+      if (productTypesFilterItems[position].value === false) {
+        newArray = newArray.filter(result => (result.category != (productTypesFilterItems[position].name )));
       }
     });
     setProductsCollectionFiltered(newArray);
@@ -63,9 +118,10 @@ export const ProductCollectionContainerInner = (props: Props) => {
   return <ProductCollectionComponent
     productCollection={productsCollectionFiltered}
     viewProduct={viewProduct}
-    comfortLevelFilterState={checkedItems}
-    handleChangeCheckbox={handleChangeCheckbox}
-
+    comfortLevelFilterState={comfortLevelFilterItems}
+    handleChangeComfortFilter={handleChangeComfortFilter}
+    productTypesFilterState={productTypesFilterItems}
+    handleProductTypesFilter={handleChangeProductTypesFilter}
   />;
 
 };

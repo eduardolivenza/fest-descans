@@ -16,47 +16,19 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const comfortLevelCheckboxes: CheckBoxConfigValue[] = [{
-  name: '4',
-  label: 'Very hard',
-}, {
-  name: '3',
-  label: 'Hard',
-}, {
-  name: '2',
-  label: 'Medium',
-}, {
-  name: '1',
-  label: 'Soft',
-}, {
-  name: '0',
-  label: 'Very soft',
-}];
-
-const productTypesCheckBoxes: CheckBoxConfigValue[] = [{
-  name: 'BED',
-  label: 'Beds and canapes',
-}, {
-  name: 'MATTRESS',
-  label: 'Matresses',
-}, {
-  name: 'SOFA',
-  label: 'Sofas',
-}, {
-  name: 'OTHER',
-  label: 'Pillows and other products',
-}];
 
 interface Props {
-  handleChangeCheckbox: (position: number, value: boolean) => void;
-  comfortLevelFilterState: boolean[];
+  handleChangeComfortFilter: (name: string, value: boolean) => void;
+  handleProductTypesFilter: (name: string, value: boolean) => void;
+  comfortLevelFilterState: CheckBoxConfigValue[];
+  productTypesFilterState: CheckBoxConfigValue[];
 }
 
 export const FilterCard = (props: Props) => {
 
   const classes = useStyles({});
 
-  const { comfortLevelFilterState, handleChangeCheckbox } = props;
+  const { comfortLevelFilterState, handleChangeComfortFilter, productTypesFilterState, handleProductTypesFilter } = props;
 
   return (
     <Card className={classes.card}>
@@ -69,15 +41,15 @@ export const FilterCard = (props: Props) => {
           flexDirection: "row",
         }}>
           <CheckBoxGroup 
-            label = {"Filter by products type"}
-            handleChangeCheckbox={handleChangeCheckbox}
-            states={comfortLevelFilterState}
-            items={productTypesCheckBoxes}/>  
-          <CheckBoxGroup 
             label = {"Filter by comfort level"}
-            handleChangeCheckbox={handleChangeCheckbox}
-            states={comfortLevelFilterState}
-            items={comfortLevelCheckboxes}/>  
+            handleChangeCheckbox={handleChangeComfortFilter}
+            items={comfortLevelFilterState}
+          />  
+          <CheckBoxGroup 
+            label = {"Filter by product types"}
+            handleChangeCheckbox={handleProductTypesFilter}
+            items={productTypesFilterState}
+          />  
         </div>
       </CardContent>
     </Card>
