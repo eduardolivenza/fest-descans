@@ -32,38 +32,9 @@ export const ProductCollectionContainerInner = (props: Props) => {
 
   const [checkedItems, setCheckedItems] = React.useState([true, true, true, true, true]);
 
-  const comfortLevelCheckboxes: CheckBoxConfigValue[]  = [{
-      name: '4',
-      label: 'Very hard',
-    }, {
-      name: '3',
-      label: 'Hard',
-    }, {
-      name: '2',
-      label: 'Medium',
-    }, {
-      name: '1',
-      label: 'Soft',
-    }, {
-      name: '0',
-      label: 'Very soft',
-  }];
 
-  const productTypesCheckBoxes: CheckBoxConfigValue[]  = [{
-    name: 'BED',
-    label: 'Beds and canapes',
-  }, {
-    name: 'MATTRESS',
-    label: 'Matresses',
-  }, {
-    name: 'SOFA',
-    label: 'Sofas',
-  }, {
-    name: 'OTHER',
-    label: 'Pillows and other products',
-}];
 
-  const handleChangeCheckboxNew = (position: number, value: boolean) => {
+  const handleChangeCheckbox = (position: number, value: boolean) => {
     setCheckedItems({...checkedItems, [position]: value });
   };
 
@@ -92,10 +63,9 @@ export const ProductCollectionContainerInner = (props: Props) => {
   return <ProductCollectionComponent
     productCollection={productsCollectionFiltered}
     viewProduct={viewProduct}
-    checkBoxStateNew={checkedItems}
-    handleChangeCheckboxNew={handleChangeCheckboxNew}
-    comfortLevelCheckboxes={comfortLevelCheckboxes}
-    productTypesCheckBoxes={productTypesCheckBoxes}
+    comfortLevelFilterState={checkedItems}
+    handleChangeCheckbox={handleChangeCheckbox}
+
   />;
 
 };

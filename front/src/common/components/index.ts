@@ -5,3 +5,4 @@ export * from "./text-area-form.component";
 export * from './notification.component';
 export * from './value-field-display.component';
 export * from './checkbox-config-value.component';
+export * from './checkbox-group.component';
