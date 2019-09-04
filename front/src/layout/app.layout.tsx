@@ -2,7 +2,7 @@ import * as React from "react";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
-import { routesLinks } from "core";
+import { SessionContext, routesLinks } from "core";
 import { withRouter, RouteComponentProps } from "react-router-dom";
 import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
@@ -15,8 +15,9 @@ import Container from '@material-ui/core/Container';
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import NotificationsIcon from '@material-ui/icons/Notifications';
-import { Copyright } from "./Copyright";
+import { Copyright } from "./copyright";
 import { MainMenu } from "./mainMenu.layout";
+import { LoginMenu } from "./loginMenu.layout";
 
 const logo = require("./../images/FEST_COLOR_3.png");
 const drawerWidth = 240;
@@ -58,6 +59,9 @@ const useStyles = makeStyles(theme => ({
   },
   title: {
     flexGrow: 1,
+  },
+  login: {
+    marginRight: theme.spacing(4),
   },
   drawerPaper: {
     position: 'relative',
@@ -106,6 +110,23 @@ const AppLayoutInner: React.FunctionComponent<Props> = (props) => {
   const classes = useStyles({});
 
   const [open, setOpen] = React.useState(false);
+  const [anchorLoginMenu, setanchorLoginMenu] = React.useState(null);
+
+  const openLoginMenu: boolean = Boolean(anchorLoginMenu);
+
+  const handleClose = () => {
+    setanchorLoginMenu(null);
+  }
+
+  const handleLoginMenu = (event: React.MouseEvent<HTMLElement>) => {
+    setanchorLoginMenu(event.currentTarget);
+  }
+
+  const doLoginLogout = () => {
+    history.push(routesLinks.login);
+  }
+
+  const loginContext = React.useContext(SessionContext);
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -133,12 +154,23 @@ const AppLayoutInner: React.FunctionComponent<Props> = (props) => {
             color="inherit"
             aria-label="open drawer"
             onClick={handleDrawerOpen}
-            className={clsx(classes.menuButton, open && classes.menuButtonHidden)}
-          >
+            className={clsx(classes.menuButton, open && classes.menuButtonHidden)}>
             <MenuIcon />
           </IconButton>
           <img src={logo} alt="Logo" height="100" />
           <Typography component="h1" variant="h6" color="inherit" noWrap className={classes.title} />
+
+          <Typography className = {classes.login} variant="h6" color="inherit" >
+            {loginContext.login}
+          </Typography>
+
+          <LoginMenu
+            handleLoginMenu={handleLoginMenu}
+            openLoginMenu={openLoginMenu}
+            handleClose={handleClose}
+            anchorLoginMenu={anchorLoginMenu}
+            doLoginLogout={doLoginLogout}
+          />
           <IconButton color="inherit">
             <Badge badgeContent={4} color="secondary">
               <NotificationsIcon />
@@ -151,23 +183,21 @@ const AppLayoutInner: React.FunctionComponent<Props> = (props) => {
         classes={{
           paper: clsx(classes.drawerPaper, !open && classes.drawerPaperClose),
         }}
-        open={open}
-      >
+        open={open} >
         <div className={classes.toolbarIcon}>
           <IconButton onClick={handleDrawerClose}>
             <ChevronLeftIcon />
           </IconButton>
-
         </div>
-        <div style={{ paddingTop: '35px'}}>
+        <div style={{ paddingTop: '35px' }}>
           <Divider />
-            <MainMenu goToDefault={goToDefault} goToProductsList={goToProductsList} />
+          <MainMenu goToDefault={goToDefault} goToProductsList={goToProductsList} />
           <Divider />
         </div>
       </Drawer>
       <main className={classes.content}>
         <div className={classes.appBarSpacer} />
-        <Container maxWidth="xl"  className={classes.container}>
+        <Container maxWidth="xl" className={classes.container}>
           {props.children}
         </Container>
         <Copyright />

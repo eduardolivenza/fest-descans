@@ -19,7 +19,7 @@ const useProductCollection = () => {
       setProductsCollection(products);
       setProductsCollectionFiltered(products);
     }
-    );
+  );
 
   return { productsCollection, loadProductsCollection, productsCollectionFiltered, setProductsCollectionFiltered };
 };
