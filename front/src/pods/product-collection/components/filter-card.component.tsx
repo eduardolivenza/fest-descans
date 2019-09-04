@@ -8,12 +8,6 @@ const useStyles = makeStyles(theme => ({
   card: {
     marginTop: theme.spacing(1)
   },
-  formControl: {
-    margin: theme.spacing(2),
-  },
-  group: {
-    margin: theme.spacing(1, 0),
-  },
 }));
 
 
@@ -38,8 +32,7 @@ export const FilterCard = (props: Props) => {
       <CardContent>
         <div style={{
           display: "flex",
-          flexDirection: "row",
-        }}>
+          flexDirection: "row",}}>
           <CheckBoxGroup 
             label = {"Filter by comfort level"}
             handleChangeCheckbox={handleChangeComfortFilter}

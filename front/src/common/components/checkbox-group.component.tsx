@@ -9,12 +9,9 @@ import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles(theme => ({
     formControl: {
-      margin: theme.spacing(2),
-    },
-    group: {
-      margin: theme.spacing(1, 0),
-    },
-  }));
+        margin: theme.spacing(2),
+    }
+}));
 
 interface Props {
     label: string;
@@ -40,12 +37,13 @@ export const CheckBoxGroup = (props: Props) => {
             <FormControl component="fieldset" className={classes.formControl}>
                 <FormLabel component="legend">{label}</FormLabel>
                 <FormGroup>
-                    {   items.map(item => (
-                            <FormControlLabel
-                                control={<Checkbox key={item.name} name={item.name} checked={item.value} color="primary" onChange={handleChange} />}
-                                label={item.label}
-                            />
-                        ))
+                    {items.map(item => (
+                        <FormControlLabel
+                            key={item.name}
+                            control={<Checkbox key={item.name} name={item.name} checked={item.value} color="primary" onChange={handleChange} />}
+                            label={item.label}
+                        />
+                    ))
                     }
                 </FormGroup>
             </FormControl>

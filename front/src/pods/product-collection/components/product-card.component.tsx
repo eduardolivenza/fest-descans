@@ -28,8 +28,9 @@ interface Props extends WithStyles<typeof styles> {
 const styles = (theme: Theme) =>
   createStyles({
     card: {
-      width: "500px",
-      marginTop: theme.spacing(1)
+      width: "340px",
+      marginTop: theme.spacing(1),
+      marginRight: theme.spacing(1)
     },
     chip:
     {
@@ -69,7 +70,7 @@ export const ProductCardInner = (props: Props) => {
   }
 
   return (
-    <Card className={classes.card}>
+    <Card className={classes.card} key={product.productIdentifier}>
       <CardHeader
         avatar={<Avatar aria-label="Product">{product.category}</Avatar>}
         title={product.productName}
@@ -84,12 +85,12 @@ export const ProductCardInner = (props: Props) => {
           }}
         >
           <AwesomeSlider style={{ marginBottom: '40px' }}>
-            <div style={{ backgroundImage: `url(${product.picture})`, backgroundColor: '#ffffff', backgroundRepeat: 'no-repeat', backgroundSize: 'contain', backgroundPosition: '50% 50%' }} />
-            <div
+            <div key="img1" style={{ backgroundImage: `url(${product.picture})`, backgroundColor: '#ffffff', backgroundRepeat: 'no-repeat', backgroundSize: 'contain', backgroundPosition: '50% 50%' }} />
+            <div  key="img2"
               style={{ backgroundColor: '#ffffff' }}
               data-src={imageStranger}
             />
-            <div
+            <div  key="img3"
               style={{ backgroundColor: '#ffffff' }}
               data-src={logo}
             />
@@ -109,7 +110,7 @@ export const ProductCardInner = (props: Props) => {
           <div className={classes.chipParent}>
             <div className={classes.chips}>
             {product.sizes.map(size => (
-              <Chip className={classes.chip} color="primary" label={size.size} onClick={() => onSizeSelected(size)} />
+              <Chip key={product.productIdentifier + size.size} className={classes.chip} color="primary" label={size.size} onClick={() => onSizeSelected(size)} />
             ))}
             </div>
             <Typography className={classes.price}>{currentPrice}€</Typography>
