@@ -12,16 +12,23 @@ const useProductCollection = () => {
 
   const [productsCollection, setProductsCollection] = React.useState<ProductEntityVm[]>([]);
   const [productsCollectionFiltered, setProductsCollectionFiltered] = React.useState<ProductEntityVm[]>([]);
+  const [maxPrice, setMaxPrice] = React.useState<number>(0);
 
   const loadProductsCollection = () =>
     getProductsCollection().then(result => {
       const products: ProductEntityVm[] = mapFromAToBCollection(mapFromApiToVm, result);
+      products.map(item =>{
+        item.sizes.map( avSize => {
+            if (parseInt(avSize.price) > maxPrice) {
+              setMaxPrice(parseInt(avSize.price))
+            }
+        })
+      });
       setProductsCollection(products);
       setProductsCollectionFiltered(products);
     }
   );
-
-  return { productsCollection, loadProductsCollection, productsCollectionFiltered, setProductsCollectionFiltered };
+  return { productsCollection, loadProductsCollection, productsCollectionFiltered, setProductsCollectionFiltered, maxPrice };
 };
 
 const comfortLevelCheckboxes: CheckBoxConfigValue[] = [{
@@ -68,10 +75,11 @@ interface Props extends RouteComponentProps { }
 
 export const ProductCollectionContainerInner = (props: Props) => {
 
-  const { productsCollection, loadProductsCollection, productsCollectionFiltered, setProductsCollectionFiltered } = useProductCollection();
+  const { productsCollection, loadProductsCollection, productsCollectionFiltered, setProductsCollectionFiltered, maxPrice } = useProductCollection();
 
-  const [comfortLevelFilterItems, setComfortLevelFilterItems] = React.useState(comfortLevelCheckboxes);
-  const [productTypesFilterItems, setProductTypesFilterItems] = React.useState(productTypesCheckBoxes);
+  const [ comfortLevelFilterItems, setComfortLevelFilterItems] = React.useState(comfortLevelCheckboxes);
+  const [ productTypesFilterItems, setProductTypesFilterItems] = React.useState(productTypesCheckBoxes);
+  const [ priceFilter, setPriceFilter] = React.useState([0, maxPrice]);
 
 
   const handleChangeComfortFilter = (name: string, valueEnter: boolean) => {
@@ -88,30 +96,41 @@ export const ProductCollectionContainerInner = (props: Props) => {
     setProductTypesFilterItems(newState);
   }
 
+  const handleChangePriceFilter = ( newValue: number[]) => {
+    setPriceFilter(newValue);
+  };
+
   const viewProduct = (productId: string) => {
     props.history.push(routesLinks.hotelEdit(productId));
   }
 
   React.useEffect(() => {
-    loadProductsCollection();
+    loadProductsCollection();    
   }, []);
 
   React.useEffect(() => {
+    setPriceFilter([0, maxPrice]);
+  }, [maxPrice]);
+  
+  React.useEffect(() => {
     applyFilter();
-  }, [comfortLevelFilterItems, productTypesFilterItems])
+  }, [ comfortLevelFilterItems, productTypesFilterItems, priceFilter])
 
   const applyFilter = () => {
-    var newArray = productsCollection;
-    Object.keys(comfortLevelFilterItems).forEach(function (position) {
+    let newArray = productsCollection;
+    Object.keys(comfortLevelFilterItems).forEach((position) => {
       if (comfortLevelFilterItems[position].value === false) {
         newArray = newArray.filter(result => (result.comfortLevel != (parseInt(comfortLevelFilterItems[position].name) + 1)));
       }
     });
-    Object.keys(productTypesFilterItems).forEach(function (position) {
+    Object.keys(productTypesFilterItems).forEach( (position) => {
       if (productTypesFilterItems[position].value === false) {
         newArray = newArray.filter(result => (result.category != (productTypesFilterItems[position].name )));
       }
     });
+    newArray = newArray.filter(
+        x => x.sizes.some(y => (parseInt(y.price) > priceFilter[0]) && (parseInt(y.price) <= priceFilter[1]))
+    );
     setProductsCollectionFiltered(newArray);
   }
 
@@ -122,6 +141,9 @@ export const ProductCollectionContainerInner = (props: Props) => {
     handleChangeComfortFilter={handleChangeComfortFilter}
     productTypesFilterState={productTypesFilterItems}
     handleProductTypesFilter={handleChangeProductTypesFilter}
+    handleChangePriceFilter={handleChangePriceFilter}
+    maxPriceValue={maxPrice}
+    selectedPrice={priceFilter}
   />;
 
 };

@@ -16,9 +16,9 @@ import { withStyles, createStyles, WithStyles } from "@material-ui/core/styles";
 import { ValueDisplay } from "common/components";
 import AwesomeSlider from 'react-awesome-slider';
 import 'react-awesome-slider/dist/styles.css';
+
 const logo = require("./../../../images/logo.jpg");
 const imageStranger = require("./../../../images/series/stranger-things-2.jpg");
-
 
 interface Props extends WithStyles<typeof styles> {
   product: ProductEntityVm;
@@ -28,7 +28,7 @@ interface Props extends WithStyles<typeof styles> {
 const styles = (theme: Theme) =>
   createStyles({
     card: {
-      width: "340px",
+      width: "36vh",
       marginTop: theme.spacing(1),
       marginRight: theme.spacing(1)
     },
@@ -55,10 +55,8 @@ const manageProductPrice = () => {
   const [currentPrice, setCurrentPrice] = React.useState<string>(
     "--"
   );
-
   return { currentPrice, setCurrentPrice };
 };
-
 
 export const ProductCardInner = (props: Props) => {
 
@@ -84,13 +82,13 @@ export const ProductCardInner = (props: Props) => {
             justifyContent: "center"
           }}
         >
-          <AwesomeSlider style={{ marginBottom: '40px' }}>
+          <AwesomeSlider style={{ marginBottom: '5vh' }}>
             <div key="img1" style={{ backgroundImage: `url(${product.picture})`, backgroundColor: '#ffffff', backgroundRepeat: 'no-repeat', backgroundSize: 'contain', backgroundPosition: '50% 50%' }} />
-            <div  key="img2"
+            <div key="img2"
               style={{ backgroundColor: '#ffffff' }}
               data-src={imageStranger}
             />
-            <div  key="img3"
+            <div key="img3"
               style={{ backgroundColor: '#ffffff' }}
               data-src={logo}
             />
@@ -106,12 +104,12 @@ export const ProductCardInner = (props: Props) => {
           </Typography>
           <Typography variant="subtitle1" gutterBottom>
             Produced by {product.supplier.companyName} - {product.supplier.country}
-          </Typography> 
+          </Typography>
           <div className={classes.chipParent}>
             <div className={classes.chips}>
-            {product.sizes.map(size => (
-              <Chip key={product.productIdentifier + size.size} className={classes.chip} color="primary" label={size.size} onClick={() => onSizeSelected(size)} />
-            ))}
+              {product.sizes.map(size => (
+                <Chip key={product.productIdentifier + size.size} className={classes.chip} color="primary" label={size.size} onClick={() => onSizeSelected(size)} />
+              ))}
             </div>
             <Typography className={classes.price}>{currentPrice}€</Typography>
           </div>

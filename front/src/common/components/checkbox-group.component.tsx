@@ -9,7 +9,7 @@ import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles(theme => ({
     formControl: {
-        margin: theme.spacing(2),
+        marginRight: theme.spacing(2),
     }
 }));
 
