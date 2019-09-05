@@ -82,7 +82,7 @@ export const ProductCardInner = (props: Props) => {
             justifyContent: "center"
           }}
         >
-          <AwesomeSlider style={{ marginBottom: '5vh' }}>
+          <AwesomeSlider style={{ marginBottom: '6vh' }}>
             <div key="img1" style={{ backgroundImage: `url(${product.picture})`, backgroundColor: '#ffffff', backgroundRepeat: 'no-repeat', backgroundSize: 'contain', backgroundPosition: '50% 50%' }} />
             <div key="img2"
               style={{ backgroundColor: '#ffffff' }}

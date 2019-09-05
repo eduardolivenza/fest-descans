@@ -40,7 +40,9 @@ export const FilterCard = (props: Props) => {
     handleChangePriceFilter(newValue);
   };
 
+
   return (
+    
     <Card className={classes.card}>
       <CardHeader
         title="Products filter"
@@ -48,7 +50,8 @@ export const FilterCard = (props: Props) => {
       <CardContent>
         <div style={{
           display: "flex",
-          justifyContent: 'space-around',
+          justifyContent: 'space-between',
+          flexWrap: "wrap",
         }}>
           <CheckBoxGroup
             label={"Filter by comfort level"}
