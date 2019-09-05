@@ -48,7 +48,7 @@ export const FilterCard = (props: Props) => {
       <CardContent>
         <div style={{
           display: "flex",
-          flexDirection: "row",
+          justifyContent: 'space-around',
         }}>
           <CheckBoxGroup
             label={"Filter by comfort level"}

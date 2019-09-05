@@ -17,15 +17,17 @@ const useProductCollection = () => {
   const loadProductsCollection = () =>
     getProductsCollection().then(result => {
       const products: ProductEntityVm[] = mapFromAToBCollection(mapFromApiToVm, result);
+      let maxPriceLocal = maxPrice
       products.map(item =>{
         item.sizes.map( avSize => {
-            if (parseInt(avSize.price) > maxPrice) {
-              setMaxPrice(parseInt(avSize.price))
+            if (parseInt(avSize.price) >= maxPriceLocal) {
+              maxPriceLocal =parseInt(avSize.price);
             }
         })
       });
       setProductsCollection(products);
       setProductsCollectionFiltered(products);
+      setMaxPrice(maxPriceLocal);
     }
   );
   return { productsCollection, loadProductsCollection, productsCollectionFiltered, setProductsCollectionFiltered, maxPrice };
