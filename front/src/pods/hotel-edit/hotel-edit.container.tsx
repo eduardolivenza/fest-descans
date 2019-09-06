@@ -1,6 +1,6 @@
 import * as React from "react";
 import { withRouter, RouteComponentProps } from "react-router-dom";
-import { hotelEditRouteParams } from "core";
+import { productViewRouteParams } from "core";
 import { HotelEditComponent } from "./hotel-edit.component";
 import { HotelEntityVm, createDefaultHotel, HotelFormErrors, createDefaultHotelFormErrors } from "./hotel-edit.vm";
 import { citiesLookup } from "core";
@@ -40,7 +40,7 @@ const HotelEditContainerInner = (props: Props) => {
   const [showValidationFailedMessage, setShowValidationFailedMessage] = React.useState(false);
 
   React.useEffect(() => {
-    loadHotelEdit(props.match.params[hotelEditRouteParams.id]);
+    loadHotelEdit(props.match.params[productViewRouteParams.id]);
   }, []);
 
   const onFieldUpdate = (fieldName: keyof HotelEntityVm, value: any) => {

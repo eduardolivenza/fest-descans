@@ -15,11 +15,7 @@ import {
 } from "@material-ui/core";
 import { withStyles, createStyles, WithStyles } from "@material-ui/core/styles";
 import { ValueDisplay } from "common/components";
-import AwesomeSlider from 'react-awesome-slider';
-import 'react-awesome-slider/dist/styles.css';
 
-const logo = require("./../../../images/logo.jpg");
-const imageStranger = require("./../../../images/series/stranger-things-2.jpg");
 
 interface Props extends WithStyles<typeof styles> {
   product: ProductEntityVm;
