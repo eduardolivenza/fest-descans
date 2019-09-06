@@ -103,7 +103,7 @@ export const ProductCollectionContainerInner = (props: Props) => {
   };
 
   const viewProduct = (productId: string) => {
-    props.history.push(routesLinks.hotelEdit(productId));
+    props.history.push(routesLinks.productView(productId));
   }
 
   React.useEffect(() => {

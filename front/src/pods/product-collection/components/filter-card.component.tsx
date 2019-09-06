@@ -8,7 +8,8 @@ import Slider from '@material-ui/core/Slider';
 
 const useStyles = makeStyles(theme => ({
   card: {
-    marginTop: theme.spacing(1)
+    marginTop: theme.spacing(1),
+    marginRight: theme.spacing(1),
   },
   slider: {
     width: 300,
@@ -27,7 +28,7 @@ interface Props {
 }
 
 function valuetext(value) {
-  return `${value}€`;
+  return value + "€";
 }
 
 export const FilterCard = (props: Props) => {

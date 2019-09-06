@@ -3,7 +3,7 @@ import * as ReactDOM from "react-dom";
 import { HashRouter, Switch, Route } from "react-router-dom";
 import { LoginPage, ProductCollectionPage, RegisterPage, DefaultPage } from "./scenes";
 import { routerSwitchRoutes, SessionProvider } from "core";
-import { HotelEditPage } from "scenes";
+import { ProductViewPage } from "scenes";
 
 ReactDOM.render(
   <SessionProvider>
@@ -29,8 +29,8 @@ ReactDOM.render(
           component={ProductCollectionPage}
         />
         <Route
-          path={routerSwitchRoutes.hotelEdit}
-          component={HotelEditPage}
+          path={routerSwitchRoutes.productView}
+          component={ProductViewPage}
         />
       </Switch>
     </HashRouter>

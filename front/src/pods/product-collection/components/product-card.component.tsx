@@ -10,7 +10,8 @@ import {
   Typography,
   CardActions,
   Chip,
-  Avatar
+  Avatar,
+  CardMedia
 } from "@material-ui/core";
 import { withStyles, createStyles, WithStyles } from "@material-ui/core/styles";
 import { ValueDisplay } from "common/components";
@@ -28,7 +29,7 @@ interface Props extends WithStyles<typeof styles> {
 const styles = (theme: Theme) =>
   createStyles({
     card: {
-      width: "36vh",
+      width: "40vh",
       marginTop: theme.spacing(1),
       marginRight: theme.spacing(1)
     },
@@ -82,6 +83,7 @@ export const ProductCardInner = (props: Props) => {
             justifyContent: "center"
           }}
         >
+          {/*
           <AwesomeSlider style={{ marginBottom: '6vh' }}>
             <div key="img1" style={{ backgroundImage: `url(${product.picture})`, backgroundColor: '#ffffff', backgroundRepeat: 'no-repeat', backgroundSize: 'contain', backgroundPosition: '50% 50%' }} />
             <div key="img2"
@@ -93,7 +95,13 @@ export const ProductCardInner = (props: Props) => {
               data-src={logo}
             />
           </AwesomeSlider>
-
+          */}
+          <CardMedia
+            image={product.picture}
+            title={product.productName}
+            style={{ height: 0, paddingTop: "56.25%" }}
+            onClick={() => viewProduct(product.productIdentifier)}
+          />
           <ValueDisplay
             name="Comfort"
             value={product.comfortLevel}

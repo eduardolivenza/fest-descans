@@ -20,14 +20,14 @@ import { MainMenu } from "./mainMenu.layout";
 import { LoginMenu } from "./loginMenu.layout";
 
 const logo = require("./../images/FEST_COLOR_3.png");
-const drawerWidth = 240;
+const drawerWidth = 25;
 
 const useStyles = makeStyles(theme => ({
   root: {
     display: 'flex',
   },
   toolbar: {
-    paddingRight: 24, // keep right padding when drawer closed
+    paddingRight: '3vh', // keep right padding when drawer closed
   },
   toolbarIcon: {
     display: 'flex',
@@ -45,7 +45,7 @@ const useStyles = makeStyles(theme => ({
   },
   appBarShift: {
     marginLeft: drawerWidth,
-    width: `calc(100% - ${drawerWidth}px)`,
+    width: `calc(100% - ${drawerWidth}vh)`,
     transition: theme.transitions.create(['width', 'margin'], {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.enteringScreen,
@@ -66,7 +66,7 @@ const useStyles = makeStyles(theme => ({
   drawerPaper: {
     position: 'relative',
     whiteSpace: 'nowrap',
-    width: drawerWidth,
+    width: `${drawerWidth}vh`,
     transition: theme.transitions.create('width', {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.enteringScreen,
@@ -157,7 +157,7 @@ const AppLayoutInner: React.FunctionComponent<Props> = (props) => {
             className={clsx(classes.menuButton, open && classes.menuButtonHidden)}>
             <MenuIcon />
           </IconButton>
-          <img src={logo} alt="Logo" height="100" />
+          <img src={logo} alt="Logo" height="100vh" />
           <Typography component="h1" variant="h6" color="inherit" noWrap className={classes.title} />
 
           <Typography className = {classes.login} variant="h6" color="inherit" >
