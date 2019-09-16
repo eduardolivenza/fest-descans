@@ -2,6 +2,7 @@ import * as React from "react";
 import { Menu, MenuItem } from "@material-ui/core";
 import IconButton from "@material-ui/core/IconButton";
 import AccountCircle from "@material-ui/icons/AccountCircle";
+import { SessionContext } from "core";
 
 const menuButtonStyle = {
     marginLeft: -12,
@@ -19,7 +20,7 @@ interface Props {
 export const LoginMenu = (props: Props) => {
 
     const {anchorLoginMenu, openLoginMenu, handleLoginMenu, handleClose, doLoginLogout } = props;
-
+    const session = React.useContext(SessionContext);
     return (
         <div>
             <IconButton
@@ -45,7 +46,7 @@ export const LoginMenu = (props: Props) => {
                 onClose={handleClose}
             >
                 <MenuItem onClick={handleClose}>My account</MenuItem>
-                <MenuItem onClick={doLoginLogout}>Login/Register</MenuItem>
+                <MenuItem onClick={doLoginLogout}> { session.login ? "Logout": "Login/Register"}</MenuItem>
             </Menu>
         </div>
 

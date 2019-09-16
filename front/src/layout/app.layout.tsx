@@ -18,6 +18,7 @@ import NotificationsIcon from '@material-ui/icons/Notifications';
 import { Copyright } from "./copyright";
 import { MainMenu } from "./mainMenu.layout";
 import { LoginMenu } from "./loginMenu.layout";
+import Cookies from "js-cookie";
 
 const logo = require("./../images/FEST_COLOR_3.png");
 const drawerWidth = 25;
@@ -123,8 +124,9 @@ const AppLayoutInner: React.FunctionComponent<Props> = (props) => {
   }
 
   const doLoginLogout = () => {
-    history.push(routesLinks.login);
-  }
+    Cookies.remove("session");
+    history.push("/login");
+  };
 
   const loginContext = React.useContext(SessionContext);
 

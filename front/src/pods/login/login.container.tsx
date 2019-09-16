@@ -1,7 +1,7 @@
 import * as React from "react";
 import { withRouter, RouteComponentProps } from "react-router-dom";
 import { LoginComponent } from "./login.component";
-import { routesLinks, SessionContext } from "core";
+import { routesLinks, SessionContext, getSessionCookie, setSessionCookie } from "core";
 import {
   LoginEntity,
   createEmptyLogin,
@@ -10,11 +10,12 @@ import {
 } from "./login.vm";
 import { validateCredentials } from "./api";
 import { loginFormValidation } from "./login.validation";
+import Cookies from "js-cookie";
 
 interface Props extends RouteComponentProps { }
 
 export const LoginContainerInner = (props: Props) => {
-  const loginContext = React.useContext(SessionContext);
+ 
   const [loginFormErrors, setLoginFormErrors] = React.useState<LoginFormErrors>(
     createDefaultLoginFormErrors()
   );
@@ -24,14 +25,13 @@ export const LoginContainerInner = (props: Props) => {
   );
   const { history } = props;
 
-  // TODO: Excercise refactor this method follow SRP
   const doLogin = () => {
     loginFormValidation.validateForm(credentials).then(formValidationResult => {
       if (formValidationResult.succeeded) {
         validateCredentials(credentials.login, credentials.password).then(
           areValidCredentials => {
             if (areValidCredentials) {
-              loginContext.updateLogin(credentials.login);
+              setSessionCookie( {login: credentials.login});
               history.push(routesLinks.productCollection);
             }
             else {
