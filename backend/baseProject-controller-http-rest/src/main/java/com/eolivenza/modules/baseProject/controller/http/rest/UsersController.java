@@ -8,6 +8,7 @@ import com.eolivenza.modules.baseProject.application.users.queries.ValidateUserC
 import com.eolivenza.modules.baseProject.controller.http.rest.mapper.UsersResourceMapper;
 import com.eolivenza.modules.baseProject.controller.http.rest.resources.SessionResource;
 import com.eolivenza.modules.baseProject.controller.http.rest.resources.UserResource;
+import com.eolivenza.modules.baseProject.controller.http.rest.resources.ValUserResource;
 import com.eolivenza.modules.baseProject.domain.model.user.Session;
 import com.eolivenza.modules.baseProject.domain.model.user.User;
 import io.swagger.annotations.Api;
@@ -21,8 +22,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-
-@Api(value = "Product")
+@Api(value = "Users")
 @RestController
 public class UsersController {
 
@@ -68,9 +68,8 @@ public class UsersController {
     @PostMapping(path = "/users/authenticate")
     @RolesAllowed(BaseProjectGrantPermission.MASTER_FILE_EDITION)
     public SessionResource validateUser(
-            @RequestBody UserResource userResource) {
-        User  user = usersResourceMapper.toFirstType(userResource);
-        ValidateUserCommand command = new ValidateUserCommand(user.getEmail(), user.getPassword());
+            @RequestBody ValUserResource userResource) {
+        ValidateUserCommand command = new ValidateUserCommand(userResource.email, userResource.password);
         Session session = validateUserQueryHandler.apply(command);
         SessionResource sessionResource = new SessionResource();
         sessionResource.token = session.getToken();
