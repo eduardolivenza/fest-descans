@@ -7,6 +7,7 @@ import Button from "@material-ui/core/Button";
 import { createStyles, WithStyles, withStyles } from "@material-ui/core";
 import { LoginEntity as LoginEntityVm, LoginFormErrors } from "./login.vm";
 import { TextFieldForm } from "common/components";
+import { Link } from "react-router-dom";
 
 const styles = theme =>
   createStyles({
@@ -20,18 +21,21 @@ const styles = theme =>
       justifyContent: "center",
       flex: 1,
     },
-    button:{
-      width:"100%",
+    button: {
+      width: "100%",
     }
   });
 
 interface Props extends WithStyles<typeof styles> {
   onLogin: () => void;
   onRegister: () => void;
+  goBack: () => void;
   credentials: LoginEntityVm;
   onUpdateCredentials: (name: keyof LoginEntityVm, value: string) => void;
   loginFormErrors: LoginFormErrors;
 }
+
+
 
 export const LoginComponentInner = (props: Props) => {
   const {
@@ -40,7 +44,8 @@ export const LoginComponentInner = (props: Props) => {
     onRegister,
     credentials,
     onUpdateCredentials,
-    loginFormErrors
+    loginFormErrors,
+    goBack
   } = props;
 
 
@@ -70,12 +75,13 @@ export const LoginComponentInner = (props: Props) => {
               <Button className={classes.button} variant="contained" color="primary" onClick={onLogin}>
                 Login
             </Button>
-            </div>
-            <div className={classes.buttonContainer} >
-              <Button  className={classes.button} variant="contained" color="primary" onClick={onRegister}>
+              </div>
+              <div className={classes.buttonContainer} >
+              <Button className={classes.button} variant="contained" color="primary" onClick={onRegister}>
                 Register new user
             </Button>
             </div>
+            <Link style={{textAlign: "center"}} to={""} onClick={goBack}>Back</Link>
           </div>
         </CardContent>
       </Card>

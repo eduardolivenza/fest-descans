@@ -4,7 +4,6 @@ import {
   WithStyles,
   withStyles
 } from "@material-ui/core/styles";
-import { LookupEntity } from "core";
 import { ProductEntityVm } from "core/dataModel/product-entity.vm";
 import AwesomeSlider from 'react-awesome-slider';
 import 'react-awesome-slider/dist/styles.css';
@@ -32,11 +31,12 @@ export const ProductViewComponentInner = (props: Props) => {
   return (
     <div className={classes.formContainer}>
       <AwesomeSlider style={{ marginBottom: '6vh', maxWidth: "31.25rem" }}>
-        <div key="img1" style={{ backgroundImage: `url(${product.picture})`, backgroundColor: '#ffffff', backgroundRepeat: 'no-repeat', backgroundSize: 'contain', backgroundPosition: '50% 50%' }} />
         <div key="img2"
           style={{ backgroundColor: '#ffffff' }}
           data-src={imageStranger}
         />
+        <div key="img1" style={{ backgroundImage: `url(${product.picture})`, backgroundColor: '#ffffff', backgroundRepeat: 'no-repeat', backgroundSize: 'contain', backgroundPosition: '50% 50%' }} />
+
         <div key="img3"
           style={{ backgroundColor: '#ffffff' }}
           data-src={logo}

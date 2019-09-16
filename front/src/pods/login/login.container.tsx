@@ -56,6 +56,10 @@ export const LoginContainerInner = (props: Props) => {
     history.push(routesLinks.register)
   }
 
+  const goBack = () => {
+    history.goBack();
+  }
+
   const onUpdateCredentialsField = (name, value) => {
     setCredentials({
       ...credentials,
@@ -79,6 +83,7 @@ export const LoginContainerInner = (props: Props) => {
       credentials={credentials}
       onUpdateCredentials={onUpdateCredentialsField}
       loginFormErrors={loginFormErrors}
+      goBack={goBack}
     />
   );
 };
