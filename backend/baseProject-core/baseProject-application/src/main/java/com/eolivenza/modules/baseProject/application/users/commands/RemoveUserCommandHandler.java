@@ -1,10 +1,9 @@
-package com.eolivenza.modules.baseProject.application.users;
+package com.eolivenza.modules.baseProject.application.users.commands;
 
 
 import com.eolivenza.modules.baseProject.application.CommandHandler;
 import com.eolivenza.modules.baseProject.application.annotations.DomainStrictTransactional;
 import com.eolivenza.modules.baseProject.application.repositories.UsersRepository;
-import com.eolivenza.modules.baseProject.domain.model.user.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

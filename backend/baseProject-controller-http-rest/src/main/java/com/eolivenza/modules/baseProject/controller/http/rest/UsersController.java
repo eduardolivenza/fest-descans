@@ -2,11 +2,13 @@ package com.eolivenza.modules.baseProject.controller.http.rest;
 
 import com.eolivenza.modules.baseProject.application.*;
 import com.eolivenza.modules.baseProject.application.security.BaseProjectGrantPermission;
-import com.eolivenza.modules.baseProject.application.users.AddUserCommand;
-import com.eolivenza.modules.baseProject.application.users.RemoveUserCommand;
-import com.eolivenza.modules.baseProject.application.users.ValidateUserCommand;
+import com.eolivenza.modules.baseProject.application.users.commands.AddUserCommand;
+import com.eolivenza.modules.baseProject.application.users.commands.RemoveUserCommand;
+import com.eolivenza.modules.baseProject.application.users.queries.ValidateUserCommand;
 import com.eolivenza.modules.baseProject.controller.http.rest.mapper.UsersResourceMapper;
+import com.eolivenza.modules.baseProject.controller.http.rest.resources.SessionResource;
 import com.eolivenza.modules.baseProject.controller.http.rest.resources.UserResource;
+import com.eolivenza.modules.baseProject.domain.model.user.Session;
 import com.eolivenza.modules.baseProject.domain.model.user.User;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -28,7 +30,7 @@ public class UsersController {
     private final QueryHandler<Class<String>, Optional<User>> getUserQueryHandler;
     private final QueryHandler<Class<Void>, List<User>> getAllUsersQueryHandler;
     private final CommandHandler<AddUserCommand> addUserCommandCommandHandler;
-    private final CommandHandler<ValidateUserCommand> validateUserCommandCommandHandler;
+    private final QueryHandler<ValidateUserCommand, Session> validateUserQueryHandler;
     private final CommandHandler<RemoveUserCommand> removeUserCommandHandler;
 
     @Autowired
@@ -36,13 +38,13 @@ public class UsersController {
             QueryHandler<Class<String>, Optional<User>> getUserQueryHandler,
             UsersResourceMapper usersResourceMapper,
             CommandHandler<AddUserCommand> addUserCommandCommandHandler,
-            CommandHandler<ValidateUserCommand> validateUserCommandCommandHandler,
+            QueryHandler<ValidateUserCommand, Session> validateUserQueryHandler,
             QueryHandler<Class<Void>, List<User>> getAllUsersQueryHandler,
             CommandHandler<RemoveUserCommand> removeUserCommandHandler) {
         this.getUserQueryHandler = getUserQueryHandler;
         this.usersResourceMapper = usersResourceMapper;
         this.addUserCommandCommandHandler = addUserCommandCommandHandler;
-        this.validateUserCommandCommandHandler = validateUserCommandCommandHandler;
+        this.validateUserQueryHandler = validateUserQueryHandler;
         this.getAllUsersQueryHandler = getAllUsersQueryHandler;
         this.removeUserCommandHandler = removeUserCommandHandler;
     }
@@ -65,11 +67,14 @@ public class UsersController {
     @ApiOperation(value = "Validate an user to enter into the system")
     @PostMapping(path = "/users/authenticate")
     @RolesAllowed(BaseProjectGrantPermission.MASTER_FILE_EDITION)
-    public void validateUser(
+    public SessionResource validateUser(
             @RequestBody UserResource userResource) {
         User  user = usersResourceMapper.toFirstType(userResource);
         ValidateUserCommand command = new ValidateUserCommand(user.getEmail(), user.getPassword());
-        validateUserCommandCommandHandler.accept(command);
+        Session session = validateUserQueryHandler.apply(command);
+        SessionResource sessionResource = new SessionResource();
+        sessionResource.token = session.getToken();
+        return sessionResource;
     }
 
     @ApiOperation(value = "Validate an user to enter into the system")

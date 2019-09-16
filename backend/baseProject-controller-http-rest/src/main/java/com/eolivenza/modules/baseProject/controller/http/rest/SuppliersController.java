@@ -2,10 +2,9 @@ package com.eolivenza.modules.baseProject.controller.http.rest;
 
 import com.eolivenza.modules.baseProject.application.CommandHandler;
 import com.eolivenza.modules.baseProject.application.QueryHandler;
-import com.eolivenza.modules.baseProject.application.suppliers.commands.commands.AddSupplierCommand;
+import com.eolivenza.modules.baseProject.application.suppliers.commands.AddSupplierCommand;
 import com.eolivenza.modules.baseProject.controller.http.rest.mapper.SupplierResourceMapper;
 import com.eolivenza.modules.baseProject.controller.http.rest.resources.SupplierResource;
-import com.eolivenza.modules.baseProject.domain.model.products.Product;
 import com.eolivenza.modules.baseProject.domain.model.suppliers.Supplier;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;

@@ -7,7 +7,7 @@ export interface SessionContextProps {
 
 export const setSessionCookie = (session: SessionContextProps): void => {
   Cookies.remove("session");
-  Cookies.set("session", session, { expires: 14 });
+  Cookies.set("session", session, { expires: 0.1 });
 };
 
 export const getSessionCookie: any = () => {
