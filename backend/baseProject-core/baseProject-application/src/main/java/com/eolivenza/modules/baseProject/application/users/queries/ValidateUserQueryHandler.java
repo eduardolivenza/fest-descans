@@ -13,21 +13,20 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 @Named
-public class ValidateUserCommandHandler implements QueryHandler<ValidateUserCommand, Session> {
+public class ValidateUserQueryHandler implements QueryHandler<ValidateUserCommand, Session> {
 
     private final UsersRepository usersRepository;
 
-    private Logger logger = LoggerFactory.getLogger(ValidateUserCommandHandler.class);
+    private Logger logger = LoggerFactory.getLogger(ValidateUserQueryHandler.class);
 
     @Inject
-    public ValidateUserCommandHandler(UsersRepository usersRepository) {
+    public ValidateUserQueryHandler(UsersRepository usersRepository) {
         this.usersRepository = usersRepository;
     }
 
     @DomainStrictTransactional
     @Override
     public Session apply(ValidateUserCommand validateUserCommand) {
-        logger.debug(" Element user validated");
         Session session = null;
         if (usersRepository.exists(validateUserCommand.getEmail())) {
             User currentUser = usersRepository.retrieve(validateUserCommand.getEmail());
@@ -44,9 +43,10 @@ public class ValidateUserCommandHandler implements QueryHandler<ValidateUserComm
         return session;
     }
 
-
     @Override
-    public String getName() { return "Validates user"; }
+    public String getName() {
+        return "Validates user";
+    }
 
 }
 
