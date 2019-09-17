@@ -46,7 +46,7 @@ export const LoginMenu = (props: Props) => {
                 onClose={handleClose}
             >
                 <MenuItem onClick={handleClose}>My account</MenuItem>
-                <MenuItem onClick={doLoginLogout}> { session.login ? "Logout": "Login/Register"}</MenuItem>
+                <MenuItem onClick={doLoginLogout}> { session.email ? "Logout": "Login/Register"}</MenuItem>
             </Menu>
         </div>
 

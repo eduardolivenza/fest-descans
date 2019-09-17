@@ -3,7 +3,7 @@ import { withRouter, RouteComponentProps } from "react-router-dom";
 import { RegisterEntityVm, createRegisterEntity, RegisterFormErrors, createDefaultRegisterFormErrors } from "./register.vm";
 import { RegisterComponent } from "./register.component";
 import { registerFormValidation } from "./register.validation";
-import { registerNewProduct } from "./register.api";
+import { registerNewProduct } from "../../core/api/register.api";
 
 interface Props extends RouteComponentProps { }
 

@@ -4,7 +4,8 @@ import CardHeader from "@material-ui/core/CardHeader";
 import CardContent from "@material-ui/core/CardContent";
 import Button from "@material-ui/core/Button";
 import { createStyles, WithStyles, withStyles } from "@material-ui/core";
-import { LoginEntity as LoginEntityVm, LoginFormErrors } from "./login.vm";
+import { LoginEntityVm} from "core/dataModel/login-entity.vm"
+import { LoginFormErrors } from "./loginFormErrors";
 import { TextFieldForm } from "common/components";
 import { Link } from "react-router-dom";
 
@@ -57,10 +58,10 @@ export const LoginComponentInner = (props: Props) => {
           <div className={classes.formContainer}>
             <TextFieldForm
               label="User e-mail"
-              name="login"
-              value={credentials.login}
+              name="email"
+              value={credentials.email}
               onChange={onUpdateCredentials}
-              error={loginFormErrors.login.errorMessage}
+              error={loginFormErrors.email.errorMessage}
             />
             <TextFieldForm
               label="Password"

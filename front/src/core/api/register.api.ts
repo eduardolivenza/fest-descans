@@ -1,6 +1,6 @@
 import Axios, { AxiosResponse } from "axios";
 import {baseApiUrl} from 'core'
-import { RegisterEntityVm } from "./register.vm"
+import { RegisterEntityVm } from "../../pods/register/register.vm"
 
 const backendUsers = `${baseApiUrl}/users`;
 

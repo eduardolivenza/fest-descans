@@ -3,12 +3,13 @@ import { withRouter, RouteComponentProps } from "react-router-dom";
 import { LoginComponent } from "./login.component";
 import { routesLinks,  setSessionCookie } from "core";
 import {
-  LoginEntity,
-  createEmptyLogin,
+  LoginEntityVm,
+  createEmptyLogin} from "core/dataModel/login-entity.vm";
+import {
   LoginFormErrors,
   createDefaultLoginFormErrors
-} from "./login.vm";
-import { validateCredentials } from "./api";
+} from "./loginFormErrors";
+import { validateCredentials } from "core/api/login.api";
 import { loginFormValidation } from "./login.validation";
 
 interface Props extends RouteComponentProps { }
@@ -19,7 +20,7 @@ export const LoginContainerInner = (props: Props) => {
     createDefaultLoginFormErrors()
   );
 
-  const [credentials, setCredentials] = React.useState<LoginEntity>(
+  const [credentials, setCredentials] = React.useState<LoginEntityVm>(
     createEmptyLogin()
   );
   const { history } = props;
@@ -27,11 +28,11 @@ export const LoginContainerInner = (props: Props) => {
   const doLogin = () => {
     loginFormValidation.validateForm(credentials).then(formValidationResult => {
       if (formValidationResult.succeeded) {
-        validateCredentials(credentials).then(
+        validateCredentials(credentials.email, credentials.password).then(
           areValidCredentials => {
             console.log(areValidCredentials.data.token);
             setSessionCookie({ 
-              login: credentials.login,
+              email: credentials.email,
               token: areValidCredentials.data.token,
             });
             history.push(routesLinks.productCollection);

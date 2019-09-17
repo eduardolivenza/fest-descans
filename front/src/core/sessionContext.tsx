@@ -2,7 +2,7 @@ import * as React from "react";
 import * as Cookies from "js-cookie";
 
 export interface SessionContextProps {
-  login: string;
+  email: string;
   token: string;
 }
 

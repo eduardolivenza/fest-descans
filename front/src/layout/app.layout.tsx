@@ -163,7 +163,7 @@ const AppLayoutInner: React.FunctionComponent<Props> = (props) => {
           <Typography component="h1" variant="h6" color="inherit" noWrap className={classes.title} />
 
           <Typography className = {classes.login} variant="h6" color="inherit" >
-            {loginContext.login}
+            {loginContext.email}
           </Typography>
 
           <LoginMenu

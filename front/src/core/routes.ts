@@ -3,15 +3,19 @@ import { generatePath } from "react-router";
 interface BaseRoutes {
   login : string;
   register: string;
+  userAccount: string;
   productCollection : string;
   productView: string;
+  suppliers: string;
   default: string;
 }
 
 const appBaseRoutes : BaseRoutes = {
   login: '/login',
+  userAccount: '/myaccount',
   productCollection: '/product-collection',
   productView: '/product-view',
+  suppliers: '/suppliers-collection',
   register: '/register',
   default: '/',
 }

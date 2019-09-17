@@ -69,7 +69,7 @@ public class UsersController {
     @RolesAllowed(BaseProjectGrantPermission.MASTER_FILE_EDITION)
     public SessionResource validateUser(
             @RequestBody ValUserResource userResource) {
-        ValidateUserCommand command = new ValidateUserCommand(userResource.login, userResource.password);
+        ValidateUserCommand command = new ValidateUserCommand(userResource.email, userResource.password);
         Session session = validateUserQueryHandler.apply(command);
         SessionResource sessionResource = new SessionResource();
         sessionResource.token = session.getToken();
