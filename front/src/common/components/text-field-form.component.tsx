@@ -34,7 +34,7 @@ export const TextFieldForm: React.StatelessComponent<Props> = props => {
         onChange={onTextFieldChange(name, onChange)}
       />
       <Typography variant="caption" color="error" gutterBottom>
-        {props.error}
+        {error}
       </Typography>
     </>
   );

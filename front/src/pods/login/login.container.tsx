@@ -1,7 +1,7 @@
 import * as React from "react";
 import { withRouter, RouteComponentProps } from "react-router-dom";
 import { LoginComponent } from "./login.component";
-import { routesLinks, SessionContext, getSessionCookie, setSessionCookie } from "core";
+import { routesLinks,  setSessionCookie } from "core";
 import {
   LoginEntity,
   createEmptyLogin,
@@ -10,12 +10,11 @@ import {
 } from "./login.vm";
 import { validateCredentials } from "./api";
 import { loginFormValidation } from "./login.validation";
-import Cookies from "js-cookie";
 
 interface Props extends RouteComponentProps { }
 
 export const LoginContainerInner = (props: Props) => {
- 
+
   const [loginFormErrors, setLoginFormErrors] = React.useState<LoginFormErrors>(
     createDefaultLoginFormErrors()
   );
@@ -28,20 +27,20 @@ export const LoginContainerInner = (props: Props) => {
   const doLogin = () => {
     loginFormValidation.validateForm(credentials).then(formValidationResult => {
       if (formValidationResult.succeeded) {
-        validateCredentials(credentials.login, credentials.password).then(
+        validateCredentials(credentials).then(
           areValidCredentials => {
-            if (areValidCredentials) {
-              setSessionCookie( {login: credentials.login});
-              history.push(routesLinks.productCollection);
-            }
-            else {
-              alert(
-                "invalid credentials, use admin/test, excercise: display a mui snackbar instead of this alert."
-              );
-            }
+            console.log(areValidCredentials.data.token);
+            setSessionCookie({ 
+              login: credentials.login,
+              token: areValidCredentials.data.token,
+            });
+            history.push(routesLinks.productCollection);
           }
-        );
-      } else {
+        ).catch(error => {
+          console.log(error);
+        });
+      } 
+      else {
         alert("error, review the fields");
         const updatedLoginFormErrors = {
           ...loginFormErrors,

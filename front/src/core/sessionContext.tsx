@@ -3,6 +3,7 @@ import * as Cookies from "js-cookie";
 
 export interface SessionContextProps {
   login: string;
+  token: string;
 }
 
 export const setSessionCookie = (session: SessionContextProps): void => {
