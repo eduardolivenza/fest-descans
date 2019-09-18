@@ -1,5 +1,5 @@
-import {ProductEntityApi} from './product-collection.api';
-import {ProductEntityVm} from './product-collection.vm';
+import {ProductEntityApi} from 'core/apiModel/product-entity.api'
+import {ProductEntityVm} from '../dataModel/product-entity.vm';
 import {basePicturesUrl} from 'core';
 
 export const mapFromApiToVm = (apiEntity : ProductEntityApi) : ProductEntityVm => ({

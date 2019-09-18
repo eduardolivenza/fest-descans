@@ -1,7 +1,7 @@
 import * as React from "react";
 
 import { TableRow, TableCell } from "@material-ui/core";
-import { WithStyles, createStyles, Icon, withStyles } from "@material-ui/core";
+import { WithStyles, createStyles, withStyles } from "@material-ui/core";
 import { ProductEntityVm } from "../product-collection.vm";
 
 interface Props extends WithStyles<typeof styles> {
@@ -25,12 +25,14 @@ const ProductRowComponentInner: React.FunctionComponent<Props> = (props) => {
 
     return (
         <TableRow key={product.productIdentifier} onDoubleClick={() => viewProduct(product.productIdentifier)} className={classes.tableRowHover}>
-             <TableCell align="right" >
+             <TableCell align="left" >
                 <img  className={classes.picture} src={product.picture} />
             </TableCell>
-            <TableCell align="right">{product.category}</TableCell>
-            <TableCell align="right">{product.productIdentifier}</TableCell>
-            <TableCell align="right">{product.productDescription}</TableCell>
+            <TableCell align="left">{product.productIdentifier}</TableCell>
+            <TableCell align="left">{product.productName}</TableCell>
+            <TableCell align="left">{product.category}</TableCell>
+            <TableCell align="left">{product.comfortLevel}</TableCell>
+            <TableCell align="left">{product.productDescription}</TableCell>
         </TableRow>
     );
 };

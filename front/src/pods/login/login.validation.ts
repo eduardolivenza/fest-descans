@@ -6,7 +6,7 @@ import {
 
 const loginFormValidationConstraints: ValidationConstraints = {
   fields: {
-    login: [{ validator: Validators.required }],
+    email: [{ validator: Validators.required }],
     password: [{ validator: Validators.required }],
   }
 };

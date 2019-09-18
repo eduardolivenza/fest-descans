@@ -2,7 +2,7 @@ import * as React from "react";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
-import { routesLinks } from "core";
+import { SessionContext, routesLinks } from "core";
 import { withRouter, RouteComponentProps } from "react-router-dom";
 import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
@@ -15,21 +15,20 @@ import Container from '@material-ui/core/Container';
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import NotificationsIcon from '@material-ui/icons/Notifications';
-import { List, ListItem, ListItemIcon, ListItemText } from "@material-ui/core";
-import DashboardIcon from '@material-ui/icons/Dashboard';
-import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
-import PeopleIcon from '@material-ui/icons/People';
-import { Copyright } from "./Copyright";
+import { Copyright } from "./copyright";
+import { MainMenu } from "./mainMenu.layout";
+import { LoginMenu } from "./loginMenu.layout";
+import Cookies from "js-cookie";
 
 const logo = require("./../images/FEST_COLOR_3.png");
-const drawerWidth = 240;
+const drawerWidth = 25;
 
 const useStyles = makeStyles(theme => ({
   root: {
     display: 'flex',
   },
   toolbar: {
-    paddingRight: 24, // keep right padding when drawer closed
+    paddingRight: '3vh', // keep right padding when drawer closed
   },
   toolbarIcon: {
     display: 'flex',
@@ -47,7 +46,7 @@ const useStyles = makeStyles(theme => ({
   },
   appBarShift: {
     marginLeft: drawerWidth,
-    width: `calc(100% - ${drawerWidth}px)`,
+    width: `calc(100% - ${drawerWidth}vh)`,
     transition: theme.transitions.create(['width', 'margin'], {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.enteringScreen,
@@ -62,10 +61,13 @@ const useStyles = makeStyles(theme => ({
   title: {
     flexGrow: 1,
   },
+  login: {
+    marginRight: theme.spacing(4),
+  },
   drawerPaper: {
     position: 'relative',
     whiteSpace: 'nowrap',
-    width: drawerWidth,
+    width: `${drawerWidth}vh`,
     transition: theme.transitions.create('width', {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.enteringScreen,
@@ -89,7 +91,7 @@ const useStyles = makeStyles(theme => ({
     overflow: 'auto',
   },
   container: {
-    paddingTop: theme.spacing(4),
+    paddingTop: theme.spacing(6),
     paddingBottom: theme.spacing(4),
   },
   paper: {
@@ -97,9 +99,6 @@ const useStyles = makeStyles(theme => ({
     display: 'flex',
     overflow: 'auto',
     flexDirection: 'column',
-  },
-  fixedHeight: {
-    height: 240,
   },
 }));
 
@@ -112,6 +111,24 @@ const AppLayoutInner: React.FunctionComponent<Props> = (props) => {
   const classes = useStyles({});
 
   const [open, setOpen] = React.useState(false);
+  const [anchorLoginMenu, setanchorLoginMenu] = React.useState(null);
+
+  const openLoginMenu: boolean = Boolean(anchorLoginMenu);
+
+  const handleClose = () => {
+    setanchorLoginMenu(null);
+  }
+
+  const handleLoginMenu = (event: React.MouseEvent<HTMLElement>) => {
+    setanchorLoginMenu(event.currentTarget);
+  }
+
+  const doLoginLogout = () => {
+    Cookies.remove("session");
+    history.push("/login");
+  };
+
+  const loginContext = React.useContext(SessionContext);
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -129,6 +146,10 @@ const AppLayoutInner: React.FunctionComponent<Props> = (props) => {
     history.push(routesLinks.productCollection);
   }
 
+  const goToSuppliersPage = ()=> {
+    history.push(routesLinks.suppliersCollection);
+  }
+
   return (
     <div className={classes.root}>
       <CssBaseline />
@@ -139,12 +160,23 @@ const AppLayoutInner: React.FunctionComponent<Props> = (props) => {
             color="inherit"
             aria-label="open drawer"
             onClick={handleDrawerOpen}
-            className={clsx(classes.menuButton, open && classes.menuButtonHidden)}
-          >
+            className={clsx(classes.menuButton, open && classes.menuButtonHidden)}>
             <MenuIcon />
           </IconButton>
-          <img src={logo} alt="Logo" height="100" />
+          <img src={logo} alt="Logo" height="100vh" />
           <Typography component="h1" variant="h6" color="inherit" noWrap className={classes.title} />
+
+          <Typography className = {classes.login} variant="h6" color="inherit" >
+            {loginContext.email}
+          </Typography>
+
+          <LoginMenu
+            handleLoginMenu={handleLoginMenu}
+            openLoginMenu={openLoginMenu}
+            handleClose={handleClose}
+            anchorLoginMenu={anchorLoginMenu}
+            doLoginLogout={doLoginLogout}
+          />
           <IconButton color="inherit">
             <Badge badgeContent={4} color="secondary">
               <NotificationsIcon />
@@ -157,42 +189,21 @@ const AppLayoutInner: React.FunctionComponent<Props> = (props) => {
         classes={{
           paper: clsx(classes.drawerPaper, !open && classes.drawerPaperClose),
         }}
-        open={open}
-      >
+        open={open} >
         <div className={classes.toolbarIcon}>
           <IconButton onClick={handleDrawerClose}>
             <ChevronLeftIcon />
           </IconButton>
-
         </div>
-        <div style={{ paddingTop: '35px'}}>
+        <div style={{ paddingTop: '35px' }}>
           <Divider />
-          <List>
-            <ListItem button onClick={goToDefault}>
-              <ListItemIcon>
-                <DashboardIcon />
-              </ListItemIcon>
-              <ListItemText primary="Dashboard" />
-            </ListItem>
-            <ListItem button onClick={goToProductsList}>
-              <ListItemIcon>
-                <ShoppingCartIcon />
-              </ListItemIcon>
-              <ListItemText primary="Products list" />
-            </ListItem>
-            <ListItem button>
-              <ListItemIcon>
-                <PeopleIcon />
-              </ListItemIcon>
-              <ListItemText primary="Customers" />
-            </ListItem>
-          </List>
+          <MainMenu goToDefault={goToDefault} goToProductsList={goToProductsList} goToSuppliersPage={goToSuppliersPage} />
           <Divider />
         </div>
       </Drawer>
       <main className={classes.content}>
         <div className={classes.appBarSpacer} />
-        <Container maxWidth="lg" className={classes.container}>
+        <Container maxWidth="xl" className={classes.container}>
           {props.children}
         </Container>
         <Copyright />

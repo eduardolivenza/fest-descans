@@ -1,4 +1,4 @@
-package com.eolivenza.modules.baseProject.application.suppliers.commands.commands;
+package com.eolivenza.modules.baseProject.application.suppliers.commands;
 
 public class AddSupplierCommand {
 

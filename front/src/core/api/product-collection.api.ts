@@ -1,27 +1,6 @@
 import Axios from "axios";
-import {baseApiUrl} from 'core'
-
-export interface ProductEntityApi {
-  category: string;
-  productIdentifier: string;
-  productName: string;
-  productDescription: string;
-  comfortLevel: number;
-  picture: string;
-  supplier: SupplierApi;
-  sizes: ProductSizeEntityApi[];
-}
-
-export interface SupplierApi {
-  companyId: string;
-  companyName: string;
-  country: string;
-}
-
-export interface ProductSizeEntityApi {
-  size: string;
-  price : string;
-}
+import {baseApiUrl} from 'core';
+import {ProductEntityApi} from 'core/apiModel/product-entity.api';
 
 const getProductsUrl = `${baseApiUrl}/products`;
 

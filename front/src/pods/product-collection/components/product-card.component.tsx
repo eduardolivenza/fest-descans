@@ -10,14 +10,11 @@ import {
   Typography,
   CardActions,
   Chip,
-  Avatar
+  Avatar,
+  CardMedia
 } from "@material-ui/core";
 import { withStyles, createStyles, WithStyles } from "@material-ui/core/styles";
 import { ValueDisplay } from "common/components";
-import AwesomeSlider from 'react-awesome-slider';
-import 'react-awesome-slider/dist/styles.css';
-const logo = require("./../../../images/logo.jpg");
-const imageStranger = require("./../../../images/series/stranger-things-2.jpg");
 
 
 interface Props extends WithStyles<typeof styles> {
@@ -28,8 +25,9 @@ interface Props extends WithStyles<typeof styles> {
 const styles = (theme: Theme) =>
   createStyles({
     card: {
-      width: "500px",
-      marginTop: theme.spacing(1)
+      width: "40vh",
+      marginTop: theme.spacing(1),
+      marginRight: theme.spacing(1)
     },
     chip:
     {
@@ -54,10 +52,8 @@ const manageProductPrice = () => {
   const [currentPrice, setCurrentPrice] = React.useState<string>(
     "--"
   );
-
   return { currentPrice, setCurrentPrice };
 };
-
 
 export const ProductCardInner = (props: Props) => {
 
@@ -69,7 +65,7 @@ export const ProductCardInner = (props: Props) => {
   }
 
   return (
-    <Card className={classes.card}>
+    <Card className={classes.card} key={product.productIdentifier}>
       <CardHeader
         avatar={<Avatar aria-label="Product">{product.category}</Avatar>}
         title={product.productName}
@@ -83,19 +79,25 @@ export const ProductCardInner = (props: Props) => {
             justifyContent: "center"
           }}
         >
-
-          <AwesomeSlider style={{ marginBottom: '40px' }}>
-            <div style={{ backgroundImage: `url(${product.picture})`, backgroundColor: '#ffffff', backgroundRepeat: 'no-repeat', backgroundSize: 'contain', backgroundPosition: '50% 50%' }} />
-            <div
+          {/*
+          <AwesomeSlider style={{ marginBottom: '6vh' }}>
+            <div key="img1" style={{ backgroundImage: `url(${product.picture})`, backgroundColor: '#ffffff', backgroundRepeat: 'no-repeat', backgroundSize: 'contain', backgroundPosition: '50% 50%' }} />
+            <div key="img2"
               style={{ backgroundColor: '#ffffff' }}
               data-src={imageStranger}
             />
-            <div
+            <div key="img3"
               style={{ backgroundColor: '#ffffff' }}
               data-src={logo}
             />
           </AwesomeSlider>
-
+          */}
+          <CardMedia
+            image={product.picture}
+            title={product.productName}
+            style={{ height: 0, paddingTop: "56.25%" }}
+            onClick={() => viewProduct(product.productIdentifier)}
+          />
           <ValueDisplay
             name="Comfort"
             value={product.comfortLevel}
@@ -106,12 +108,12 @@ export const ProductCardInner = (props: Props) => {
           </Typography>
           <Typography variant="subtitle1" gutterBottom>
             Produced by {product.supplier.companyName} - {product.supplier.country}
-          </Typography> 
+          </Typography>
           <div className={classes.chipParent}>
             <div className={classes.chips}>
-            {product.sizes.map(size => (
-              <Chip className={classes.chip} color="primary" label={size.size} onClick={() => onSizeSelected(size)} />
-            ))}
+              {product.sizes.map(size => (
+                <Chip key={product.productIdentifier + size.size} className={classes.chip} color="primary" label={size.size} onClick={() => onSizeSelected(size)} />
+              ))}
             </div>
             <Typography className={classes.price}>{currentPrice}€</Typography>
           </div>

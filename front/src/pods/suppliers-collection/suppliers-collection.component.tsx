@@ -1,17 +1,16 @@
 import * as React from "react";
 
-
 interface Props {
    
 }
 
-export const DefaultComponent = (props: Props) => {
+export const SuppliersCollectionComponent = (props: Props) => {
 
     const { } = props;
 
     return (
         <div>
-           This page is still empty
+           Suppliers page is still empty but different of other pages
         </div>
 
     );

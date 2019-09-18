@@ -2,10 +2,9 @@ package com.eolivenza.modules.baseProject.domain.model.products;
 
 public enum Category {
     BED ("Bed"),
-    PILLOW ("Pillow"),
     SOFA ("Sofa"),
-    MATTRESS ("Mattress");
-
+    MATTRESS ("Mattress"),
+    OTHER ("Others");
 
     /** A human-friendly string value */
     private String description;

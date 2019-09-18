@@ -7,16 +7,16 @@ import io.swagger.annotations.ApiModelProperty;
 public class UserResource {
 
 
-    @ApiModelProperty(required = true, value = "Relates to the highest level customer identification. The CustomerID value can come from a global SAP, customer master record, local identifier", example = "Bayley")
+    @ApiModelProperty(required = true, value = "First name", example = "John")
     public String firstName;
 
-    @ApiModelProperty(required = true, value = "The path on the filesystem where to generate the report file. It must exists.", example = "d:")
+    @ApiModelProperty(required = true, value = "Last name", example = "Doe")
     public String lastName;
 
-    @ApiModelProperty(required = true, value = "The path on the filesystem where to generate the report file. It must exists.", example = "d:")
+    @ApiModelProperty(required = true, value = "Email of the introduced user. It must be unique.", example = "xxx@mail.com")
     public String email;
 
-    @ApiModelProperty(required = true, value = "Unique identifier related to the sales organization or the country affiliate", example = "34")
+    @ApiModelProperty(required = true, value = "Unique identifier related to the sales organization or the country affiliate", example = "123456")
     public String password;
 
     @ApiModelProperty(required = true, value = "Rights and permissions that user will have", example = "administrator")

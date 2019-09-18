@@ -2,11 +2,12 @@ import * as React from "react";
 import Card from "@material-ui/core/Card";
 import CardHeader from "@material-ui/core/CardHeader";
 import CardContent from "@material-ui/core/CardContent";
-import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import { createStyles, WithStyles, withStyles } from "@material-ui/core";
-import { LoginEntity as LoginEntityVm, LoginFormErrors } from "./login.vm";
+import { LoginEntityVm} from "core/dataModel/login-entity.vm"
+import { LoginFormErrors } from "./loginFormErrors";
 import { TextFieldForm } from "common/components";
+import { Link } from "react-router-dom";
 
 const styles = theme =>
   createStyles({
@@ -20,14 +21,15 @@ const styles = theme =>
       justifyContent: "center",
       flex: 1,
     },
-    button:{
-      width:"100%",
+    button: {
+      width: "100%",
     }
   });
 
 interface Props extends WithStyles<typeof styles> {
   onLogin: () => void;
   onRegister: () => void;
+  goBack: () => void;
   credentials: LoginEntityVm;
   onUpdateCredentials: (name: keyof LoginEntityVm, value: string) => void;
   loginFormErrors: LoginFormErrors;
@@ -40,10 +42,9 @@ export const LoginComponentInner = (props: Props) => {
     onRegister,
     credentials,
     onUpdateCredentials,
-    loginFormErrors
+    loginFormErrors,
+    goBack
   } = props;
-
-
 
   return (
     <>
@@ -52,11 +53,11 @@ export const LoginComponentInner = (props: Props) => {
         <CardContent>
           <div className={classes.formContainer}>
             <TextFieldForm
-              label="Name"
-              name="login"
-              value={credentials.login}
+              label="User e-mail"
+              name="email"
+              value={credentials.email}
               onChange={onUpdateCredentials}
-              error={loginFormErrors.login.errorMessage}
+              error={loginFormErrors.email.errorMessage}
             />
             <TextFieldForm
               label="Password"
@@ -70,12 +71,13 @@ export const LoginComponentInner = (props: Props) => {
               <Button className={classes.button} variant="contained" color="primary" onClick={onLogin}>
                 Login
             </Button>
-            </div>
-            <div className={classes.buttonContainer} >
-              <Button  className={classes.button} variant="contained" color="primary" onClick={onRegister}>
+              </div>
+              <div className={classes.buttonContainer} >
+              <Button className={classes.button} variant="contained" color="primary" onClick={onRegister}>
                 Register new user
             </Button>
             </div>
+            <Link style={{textAlign: "center"}} to={""} onClick={goBack}>Back</Link>
           </div>
         </CardContent>
       </Card>

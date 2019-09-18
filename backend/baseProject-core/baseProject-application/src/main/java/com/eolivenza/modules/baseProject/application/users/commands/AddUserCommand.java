@@ -1,4 +1,4 @@
-package com.eolivenza.modules.baseProject.application.users;
+package com.eolivenza.modules.baseProject.application.users.commands;
 
 import com.eolivenza.modules.baseProject.application.Command;
 import com.eolivenza.modules.baseProject.domain.model.user.UserRights;
