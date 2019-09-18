@@ -2,13 +2,8 @@ import * as React from "react";
 import { withRouter, RouteComponentProps } from "react-router-dom";
 import { LoginComponent } from "./login.component";
 import { routesLinks,  setSessionCookie } from "core";
-import {
-  LoginEntityVm,
-  createEmptyLogin} from "core/dataModel/login-entity.vm";
-import {
-  LoginFormErrors,
-  createDefaultLoginFormErrors
-} from "./loginFormErrors";
+import { LoginEntityVm, createEmptyLogin } from "core/dataModel/login-entity.vm";
+import { LoginFormErrors, createDefaultLoginFormErrors } from "./loginFormErrors";
 import { validateCredentials } from "core/api/login.api";
 import { loginFormValidation } from "./login.validation";
 
@@ -28,7 +23,7 @@ export const LoginContainerInner = (props: Props) => {
   const doLogin = () => {
     loginFormValidation.validateForm(credentials).then(formValidationResult => {
       if (formValidationResult.succeeded) {
-        validateCredentials(credentials.email, credentials.password).then(
+        validateCredentials(credentials).then(
           areValidCredentials => {
             console.log(areValidCredentials.data.token);
             setSessionCookie({ 

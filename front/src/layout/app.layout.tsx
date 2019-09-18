@@ -146,6 +146,10 @@ const AppLayoutInner: React.FunctionComponent<Props> = (props) => {
     history.push(routesLinks.productCollection);
   }
 
+  const goToSuppliersPage = ()=> {
+    history.push(routesLinks.suppliersCollection);
+  }
+
   return (
     <div className={classes.root}>
       <CssBaseline />
@@ -193,7 +197,7 @@ const AppLayoutInner: React.FunctionComponent<Props> = (props) => {
         </div>
         <div style={{ paddingTop: '35px' }}>
           <Divider />
-          <MainMenu goToDefault={goToDefault} goToProductsList={goToProductsList} />
+          <MainMenu goToDefault={goToDefault} goToProductsList={goToProductsList} goToSuppliersPage={goToSuppliersPage} />
           <Divider />
         </div>
       </Drawer>

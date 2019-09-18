@@ -6,7 +6,7 @@ interface BaseRoutes {
   userAccount: string;
   productCollection : string;
   productView: string;
-  suppliers: string;
+  suppliersCollection: string;
   default: string;
 }
 
@@ -15,7 +15,7 @@ const appBaseRoutes : BaseRoutes = {
   userAccount: '/myaccount',
   productCollection: '/product-collection',
   productView: '/product-view',
-  suppliers: '/suppliers-collection',
+  suppliersCollection: '/suppliers-collection',
   register: '/register',
   default: '/',
 }

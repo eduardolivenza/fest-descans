@@ -3,7 +3,8 @@ import * as ReactDOM from "react-dom";
 import { HashRouter, Switch, Route } from "react-router-dom";
 import { LoginPage, ProductCollectionPage, RegisterPage, DefaultPage } from "./scenes";
 import { routerSwitchRoutes, SessionContext, getSessionCookie } from "core";
-import { ProductViewPage } from "scenes";
+import { ProductViewPage, SuppliersCollectionPage } from "scenes";
+
 
 const Routes = () => {
 
@@ -41,6 +42,10 @@ const Routes = () => {
           <Route
             path={routerSwitchRoutes.productView}
             component={ProductViewPage}
+          />
+          <Route
+            path={routerSwitchRoutes.suppliersCollection}
+            component={SuppliersCollectionPage}
           />
         </Switch>
       </HashRouter>

@@ -35,8 +35,6 @@ interface Props extends WithStyles<typeof styles> {
   loginFormErrors: LoginFormErrors;
 }
 
-
-
 export const LoginComponentInner = (props: Props) => {
   const {
     classes,
@@ -47,8 +45,6 @@ export const LoginComponentInner = (props: Props) => {
     loginFormErrors,
     goBack
   } = props;
-
-
 
   return (
     <>

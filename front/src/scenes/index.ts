@@ -3,3 +3,4 @@ export * from './product-collection.page';
 export * from './product-view.page';
 export * from './register.page';
 export * from './default.page';
+export * from './suppliers-collection.page';

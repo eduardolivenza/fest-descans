@@ -7,11 +7,12 @@ import PeopleIcon from '@material-ui/icons/People';
 interface Props {
     goToDefault: () => void;
     goToProductsList: () => void;
+    goToSuppliersPage: () => void;
 }
 
 export const MainMenu = (props: Props) => {
 
-    const { goToDefault, goToProductsList } = props;
+    const { goToDefault, goToProductsList, goToSuppliersPage } = props;
 
     return (
         <div>
@@ -20,19 +21,19 @@ export const MainMenu = (props: Props) => {
                     <ListItemIcon>
                         <DashboardIcon />
                     </ListItemIcon>
-                    <ListItemText primary="Dashboard" />
+                    <ListItemText primary="About us" />
                 </ListItem>
                 <ListItem button onClick={goToProductsList}>
                     <ListItemIcon>
                         <ShoppingCartIcon />
                     </ListItemIcon>
-                    <ListItemText primary="Products list" />
+                    <ListItemText primary="Our products" />
                 </ListItem>
-                <ListItem button>
+                <ListItem button onClick={goToSuppliersPage}>
                     <ListItemIcon>
-                        <PeopleIcon />
+                        <PeopleIcon/>
                     </ListItemIcon>
-                    <ListItemText primary="Customers" />
+                    <ListItemText primary="Our suppliers" />
                 </ListItem>
             </List>
         </div>

@@ -1,19 +1,15 @@
 import Axios, { AxiosResponse } from "axios";
 import { baseApiUrl } from 'core'
-import { LoginEntityApi } from  "core/apiModel/login-entity.api";
+import { LoginEntityVm } from "core/dataModel/login-entity.vm";
+import {mapCredentials} from "core/mapper/login-entity.mapper";
 
 const backendUsers = `${baseApiUrl}/users/authenticate`;
 
-export const validateCredentials = (email: string, password: string): Promise<AxiosResponse> => {
+export const validateCredentials = (credentials: LoginEntityVm): Promise<AxiosResponse> => {
 
-  const mapCredentials = (email: string, password: string): LoginEntityApi => (
-  { 
-    email: email,
-    password: password
-  });
 
   const promise = new Promise<AxiosResponse>((resolve, reject) =>
-    Axios.post(backendUsers, mapCredentials(email, password)).then((response) => {
+    Axios.post(backendUsers, mapCredentials(credentials)).then((response) => {
       resolve(response);
     }
   ).catch(error=> reject(error)));
