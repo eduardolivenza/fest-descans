@@ -3,7 +3,8 @@ import { withRouter, RouteComponentProps } from "react-router-dom";
 import { RegisterEntityVm, createRegisterEntity, RegisterFormErrors, createDefaultRegisterFormErrors } from "./register.vm";
 import { RegisterComponent } from "./register.component";
 import { registerFormValidation } from "./register.validation";
-import { registerNewProduct } from "../../core/api/register.api";
+import { registerNewProduct } from "core/api/register.api";
+import { NotificationComponent } from "common/components";
 
 interface Props extends RouteComponentProps { }
 
@@ -12,6 +13,7 @@ export const RegisterContainerInner = (props: Props) => {
   const { history } = props;
   const [registerData, setRegisterData] = React.useState<RegisterEntityVm>(createRegisterEntity());
   const [registerFormErrors, setRegisterFormErrors] = React.useState<RegisterFormErrors>(createDefaultRegisterFormErrors());
+  const [showRegisterSuccesfulMessage, setShowRegisterSuccesfulMessage] = React.useState<boolean>(false);
 
   const registerProduct = () => {
     registerFormValidation.validateForm(registerData).then(formValidationResult => {
@@ -19,8 +21,7 @@ export const RegisterContainerInner = (props: Props) => {
         console.log(" Register approved");
         registerNewProduct(registerData).then(result => {
           if (result.status === 200) {
-            alert("Login succesful");
-            history.goBack();
+            setShowRegisterSuccesfulMessage(true);
           }
         });
       }
@@ -52,13 +53,21 @@ export const RegisterContainerInner = (props: Props) => {
 
 
   return (
-    <RegisterComponent
-      onRegister={registerProduct}
-      onCancel={cancel}
-      regData={registerData}
-      onUpdateRegData={onUpdateRegisterDataFields}
-      registerFormErrors={registerFormErrors}
-    />
+    <>
+      <RegisterComponent
+        onRegister={registerProduct}
+        onCancel={cancel}
+        regData={registerData}
+        onUpdateRegData={onUpdateRegisterDataFields}
+        registerFormErrors={registerFormErrors}
+      />
+      <NotificationComponent
+        message="User registered succesfully"
+        show={showRegisterSuccesfulMessage}
+        onClose={() => {setShowRegisterSuccesfulMessage(false);
+                        history.goBack()}}
+      />
+    </>
   );
 };
 
