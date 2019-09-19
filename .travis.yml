@@ -3,7 +3,8 @@ jdk:
   - openjdk12
 script:
   - cd front
+  - npm install
   - npm test
-  - cd..
+  - cd ..
   - cd backend
   - mvn clean install
