@@ -2,5 +2,8 @@ language: java
 jdk:
   - openjdk12
 script:
+  - cd frontend
+  - npm test
+  - cd..
   - cd backend
   - mvn clean install
