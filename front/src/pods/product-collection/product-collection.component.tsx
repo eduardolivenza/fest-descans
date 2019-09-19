@@ -1,5 +1,5 @@
 import * as React from "react";
-import { ProductEntityVm, ProductEntitySizeVm } from "./product-collection.vm";
+import { ProductEntityVm } from "core/dataModel/product-entity.vm";
 import { ProductCollectionCardsComponent } from "./components/product-collection-cards.component";
 import { ProductCollectionTableComponent } from "./components/product-collection-table.component";
 import { HotelCollectionViewSelectorComponent, Layout } from "./components/product-collection-view-selector.component";

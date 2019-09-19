@@ -1,6 +1,6 @@
 import * as React from "react";
 import Card from "@material-ui/core/Card";
-import { ProductEntityVm, ProductEntitySizeVm } from "../product-collection.vm";
+import { ProductEntityVm, ProductEntitySizeVm } from "core/dataModel/product-entity.vm";
 import { Theme } from "@material-ui/core/styles";
 import CardHeader from "@material-ui/core/CardHeader/CardHeader";
 import IconButton from "@material-ui/core/IconButton/IconButton";

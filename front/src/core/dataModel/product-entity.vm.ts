@@ -1,3 +1,5 @@
+import {SupplierVm} from "core/dataModel/supplier-entity.vm";
+
 export interface ProductEntityVm {
   category: string;
   productIdentifier : string;
@@ -14,11 +16,6 @@ export interface ProductEntitySizeVm {
   price: string;
 }
 
-export interface SupplierVm {
-  companyId: string;
-  companyName: string;
-  country: string;
-}
 
 export const createDefaultProduct = (): ProductEntityVm => ({
   category: "string",

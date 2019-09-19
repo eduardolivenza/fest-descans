@@ -2,7 +2,7 @@ import * as React from "react";
 import { withRouter, RouteComponentProps } from "react-router-dom";
 import { productViewRouteParams } from "core";
 import { ProductViewComponent } from "./product-view.component";
-import { mapFromApiToVm } from "core/mapper/product-collection.mapper";
+import { mapFromApiToVm } from "core/mapper/product-entity.mapper";
 import { ProductEntityVm, createDefaultProduct } from "core/dataModel/product-entity.vm";
 import { getProductView } from "core/api/product-view.api";
 
