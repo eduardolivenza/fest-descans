@@ -20,7 +20,7 @@ import { MainMenu } from "./mainMenu.layout";
 import { LoginMenu } from "./loginMenu.layout";
 import Cookies from "js-cookie";
 
-const logo = require("./../images/FEST_COLOR_3.png");
+const logo = require("public/images/FEST_COLOR_3.png");
 const drawerWidth = 25;
 
 const useStyles = makeStyles(theme => ({

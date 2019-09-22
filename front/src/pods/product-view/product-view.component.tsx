@@ -9,8 +9,8 @@ import AwesomeSlider from 'react-awesome-slider';
 import 'react-awesome-slider/dist/styles.css';
 import { Typography } from "@material-ui/core";
 
-const logo = require("./../../images/logo.jpg");
-const imageStranger = require("./../../images/series/stranger-things-2.jpg");
+const logo = require("public/images/logo.jpg");
+const imageStranger = require("public/images/stranger-things-2.jpg");
 
 const styles = () =>
   createStyles({

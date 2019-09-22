@@ -18,6 +18,8 @@ export const DefaultComponent = () => {
                 <h1>{t('title')}</h1>
             </div>
             <div>{t('description.part2')}</div>
+            <div>{t('description.part3')}</div>
+            <div>normal string</div>
         </>
 
     );
