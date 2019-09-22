@@ -1,5 +1,5 @@
 import * as React from "react";
-import { ProductEntityVm } from "../product-collection.vm";
+import { ProductEntityVm } from "core/dataModel/product-entity.vm";
 import { Table, TableHead, TableRow, TableCell, TableBody } from "@material-ui/core";
 import { WithStyles, createStyles, Icon, withStyles } from "@material-ui/core";
 import { ProductRowComponent } from "./product-tableRow.component";

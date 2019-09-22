@@ -2,7 +2,7 @@ import * as React from "react";
 
 import { TableRow, TableCell } from "@material-ui/core";
 import { WithStyles, createStyles, withStyles } from "@material-ui/core";
-import { ProductEntityVm } from "../product-collection.vm";
+import { ProductEntityVm } from "core/dataModel/product-entity.vm";
 
 interface Props extends WithStyles<typeof styles> {
     product: ProductEntityVm;

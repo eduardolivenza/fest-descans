@@ -1,10 +1,10 @@
 import * as React from "react";
 import { ProductCollectionComponent } from "./product-collection.component";
-import { ProductEntityVm } from "./product-collection.vm";
+import { ProductEntityVm } from "core/dataModel/product-entity.vm";
 import { routesLinks } from "core";
 import { withRouter, RouteComponentProps } from "react-router-dom";
 import { getProductsCollection } from "core/api/product-collection.api";
-import { mapFromApiToVm } from "core/mapper/product-collection.mapper";
+import { mapFromApiToVm } from "core/mapper/product-entity.mapper";
 import { mapFromAToBCollection } from "common";
 import { CheckBoxConfigValue } from "common/components";
 

@@ -1,6 +1,7 @@
 import {ProductEntityApi} from 'core/apiModel/product-entity.api'
 import {ProductEntityVm} from '../dataModel/product-entity.vm';
 import {basePicturesUrl} from 'core';
+import {mapSupplier} from 'core/mapper/supplier-entity.mapper';
 
 export const mapFromApiToVm = (apiEntity : ProductEntityApi) : ProductEntityVm => ({
   category : apiEntity.category,
@@ -10,8 +11,9 @@ export const mapFromApiToVm = (apiEntity : ProductEntityApi) : ProductEntityVm =
   comfortLevel: apiEntity.comfortLevel,
   picture : `${basePicturesUrl}` + "/images/" + apiEntity.productIdentifier,
   sizes: apiEntity.sizes,
-  supplier: apiEntity.supplier,
+  supplier: mapSupplier(apiEntity.supplier),
 });
+
 
 
 

@@ -2,7 +2,7 @@
   "name": "fest-descans-catalog",
   "version": "1.0.0",
   "description": "Online catalog of the company",
-  "main": "index.js",
+  "main": "index.tsx",
   "scripts": {
     "start": "webpack-dev-server  --mode development --inline --hot --open",
     "build": "webpack  --mode development",
@@ -30,6 +30,7 @@
     "@types/redux-mock-store": "^1.0.0",
     "awesome-typescript-loader": "^5.2.1",
     "babel-loader": "^8.0.5",
+    "copy-webpack-plugin": "^5.0.4",
     "css-loader": "^2.1.1",
     "deep-freeze": "0.0.1",
     "enzyme": "^3.9.0",
@@ -57,11 +58,16 @@
     "@material-ui/styles": "^4.0.0",
     "axios": "^0.18.0",
     "form-data": "^2.3.3",
+    "i18next": "^17.0.16",
+    "i18next-browser-languagedetector": "^3.0.3",
+    "i18next-xhr-backend": "^3.1.2",
     "js-cookie": "^2.2.1",
     "lc-form-validation": "^2.0.0",
     "react": "^16.8.6",
     "react-awesome-slider": "^1.0.1",
     "react-dom": "^16.8.6",
-    "react-router-dom": "^5.0.0"
+    "react-i18next": "^10.12.5",
+    "react-router-dom": "^5.0.0",
+    "yarn-install": "^1.0.0"
   }
 }
