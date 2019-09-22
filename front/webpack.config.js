@@ -1,3 +1,4 @@
+var CopyWebpackPlugin = require('copy-webpack-plugin');
 var HtmlWebpackPlugin = require("html-webpack-plugin");
 var MiniCssExtractPlugin = require("mini-css-extract-plugin");
 var webpack = require("webpack");
@@ -11,6 +12,8 @@ module.exports = {
     extensions: [".js", ".ts", ".tsx"],
     alias: {
       // Later on we will add more aliases here
+      config: path.resolve(__dirname, "./config"),
+      public: path.resolve(__dirname, "./public"),
       layout: path.resolve(__dirname, "./src/layout/"),
       scenes: path.resolve(__dirname, "./src/scenes/"),
       core: path.resolve(__dirname, "./src/core/"),
@@ -52,11 +55,22 @@ module.exports = {
         options: {
           name: "assets/img/[name].[ext]?[hash]"
         }
-      }
+      },
+      {
+        test: /\.json$/,
+        use: [
+          {
+            loader: 'file-loader',
+          },
+        ],
+      },
     ]
   },
   plugins: [
     //Generate index.html in /dist => https://github.com/ampedandwired/html-webpack-plugin
+    new CopyWebpackPlugin([
+      {from:'./../public/locales', to:'locales'} 
+  ]), 
     new HtmlWebpackPlugin({
       filename: "index.html", //Name of file in ./dist/
       template: "index.html", //Name of template in ./src

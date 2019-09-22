@@ -1,18 +1,24 @@
 import * as React from "react";
+import { useTranslation } from 'react-i18next';
 
 
-interface Props {
-   
-}
+export const DefaultComponent = () => {
 
-export const DefaultComponent = (props: Props) => {
+    const { t, i18n } = useTranslation();
 
-    const { } = props;
+    const changeLanguage = lng => {
+        i18n.changeLanguage(lng);
+      };
 
     return (
-        <div>
-           This page is still empty
-        </div>
+        <>
+            <button onClick={() => changeLanguage('es')}>es</button>
+            <button onClick={() => changeLanguage('en')}>en</button>
+            <div>
+                <h1>{t('title')}</h1>
+            </div>
+            <div>{t('description.part2')}</div>
+        </>
 
     );
 }
