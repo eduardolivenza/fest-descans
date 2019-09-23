@@ -1,34 +1,45 @@
 package com.eolivenza.modules.baseProject.controller.http.rest;
 
+import com.eolivenza.modules.baseProject.application.images.services.ImageResolver;
 import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.ClassPathResource;
-import org.springframework.core.io.Resource;
+import org.springframework.core.io.InputStreamResource;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.util.StreamUtils;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
-import java.io.IOException;
+import java.io.InputStream;
 
 @RestController
 @Api("Images")
 public class ImagesController {
 
     @Autowired
+    private ImageResolver imageResolver;
+
+    @Autowired
     public ImagesController(){
     }
 
-    @GetMapping(path = "/images/{imageIdentifier}", produces = MediaType.IMAGE_JPEG_VALUE)
-    public ResponseEntity<byte[]> getFileImage(@ApiParam(required = true, value = "External identifier of the picture", example = "sid")  @PathVariable final String imageIdentifier) throws IOException {
-        byte[] bytes = new byte[0];
-        Resource imgFile = new ClassPathResource("image/"+ imageIdentifier +".jpg");
-        bytes = StreamUtils.copyToByteArray(imgFile.getInputStream());
-        return ResponseEntity
-                .ok()
-                .contentType(MediaType.IMAGE_JPEG)
-                .body(bytes);
+
+    @RequestMapping("/image/{predefined-type-name}/{reference}")
+    public ResponseEntity getImage(@PathVariable("predefined-type-name") String predefinedTypeName,
+                                   @PathVariable("reference") String reference) {
+        final HttpHeaders headers = new HttpHeaders();
+        try {
+            headers.setContentType(MediaType.IMAGE_JPEG);
+            InputStream inputStream = imageResolver.resolve(predefinedTypeName, reference);
+            InputStreamResource inputStreamResource = new InputStreamResource(inputStream);
+            return new ResponseEntity(inputStreamResource, headers, HttpStatus.OK);
+        } catch (Exception exception) {
+            headers.setContentType(MediaType.TEXT_HTML);
+            return new ResponseEntity(exception.getMessage(), headers, HttpStatus.BAD_REQUEST);
+        }
     }
 
 }
