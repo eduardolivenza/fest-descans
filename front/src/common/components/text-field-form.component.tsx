@@ -4,7 +4,8 @@ import Typography from "@material-ui/core/Typography/Typography";
 
 interface Props {
   name: string;
-  label: string;
+  placeholder?: string;
+  label?: string;
   onChange: (id : string, value : any) => void;
   value: string;
   error?: string;
@@ -23,11 +24,12 @@ const onTextFieldChange = (
 };
 
 export const TextFieldForm: React.StatelessComponent<Props> = props => {
-  const { name, label, onChange, value, error, type } = props;
+  const { name, label,placeholder, onChange, value, error, type } = props;
   return (
     <>
       <TextField
         label={label}
+        placeholder={placeholder}
         margin="normal"
         value={value}
         type={type}
