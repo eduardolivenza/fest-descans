@@ -47,7 +47,6 @@ public class ProductsController {
     @Autowired
     private  CommandHandler<AddAvailableSizeToProductCommand> addAvailableSizeToProductCommandCommandHandler;
 
-
     @Autowired
     public ProductsController() {
     }

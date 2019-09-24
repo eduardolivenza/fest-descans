@@ -3,6 +3,7 @@ package com.eolivenza.modules.baseProject.application.files;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.InputStream;
 
 public interface ImageStorage {
 
@@ -21,4 +22,6 @@ public interface ImageStorage {
      * @return
      */
     File save(BufferedImage bufferedImage, String fileName) throws RuntimeException;
+
+    void saveFile(InputStream fileContent, String filename);
 }
