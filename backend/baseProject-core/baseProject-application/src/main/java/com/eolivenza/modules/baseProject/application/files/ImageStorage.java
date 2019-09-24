@@ -1,4 +1,4 @@
-package com.eolivenza.modules.baseProject.application.images.services;
+package com.eolivenza.modules.baseProject.application.files;
 
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -20,5 +20,5 @@ public interface ImageStorage {
      * @param fileName The new file name.
      * @return
      */
-    File save(BufferedImage bufferedImage, String fileName) throws Exception;
+    File save(BufferedImage bufferedImage, String fileName) throws RuntimeException;
 }

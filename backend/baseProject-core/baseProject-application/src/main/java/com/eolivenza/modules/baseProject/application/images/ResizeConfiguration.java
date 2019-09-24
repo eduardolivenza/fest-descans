@@ -1,4 +1,4 @@
-package com.eolivenza.modules.baseProject.application.images.services;
+package com.eolivenza.modules.baseProject.application.images;
 
 import com.google.gson.JsonObject;
 

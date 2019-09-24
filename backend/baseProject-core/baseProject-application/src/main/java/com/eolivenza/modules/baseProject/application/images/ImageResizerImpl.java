@@ -1,4 +1,4 @@
-package com.eolivenza.modules.baseProject.application.images.services;
+package com.eolivenza.modules.baseProject.application.images;
 
 import com.google.gson.JsonObject;
 import net.coobird.thumbnailator.Thumbnails;
@@ -13,7 +13,7 @@ public class ImageResizerImpl implements ImageResizer {
     @Autowired
     ResizeConfiguration resizeConfiguration;
 
-    public BufferedImage resize(BufferedImage bufferedImage, String type) throws Exception {
+    public BufferedImage resize(BufferedImage bufferedImage, String type) throws RuntimeException {
         JsonObject configuration = resizeConfiguration.getConfiguration(type);
         if (configuration == null) {
            // throw new ImageResizerException(HttpStatus.INTERNAL_SERVER_ERROR, "Configuration is not available: " + type);
@@ -27,7 +27,7 @@ public class ImageResizerImpl implements ImageResizer {
                     .width(width)
                     .asBufferedImage();
         } catch (IOException exception) {
-            throw new Exception( "Image could not be resized to type: " + type);
+            throw new RuntimeException( "Image could not be resized to type: " + type);
         }
     }
 }
