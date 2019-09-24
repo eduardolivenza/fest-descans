@@ -78,7 +78,6 @@ interface Props extends RouteComponentProps { }
 export const ProductCollectionContainerInner = (props: Props) => {
 
   const { productsCollection, loadProductsCollection, productsCollectionFiltered, setProductsCollectionFiltered, maxPrice } = useProductCollection();
-
   const [ comfortLevelFilterItems, setComfortLevelFilterItems] = React.useState(comfortLevelCheckboxes);
   const [ productTypesFilterItems, setProductTypesFilterItems] = React.useState(productTypesCheckBoxes);
   const [ priceFilter, setPriceFilter] = React.useState([0, maxPrice]);
@@ -104,6 +103,10 @@ export const ProductCollectionContainerInner = (props: Props) => {
 
   const viewProduct = (productId: string) => {
     props.history.push(routesLinks.productView(productId));
+  }
+
+  const editProduct = (productId: string) => {
+    props.history.push(routesLinks.productEdit(productId));
   }
 
   React.useEffect(() => {
@@ -139,6 +142,7 @@ export const ProductCollectionContainerInner = (props: Props) => {
   return <ProductCollectionComponent
     productCollection={productsCollectionFiltered}
     viewProduct={viewProduct}
+    editProduct={editProduct}
     comfortLevelFilterState={comfortLevelFilterItems}
     handleChangeComfortFilter={handleChangeComfortFilter}
     productTypesFilterState={productTypesFilterItems}

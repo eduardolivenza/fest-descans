@@ -1,20 +1,20 @@
 import { FieldValidationResult } from 'lc-form-validation';
-import { HotelEditFormValidation } from './hotel-edit.validation';
+import { ProductEditFormValidation } from './product-edit.validation';
 
-describe('Hotel Edit Validation tests', () => {
+describe('Product edit Validation tests', () => {
     describe('Field Validations =>', () => {
-        it('should invalidate when hotel name does not exist', (done) => {
+        it('should invalidate when productName does not exist', (done) => {
 
             // Arrange
             const viewModel = {
-                name: 'arts',
+                productName: 'arts',
                 city: 'Barcelona',
-                description: 'Description'
+                productDescription: 'productDescription'
             };
 
             // Act
-            HotelEditFormValidation
-                .validateField(viewModel, 'name', "")
+            ProductEditFormValidation
+                .validateField(viewModel, 'productName', "")
                 .then(fieldValidationResult => {
                     // assert
                     expect(fieldValidationResult.errorMessage).toEqual('Please fill in this mandatory field.');
@@ -23,17 +23,18 @@ describe('Hotel Edit Validation tests', () => {
 
         });
 
+        /*
         it('should invalidate when city does not exist', (done) => {
 
             // Arrange
             const viewModel = {
-                name: 'arts',
+                productName: 'arts',
                 city: 'Barcelona',
-                description: 'Description'
+                productDescription: 'productDescription'
             };
 
             // Act
-            HotelEditFormValidation
+            ProductEditFormValidation
                 .validateField(viewModel, 'city', "")
                 .then(fieldValidationResult => {
                     // assert
@@ -43,19 +44,19 @@ describe('Hotel Edit Validation tests', () => {
                 });
 
         });
-
-        it('should invalidate when description does not exist', (done) => {
+        */
+        it('should invalidate when productDescription does not exist', (done) => {
 
             // Arrange
             const viewModel = {
-                name: 'arts',
+                productName: 'arts',
                 city: 'Barcelona',
-                description: 'Description'
+                productDescription: 'productDescription'
             };
 
             // Act
-            HotelEditFormValidation
-                .validateField(viewModel, 'description', "")
+            ProductEditFormValidation
+                .validateField(viewModel, 'productDescription', "")
                 .then(fieldValidationResult => {
                     // assert
                     expect(fieldValidationResult.errorMessage).toEqual('Please fill in this mandatory field.');
@@ -64,18 +65,18 @@ describe('Hotel Edit Validation tests', () => {
 
         });
 
-        it('should validate when name is correct', (done) => {
+        it('should validate when productName is correct', (done) => {
 
             // Arrange
             const viewModel = {
-                name: 'arts',
+                productName: 'arts',
                 city: 'Barcelona',
-                description: 'Description'
+                productDescription: 'productDescription'
             };
 
             // Act
-            HotelEditFormValidation
-                .validateField(viewModel, 'name', "arts")
+            ProductEditFormValidation
+                .validateField(viewModel, 'productName', "arts")
                 .then(fieldValidationResult => {
                     // assert
                     expect(fieldValidationResult.succeeded).toBeTruthy();
@@ -84,17 +85,18 @@ describe('Hotel Edit Validation tests', () => {
 
         });
 
+        /*
         it('should validate when city is correct', (done) => {
 
             // Arrange
             const viewModel = {
-                name: 'arts',
+                productName: 'arts',
                 city: 'Barcelona',
-                description: 'Description'
+                productDescription: 'productDescription'
             };
 
             // Act
-            HotelEditFormValidation
+            ProductEditFormValidation
                 .validateField(viewModel, 'city', "Berlin")
                 .then(fieldValidationResult => {
                     // assert
@@ -103,18 +105,18 @@ describe('Hotel Edit Validation tests', () => {
                 });
 
         });
-
-        it('should validate when description is correct', (done) => {
+        */
+        it('should validate when productDescription is correct', (done) => {
             // Arrange
             const viewModel = {
-                name: 'arts',
+                productName: 'arts',
                 city: 'Barcelona',
-                description: 'Description'
+                productDescription: 'productDescription'
             };
 
             // Act
-            HotelEditFormValidation
-                .validateField(viewModel, 'description', "Description")
+            ProductEditFormValidation
+                .validateField(viewModel, 'productDescription', "productDescription")
                 .then(fieldValidationResult => {
                     // assert
                     expect(fieldValidationResult.succeeded).toBeTruthy();
@@ -123,18 +125,18 @@ describe('Hotel Edit Validation tests', () => {
 
         });
 
-        it('should invalidate when description is less than 10', (done) => {
+        it('should invalidate when productDescription is less than 10', (done) => {
 
             // Arrange
             const viewModel = {
-                name: 'arts',
+                productName: 'arts',
                 city: 'Barcelona',
-                description: 'Description'
+                productDescription: 'productDescription'
             };
 
             // Act
-            HotelEditFormValidation
-                .validateField(viewModel, 'description', "Less 10")
+            ProductEditFormValidation
+                .validateField(viewModel, 'productDescription', "Less 10")
                 .then(fieldValidationResult => {
                     // assert
                     expect(fieldValidationResult.errorMessage).toEqual('The value provided must have at least 10 characters.');
@@ -149,13 +151,13 @@ describe('Hotel Edit Validation tests', () => {
 
             // Arrange
             const viewModel = {
-                name: 'arts',
+                productName: 'arts',
                 city: 'Barcelona',
-                description: 'Description'
+                productDescription: 'productDescription'
             };
 
             // Act
-            HotelEditFormValidation.validateForm(viewModel).then(formValidationResult => {
+            ProductEditFormValidation.validateForm(viewModel).then(formValidationResult => {
                 // assert
                 expect(formValidationResult.succeeded).toBeTruthy();
                 done();
@@ -163,17 +165,17 @@ describe('Hotel Edit Validation tests', () => {
 
         });
 
-        it('should validate when description has more than 250 characters', (done) => {
+        it('should validate when productDescription has more than 250 characters', (done) => {
 
             // Arrange
             const viewModel = {
-                name: 'arts',
+                productName: 'arts',
                 city: 'Barcelona',
-                description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum'
+                productDescription: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum'
             };
 
             // Act
-            HotelEditFormValidation.validateForm(viewModel).then(formValidationResult => {
+            ProductEditFormValidation.validateForm(viewModel).then(formValidationResult => {
                 // assert
                 expect(formValidationResult.succeeded).toBeFalsy();
                 done();
@@ -185,13 +187,13 @@ describe('Hotel Edit Validation tests', () => {
 
             // Arrange
             const viewModel = {
-                name: '',
+                productName: '',
                 city: 'Barcelona',
-                description: 'Description'
+                productDescription: 'productDescription'
             };
 
             // Act
-            HotelEditFormValidation.validateForm(viewModel).then(formValidationResult => {
+            ProductEditFormValidation.validateForm(viewModel).then(formValidationResult => {
                 // assert
                 expect(formValidationResult.succeeded).toBeFalsy();
                 done();

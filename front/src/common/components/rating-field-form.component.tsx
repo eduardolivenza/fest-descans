@@ -17,24 +17,26 @@ const styles = (theme: Theme) =>
   });
 
 interface Props extends WithStyles<typeof styles>{
-  name: string
+  name: string;
+  label: string;
   onChange: (id: string, value: any) => void;
   value: number;
   max: number;
   error?: string;
 }
 
-const onValueFieldChange = (fieldId: string, onChange: (fieldId, value) => void) => value => {
-  onChange(fieldId, value);
+const onValueFieldChange = (  fieldId: string,  onChange: (fieldId, value) => void) => e => {
+  onChange(fieldId, Number(e.target.value));
 };
 
 export const RatingFormInner: React.StatelessComponent<Props> = props => {
-  const { classes, value, max, onChange, name } = props;
+  const { classes, value, max, onChange, name, label } = props;
   return (
     <>
     <div className={classes.ratingComponent}>
-        <Typography>{name}</Typography>
+        <Typography>{label}</Typography>
         <Rating
+          name={name}
           value={value}
           max={max}
           onChange={onValueFieldChange(name, onChange)}

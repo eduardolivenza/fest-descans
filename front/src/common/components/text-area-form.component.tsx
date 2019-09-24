@@ -22,6 +22,7 @@ export const TextAreaForm: React.StatelessComponent<Props> = props => {
   const { name, label, onChange, value, error, rows, rowsMax, placeholder } = props;
   return (
     <>
+      {/*
       <TextField
         placeholder={placeholder}
         label={label}
@@ -32,7 +33,7 @@ export const TextAreaForm: React.StatelessComponent<Props> = props => {
         rows={rows}
         rowsMax={rowsMax}
         onChange={onTextFieldChange(name, onChange)}       
-      />
+      />*/}
       <Typography variant="caption" color="error" gutterBottom>
         {error}
       </Typography>

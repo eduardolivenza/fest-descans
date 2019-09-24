@@ -6,6 +6,7 @@ import { ProductCard } from "./product-card.component"; // on next step we will 
 interface Props extends WithStyles<typeof styles> {
   productCollection: ProductEntityVm[];
   viewProduct: (id: string) => void;
+  editProduct: (id: string) => void;
 }
 
 const styles = () => createStyles({
@@ -18,12 +19,12 @@ const styles = () => createStyles({
 
 export const ProductCollectionCardsComponentInner: React.FunctionComponent<Props> = (props) => {
   
-  const { productCollection, classes, viewProduct } = props;
+  const { productCollection, classes, viewProduct, editProduct} = props;
   
   return (
     <div className={classes.listLayout}>
       {productCollection.map(product => (
-        <ProductCard product={product} key={product.productIdentifier} viewProduct={viewProduct} />
+        <ProductCard product={product} key={product.productIdentifier} viewProduct={viewProduct} editProduct={editProduct}/>
       ))}
     </div>
   );

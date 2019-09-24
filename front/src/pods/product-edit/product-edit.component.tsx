@@ -7,7 +7,7 @@ import {
 } from "@material-ui/core/styles";
 import { TextFieldForm, DropdownForm, TextAreaForm } from "common/components";
 import { Button } from "@material-ui/core";
-import { HotelEntityVm, HotelFormErrors } from "./hotel-edit.vm";
+import { ProductEntityVm, ProductFormErrors } from "core/dataModel/product-entity.vm";
 import { LookupEntity } from "core";
 import { RatingForm } from "common/components";
 
@@ -24,59 +24,61 @@ const styles = (theme: Theme) =>
   });
 
 interface Props extends WithStyles<typeof styles> {
-  hotel: HotelEntityVm;
+  product: ProductEntityVm;
   cities: LookupEntity[];
   onFieldUpdate: (id: string, value: any) => void;
   onSave: () => void;
-  hotelFormErrors: HotelFormErrors;
+  productFormErrors: ProductFormErrors;
 }
 
-export const HotelEditComponentInner = (props: Props) => {
-  const { classes, hotel, cities, onFieldUpdate, onSave, hotelFormErrors } = props;
+export const ProductEditComponentInner = (props: Props) => {
+  const { classes, product, cities, onFieldUpdate, onSave, productFormErrors } = props;
 
   return (
+
+
     <div className={classes.formContainer}>
+      <h1> product edit</h1>
       <TextFieldForm
         label="Name"
-        name="name"
-        value={hotel.name}
+        name="productName"
+        value={product.productName}
         onChange={onFieldUpdate}
-        error={hotelFormErrors.name.errorMessage}
+        error={productFormErrors.productName.errorMessage}
       />
-      {/* for multilanguage support rather use formErrors.name.type */}
-
-      <img className={classes.picture} src={hotel.picture} />
-
       <RatingForm
-        name="rating"
-        value={hotel.rating}
+        label="Comfort level"
+        name="comfortLevel"
+        value={product.comfortLevel}
         max={5}
         onChange={onFieldUpdate}
       />
-
+      {/*  
+     
+      <img className={classes.picture} src={product.picture} />
+      
       <DropdownForm
         name="city"
         label="city"
         onChange={onFieldUpdate}
-        value={hotel.city}
+        value={product.}
         list={cities}
-        error={hotelFormErrors.city.errorMessage}
+        error={productFormErrors.city.errorMessage}
       />
-
+      */}
       <TextAreaForm
         placeholder="Description"
-        name="description"
+        name="productDescription"
         label="description"
-        value={hotel.description}
+        value={product.productDescription}
         onChange={onFieldUpdate}
-        error={hotelFormErrors.description.errorMessage}
+        error={productFormErrors.productDescription.errorMessage}
       />
-
-      <Button variant="contained" color="primary" onClick={onSave}>
+      <Button name="saveButton" variant="contained" color="primary" onClick={onSave}>
         Save
       </Button>
     </div>
   );
 };
 
-export const HotelEditComponent = withStyles(styles)(HotelEditComponentInner);
+export const ProductEditComponent = withStyles(styles)(ProductEditComponentInner);
