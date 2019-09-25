@@ -17,6 +17,8 @@ local.properties
 .settings/
 .loadpath
 .recommenders
+settings.json
+package-lock.json
 
 # External tool builders
 .externalToolBuilders/

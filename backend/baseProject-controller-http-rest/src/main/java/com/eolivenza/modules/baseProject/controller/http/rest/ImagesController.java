@@ -1,9 +1,6 @@
 package com.eolivenza.modules.baseProject.controller.http.rest;
 
-import com.eolivenza.modules.baseProject.application.CommandHandler;
-import com.eolivenza.modules.baseProject.application.CommandLogger;
 import com.eolivenza.modules.baseProject.application.QueryHandler;
-import com.eolivenza.modules.baseProject.application.images.commands.StoreImageCommand;
 import com.eolivenza.modules.baseProject.application.images.queries.ImageCommand;
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,9 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 
-import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
 
@@ -25,8 +20,7 @@ public class ImagesController {
 
     @Autowired
     private QueryHandler<ImageCommand, List<InputStream>> getImageQueryHandler;
-    @Autowired
-    private CommandHandler<StoreImageCommand> storeImageCommandHandler;
+
 
     @Autowired
     public ImagesController(){
@@ -50,16 +44,7 @@ public class ImagesController {
         return responseEntity;
     }
 
-    @PostMapping(value = "/image/upload/{productIdentifier}")
-    public void handleFileUpload(@PathVariable("productIdentifier") String productIdentifier,
-                                 @RequestParam("file") MultipartFile file) {
-        try{
-            StoreImageCommand command = new StoreImageCommand(productIdentifier, file.getOriginalFilename(), file.getInputStream());
-            storeImageCommandHandler.accept(command);
-        } catch ( IOException e) {
-            throw new RuntimeException("Failed to store file " + file.getOriginalFilename(), e);
-        }
-    }
+
 
 
 }

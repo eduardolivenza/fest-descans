@@ -1,14 +1,14 @@
-package com.eolivenza.modules.baseProject.application.images.commands;
+package com.eolivenza.modules.baseProject.application.products.commands.productImages;
 
 import java.io.InputStream;
 
-public class StoreImageCommand {
+public class AddProductImageCommand {
 
     private String productIdentifier;
     private String filename;
     private InputStream fileContent;
 
-    public StoreImageCommand(String productIdentifier, String filename, InputStream fileContent) {
+    public AddProductImageCommand(String productIdentifier, String filename, InputStream fileContent) {
         this.productIdentifier= productIdentifier;
         this.filename = filename;
         this.fileContent = fileContent;

@@ -2,6 +2,7 @@ package com.eolivenza.modules.baseProject.controller.http.rest;
 
 import com.eolivenza.modules.baseProject.application.CommandHandler;
 import com.eolivenza.modules.baseProject.application.QueryHandler;
+import com.eolivenza.modules.baseProject.application.products.commands.productImages.AddProductImageCommand;
 import com.eolivenza.modules.baseProject.application.products.commands.AddProductCommand;
 import com.eolivenza.modules.baseProject.application.products.commands.availableSizes.AddAvailableSizeToProductCommand;
 import com.eolivenza.modules.baseProject.application.security.BaseProjectGrantPermission;
@@ -19,8 +20,10 @@ import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.security.RolesAllowed;
+import java.io.IOException;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -46,6 +49,8 @@ public class ProductsController {
     private CommandHandler<AddProductCommand> addProductCommandHandler;
     @Autowired
     private  CommandHandler<AddAvailableSizeToProductCommand> addAvailableSizeToProductCommandCommandHandler;
+    @Autowired
+    private CommandHandler<AddProductImageCommand> storeImageCommandHandler;
 
     @Autowired
     public ProductsController() {
@@ -101,6 +106,17 @@ public class ProductsController {
             @PathVariable final String productIdentifier) {
         Product product = getProductQueryHandler.apply(productIdentifier);
         return productsResourceMapper.toSecondType(product);
+    }
+
+    @PostMapping(value = "/products/images/{productIdentifier}")
+    public void handleFileUpload(@PathVariable("productIdentifier") String productIdentifier,
+                                 @RequestParam("file") MultipartFile file) {
+        try{
+            AddProductImageCommand command = new AddProductImageCommand(productIdentifier, file.getOriginalFilename(), file.getInputStream());
+            storeImageCommandHandler.accept(command);
+        } catch ( IOException e) {
+            throw new RuntimeException("Failed to store file " + file.getOriginalFilename(), e);
+        }
     }
 
 }
