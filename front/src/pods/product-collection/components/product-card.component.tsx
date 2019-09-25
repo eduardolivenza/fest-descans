@@ -83,7 +83,7 @@ export const ProductCardInner = (props: Props) => {
           }}
         >
           <CardMedia
-            image={product.picture}
+            image={product.thumbnail}
             title={product.productName}
             style={{ height: 0, paddingTop: "56.25%" }}
             onClick={() => viewProduct(product.productIdentifier)}

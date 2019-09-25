@@ -52,7 +52,7 @@ export const ProductEditComponentInner = (props: Props) => {
         max={5}
         onChange={onFieldUpdate}
       />
-      <img className={classes.picture} src={product.picture} />
+      <img className={classes.picture} src={product.thumbnail} />
       {/*  
      
       <DropdownForm

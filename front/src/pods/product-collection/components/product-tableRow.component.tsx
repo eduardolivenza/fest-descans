@@ -26,7 +26,7 @@ const ProductRowComponentInner: React.FunctionComponent<Props> = (props) => {
     return (
         <TableRow key={product.productIdentifier} onDoubleClick={() => viewProduct(product.productIdentifier)} className={classes.tableRowHover}>
              <TableCell align="left" >
-                <img  className={classes.picture} src={product.picture} />
+                <img  className={classes.picture} src={product.thumbnail} />
             </TableCell>
             <TableCell align="left">{product.productIdentifier}</TableCell>
             <TableCell align="left">{product.productName}</TableCell>
