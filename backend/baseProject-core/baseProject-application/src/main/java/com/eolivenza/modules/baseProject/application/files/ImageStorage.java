@@ -23,5 +23,5 @@ public interface ImageStorage {
      */
     File save(BufferedImage bufferedImage, String fileName) throws RuntimeException;
 
-    void saveFile(InputStream fileContent, String filename);
+    boolean saveFile(InputStream fileContent, String filename);
 }

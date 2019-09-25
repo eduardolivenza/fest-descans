@@ -47,6 +47,7 @@ public class AddProductCommandHandler implements CommandHandler<AddProductComman
                 addProductCommand.productDescription,
                 addProductCommand.comfortLevel,
                 addProductCommand.supplier,
+                new HashSet<>(),
                 new HashSet<>()
         );
         addProductCommand.sizes.forEach(size ->

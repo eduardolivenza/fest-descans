@@ -6,6 +6,7 @@ import com.eolivenza.modules.baseProject.controller.http.rest.resources.Supplier
 import com.eolivenza.modules.baseProject.domain.model.products.AvailableProduct;
 import com.eolivenza.modules.baseProject.domain.model.products.Category;
 import com.eolivenza.modules.baseProject.domain.model.products.Product;
+import com.eolivenza.modules.baseProject.domain.model.products.ProductImage;
 import com.eolivenza.modules.baseProject.domain.model.suppliers.Supplier;
 import org.springframework.stereotype.Component;
 
@@ -17,26 +18,38 @@ public class ProductsResourceMapper implements ResourceMapper<Product, ProductRe
 
     private final AvailableProductResourceMapper availableProductResourceMapper;
     private final SupplierResourceMapper supplierResourceMapper;
+    private final ImageResourceMapper imageResourceMapper;
 
-    public ProductsResourceMapper(AvailableProductResourceMapper availableProductResourceMapper, SupplierResourceMapper supplierResourceMapper) {
+    public ProductsResourceMapper(AvailableProductResourceMapper availableProductResourceMapper, SupplierResourceMapper supplierResourceMapper, ImageResourceMapper imageResourceMapper) {
         this.availableProductResourceMapper = availableProductResourceMapper;
         this.supplierResourceMapper = supplierResourceMapper;
+        this.imageResourceMapper = imageResourceMapper;
     }
 
     @Override
     public Product toFirstType(ProductResource object) {
         return new Product(
-                Category.valueOf(object.category),
-                object.identifier,
-                object.productName,
-                object.productDescription,
-                object.comfortLevel,
-                null,
-                new HashSet<AvailableProduct>());
+            Category.valueOf(object.category),
+            object.identifier,
+            object.productName,
+            object.productDescription,
+            object.comfortLevel,
+            null,
+            new HashSet<AvailableProduct>(),
+            new HashSet<ProductImage>());
     }
 
     @Override
     public ProductResource toSecondType(Product object) {
-        return new ProductResource(object.getUuid().toString(), object.getCategory().name(), object.getProductIdentifier(), object.getProductName(), object.getDescription(), object.getComfortLevel(), supplierResourceMapper.toSecondType(object.getSupplier()) , object.getAvailableProducts().stream().map(availableProductResourceMapper::toSecondType).collect(Collectors.toSet()));
+        return new ProductResource(
+                object.getUuid().toString(),
+                object.getCategory().name(),
+                object.getProductIdentifier(),
+                object.getProductName(),
+                object.getDescription(), object.getComfortLevel(),
+                supplierResourceMapper.toSecondType(object.getSupplier()),
+                object.getAvailableProducts().stream().map(availableProductResourceMapper::toSecondType).collect(Collectors.toSet()),
+                object.getProductImages().stream().map(imageResourceMapper::toSecondType).collect(Collectors.toSet())
+        );
     }
 }

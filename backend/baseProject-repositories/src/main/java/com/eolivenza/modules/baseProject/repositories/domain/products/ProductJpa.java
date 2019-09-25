@@ -1,6 +1,7 @@
 package com.eolivenza.modules.baseProject.repositories.domain.products;
 
 import com.eolivenza.modules.baseProject.domain.model.products.Category;
+import com.eolivenza.modules.baseProject.repositories.domain.products.productImages.ProductImageJpa;
 import com.eolivenza.modules.baseProject.repositories.domain.products.sizes.AvailableProductSizeJpa;
 import com.eolivenza.modules.baseProject.repositories.domain.suppliers.SupplierJpa;
 
@@ -34,11 +35,14 @@ public class ProductJpa {
     @OneToMany(orphanRemoval = true, cascade = CascadeType.ALL, mappedBy = "productJpa", fetch = FetchType.EAGER)
     private Set<AvailableProductSizeJpa> productSizes;
 
+    @OneToMany(orphanRemoval = true, cascade = CascadeType.ALL, mappedBy = "productJpa", fetch = FetchType.EAGER)
+    private Set<ProductImageJpa> productImages;
+
     public ProductJpa() {
         //JPA demands it
     }
 
-    public ProductJpa(String uuid, Category categoryJpa, String productIdentifier, String productName, String description, Integer comfortLevel, SupplierJpa supplierJpa, Set<AvailableProductSizeJpa> productSizes ) {
+    public ProductJpa(String uuid, Category categoryJpa, String productIdentifier, String productName, String description, Integer comfortLevel, SupplierJpa supplierJpa, Set<AvailableProductSizeJpa> productSizes, Set<ProductImageJpa>imagesList ) {
         this.uuid = uuid;
         this.categoryJpa = categoryJpa;
         this.productIdentifier = productIdentifier;
@@ -47,6 +51,7 @@ public class ProductJpa {
         this.comfortLevel = comfortLevel;
         this.supplier = supplierJpa;
         this.productSizes = productSizes;
+        this.productImages = imagesList;
     }
 
     public String getUuid() {
@@ -111,5 +116,13 @@ public class ProductJpa {
 
     public void setSupplier(SupplierJpa supplier) {
         this.supplier = supplier;
+    }
+
+    public Set<ProductImageJpa> getProductImages() {
+        return productImages;
+    }
+
+    public void setProductImages(Set<ProductImageJpa> productImages) {
+        this.productImages = productImages;
     }
 }

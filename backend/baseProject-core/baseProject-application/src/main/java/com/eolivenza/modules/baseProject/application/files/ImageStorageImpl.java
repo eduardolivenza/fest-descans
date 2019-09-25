@@ -44,11 +44,12 @@ public class ImageStorageImpl implements ImageStorage {
         }
     }
 
-    public void saveFile(InputStream fileContent, String filename){
+    public boolean saveFile(InputStream fileContent, String filename){
         try {
             Files.copy(fileContent, this.uploadLocation.resolve(filename), StandardCopyOption.REPLACE_EXISTING);
+            return true;
         } catch (IOException e) {
-            e.printStackTrace();
+            return false;
         }
     }
 

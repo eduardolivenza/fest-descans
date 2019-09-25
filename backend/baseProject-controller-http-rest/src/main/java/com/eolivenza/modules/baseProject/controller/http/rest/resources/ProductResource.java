@@ -32,9 +32,12 @@ public class ProductResource {
     @ApiModelProperty(required = false)
     public Set<AvailableSizeResource> sizes;
 
+    @ApiModelProperty(required = false)
+    public Set<String> images;
+
     public ProductResource(){}
 
-    public ProductResource(String identifier, String category, String productIdentifier, String productName, String productDescription, Integer comfortLevel, SupplierResource supplierResource, Set<AvailableSizeResource> sizes) {
+    public ProductResource(String identifier, String category, String productIdentifier, String productName, String productDescription, Integer comfortLevel, SupplierResource supplierResource, Set<AvailableSizeResource> sizes, Set<String> images) {
         this.identifier = identifier;
         this.category = category;
         this.productIdentifier = productIdentifier;
@@ -43,9 +46,10 @@ public class ProductResource {
         this.sizes = sizes;
         this.comfortLevel = comfortLevel;
         this.supplier = supplierResource;
+        this.images = images;
     }
 
-    public ProductResource( String category, String productIdentifier,  String productName, String productDescription,  Integer comfortLevel,  SupplierResource supplierResource, Set<AvailableSizeResource> sizes) {
+    public ProductResource( String category, String productIdentifier,  String productName, String productDescription,  Integer comfortLevel,  SupplierResource supplierResource, Set<AvailableSizeResource> sizes, Set<String> images) {
         this.category = category;
         this.productIdentifier = productIdentifier;
         this.productName = productName;
@@ -53,5 +57,6 @@ public class ProductResource {
         this.comfortLevel = comfortLevel;
         this.supplier = supplierResource;
         this.sizes = sizes;
+        this.images = images;
     }
 }
