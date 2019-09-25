@@ -9,6 +9,7 @@ export interface ProductEntityVm {
   sizes: ProductEntitySizeVm[];
   supplier: SupplierVm;
   comfortLevel: number;
+  pictures: string[];
   picture: string;
   thumbnail: string;
 }
@@ -27,6 +28,7 @@ export const createDefaultProduct = (): ProductEntityVm => ({
   sizes: [],
   supplier: null,
   comfortLevel: 3,
+  pictures: [],
   picture: "",
   thumbnail: "",
 });

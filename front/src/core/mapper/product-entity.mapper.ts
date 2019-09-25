@@ -11,9 +11,19 @@ export const mapFromApiToVm = (apiEntity : ProductEntityApi) : ProductEntityVm =
   comfortLevel: apiEntity.comfortLevel,
   picture :   `${basePicturesUrl}` + "/image/poster/" + apiEntity.productIdentifier + ".jpg",
   thumbnail : `${basePicturesUrl}` + "/image/thumbnail/" + apiEntity.productIdentifier + ".jpg",
+  pictures: formatPictures(apiEntity.images),
   sizes: apiEntity.sizes,
   supplier: mapSupplier(apiEntity.supplier),
 });
+
+const formatPictures = ( filenames: string[]): string[] => {
+  let pictures: string[] = [];
+  filenames.map( filename => {
+      pictures.push(`${basePicturesUrl}` + "/image/poster/" + filename);
+    }
+  )
+  return pictures;
+}
 
 
 
