@@ -30,11 +30,14 @@ public class Product extends Entity<Product> {
     @NotNull
     private Set<@NotBlank AvailableProduct> availableProducts;
 
-    public Product(Category category, String productIdentifier, String productName, String description,  Integer comfortLevel, Supplier supplier, HashSet<AvailableProduct> availableProducts){
-        this(UUID.randomUUID(), category, productIdentifier, productName, description, comfortLevel, supplier, availableProducts);
+    @NotNull
+    private Set<@NotBlank ProductImage> productImages;
+
+    public Product(Category category, String productIdentifier, String productName, String description,  Integer comfortLevel, Supplier supplier, HashSet<AvailableProduct> availableProducts, Set<ProductImage> productImages){
+        this(UUID.randomUUID(), category, productIdentifier, productName, description, comfortLevel, supplier, availableProducts, productImages);
     }
 
-    public Product(UUID uuid,  Category category, String productIdentifier, String productName, String description,  Integer comfortLevel, Supplier supplier, Set<AvailableProduct> availableProducts){
+    public Product(UUID uuid,  Category category, String productIdentifier, String productName, String description,  Integer comfortLevel, Supplier supplier, Set<AvailableProduct> availableProducts, Set<ProductImage> productImages){
        this.uuid = uuid;
        this.category = category;
        this.productIdentifier= productIdentifier;
@@ -43,6 +46,7 @@ public class Product extends Entity<Product> {
        this.comfortLevel = comfortLevel;
        this.supplier = supplier;
        this.availableProducts = availableProducts;
+       this.productImages = productImages;
     }
 
     public UUID getUuid() {
@@ -111,6 +115,22 @@ public class Product extends Entity<Product> {
         this.supplier = supplier;
     }
 
+    public Set<ProductImage> getProductImages() {
+        return productImages;
+    }
+
+    public void setProductImages(Set<ProductImage> productImages) {
+        this.productImages = productImages;
+    }
+
+    public void addAvailableSize(AvailableProduct availableProduct) {
+        this.availableProducts.add(availableProduct);
+    }
+
+    public void addProductImage(ProductImage productImage) {
+        this.productImages.add(productImage);
+    }
+
     @Override
     public int hashCodeCalculation() {
         return super.hashCode();
@@ -119,9 +139,5 @@ public class Product extends Entity<Product> {
     @Override
     public boolean hasSameIdentity(Product other) {
         return super.equals(other) && hasSameIdentity((Product) other);
-    }
-
-    public void addAvailableSize(AvailableProduct availableProduct) {
-        this.availableProducts.add(availableProduct);
     }
 }

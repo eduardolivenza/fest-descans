@@ -18,7 +18,7 @@
       "@core": ["./core/*"],
       "@pods": ["./pods/*"],
       "@common": ["./common/*"],
-      "@images": ["./images/*"],
+      "@images": ["./images/*"]
     }
   },
   "compileOnSave": false,

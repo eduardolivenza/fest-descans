@@ -5,14 +5,14 @@ import {
 } from "lc-form-validation";
 import { validateValueMatchValidator } from "common/validators";
 
-const HotelEditFormValidationConstraints: ValidationConstraints = {
+const ProductEditFormValidationConstraints: ValidationConstraints = {
     fields: {
-        name: [{ validator: Validators.required }],
-        city: [{ 
+        productName: [{ validator: Validators.required }],
+       /* city: [{ 
                  validator: validateValueMatchValidator, 
                  customParams: {stringToMatch: 'No city selected'} 
-              }],
-        description: [
+              }],*/
+        productDescription: [
             { validator: Validators.required },
             {
                 validator: Validators.maxLength,
@@ -26,6 +26,6 @@ const HotelEditFormValidationConstraints: ValidationConstraints = {
     }
 };
 
-export const HotelEditFormValidation = createFormValidation(
-    HotelEditFormValidationConstraints
+export const ProductEditFormValidation = createFormValidation(
+    ProductEditFormValidationConstraints
 );

@@ -5,7 +5,7 @@ import { placeholder } from "@babel/types";
 
 interface Props {
   name: string;
-  label: string;
+  label?: string;
   placeholder?: string;
   onChange: (id : string, value : any) => void;
   value: string;
@@ -18,21 +18,23 @@ const onTextFieldChange = (fieldId: string, onChange: (fieldId, value) => void) 
   onChange(fieldId, e.target.value);
 };
 
-export const TextAreaForm: React.StatelessComponent<Props> = props => {
+export const TextAreaForm = props => {
+  
   const { name, label, onChange, value, error, rows, rowsMax, placeholder } = props;
   return (
     <>
-      <TextField
-        placeholder={placeholder}
-        label={label}
-        margin="normal"
+    
+      <TextField 
+        id={name}
+        label={label} 
+        multiline
+        rows={rows? rows: TextAreaForm.defaultProps.rows}
         value={value}
-        type="text"
-        multiline={true}
-        rows={rows}
-        rowsMax={rowsMax}
-        onChange={onTextFieldChange(name, onChange)}       
+        margin="normal"
+        placeholder={placeholder}
+        onChange={onTextFieldChange(name, onChange)}  
       />
+      
       <Typography variant="caption" color="error" gutterBottom>
         {error}
       </Typography>
@@ -41,6 +43,6 @@ export const TextAreaForm: React.StatelessComponent<Props> = props => {
 };
 
 TextAreaForm.defaultProps = {
-  rows: 3,
+  rows: 1,
   rowsMax: 5,
 }

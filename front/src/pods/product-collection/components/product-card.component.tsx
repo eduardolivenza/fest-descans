@@ -5,6 +5,7 @@ import { Theme } from "@material-ui/core/styles";
 import CardHeader from "@material-ui/core/CardHeader/CardHeader";
 import IconButton from "@material-ui/core/IconButton/IconButton";
 import DetailsIcon from "@material-ui/icons/details";
+import EditIcon from "@material-ui/icons/edit";
 import {
   CardContent,
   Typography,
@@ -15,11 +16,12 @@ import {
 } from "@material-ui/core";
 import { withStyles, createStyles, WithStyles } from "@material-ui/core/styles";
 import { ValueDisplay } from "common/components";
-
+import { SessionContext } from "core";
 
 interface Props extends WithStyles<typeof styles> {
   product: ProductEntityVm;
   viewProduct: (id: string) => void;
+  editProduct: (id: string) => void;
 }
 
 const styles = (theme: Theme) =>
@@ -57,8 +59,9 @@ const manageProductPrice = () => {
 
 export const ProductCardInner = (props: Props) => {
 
-  const { product, classes, viewProduct } = props;
+  const { product, classes, viewProduct, editProduct } = props;
   const { currentPrice, setCurrentPrice } = manageProductPrice();
+  const session = React.useContext(SessionContext);
 
   const onSizeSelected = (size: ProductEntitySizeVm) => {
     setCurrentPrice(size.price);
@@ -79,19 +82,6 @@ export const ProductCardInner = (props: Props) => {
             justifyContent: "center"
           }}
         >
-          {/*
-          <AwesomeSlider style={{ marginBottom: '6vh' }}>
-            <div key="img1" style={{ backgroundImage: `url(${product.picture})`, backgroundColor: '#ffffff', backgroundRepeat: 'no-repeat', backgroundSize: 'contain', backgroundPosition: '50% 50%' }} />
-            <div key="img2"
-              style={{ backgroundColor: '#ffffff' }}
-              data-src={imageStranger}
-            />
-            <div key="img3"
-              style={{ backgroundColor: '#ffffff' }}
-              data-src={logo}
-            />
-          </AwesomeSlider>
-          */}
           <CardMedia
             image={product.picture}
             title={product.productName}
@@ -120,6 +110,11 @@ export const ProductCardInner = (props: Props) => {
         </div>
       </CardContent>
       <CardActions disableSpacing>
+        { session.email ? (
+         <IconButton aria-label="Edit" onClick={() => editProduct(product.productIdentifier)}>
+          <EditIcon />
+        </IconButton>
+        ): ""}
         <IconButton aria-label="More information" onClick={() => viewProduct(product.productIdentifier)}>
           <DetailsIcon />
         </IconButton>

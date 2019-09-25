@@ -1,66 +1,64 @@
 import * as React from "react";
 import { withRouter, RouteComponentProps } from "react-router-dom";
 import { productViewRouteParams } from "core";
-import { HotelEditComponent } from "./hotel-edit.component";
-import { HotelEntityVm, createDefaultHotel, HotelFormErrors, createDefaultHotelFormErrors } from "./hotel-edit.vm";
+import { ProductEditComponent } from "./product-edit.component";
 import { citiesLookup } from "core";
-import { mapFromApiToVm } from "./hotel-edit.mapper";
-import { getHotelEdit } from './hotel-edit.api';
 import { FormValidationResult } from "lc-form-validation";
-import { HotelEditFormValidation } from "./hotel-edit.validation";
+import { ProductEditFormValidation } from "./product-edit.validation";
 import { NotificationComponent } from "common/components";
+import { ProductEntityVm, createDefaultProduct, ProductFormErrors, createDefaultProductFormErrors } from "core/dataModel/product-entity.vm";
+import { getProductView } from "core/api/product-view.api";
+import { mapFromApiToVm } from "core/mapper/product-entity.mapper";
 
 interface Props extends RouteComponentProps {}
 
-const useHotelEdit = () => {
-  const [hotel, setHotel] = React.useState<HotelEntityVm>(
-    createDefaultHotel()
+const useProductEdit = () => {
+
+  const [product, setProduct] = React.useState<ProductEntityVm>(
+    createDefaultProduct()
   );
 
-  
-  const loadHotelEdit = (id : number) =>
-      getHotelEdit(id).then(result =>
-          setHotel(mapFromApiToVm(result))
+  const loadProductEdit = (id: number) =>
+    getProductView(id).then(result =>
+      setProduct(mapFromApiToVm(result))
     );
 
-  return { hotel, setHotel, loadHotelEdit };
+  return { product, setProduct, loadProductEdit };
 };
 
 interface Props extends RouteComponentProps { }
 
-const HotelEditContainerInner = (props: Props) => {
+const ProductEditContainerInner = (props: Props) => {
+
   const [cities] = React.useState(citiesLookup);
-  const {hotel, setHotel, loadHotelEdit} = useHotelEdit();
-  
-
-  const [hotelFormErrors, setHotelFormErrors] = React.useState<HotelFormErrors>(
-    createDefaultHotelFormErrors()
+  const {product, setProduct, loadProductEdit} = useProductEdit();
+  const [productFormErrors, setProductFormErrors] = React.useState<ProductFormErrors>(
+    createDefaultProductFormErrors()
   );
-
   const [showValidationFailedMessage, setShowValidationFailedMessage] = React.useState(false);
 
   React.useEffect(() => {
-    loadHotelEdit(props.match.params[productViewRouteParams.id]);
+    loadProductEdit(props.match.params[productViewRouteParams.id]);
   }, []);
 
-  const onFieldUpdate = (fieldName: keyof HotelEntityVm, value: any) => {
-    setHotel({
-      ...hotel,
+  const onFieldUpdate = (fieldName: keyof ProductEntityVm, value: any) => {
+    setProduct({
+      ...product,
       [fieldName]: value
     });
 
-    HotelEditFormValidation
-      .validateField(hotel, fieldName, value)
+    ProductEditFormValidation
+      .validateField(product, fieldName, value)
       .then(fieldValidationResult => {
-        setHotelFormErrors({
-          ...hotelFormErrors,
+        setProductFormErrors({
+          ...productFormErrors,
           [fieldName]: fieldValidationResult
         });
       });
   };
 
   const doSave = () => {
-    HotelEditFormValidation.validateForm(hotel).then(formValidationResult => {
+    ProductEditFormValidation.validateForm(product).then(formValidationResult => {
       handleFormValidation(formValidationResult);
     });
   }
@@ -79,21 +77,21 @@ const HotelEditContainerInner = (props: Props) => {
 
   const showErrorNotification = (formValidationResult: FormValidationResult) => {
     const updateHotelFormErrors = {
-      ...hotelFormErrors,
+      ...productFormErrors,
       ...formValidationResult.fieldErrors
     };
-    setHotelFormErrors(updateHotelFormErrors);
+    setProductFormErrors(updateHotelFormErrors);
     setShowValidationFailedMessage(true);
   }
 
   return (
     <>
-      <HotelEditComponent
-        hotel={hotel}
+      <ProductEditComponent
+        product={product}
         cities={cities}
         onFieldUpdate={onFieldUpdate}
         onSave={doSave}
-        hotelFormErrors={hotelFormErrors}
+        productFormErrors={productFormErrors}
       />
       <NotificationComponent
                 message="The form contains errors, please check"
@@ -104,4 +102,6 @@ const HotelEditContainerInner = (props: Props) => {
   );
 };
 
-export const HotelEditContainer = withRouter(HotelEditContainerInner);
+export const ProductEditContainer = withRouter(ProductEditContainerInner);
+
+

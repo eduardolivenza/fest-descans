@@ -10,6 +10,7 @@ import { CheckBoxConfigValue } from "common/components";
 interface Props {
   productCollection: ProductEntityVm[];
   viewProduct: (id: string) => void;
+  editProduct: (id: string) => void;
   layout?: Layout;
   handleChangeComfortFilter: (name: string, value: boolean) => void;
   comfortLevelFilterState: CheckBoxConfigValue[];
@@ -25,6 +26,7 @@ export const ProductCollectionComponent: React.FunctionComponent<Props> = (props
   const { 
     productCollection,
     viewProduct,
+    editProduct,
     layout,
     handleChangeComfortFilter,
     handleProductTypesFilter,
@@ -38,7 +40,7 @@ export const ProductCollectionComponent: React.FunctionComponent<Props> = (props
 
   let hotelCollectionComponent;
   if (componentLayout === Layout.Card) {
-    hotelCollectionComponent = <ProductCollectionCardsComponent productCollection={productCollection} viewProduct={viewProduct} />;
+    hotelCollectionComponent = <ProductCollectionCardsComponent productCollection={productCollection} viewProduct={viewProduct} editProduct={editProduct}/>;
   } else if (componentLayout === Layout.Table) {
     hotelCollectionComponent = <ProductCollectionTableComponent productCollection={productCollection} viewProduct={viewProduct} />;
   }

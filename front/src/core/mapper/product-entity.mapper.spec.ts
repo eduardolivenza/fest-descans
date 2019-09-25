@@ -16,7 +16,7 @@ describe('Product entity mapper tests', () => {
             country: "string",
           },
           comfortLevel: 4,
-          picture: "string",
+          images: [],
         };
 
         // Act

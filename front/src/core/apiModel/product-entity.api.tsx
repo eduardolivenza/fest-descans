@@ -6,7 +6,7 @@ export interface ProductEntityApi {
     productName: string;
     productDescription: string;
     comfortLevel: number;
-    picture: string;
+    images: string[];
     supplier: SupplierApi;
     sizes: ProductSizeEntityApi[];
   }
