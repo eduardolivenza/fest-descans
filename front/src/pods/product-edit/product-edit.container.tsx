@@ -63,7 +63,13 @@ const ProductEditContainerInner = (props: Props) => {
   }
 
   const onConfirmSubmit =() => {
-    postImageToProduct(product.productIdentifier, file);
+    postImageToProduct(product.productIdentifier, file).then(
+      imagePosted => {
+        loadProductEdit(props.match.params[productViewRouteParams.id]);
+      }
+    ).catch(error => {
+      console.log(error);
+    });
   }
 
   const onChangeFile = (file:File) => {
@@ -73,7 +79,8 @@ const ProductEditContainerInner = (props: Props) => {
   const handleFormValidation = (formValidation: FormValidationResult) => {
     if (formValidation.succeeded) {
       //doSaveServerRequest();
-    } else {
+    } 
+    else {
       showErrorNotification(formValidation);
     }
   }

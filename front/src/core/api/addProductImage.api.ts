@@ -1,25 +1,23 @@
-import axios from 'axios'
+import axios,{ AxiosResponse } from 'axios'
 import { baseApiUrl } from 'core'
 
 const backendImages = `${baseApiUrl}/products/images/`;
 
-export const postImageToProduct = async (productId: string, file: File) => {
+export const postImageToProduct = (productId: string, file: File) => {
 
-    const formData = new FormData();
-    const url = backendImages + productId;
-    formData.append('file', file);
-    try {
-        const res = await axios.post(url, formData, {
-          headers: {
-            'Content-Type': 'multipart/form-data'
-          }
-        });
-      } catch (err) {
-        if (err.response.status === 500) {
-          console.log("There was a problem with the server");
-        } else {
-          console.log(err.response.data.msg);
-        }
+  const formData = new FormData();
+  const url = backendImages + productId;
+  formData.append('file', file);
+
+  const promise = new Promise<AxiosResponse>((resolve, reject) =>
+    axios.post(url, formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data'
       }
+    }).then((response) => {
+      resolve(response);
+    }
+    ).catch(error => reject(error)));
+  return promise;
 
 }

@@ -3,7 +3,7 @@ import { withRouter, RouteComponentProps } from "react-router-dom";
 import { RegisterEntityVm, createRegisterEntity, RegisterFormErrors, createDefaultRegisterFormErrors } from "./register.vm";
 import { RegisterComponent } from "./register.component";
 import { registerFormValidation } from "./register.validation";
-import { registerNewProduct } from "core/api/register.api";
+import { registerNewUser } from "core/api/register.api";
 import { NotificationComponent } from "common/components";
 
 interface Props extends RouteComponentProps { }
@@ -19,7 +19,7 @@ export const RegisterContainerInner = (props: Props) => {
     registerFormValidation.validateForm(registerData).then(formValidationResult => {
       if (formValidationResult.succeeded) {
         console.log(" Register approved");
-        registerNewProduct(registerData).then(result => {
+        registerNewUser(registerData).then(result => {
           if (result.status === 200) {
             setShowRegisterSuccesfulMessage(true);
           }
