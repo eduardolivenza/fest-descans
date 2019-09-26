@@ -10,8 +10,11 @@ import { Button } from "@material-ui/core";
 import { ProductEntityVm, ProductFormErrors } from "core/dataModel/product-entity.vm";
 import { LookupEntity } from "core";
 import { RatingForm } from "common/components";
+import CloudUploadIcon from '@material-ui/icons/CloudUpload';
 import AwesomeSlider from 'react-awesome-slider';
 import 'react-awesome-slider/dist/styles.css';
+import FileUpload from './upload.component';
+
 
 const styles = (theme: Theme) =>
   createStyles({
@@ -22,7 +25,14 @@ const styles = (theme: Theme) =>
     },
     picture: {
       maxWidth: "31.25rem"
-    }
+    },
+    button: {
+      marginRight: theme.spacing(1),
+      marginBottom: theme.spacing(1),
+    },
+    rightIcon: {
+      marginLeft: theme.spacing(1),
+    },
   });
 
 interface Props extends WithStyles<typeof styles> {
@@ -30,11 +40,13 @@ interface Props extends WithStyles<typeof styles> {
   cities: LookupEntity[];
   onFieldUpdate: (id: string, value: any) => void;
   onSave: () => void;
+  onClickAddImage: (file: File) => void;
   productFormErrors: ProductFormErrors;
 }
 
 export const ProductEditComponentInner = (props: Props) => {
-  const { classes, product, cities, onFieldUpdate, onSave, productFormErrors } = props;
+
+  const { classes, product, cities, onFieldUpdate, onSave, onClickAddImage, productFormErrors } = props;
 
   return (
     <div className={classes.formContainer}>
@@ -58,16 +70,6 @@ export const ProductEditComponentInner = (props: Props) => {
         max={5}
         onChange={onFieldUpdate}
       />
-      {/*  
-      <DropdownForm
-        name="city"
-        label="city"
-        onChange={onFieldUpdate}
-        value={product.}
-        list={cities}
-        error={productFormErrors.city.errorMessage}
-      />
-       */}
       <TextAreaForm
         placeholder="Description"
         name="productDescription"
@@ -76,6 +78,7 @@ export const ProductEditComponentInner = (props: Props) => {
         rows={1}
         error={productFormErrors.productDescription.errorMessage}
       />
+      <FileUpload onUploadSubmit={onClickAddImage} />
       <Button name="saveButton" variant="contained" color="primary" onClick={onSave}>
         Save
       </Button>

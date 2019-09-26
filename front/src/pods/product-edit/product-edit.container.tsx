@@ -9,6 +9,7 @@ import { NotificationComponent } from "common/components";
 import { ProductEntityVm, createDefaultProduct, ProductFormErrors, createDefaultProductFormErrors } from "core/dataModel/product-entity.vm";
 import { getProductView } from "core/api/product-view.api";
 import { mapFromApiToVm } from "core/mapper/product-entity.mapper";
+import {postImageToProduct} from 'core/api/addProductImage.api';
 
 interface Props extends RouteComponentProps {}
 
@@ -57,10 +58,15 @@ const ProductEditContainerInner = (props: Props) => {
       });
   };
 
+
   const doSave = () => {
     ProductEditFormValidation.validateForm(product).then(formValidationResult => {
       handleFormValidation(formValidationResult);
     });
+  }
+
+  const onClickAddImage =(file: File) => {
+    postImageToProduct(product.productIdentifier, file);
   }
 
   const handleFormValidation = (formValidation: FormValidationResult) => {
@@ -92,6 +98,7 @@ const ProductEditContainerInner = (props: Props) => {
         onFieldUpdate={onFieldUpdate}
         onSave={doSave}
         productFormErrors={productFormErrors}
+        onClickAddImage={onClickAddImage}
       />
       <NotificationComponent
                 message="The form contains errors, please check"
