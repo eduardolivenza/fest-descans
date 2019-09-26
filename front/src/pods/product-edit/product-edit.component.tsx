@@ -10,7 +10,8 @@ import { Button } from "@material-ui/core";
 import { ProductEntityVm, ProductFormErrors } from "core/dataModel/product-entity.vm";
 import { LookupEntity } from "core";
 import { RatingForm } from "common/components";
-import TextField from "@material-ui/core/TextField";
+import AwesomeSlider from 'react-awesome-slider';
+import 'react-awesome-slider/dist/styles.css';
 
 const styles = (theme: Theme) =>
   createStyles({
@@ -38,8 +39,13 @@ export const ProductEditComponentInner = (props: Props) => {
   return (
     <div className={classes.formContainer}>
       <h1> Product edition</h1>
+      <AwesomeSlider style={{ marginBottom: '6vh', maxWidth: "31.25rem" }}>
+        {product.pictures.map(image => (
+          <div key="img1" style={{ backgroundImage: `url(${image})`, backgroundColor: '#ffffff', backgroundRepeat: 'no-repeat', backgroundSize: 'contain', backgroundPosition: '50% 50%' }} />
+        ))}
+      </AwesomeSlider>
       <TextFieldForm
-        placeholder="Insert product name"
+        placeholder="Insert the product name"
         name="productName"
         value={product.productName}
         onChange={onFieldUpdate}
@@ -52,9 +58,7 @@ export const ProductEditComponentInner = (props: Props) => {
         max={5}
         onChange={onFieldUpdate}
       />
-      <img className={classes.picture} src={product.thumbnail} />
       {/*  
-     
       <DropdownForm
         name="city"
         label="city"

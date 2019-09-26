@@ -11,6 +11,8 @@ import com.eolivenza.modules.baseProject.domain.model.products.ProductImage;
 import javax.inject.Inject;
 import javax.inject.Named;
 import java.util.Optional;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 
 @Named
@@ -18,11 +20,17 @@ public class AddProductImageCommandHandler implements CommandHandler<AddProductI
 
     private final ImageStorage imageStorage;
     private final ProductsRepository productsRepository;
+    private Pattern pattern;
+    private Matcher matcher;
+
+    private static final String IMAGE_PATTERN =
+            "([^\\s]+(\\.(?i)(jpg|jpeg|png|gif|bmp))$)";
 
     @Inject
     public AddProductImageCommandHandler(ImageStorage imageStorage, ProductsRepository productsRepository) {
         this.imageStorage = imageStorage;
         this.productsRepository = productsRepository;
+        pattern = Pattern.compile(IMAGE_PATTERN);
     }
 
     @DomainStrictTransactional
@@ -30,6 +38,10 @@ public class AddProductImageCommandHandler implements CommandHandler<AddProductI
     public void accept(AddProductImageCommand addProductImageCommand) {
         if (addProductImageCommand.getFilename().contains("..")) {
             throw new RuntimeException("Cannot store file with relative path outside current directory " + addProductImageCommand.getFilename());
+        }
+        matcher = pattern.matcher(addProductImageCommand.getFilename());
+        if (!matcher.matches()) {
+            throw new RuntimeException("Extension is not supported: " + addProductImageCommand.getFilename());
         }
         Optional<Product> optionalProduct = productsRepository.retrieveByProductIdentifier(addProductImageCommand.getProductIdentifier());
         if (optionalProduct.isPresent() && imageStorage.saveFile(addProductImageCommand.getFileContent(), addProductImageCommand.getFilename())){

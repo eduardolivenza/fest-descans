@@ -9,17 +9,21 @@ export const mapFromApiToVm = (apiEntity : ProductEntityApi) : ProductEntityVm =
   productName: apiEntity.productName, 
   productDescription : apiEntity.productDescription,
   comfortLevel: apiEntity.comfortLevel,
-  thumbnail : apiEntity.images.length > 0 ? `${basePicturesUrl}` + "/image/thumbnail/" + apiEntity.images[0] : "",
-  pictures: formatPictures(apiEntity.images),
+  thumbnail : apiEntity.images.length > 0 ? formatPicture("thumbnail", apiEntity.images[0]) : formatPicture("thumbnail", "defaultPic.jpg"),
+  pictures: apiEntity.images.length > 0 ? formatPictures(apiEntity.images): [formatPicture("thumbnail", "defaultPic.jpg")],
   sizes: apiEntity.sizes,
   supplier: mapSupplier(apiEntity.supplier),
 });
 
+const formatPicture = (type: string, filename: string): string =>{
+  return (`${basePicturesUrl}` + "/image/"+ type+"/" + filename);
+}
+
 const formatPictures = ( filenames: string[]): string[] => {
   let pictures: string[] = [];
   filenames.map( filename => {
-      pictures.push(`${basePicturesUrl}` + "/image/poster/" + filename);
-    }
+      pictures.push(formatPicture("poster", filename));
+    } 
   )
   return pictures;
 }

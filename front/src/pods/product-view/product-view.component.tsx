@@ -9,9 +9,6 @@ import AwesomeSlider from 'react-awesome-slider';
 import 'react-awesome-slider/dist/styles.css';
 import { Typography } from "@material-ui/core";
 
-const logo = require("public/images/logo.jpg");
-const imageStranger = require("public/images/stranger-things-2.jpg");
-
 const styles = () =>
   createStyles({
     formContainer: {
@@ -32,7 +29,7 @@ export const ProductViewComponentInner = (props: Props) => {
     <div className={classes.formContainer}>
       <AwesomeSlider style={{ marginBottom: '6vh', maxWidth: "31.25rem" }}>
         {product.pictures.map(image => (
-          <div key="img1" style={{ backgroundImage: `url(${image})`, backgroundColor: '#ffffff', backgroundRepeat: 'no-repeat', backgroundSize: 'contain', backgroundPosition: '50% 50%' }} />
+          <div key={image} style={{ backgroundImage: `url(${image})`, backgroundColor: '#ffffff', backgroundRepeat: 'no-repeat', backgroundSize: 'contain', backgroundPosition: '50% 50%' }} />
         ))}
       </AwesomeSlider>
       <Typography >{product.productName}</Typography>

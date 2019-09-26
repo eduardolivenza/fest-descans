@@ -15,13 +15,5 @@ public interface ImageStorage {
      */
     File get(String name) throws FileNotFoundException;
 
-    /**
-     * Saves an image to the disk.
-     * @param bufferedImage Image.
-     * @param fileName The new file name.
-     * @return
-     */
-    File save(BufferedImage bufferedImage, String fileName) throws RuntimeException;
-
     boolean saveFile(InputStream fileContent, String filename);
 }
