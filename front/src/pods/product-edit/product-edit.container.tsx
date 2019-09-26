@@ -33,11 +33,10 @@ const ProductEditContainerInner = (props: Props) => {
 
   const [cities] = React.useState(citiesLookup);
   const {product, setProduct, loadProductEdit} = useProductEdit();
-  const [productFormErrors, setProductFormErrors] = React.useState<ProductFormErrors>(
-    createDefaultProductFormErrors()
-  );
+  const [productFormErrors, setProductFormErrors] = React.useState<ProductFormErrors>(createDefaultProductFormErrors());
   const [showValidationFailedMessage, setShowValidationFailedMessage] = React.useState(false);
-
+  const [file, setFile] = React.useState();
+  
   React.useEffect(() => {
     loadProductEdit(props.match.params[productViewRouteParams.id]);
   }, []);
@@ -47,7 +46,6 @@ const ProductEditContainerInner = (props: Props) => {
       ...product,
       [fieldName]: value
     });
-
     ProductEditFormValidation
       .validateField(product, fieldName, value)
       .then(fieldValidationResult => {
@@ -58,27 +56,26 @@ const ProductEditContainerInner = (props: Props) => {
       });
   };
 
-
   const doSave = () => {
     ProductEditFormValidation.validateForm(product).then(formValidationResult => {
       handleFormValidation(formValidationResult);
     });
   }
 
-  const onClickAddImage =(file: File) => {
+  const onConfirmSubmit =() => {
     postImageToProduct(product.productIdentifier, file);
+  }
+
+  const onChangeFile = (file:File) => {
+    setFile(file);
   }
 
   const handleFormValidation = (formValidation: FormValidationResult) => {
     if (formValidation.succeeded) {
-      doSaveServerRequest();
+      //doSaveServerRequest();
     } else {
       showErrorNotification(formValidation);
     }
-  }
-
-  const doSaveServerRequest = () => {
-    //save
   }
 
   const showErrorNotification = (formValidationResult: FormValidationResult) => {
@@ -98,7 +95,8 @@ const ProductEditContainerInner = (props: Props) => {
         onFieldUpdate={onFieldUpdate}
         onSave={doSave}
         productFormErrors={productFormErrors}
-        onClickAddImage={onClickAddImage}
+        onConfirmSubmit={onConfirmSubmit}
+        onChangeFile={onChangeFile}
       />
       <NotificationComponent
                 message="The form contains errors, please check"

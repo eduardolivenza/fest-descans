@@ -10,11 +10,9 @@ import { Button } from "@material-ui/core";
 import { ProductEntityVm, ProductFormErrors } from "core/dataModel/product-entity.vm";
 import { LookupEntity } from "core";
 import { RatingForm } from "common/components";
-import CloudUploadIcon from '@material-ui/icons/CloudUpload';
 import AwesomeSlider from 'react-awesome-slider';
 import 'react-awesome-slider/dist/styles.css';
 import FileUpload from './upload.component';
-
 
 const styles = (theme: Theme) =>
   createStyles({
@@ -40,13 +38,14 @@ interface Props extends WithStyles<typeof styles> {
   cities: LookupEntity[];
   onFieldUpdate: (id: string, value: any) => void;
   onSave: () => void;
-  onClickAddImage: (file: File) => void;
+  onChangeFile: (file: File) => void;
+  onConfirmSubmit: () => void;
   productFormErrors: ProductFormErrors;
 }
 
 export const ProductEditComponentInner = (props: Props) => {
 
-  const { classes, product, cities, onFieldUpdate, onSave, onClickAddImage, productFormErrors } = props;
+  const { classes, product, cities, onFieldUpdate, onSave, onConfirmSubmit, onChangeFile, productFormErrors } = props;
 
   return (
     <div className={classes.formContainer}>
@@ -78,7 +77,7 @@ export const ProductEditComponentInner = (props: Props) => {
         rows={1}
         error={productFormErrors.productDescription.errorMessage}
       />
-      <FileUpload onUploadSubmit={onClickAddImage} />
+      <FileUpload onChangeFile={onChangeFile} onConfirmSubmit={onConfirmSubmit} />
       <Button name="saveButton" variant="contained" color="primary" onClick={onSave}>
         Save
       </Button>
