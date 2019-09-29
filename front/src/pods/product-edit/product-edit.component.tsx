@@ -15,6 +15,10 @@ import AwesomeSlider from 'react-awesome-slider';
 import 'react-awesome-slider/dist/styles.css';
 import FileUpload from './upload.component';
 import { ProductSizeComponent } from "pods/product-edit/productSize-tableRow.component";
+import EnhancedTable from "./newtable.component";
+import Card from "@material-ui/core/Card";
+import { makeStyles } from '@material-ui/core/styles';
+import { CardContent, CardHeader } from "@material-ui/core";
 
 const styles = (theme: Theme) =>
   createStyles({
@@ -37,6 +41,10 @@ const styles = (theme: Theme) =>
       marginTop: theme.spacing(1),
       marginBottom: theme.spacing(5),
     },
+    card: {
+      marginTop: theme.spacing(1),
+      marginRight: theme.spacing(1),
+    },
   });
 
 interface Props extends WithStyles<typeof styles> {
@@ -44,6 +52,7 @@ interface Props extends WithStyles<typeof styles> {
   cities: LookupEntity[];
   onFieldUpdate: (id: string, value: any) => void;
   onSave: () => void;
+  onCancel: () => void;
   onChangeFile: (file: File) => void;
   onConfirmSubmit: () => void;
   productFormErrors: ProductFormErrors;
@@ -51,16 +60,23 @@ interface Props extends WithStyles<typeof styles> {
 
 export const ProductEditComponentInner = (props: Props) => {
 
-  const { classes, product, cities, onFieldUpdate, onSave, onConfirmSubmit, onChangeFile, productFormErrors } = props;
+  const { classes, product, cities, onFieldUpdate, onSave,onCancel, onConfirmSubmit, onChangeFile, productFormErrors } = props;
 
   return (
     <div className={classes.formContainer}>
       <h1> Product edition</h1>
+      <Card className={classes.card}>
+      <CardHeader
+        title="Product images"
+      />
+      <CardContent>
       <AwesomeSlider style={{ marginBottom: '6vh', maxWidth: "31.25rem" }}>
         {product.pictures.map(image => (
           <div key="img1" style={{ backgroundImage: `url(${image})`, backgroundColor: '#ffffff', backgroundRepeat: 'no-repeat', backgroundSize: 'contain', backgroundPosition: '50% 50%' }} />
         ))}
       </AwesomeSlider>
+      </CardContent>
+      </Card>
       <TextFieldForm
         placeholder="Insert the product name"
         name="productName"
@@ -97,9 +113,13 @@ export const ProductEditComponentInner = (props: Props) => {
           }
         </TableBody>
       </Table>
+      <EnhancedTable/>
        <FileUpload onChangeFile={onChangeFile} onConfirmSubmit={onConfirmSubmit} />
-      <Button name="saveButton" variant="contained" color="primary" onClick={onSave}>
+      <Button name="saveButton" className={classes.button} variant="contained" color="primary" onClick={onSave}>
         Save
+      </Button>
+      <Button name="cancelButton" className={classes.button} variant="contained" color="primary" onClick={onCancel}>
+        Cancel edition
       </Button>
     </div>
   );

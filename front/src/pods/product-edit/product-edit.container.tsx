@@ -62,6 +62,10 @@ const ProductEditContainerInner = (props: Props) => {
     });
   }
 
+  const doCancel = () => {
+    history.back();
+  }
+
   const onConfirmSubmit =() => {
     postImageToProduct(product.productIdentifier, file).then(
       imagePosted => {
@@ -101,6 +105,7 @@ const ProductEditContainerInner = (props: Props) => {
         cities={cities}
         onFieldUpdate={onFieldUpdate}
         onSave={doSave}
+        onCancel={doCancel}
         productFormErrors={productFormErrors}
         onConfirmSubmit={onConfirmSubmit}
         onChangeFile={onChangeFile}
