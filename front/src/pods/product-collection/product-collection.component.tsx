@@ -13,12 +13,14 @@ interface Props {
   editProduct: (id: string) => void;
   layout?: Layout;
   handleChangeComfortFilter: (name: string, value: boolean) => void;
-  comfortLevelFilterState: CheckBoxConfigValue[];
   handleProductTypesFilter: (name: string, value: boolean) => void;
-  productTypesFilterState: CheckBoxConfigValue[];
   handleChangePriceFilter: (value: number[]) => void;
+  handleChangeFilterText: (value: string) => void;
+  comfortLevelFilterState: CheckBoxConfigValue[];
+  productTypesFilterState: CheckBoxConfigValue[];
   maxPriceValue: number,
   selectedPrice: number[],
+  filterTextValue: string,
 }
 
 export const ProductCollectionComponent: React.FunctionComponent<Props> = (props) => {
@@ -30,9 +32,11 @@ export const ProductCollectionComponent: React.FunctionComponent<Props> = (props
     layout,
     handleChangeComfortFilter,
     handleProductTypesFilter,
+    handleChangeFilterText,
+    handleChangePriceFilter,
     comfortLevelFilterState,
     productTypesFilterState,
-    handleChangePriceFilter,
+    filterTextValue,
     maxPriceValue,
     selectedPrice } = props;
 
@@ -50,9 +54,11 @@ export const ProductCollectionComponent: React.FunctionComponent<Props> = (props
       <FilterCard
         handleChangeComfortFilter={handleChangeComfortFilter}
         handleProductTypesFilter={handleProductTypesFilter}
+        handleChangePriceFilter={handleChangePriceFilter}
+        handleChangeFilterText={handleChangeFilterText}
         comfortLevelFilterState={comfortLevelFilterState}
         productTypesFilterState={productTypesFilterState}
-        handleChangePriceFilter={handleChangePriceFilter}
+        filterTextValue={filterTextValue}
         maxPriceValue={maxPriceValue}
         selectedPrice={selectedPrice}
       />
