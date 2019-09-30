@@ -40,6 +40,7 @@ const useStyles = makeStyles(theme => ({
 
 interface mainprops {
     rows: ProductEntitySizeVm[];
+    onChange: (id: string, value: any) => void;
 }
 
 const headCells = [
@@ -69,12 +70,11 @@ function desc(a, b, orderBy) {
       return 1;
     }
     return 0;
-  }
-
-
+}
 
 export default function SizesTable(props: mainprops) {
-    const { rows } = props;
+
+    const { rows, onChange } = props;
     const classes = useStyles({});
     const [order, setOrder] = React.useState('asc');
     const [orderBy, setOrderBy] = React.useState('calories');
@@ -121,12 +121,17 @@ export default function SizesTable(props: mainprops) {
         setPage(newPage);
     };
 
+    const onCellEdit = (index: number, fieldId: string ) => e => {
+        rows[index][fieldId] = e.target.innerHTML
+        onChange("sizes", rows);
+    };
+
     const executeDelete = () =>
     {
         selected.forEach(selectedSizeValue => {
-            alert("Deleting elements " + selectedSizeValue );
             rows.splice(rows.findIndex(item => item.size === selectedSizeValue), 1);
-        })  
+        })
+        onChange("sizes", rows);  
     }
 
     const addElement= () =>
@@ -136,7 +141,7 @@ export default function SizesTable(props: mainprops) {
             price: "0"
         }
         rows.push(newElement);
-        alert("adding a new element");
+        onChange("sizes", rows);
     }
 
     const handleChangeRowsPerPage = event => {
@@ -194,10 +199,10 @@ export default function SizesTable(props: mainprops) {
                                                     inputProps={{ 'aria-labelledby': labelId }}
                                                 />
                                             </TableCell>
-                                            <TableCell component="th" id={labelId} scope="row" padding="none" contentEditable>
+                                            <TableCell component="th" suppressContentEditableWarning id={labelId} scope="row" padding="none" contentEditable onBlur={onCellEdit( index, "size")}>
                                                 {row.size}
                                             </TableCell>
-                                            <TableCell align="right" contentEditable>{row.price}</TableCell>
+                                            <TableCell align="right" contentEditable suppressContentEditableWarning  onBlur={onCellEdit( index, "price")}>{row.price}</TableCell>
                                         </TableRow>
                                     );
                                 })}

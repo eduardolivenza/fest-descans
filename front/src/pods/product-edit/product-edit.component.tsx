@@ -96,7 +96,7 @@ export const ProductEditComponentInner = (props: Props) => {
         rows={1}
         error={productFormErrors.productDescription.errorMessage}
       />
-      <SizesTable rows={product.sizes}/>
+      <SizesTable onChange={onFieldUpdate} rows={product.sizes}/>
       <FileUpload onChangeFile={onChangeFile} onConfirmSubmit={onConfirmSubmit} />
       <Button name="saveButton" className={classes.button} variant="contained" color="primary" onClick={onSave}>
         Save

@@ -41,9 +41,6 @@ const ProductEditContainerInner = (props: Props) => {
     loadProductEdit(props.match.params[productViewRouteParams.id]);
   }, []);
 
-  React.useEffect(() => {
-    alert("product changed: " + product.sizes.length);
-  }, [product]);
 
   const onFieldUpdate = (fieldName: keyof ProductEntityVm, value: any) => {
     setProduct({
@@ -87,6 +84,7 @@ const ProductEditContainerInner = (props: Props) => {
   const handleFormValidation = (formValidation: FormValidationResult) => {
     if (formValidation.succeeded) {
       //doSaveServerRequest();
+      product.sizes.forEach(s => alert(s.size + " --> " + s.price));
     } 
     else {
       showErrorNotification(formValidation);
