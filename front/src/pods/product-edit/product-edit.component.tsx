@@ -14,8 +14,8 @@ import AwesomeSlider from 'react-awesome-slider';
 import 'react-awesome-slider/dist/styles.css';
 import FileUpload from './upload.component';
 import SizesTable from "./product-edit-sizes-table.component";
-import Card from "@material-ui/core/Card";
-import { CardContent, CardHeader } from "@material-ui/core";
+import { Card, CardContent, CardHeader } from "@material-ui/core";
+import Typography from '@material-ui/core/Typography';
 
 const styles = (theme: Theme) =>
   createStyles({
@@ -40,7 +40,6 @@ const styles = (theme: Theme) =>
     },
     card: {
       marginTop: theme.spacing(1),
-      marginRight: theme.spacing(1),
     },
   });
 
@@ -61,7 +60,7 @@ export const ProductEditComponentInner = (props: Props) => {
 
   return (
     <div className={classes.formContainer}>
-      <h1> Product edition</h1>
+      <Typography variant="h4" id="productEditLabel">Product edition</Typography>
       <Card className={classes.card}>
       <CardHeader
         title="Product images"
@@ -69,7 +68,7 @@ export const ProductEditComponentInner = (props: Props) => {
       <CardContent>
       <AwesomeSlider style={{ marginBottom: '6vh', maxWidth: "31.25rem" }}>
         {product.pictures.map(image => (
-          <div key="img1" style={{ backgroundImage: `url(${image})`, backgroundColor: '#ffffff', backgroundRepeat: 'no-repeat', backgroundSize: 'contain', backgroundPosition: '50% 50%' }} />
+          <div key={image} style={{ backgroundImage: `url(${image})`, backgroundColor: '#ffffff', backgroundRepeat: 'no-repeat', backgroundSize: 'contain', backgroundPosition: '50% 50%' }} />
         ))}
       </AwesomeSlider>
       </CardContent>

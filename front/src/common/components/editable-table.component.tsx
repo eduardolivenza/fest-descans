@@ -16,7 +16,7 @@ import AddIcon from '@material-ui/icons/Add';
 import FilterListIcon from '@material-ui/icons/FilterList';
 
 export function EnhancedTableHead(props) {
-  const { classes, onSelectAllClick, order, orderBy, numSelected, rowCount, onRequestSort, headCells } = props;
+  const { classes, onSelectAllClick, order, orderBy, numSelected, rowCount, onRequestSort, headCells, editable } = props;
   const createSortHandler = property => event => {
     onRequestSort(event, property);
   };
@@ -24,6 +24,7 @@ export function EnhancedTableHead(props) {
   return (
     <TableHead>
       <TableRow>
+      {editable ? (
         <TableCell padding="checkbox">
           <Checkbox
             indeterminate={numSelected > 0 && numSelected < rowCount}
@@ -32,6 +33,7 @@ export function EnhancedTableHead(props) {
             inputProps={{ 'aria-label': 'select all desserts' }}
           />
         </TableCell>
+      ):null}
         {headCells.map(headCell => (
           <TableCell
             key={headCell.id}
@@ -60,13 +62,14 @@ export function EnhancedTableHead(props) {
 
 EnhancedTableHead.propTypes = {
   classes: PropTypes.object.isRequired,
-  numSelected: PropTypes.number.isRequired,
+  numSelected: PropTypes.number,
   onRequestSort: PropTypes.func.isRequired,
-  onSelectAllClick: PropTypes.func.isRequired,
+  onSelectAllClick: PropTypes.func,
   order: PropTypes.oneOf(['asc', 'desc']).isRequired,
   orderBy: PropTypes.string.isRequired,
   rowCount: PropTypes.number.isRequired,
-  headCells: PropTypes.array
+  headCells: PropTypes.array,
+  editable: PropTypes.bool.isRequired,
 };
 
 const useToolbarStyles = makeStyles(theme => ({
@@ -98,7 +101,7 @@ const useToolbarStyles = makeStyles(theme => ({
 
 export const EnhancedTableToolbar = props => {
   const classes = useToolbarStyles({});
-  const { numSelected, title, deleteSelected, addElement } = props;
+  const { numSelected, title, deleteSelected, addElement, editable } = props;
 
   return (
     <Toolbar
@@ -127,11 +130,13 @@ export const EnhancedTableToolbar = props => {
           </Tooltip>
         ) : (
             <div className={classes.actions}>
+               {editable ? (
               <Tooltip title="Add" onClick={addElement}>
                 <IconButton aria-label="add">
                   <AddIcon />
                 </IconButton>
               </Tooltip>
+               ) : (null)}
               <Tooltip title="Filter list">
                 <IconButton aria-label="filter list">
                   <FilterListIcon />
@@ -145,10 +150,11 @@ export const EnhancedTableToolbar = props => {
 };
 
 EnhancedTableToolbar.propTypes = {
-  numSelected: PropTypes.number.isRequired,
+  numSelected: PropTypes.number,
   title: PropTypes.string.isRequired,
-  deleteSelected: PropTypes.func.isRequired,
-  addElement: PropTypes.func.isRequired,
+  deleteSelected: PropTypes.func,
+  addElement: PropTypes.func,
+  editable: PropTypes.bool,
 };
 
 
