@@ -124,6 +124,7 @@ export default function SizesTable(props: mainprops) {
     const onCellEdit = (index: number, fieldId: string ) => e => {
         rows[index][fieldId] = e.target.innerHTML
         onChange("sizes", rows);
+        setSelected([]);
     };
 
     const executeDelete = () =>
@@ -131,13 +132,14 @@ export default function SizesTable(props: mainprops) {
         selected.forEach(selectedSizeValue => {
             rows.splice(rows.findIndex(item => item.size === selectedSizeValue), 1);
         })
-        onChange("sizes", rows);  
+        onChange("sizes", rows);
+        setSelected([]);
     }
 
     const addElement= () =>
     {
         const newElement: ProductEntitySizeVm = {
-            size: "newSize",
+            size: "newSize_" + rows.length,
             price: "0"
         }
         rows.push(newElement);
