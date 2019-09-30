@@ -1,11 +1,10 @@
 import * as React from "react";
-import {
+import { 
   createStyles,
   Theme,
   WithStyles,
   withStyles
 } from "@material-ui/core/styles";
-import { Table, TableHead, TableRow, TableCell, TableBody, TextField } from "@material-ui/core";
 import { TextFieldForm, TextAreaForm } from "common/components";
 import { Button } from "@material-ui/core";
 import { ProductEntityVm, ProductFormErrors } from "core/dataModel/product-entity.vm";
@@ -14,10 +13,8 @@ import { RatingForm } from "common/components";
 import AwesomeSlider from 'react-awesome-slider';
 import 'react-awesome-slider/dist/styles.css';
 import FileUpload from './upload.component';
-import { ProductSizeComponent } from "pods/product-edit/productSize-tableRow.component";
-import EnhancedTable from "./newtable.component";
+import SizesTable from "./product-edit-sizes-table.component";
 import Card from "@material-ui/core/Card";
-import { makeStyles } from '@material-ui/core/styles';
 import { CardContent, CardHeader } from "@material-ui/core";
 
 const styles = (theme: Theme) =>
@@ -99,22 +96,8 @@ export const ProductEditComponentInner = (props: Props) => {
         rows={1}
         error={productFormErrors.productDescription.errorMessage}
       />
-
-      <Table className={classes.table}>
-        <TableHead>
-          <TableRow>
-            <TableCell align="left">Size</TableCell>
-            <TableCell align="left">Price</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {
-            product.sizes.map(size => (<ProductSizeComponent key={product.productIdentifier + "_" + size.size} productSize={size} />))
-          }
-        </TableBody>
-      </Table>
-      <EnhancedTable/>
-       <FileUpload onChangeFile={onChangeFile} onConfirmSubmit={onConfirmSubmit} />
+      <SizesTable rows={product.sizes}/>
+      <FileUpload onChangeFile={onChangeFile} onConfirmSubmit={onConfirmSubmit} />
       <Button name="saveButton" className={classes.button} variant="contained" color="primary" onClick={onSave}>
         Save
       </Button>

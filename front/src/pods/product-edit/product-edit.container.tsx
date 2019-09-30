@@ -41,6 +41,10 @@ const ProductEditContainerInner = (props: Props) => {
     loadProductEdit(props.match.params[productViewRouteParams.id]);
   }, []);
 
+  React.useEffect(() => {
+    alert("product changed: " + product.sizes.length);
+  }, [product]);
+
   const onFieldUpdate = (fieldName: keyof ProductEntityVm, value: any) => {
     setProduct({
       ...product,
