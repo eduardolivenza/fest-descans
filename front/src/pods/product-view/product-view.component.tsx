@@ -1,9 +1,5 @@
 import * as React from "react";
-import {
-  createStyles,
-  WithStyles,
-  withStyles
-} from "@material-ui/core/styles";
+import { createStyles, WithStyles, withStyles} from "@material-ui/core/styles";
 import { ProductEntityVm } from "core/dataModel/product-entity.vm";
 import AwesomeSlider from 'react-awesome-slider';
 import 'react-awesome-slider/dist/styles.css';

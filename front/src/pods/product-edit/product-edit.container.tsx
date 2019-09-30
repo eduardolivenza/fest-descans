@@ -9,7 +9,8 @@ import { NotificationComponent } from "common/components";
 import { ProductEntityVm, createDefaultProduct, ProductFormErrors, createDefaultProductFormErrors } from "core/dataModel/product-entity.vm";
 import { getProductView } from "core/api/product-view.api";
 import { mapFromApiToVm } from "core/mapper/product-entity.mapper";
-import {postImageToProduct} from 'core/api/addProductImage.api';
+import { postImageToProduct} from 'core/api/addProductImage.api';
+import { patchProduct } from "core/api/product-patch.api";
 
 interface Props extends RouteComponentProps {}
 
@@ -83,8 +84,7 @@ const ProductEditContainerInner = (props: Props) => {
 
   const handleFormValidation = (formValidation: FormValidationResult) => {
     if (formValidation.succeeded) {
-      //doSaveServerRequest();
-      product.sizes.forEach(s => alert(s.size + " --> " + s.price));
+      patchProduct(product.productIdentifier, product)
     } 
     else {
       showErrorNotification(formValidation);

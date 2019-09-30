@@ -1,7 +1,7 @@
 import {ProductEntityApi} from 'core/apiModel/product-entity.api'
 import {ProductEntityVm} from '../dataModel/product-entity.vm';
 import {basePicturesUrl} from 'core';
-import {mapSupplier} from 'core/mapper/supplier-entity.mapper';
+import {mapSupplierToVm, mapSupplierToApi} from 'core/mapper/supplier-entity.mapper';
 
 export const mapFromApiToVm = (apiEntity : ProductEntityApi) : ProductEntityVm => ({
   category : apiEntity.category,
@@ -12,7 +12,18 @@ export const mapFromApiToVm = (apiEntity : ProductEntityApi) : ProductEntityVm =
   thumbnail : apiEntity.images.length > 0 ? formatPicture("thumbnail", apiEntity.images[0]) : formatPicture("thumbnail", "defaultPic.jpg"),
   pictures: apiEntity.images.length > 0 ? formatPictures(apiEntity.images): [formatPicture("thumbnail", "defaultPic.jpg")],
   sizes: apiEntity.sizes,
-  supplier: mapSupplier(apiEntity.supplier),
+  supplier: mapSupplierToVm(apiEntity.supplier),
+});
+
+export const mapFromVmToApi = (vmEntity : ProductEntityVm) : ProductEntityApi => ({
+  category : vmEntity.category,
+  productIdentifier : vmEntity.productIdentifier,
+  productName: vmEntity.productName, 
+  productDescription : vmEntity.productDescription,
+  comfortLevel: vmEntity.comfortLevel,
+  images: [],
+  sizes: vmEntity.sizes,
+  supplier: mapSupplierToApi(vmEntity.supplier),
 });
 
 const formatPicture = (type: string, filename: string): string =>{
