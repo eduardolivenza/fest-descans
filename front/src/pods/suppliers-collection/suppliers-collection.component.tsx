@@ -1,7 +1,7 @@
 import * as React from "react";
 
 interface Props {
-   
+
 }
 
 export const SuppliersCollectionComponent = (props: Props) => {

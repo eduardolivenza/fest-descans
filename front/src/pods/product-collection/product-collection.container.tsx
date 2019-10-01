@@ -81,7 +81,7 @@ export const ProductCollectionContainerInner = (props: Props) => {
   const [ comfortLevelFilterItems, setComfortLevelFilterItems] = React.useState(comfortLevelCheckboxes);
   const [ productTypesFilterItems, setProductTypesFilterItems] = React.useState(productTypesCheckBoxes);
   const [ priceFilter, setPriceFilter] = React.useState([0, maxPrice]);
-
+  const [ textFilterValue, setTextFilterValue] = React.useState("");
 
   const handleChangeComfortFilter = (name: string, valueEnter: boolean) => {
     let itemIndex: number = comfortLevelFilterItems.findIndex((item) => (item.name === name));
@@ -99,6 +99,10 @@ export const ProductCollectionContainerInner = (props: Props) => {
 
   const handleChangePriceFilter = ( newValue: number[]) => {
     setPriceFilter(newValue);
+  };
+
+  const handleChangeFilterText = ( newValue: string) => {
+    setTextFilterValue(newValue);
   };
 
   const viewProduct = (productId: string) => {
@@ -119,7 +123,7 @@ export const ProductCollectionContainerInner = (props: Props) => {
   
   React.useEffect(() => {
     applyFilter();
-  }, [ comfortLevelFilterItems, productTypesFilterItems, priceFilter])
+  }, [ comfortLevelFilterItems, productTypesFilterItems, priceFilter, textFilterValue])
 
   const applyFilter = () => {
     let newArray = productsCollection;
@@ -136,6 +140,9 @@ export const ProductCollectionContainerInner = (props: Props) => {
     newArray = newArray.filter(
         x => x.sizes.some(y => (parseInt(y.price) > priceFilter[0]) && (parseInt(y.price) <= priceFilter[1]))
     );
+    newArray = newArray.filter(
+      x => x.productName.toLowerCase().includes(textFilterValue.toLowerCase())
+    );
     setProductsCollectionFiltered(newArray);
   }
 
@@ -143,13 +150,15 @@ export const ProductCollectionContainerInner = (props: Props) => {
     productCollection={productsCollectionFiltered}
     viewProduct={viewProduct}
     editProduct={editProduct}
-    comfortLevelFilterState={comfortLevelFilterItems}
     handleChangeComfortFilter={handleChangeComfortFilter}
-    productTypesFilterState={productTypesFilterItems}
     handleProductTypesFilter={handleChangeProductTypesFilter}
     handleChangePriceFilter={handleChangePriceFilter}
+    handleChangeFilterText={handleChangeFilterText}
+    comfortLevelFilterState={comfortLevelFilterItems}
+    productTypesFilterState={productTypesFilterItems}
     maxPriceValue={maxPrice}
     selectedPrice={priceFilter}
+    filterTextValue = {textFilterValue}
   />;
 
 };

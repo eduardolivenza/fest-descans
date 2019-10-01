@@ -3,12 +3,12 @@ package com.eolivenza.modules.baseProject.controller.http.rest;
 import com.eolivenza.modules.baseProject.application.CommandHandler;
 import com.eolivenza.modules.baseProject.application.QueryHandler;
 import com.eolivenza.modules.baseProject.application.products.commands.AddProductCommand;
-import com.eolivenza.modules.baseProject.application.products.commands.availableSizes.AddAvailableSizeToProductCommand;
+import com.eolivenza.modules.baseProject.application.products.commands.ModProductCommand;
+import com.eolivenza.modules.baseProject.application.products.commands.productImages.AddProductImageCommand;
 import com.eolivenza.modules.baseProject.application.security.BaseProjectGrantPermission;
 import com.eolivenza.modules.baseProject.controller.http.rest.mapper.AvailableProductResourceMapper;
 import com.eolivenza.modules.baseProject.controller.http.rest.mapper.ProductsResourceMapper;
 import com.eolivenza.modules.baseProject.controller.http.rest.mapper.SupplierResourceMapper;
-import com.eolivenza.modules.baseProject.controller.http.rest.resources.AvailableSizeResource;
 import com.eolivenza.modules.baseProject.controller.http.rest.resources.ProductResource;
 import com.eolivenza.modules.baseProject.domain.model.products.AvailableProduct;
 import com.eolivenza.modules.baseProject.domain.model.products.Product;
@@ -19,8 +19,10 @@ import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.security.RolesAllowed;
+import java.io.IOException;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -45,7 +47,9 @@ public class ProductsController {
     @Autowired
     private CommandHandler<AddProductCommand> addProductCommandHandler;
     @Autowired
-    private  CommandHandler<AddAvailableSizeToProductCommand> addAvailableSizeToProductCommandCommandHandler;
+    private CommandHandler<ModProductCommand> modProductCommandHandler;
+    @Autowired
+    private CommandHandler<AddProductImageCommand> storeImageCommandHandler;
 
     @Autowired
     public ProductsController() {
@@ -71,19 +75,29 @@ public class ProductsController {
         addProductCommandHandler.accept(addProductCommand);
     }
 
-    @ApiOperation(value = " Adds a new available size to an existing product")
-    @PostMapping(path = "/products/sizes/{productIdentifier}")
-    public void addAvailableSizeToExistingProduct(
+    @ApiOperation(value = " Modify values of an existing product")
+    @PatchMapping(path = "/products/{productIdentifier}")
+    public void modifyExistingProduct(
             @ApiParam(required = true, value = "External identifier of the instrument", example = "800||1")
             @PathVariable final String productIdentifier,
-            @RequestBody final AvailableSizeResource availableSizeResource) {
+            @RequestBody final ProductResource productResource) {
 
-        AddAvailableSizeToProductCommand addAvailableSizeToProductCommand = new AddAvailableSizeToProductCommand(
-                productIdentifier,
-                availableSizeResource.size,
-                availableSizeResource.price);
+        Set<AvailableProduct> sizesSet = new HashSet<>();
+        if (productResource.sizes != null) {
+            Stream<AvailableProduct> sizesStream = productResource.sizes.stream().map(availableProductResourceMapper::toFirstType);
+            sizesSet = sizesStream.collect(Collectors.toSet());
+        }
+        Supplier supplier = supplierResourceMapper.toFirstType(productResource.supplier);
+        ModProductCommand modProductCommand = new ModProductCommand(
+                productResource.productIdentifier,
+                productResource.productName,
+                productResource.category,
+                productResource.productDescription,
+                productResource.comfortLevel,
+                supplier,
+                sizesSet);
 
-        addAvailableSizeToProductCommandCommandHandler.accept(addAvailableSizeToProductCommand);
+        modProductCommandHandler.accept(modProductCommand);
     }
 
     @ApiOperation(value = " Get all products of the system")
@@ -101,6 +115,17 @@ public class ProductsController {
             @PathVariable final String productIdentifier) {
         Product product = getProductQueryHandler.apply(productIdentifier);
         return productsResourceMapper.toSecondType(product);
+    }
+
+    @PostMapping(value = "/products/images/{productIdentifier}")
+    public void handleFileUpload(@PathVariable("productIdentifier") String productIdentifier,
+                                 @RequestParam("file") MultipartFile file) {
+        try{
+            AddProductImageCommand command = new AddProductImageCommand(productIdentifier, file.getOriginalFilename(), file.getInputStream());
+            storeImageCommandHandler.accept(command);
+        } catch ( IOException e) {
+            throw new RuntimeException("Failed to store file " + file.getOriginalFilename(), e);
+        }
     }
 
 }

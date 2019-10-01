@@ -1,18 +1,23 @@
 import * as React from "react";
 import Card from "@material-ui/core/Card";
 import { makeStyles } from '@material-ui/core/styles';
-import { CardContent, CardHeader, } from "@material-ui/core";
-import { CheckBoxConfigValue, CheckBoxGroup } from "common/components";
+import { CardContent, CardHeader, TextField, } from "@material-ui/core";
+import { CheckBoxConfigValue, CheckBoxGroup, TextAreaForm } from "common/components";
 import Typography from '@material-ui/core/Typography';
 import Slider from '@material-ui/core/Slider';
+import clsx from 'clsx';
 
 const useStyles = makeStyles(theme => ({
   card: {
     marginTop: theme.spacing(1),
     marginRight: theme.spacing(1),
   },
-  slider: {
+  priceNameFilter: {
     width: 300,
+  },
+  textField: {
+    marginRight: theme.spacing(1),
+    marginBottom: theme.spacing(2),
   },
 }));
 
@@ -21,8 +26,10 @@ interface Props {
   handleChangeComfortFilter: (name: string, value: boolean) => void;
   handleProductTypesFilter: (name: string, value: boolean) => void;
   handleChangePriceFilter: (value: number[]) => void;
+  handleChangeFilterText: (name: string) => void;
   comfortLevelFilterState: CheckBoxConfigValue[];
   productTypesFilterState: CheckBoxConfigValue[];
+  filterTextValue: string,
   maxPriceValue: number,
   selectedPrice: number[],
 }
@@ -35,15 +42,26 @@ export const FilterCard = (props: Props) => {
 
   const classes = useStyles({});
 
-  const { comfortLevelFilterState, handleChangeComfortFilter, productTypesFilterState, handleProductTypesFilter, selectedPrice, maxPriceValue, handleChangePriceFilter } = props;
+  const {
+    comfortLevelFilterState,
+    handleChangeComfortFilter,
+    productTypesFilterState,
+    handleProductTypesFilter,
+    handleChangeFilterText,
+    selectedPrice,
+    maxPriceValue,
+    filterTextValue,
+    handleChangePriceFilter } = props;
 
   const handleChange = (event, newValue: number[]) => {
     handleChangePriceFilter(newValue);
   };
 
+  const handleChangeText = (event) => {
+    handleChangeFilterText(event.target.value);
+  };
 
   return (
-    
     <Card className={classes.card}>
       <CardHeader
         title="Products filter"
@@ -64,7 +82,18 @@ export const FilterCard = (props: Props) => {
             handleChangeCheckbox={handleProductTypesFilter}
             items={productTypesFilterState}
           />
-          <div className={classes.slider}>
+          <div className={classes.priceNameFilter}>
+            <Typography id="text-name-filter" gutterBottom>
+              Filter by name
+            </Typography>
+            <TextField
+              id="outlined-name"
+              className={classes.textField}
+              value={filterTextValue}
+              onChange={handleChangeText}
+              margin="normal"
+              variant="outlined"
+            />
             <Typography id="range-slider" gutterBottom>
               Price range
             </Typography>

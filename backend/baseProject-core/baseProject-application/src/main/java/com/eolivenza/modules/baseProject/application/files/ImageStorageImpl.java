@@ -1,5 +1,6 @@
 package com.eolivenza.modules.baseProject.application.files;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.util.ResourceUtils;
 import javax.imageio.ImageIO;
 import javax.inject.Named;
@@ -16,11 +17,9 @@ import java.nio.file.StandardCopyOption;
 @Named
 public class ImageStorageImpl implements ImageStorage {
 
-    private static String workingPath = "C:\\festDescans\\upload-dir\\";
     private Path uploadLocation;
 
-
-    public ImageStorageImpl() {
+    public ImageStorageImpl(@Value("${imageStorage.uploadDir}") String workingPath) {
         this.uploadLocation = Paths.get(workingPath);
         try {
             Files.createDirectories(uploadLocation);
@@ -32,16 +31,6 @@ public class ImageStorageImpl implements ImageStorage {
     public File get(String name) throws FileNotFoundException {
         File file = ResourceUtils.getFile(uploadLocation + "//"  + name);
         return file;
-    }
-
-    public File save(BufferedImage bufferedImage, String fileName) throws RuntimeException {
-        try {
-            File outputFile = new File(uploadLocation + "/" + fileName);
-            ImageIO.write(bufferedImage, "jpg", outputFile);
-            return outputFile;
-        } catch (IOException exception) {
-            throw new RuntimeException( "File could not be saved.");
-        }
     }
 
     public boolean saveFile(InputStream fileContent, String filename){

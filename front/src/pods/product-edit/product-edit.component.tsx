@@ -1,16 +1,21 @@
 import * as React from "react";
-import {
+import { 
   createStyles,
   Theme,
   WithStyles,
   withStyles
 } from "@material-ui/core/styles";
-import { TextFieldForm, DropdownForm, TextAreaForm } from "common/components";
+import { TextFieldForm, TextAreaForm } from "common/components";
 import { Button } from "@material-ui/core";
 import { ProductEntityVm, ProductFormErrors } from "core/dataModel/product-entity.vm";
 import { LookupEntity } from "core";
 import { RatingForm } from "common/components";
-import TextField from "@material-ui/core/TextField";
+import AwesomeSlider from 'react-awesome-slider';
+import 'react-awesome-slider/dist/styles.css';
+import FileUpload from './upload.component';
+import SizesTable from "./product-edit-sizes-table.component";
+import { Card, CardContent, CardHeader } from "@material-ui/core";
+import Typography from '@material-ui/core/Typography';
 
 const styles = (theme: Theme) =>
   createStyles({
@@ -21,7 +26,21 @@ const styles = (theme: Theme) =>
     },
     picture: {
       maxWidth: "31.25rem"
-    }
+    },
+    button: {
+      marginRight: theme.spacing(1),
+      marginBottom: theme.spacing(1),
+    },
+    rightIcon: {
+      marginLeft: theme.spacing(1),
+    },
+    table: {
+      marginTop: theme.spacing(1),
+      marginBottom: theme.spacing(5),
+    },
+    card: {
+      marginTop: theme.spacing(1),
+    },
   });
 
 interface Props extends WithStyles<typeof styles> {
@@ -29,17 +48,33 @@ interface Props extends WithStyles<typeof styles> {
   cities: LookupEntity[];
   onFieldUpdate: (id: string, value: any) => void;
   onSave: () => void;
+  onCancel: () => void;
+  onChangeFile: (file: File) => void;
+  onConfirmSubmit: () => void;
   productFormErrors: ProductFormErrors;
 }
 
 export const ProductEditComponentInner = (props: Props) => {
-  const { classes, product, cities, onFieldUpdate, onSave, productFormErrors } = props;
+
+  const { classes, product, cities, onFieldUpdate, onSave,onCancel, onConfirmSubmit, onChangeFile, productFormErrors } = props;
 
   return (
     <div className={classes.formContainer}>
-      <h1> Product edition</h1>
+      <Typography variant="h4" id="productEditLabel">Product edition</Typography>
+      <Card className={classes.card}>
+      <CardHeader
+        title="Product images"
+      />
+      <CardContent>
+      <AwesomeSlider style={{ marginBottom: '6vh', maxWidth: "31.25rem" }}>
+        {product.pictures.map(image => (
+          <div key={image} style={{ backgroundImage: `url(${image})`, backgroundColor: '#ffffff', backgroundRepeat: 'no-repeat', backgroundSize: 'contain', backgroundPosition: '50% 50%' }} />
+        ))}
+      </AwesomeSlider>
+      </CardContent>
+      </Card>
       <TextFieldForm
-        placeholder="Insert product name"
+        placeholder="Insert the product name"
         name="productName"
         value={product.productName}
         onChange={onFieldUpdate}
@@ -52,18 +87,6 @@ export const ProductEditComponentInner = (props: Props) => {
         max={5}
         onChange={onFieldUpdate}
       />
-      <img className={classes.picture} src={product.picture} />
-      {/*  
-     
-      <DropdownForm
-        name="city"
-        label="city"
-        onChange={onFieldUpdate}
-        value={product.}
-        list={cities}
-        error={productFormErrors.city.errorMessage}
-      />
-       */}
       <TextAreaForm
         placeholder="Description"
         name="productDescription"
@@ -72,8 +95,13 @@ export const ProductEditComponentInner = (props: Props) => {
         rows={1}
         error={productFormErrors.productDescription.errorMessage}
       />
-      <Button name="saveButton" variant="contained" color="primary" onClick={onSave}>
+      <SizesTable onChange={onFieldUpdate} rows={product.sizes}/>
+      <FileUpload onChangeFile={onChangeFile} onConfirmSubmit={onConfirmSubmit} />
+      <Button name="saveButton" className={classes.button} variant="contained" color="primary" onClick={onSave}>
         Save
+      </Button>
+      <Button name="cancelButton" className={classes.button} variant="contained" color="primary" onClick={onCancel}>
+        Cancel edition
       </Button>
     </div>
   );

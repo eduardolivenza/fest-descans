@@ -1,24 +1,17 @@
 import * as React from "react";
 import { ProductEntityVm } from "core/dataModel/product-entity.vm";
 import { Table, TableHead, TableRow, TableCell, TableBody } from "@material-ui/core";
-import { WithStyles, createStyles, Icon, withStyles } from "@material-ui/core";
 import { ProductRowComponent } from "./product-tableRow.component";
 
-interface Props extends WithStyles<typeof styles> {
+interface Props  {
     productCollection: ProductEntityVm[];
     viewProduct: (id: string) => void;
 }
 
-const styles = theme => createStyles({
-    table: {
-    },
-  
-});
-
-const ProductCollectionTableComponentInner = (props: Props) => {
-    const { productCollection, classes, viewProduct } = props;
+export const ProductCollectionTableComponent = (props: Props) => {
+    const { productCollection,  viewProduct } = props;
     return (
-        <Table className={classes.table}>
+        <Table>
             <TableHead>
                 <TableRow>    
                     <TableCell align="left">Picture</TableCell>
@@ -37,5 +30,3 @@ const ProductCollectionTableComponentInner = (props: Props) => {
         </Table>
     );
 }
-
-export const ProductCollectionTableComponent = withStyles(styles)(ProductCollectionTableComponentInner);

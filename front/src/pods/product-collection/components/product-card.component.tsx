@@ -27,9 +27,8 @@ interface Props extends WithStyles<typeof styles> {
 const styles = (theme: Theme) =>
   createStyles({
     card: {
-      width: "40vh",
-      marginTop: theme.spacing(1),
-      marginRight: theme.spacing(1)
+      width: "43vh",
+      margin: theme.spacing(1),
     },
     chip:
     {
@@ -42,12 +41,12 @@ const styles = (theme: Theme) =>
       justifyContent: 'space-between',
     },
     chips: {
-      flexBasis: '80%',
+      flexBasis: '85%',
     },
     price: {
       fontWeight: 'bold',
       fontSize: 25,
-    }
+    },
   });
 
 const manageProductPrice = () => {
@@ -83,7 +82,7 @@ export const ProductCardInner = (props: Props) => {
           }}
         >
           <CardMedia
-            image={product.picture}
+            image={product.thumbnail}
             title={product.productName}
             style={{ height: 0, paddingTop: "56.25%" }}
             onClick={() => viewProduct(product.productIdentifier)}
@@ -109,7 +108,7 @@ export const ProductCardInner = (props: Props) => {
           </div>
         </div>
       </CardContent>
-      <CardActions disableSpacing>
+      <CardActions disableSpacing >
         { session.email ? (
          <IconButton aria-label="Edit" onClick={() => editProduct(product.productIdentifier)}>
           <EditIcon />
