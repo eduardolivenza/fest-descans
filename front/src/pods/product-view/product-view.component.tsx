@@ -1,10 +1,8 @@
 import * as React from "react";
 import { createStyles, WithStyles, withStyles} from "@material-ui/core/styles";
 import { ProductEntityVm } from "core/dataModel/product-entity.vm";
-import AwesomeSlider from 'react-awesome-slider';
-import 'react-awesome-slider/dist/styles.css';
 import { SizesTableView } from 'pods/product-view/product-view-sizes-table.component';
-import { Card, CardContent, CardHeader } from "@material-ui/core";
+import { ImagesSliderCard } from "common/components/images-slider-card.component";
 import Typography from '@material-ui/core/Typography';
 import { ValueDisplay } from "common/components";
 
@@ -15,12 +13,9 @@ const styles = () =>
       flexDirection: "column",
       justifyContent: "center"
     },
-    card: {
-      marginTop: '1vh',
-    },
     infoElement:{
-      marginTop: '2vh',
-      marginBottom: '1vh',
+      marginTop: '3vh',
+      marginBottom: '3vh',
     }
   });
 
@@ -34,18 +29,7 @@ export const ProductViewComponentInner = (props: Props) => {
   return (
     <div className={classes.formContainer}>
       <Typography className={classes.infoElement} variant="h4" id="productDetailsLabel">Product details</Typography>
-      <Card className={classes.card}>
-        <CardHeader
-          title="Product images"
-        />
-        <CardContent>
-          <AwesomeSlider style={{ marginBottom: '6vh', maxWidth: "45rem" }}>
-            {product.pictures.map(image => (
-              <div key={image} style={{ backgroundImage: `url(${image})`, backgroundColor: '#ffffff', backgroundRepeat: 'no-repeat', backgroundSize: 'contain', backgroundPosition: '50% 50%' }} />
-            ))}
-          </AwesomeSlider>
-        </CardContent>
-      </Card>
+      <ImagesSliderCard product={product}/>
       <Typography className={classes.infoElement} variant="h6">{product.productName}</Typography>
       <ValueDisplay
           name="Comfort"

@@ -10,12 +10,10 @@ import { Button } from "@material-ui/core";
 import { ProductEntityVm, ProductFormErrors } from "core/dataModel/product-entity.vm";
 import { LookupEntity } from "core";
 import { RatingForm } from "common/components";
-import AwesomeSlider from 'react-awesome-slider';
-import 'react-awesome-slider/dist/styles.css';
 import FileUpload from './upload.component';
 import SizesTable from "./product-edit-sizes-table.component";
-import { Card, CardContent, CardHeader } from "@material-ui/core";
 import Typography from '@material-ui/core/Typography';
+import { ImagesSliderCard } from "common/components/images-slider-card.component";
 
 const styles = (theme: Theme) =>
   createStyles({
@@ -24,9 +22,6 @@ const styles = (theme: Theme) =>
       flexDirection: "column",
       justifyContent: "center"
     },
-    picture: {
-      maxWidth: "31.25rem"
-    },
     button: {
       marginRight: theme.spacing(1),
       marginBottom: theme.spacing(1),
@@ -34,13 +29,10 @@ const styles = (theme: Theme) =>
     rightIcon: {
       marginLeft: theme.spacing(1),
     },
-    table: {
-      marginTop: theme.spacing(1),
-      marginBottom: theme.spacing(5),
-    },
-    card: {
-      marginTop: theme.spacing(1),
-    },
+    infoElement:{
+      marginTop: '3vh',
+      marginBottom: '3vh',
+    }
   });
 
 interface Props extends WithStyles<typeof styles> {
@@ -60,19 +52,8 @@ export const ProductEditComponentInner = (props: Props) => {
 
   return (
     <div className={classes.formContainer}>
-      <Typography variant="h4" id="productEditLabel">Product edition</Typography>
-      <Card className={classes.card}>
-      <CardHeader
-        title="Product images"
-      />
-      <CardContent>
-      <AwesomeSlider style={{ marginBottom: '6vh', maxWidth: "31.25rem" }}>
-        {product.pictures.map(image => (
-          <div key={image} style={{ backgroundImage: `url(${image})`, backgroundColor: '#ffffff', backgroundRepeat: 'no-repeat', backgroundSize: 'contain', backgroundPosition: '50% 50%' }} />
-        ))}
-      </AwesomeSlider>
-      </CardContent>
-      </Card>
+      <Typography className={classes.infoElement} variant="h4" id="productEditLabel">Product edition</Typography>
+      <ImagesSliderCard product={product}/>
       <TextFieldForm
         placeholder="Insert the product name"
         name="productName"
@@ -88,6 +69,7 @@ export const ProductEditComponentInner = (props: Props) => {
         onChange={onFieldUpdate}
       />
       <TextAreaForm
+        className={classes.infoElement} 
         placeholder="Description"
         name="productDescription"
         value={product.productDescription}
