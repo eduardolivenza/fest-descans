@@ -1,8 +1,10 @@
 package com.eolivenza.modules.baseProject;
 
 import com.eolivenza.modules.baseProject.configuration.ProfileNames;
+import com.eolivenza.modules.baseProject.controller.http.rest.resources.CategoryResource;
 import com.eolivenza.modules.baseProject.controller.http.rest.resources.ProductResource;
 import com.eolivenza.modules.baseProject.controller.http.rest.resources.SupplierResource;
+import com.eolivenza.modules.baseProject.resources.CategoryResourceDataBuilder;
 import com.eolivenza.modules.baseProject.resources.ProductResourceDataBuilder;
 import com.eolivenza.modules.baseProject.resources.SupplierResourceDataBuilder;
 import io.restassured.RestAssured;
@@ -59,9 +61,11 @@ public class ControllerToSecondaryAdaptersWithInMemoryH2IT {
         String url = "/products";
         String expectedDescriptionValue = "My own description";
         SupplierResource supplierResource = SupplierResourceDataBuilder.defaultBuilder().build();
+        CategoryResource categoryResource = CategoryResourceDataBuilder.defaultBuilder().build();
         ProductResource addedProductResource = ProductResourceDataBuilder
                 .defaultBuilder()
                 .withSupplier(supplierResource)
+                .withCategory(categoryResource)
                 .withDescription(expectedDescriptionValue)
                 .build();
         given().contentType(APPLICATION_JSON_VALUE)

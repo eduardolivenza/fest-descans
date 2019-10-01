@@ -5,7 +5,7 @@ describe('Product entity mapper tests', () => {
 
     it('check product entity and its content is correctly mapped to domain objects', () => {
         const productEntityApi : ProductEntityApi = {
-          category: "string",
+          category: null,
           productIdentifier : "string",
           productName : "string",
           productDescription: "string",

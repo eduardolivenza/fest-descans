@@ -67,7 +67,7 @@ public class ProductsController {
         AddProductCommand addProductCommand = new AddProductCommand(
                 productResource.productIdentifier,
                 productResource.productName,
-                productResource.category,
+                productResource.category.value,
                 productResource.productDescription,
                 productResource.comfortLevel,
                 supplier,
@@ -91,7 +91,7 @@ public class ProductsController {
         ModProductCommand modProductCommand = new ModProductCommand(
                 productResource.productIdentifier,
                 productResource.productName,
-                productResource.category,
+                productResource.category.value,
                 productResource.productDescription,
                 productResource.comfortLevel,
                 supplier,

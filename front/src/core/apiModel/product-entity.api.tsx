@@ -1,7 +1,7 @@
 import {SupplierApi} from "./supplier.api";
 
 export interface ProductEntityApi {
-    category: string;
+    category: CategoryEntityApi;
     productIdentifier: string;
     productName: string;
     productDescription: string;
@@ -10,7 +10,12 @@ export interface ProductEntityApi {
     supplier: SupplierApi;
     sizes: ProductSizeEntityApi[];
   }
-    
+
+  export interface CategoryEntityApi {
+    value: string;
+    description : string;
+  }
+
   export interface ProductSizeEntityApi {
     size: string;
     price : string;

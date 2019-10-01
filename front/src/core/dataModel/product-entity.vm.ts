@@ -2,7 +2,7 @@ import { SupplierVm } from "core/dataModel/supplier-entity.vm";
 import { FieldValidationResult } from "lc-form-validation";
 
 export interface ProductEntityVm {
-  category: string;
+  category: CategoryEntityVm;
   productIdentifier: string;
   productName: string;
   productDescription: string;
@@ -18,9 +18,16 @@ export interface ProductEntitySizeVm {
   price: string;
 }
 
+export interface CategoryEntityVm {
+  value: string;
+  description : string;
+}
 
 export const createDefaultProduct = (): ProductEntityVm => ({
-  category: "string",
+  category: {
+    value: "",
+    description: ""
+  },
   productIdentifier: "prod01",
   productName: "prodname",
   productDescription: "desc",
