@@ -11,7 +11,7 @@ public class ProductResource {
     @ApiModelProperty(required = false, value = "Identifier", example = "", readOnly = true)
     public String identifier;
 
-    @ApiModelProperty(required = true, value = "Category", example = "BED")
+    @ApiModelProperty(required = true)
     public CategoryResource category;
 
     @ApiModelProperty(required = true, value = "Product identifier", example = "Latex01")

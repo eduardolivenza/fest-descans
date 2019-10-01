@@ -12,8 +12,8 @@ export interface ProductEntityApi {
   }
 
   export interface CategoryEntityApi {
-    value: string;
     description : string;
+    value: string;
   }
 
   export interface ProductSizeEntityApi {

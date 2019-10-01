@@ -69,9 +69,9 @@ export const ProductCardInner = (props: Props) => {
   return (
     <Card className={classes.card} key={product.productIdentifier}>
       <CardHeader
-        avatar={<Avatar aria-label="Product">{product.category}</Avatar>}
+        avatar={<Avatar aria-label="Product">{product.category.value}</Avatar>}
         title={product.productName}
-        subheader={product.category}
+        subheader={product.category.description}
       />
       <CardContent>
         <div

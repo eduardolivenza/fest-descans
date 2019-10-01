@@ -34,7 +34,7 @@ export const ProductViewComponentInner = (props: Props) => {
       <Typography className={classes.name} variant="h4" id="productDetailsLabel">Product details</Typography>
       <ImagesSliderCard product={product}/>
       <Typography className={classes.name} variant="h5">{product.productName}</Typography>
-      <Typography className={classes.infoElement} variant="subtitle1">Product type: {product.category}</Typography>
+      <Typography className={classes.infoElement} variant="subtitle1">Product type: {product.category.description}</Typography>
       <ValueDisplay name="Comfort" value={product.comfortLevel} max={5}/>
       <Typography className={classes.name} variant="subtitle1">Description: {product.productDescription}</Typography>
       <Typography className={classes.infoElement} variant="subtitle1">Produced by {product.supplier.companyName} - {product.supplier.country}</Typography>
