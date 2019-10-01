@@ -25,7 +25,11 @@ export const createDefaultProduct = (): ProductEntityVm => ({
   productName: "prodname",
   productDescription: "desc",
   sizes: [],
-  supplier: null,
+  supplier: {
+    companyName: "",
+    id: "",
+    country: ""
+  },
   comfortLevel: 3,
   pictures: [],
   thumbnail: "",

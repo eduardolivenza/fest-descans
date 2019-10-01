@@ -13,6 +13,7 @@ interface Props {
   productCollection: ProductEntityVm[];
   viewProduct: (id: string) => void;
   editProduct: (id: string) => void;
+  addProduct: () => void;
   layout?: Layout;
   handleChangeComfortFilter: (name: string, value: boolean) => void;
   handleProductTypesFilter: (name: string, value: boolean) => void;
@@ -31,6 +32,7 @@ export const ProductCollectionComponent: React.FunctionComponent<Props> = (props
     productCollection,
     viewProduct,
     editProduct,
+    addProduct,
     layout,
     handleChangeComfortFilter,
     handleProductTypesFilter,
@@ -54,7 +56,7 @@ export const ProductCollectionComponent: React.FunctionComponent<Props> = (props
   let adminComponents;
   if (session.email) {
     adminComponents = (
-      <Tooltip title="AddProduct" >
+      <Tooltip title="AddProduct" onClick={addProduct}>
         <IconButton aria-label="add">
           <AddIcon />
         </IconButton>

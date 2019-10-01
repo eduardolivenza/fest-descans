@@ -32,7 +32,7 @@ const styles = (theme: Theme) =>
     infoElement:{
       marginTop: '3vh',
       marginBottom: '3vh',
-    }
+    },
   });
 
 interface Props extends WithStyles<typeof styles> {
@@ -61,6 +61,7 @@ export const ProductEditComponentInner = (props: Props) => {
         onChange={onFieldUpdate}
         error={productFormErrors.productName.errorMessage}
       />
+      <Typography className={classes.infoElement} variant="subtitle2">Product identifier: {product.productIdentifier}</Typography>
       <RatingForm
         label="Comfort level"
         name="comfortLevel"

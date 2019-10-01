@@ -1,12 +1,13 @@
 import * as React from "react";
 import { ProductCollectionComponent } from "./product-collection.component";
-import { ProductEntityVm } from "core/dataModel/product-entity.vm";
+import { ProductEntityVm, createDefaultProduct } from "core/dataModel/product-entity.vm";
 import { routesLinks } from "core";
 import { withRouter, RouteComponentProps } from "react-router-dom";
 import { getProductsCollection } from "core/api/product-collection.api";
 import { mapFromApiToVm } from "core/mapper/product-entity.mapper";
 import { mapFromAToBCollection } from "common";
 import { CheckBoxConfigValue } from "common/components";
+
 
 const useProductCollection = () => {
 
@@ -30,7 +31,7 @@ const useProductCollection = () => {
       setMaxPrice(maxPriceLocal);
     }
   );
-  return { productsCollection, loadProductsCollection, productsCollectionFiltered, setProductsCollectionFiltered, maxPrice };
+  return { productsCollection, setProductsCollection, loadProductsCollection, productsCollectionFiltered, setProductsCollectionFiltered, maxPrice };
 };
 
 const comfortLevelCheckboxes: CheckBoxConfigValue[] = [{
@@ -77,7 +78,7 @@ interface Props extends RouteComponentProps { }
 
 export const ProductCollectionContainerInner = (props: Props) => {
 
-  const { productsCollection, loadProductsCollection, productsCollectionFiltered, setProductsCollectionFiltered, maxPrice } = useProductCollection();
+  const { productsCollection, setProductsCollection, loadProductsCollection, productsCollectionFiltered, setProductsCollectionFiltered, maxPrice } = useProductCollection();
   const [ comfortLevelFilterItems, setComfortLevelFilterItems] = React.useState(comfortLevelCheckboxes);
   const [ productTypesFilterItems, setProductTypesFilterItems] = React.useState(productTypesCheckBoxes);
   const [ priceFilter, setPriceFilter] = React.useState([0, maxPrice]);
@@ -113,6 +114,14 @@ export const ProductCollectionContainerInner = (props: Props) => {
     props.history.push(routesLinks.productEdit(productId));
   }
 
+  const addProduct = () => {
+    alert (" trying to add a new product ");
+
+    //setProductsCollection(productsCollection => [...productsCollection, createDefaultProduct()]);  
+    
+    //props.history.push(routesLinks.productEdit("external"));
+  }
+
   React.useEffect(() => {
     loadProductsCollection();    
   }, []);
@@ -123,7 +132,7 @@ export const ProductCollectionContainerInner = (props: Props) => {
   
   React.useEffect(() => {
     applyFilter();
-  }, [ comfortLevelFilterItems, productTypesFilterItems, priceFilter, textFilterValue])
+  }, [ comfortLevelFilterItems, productTypesFilterItems, priceFilter, textFilterValue, productsCollection])
 
   const applyFilter = () => {
     let newArray = productsCollection;
@@ -150,6 +159,7 @@ export const ProductCollectionContainerInner = (props: Props) => {
     productCollection={productsCollectionFiltered}
     viewProduct={viewProduct}
     editProduct={editProduct}
+    addProduct={addProduct}
     handleChangeComfortFilter={handleChangeComfortFilter}
     handleProductTypesFilter={handleChangeProductTypesFilter}
     handleChangePriceFilter={handleChangePriceFilter}

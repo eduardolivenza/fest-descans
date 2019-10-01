@@ -1,9 +1,9 @@
 import * as React from "react";
+import Typography from '@material-ui/core/Typography';
 import { createStyles, WithStyles, withStyles} from "@material-ui/core/styles";
 import { ProductEntityVm } from "core/dataModel/product-entity.vm";
 import { SizesTableView } from 'pods/product-view/product-view-sizes-table.component';
-import { ImagesSliderCard } from "common/components/images-slider-card.component";
-import Typography from '@material-ui/core/Typography';
+import { ImagesSliderCard } from "common/components/images-slider-card.component"
 import { ValueDisplay } from "common/components";
 
 const styles = () =>
@@ -13,8 +13,11 @@ const styles = () =>
       flexDirection: "column",
       justifyContent: "center"
     },
-    infoElement:{
+    name:{
       marginTop: '3vh',
+      marginBottom: '3vh',
+    },
+    infoElement:{
       marginBottom: '3vh',
     }
   });
@@ -28,15 +31,14 @@ export const ProductViewComponentInner = (props: Props) => {
 
   return (
     <div className={classes.formContainer}>
-      <Typography className={classes.infoElement} variant="h4" id="productDetailsLabel">Product details</Typography>
+      <Typography className={classes.name} variant="h4" id="productDetailsLabel">Product details</Typography>
       <ImagesSliderCard product={product}/>
-      <Typography className={classes.infoElement} variant="h6">{product.productName}</Typography>
-      <ValueDisplay
-          name="Comfort"
-          value={product.comfortLevel}
-          max={5}
-      />
-      <Typography className={classes.infoElement}variant="subtitle1">{product.productDescription}</Typography>
+      <Typography className={classes.name} variant="h5">{product.productName}</Typography>
+      <Typography className={classes.infoElement} variant="subtitle2">Identifier: {product.productIdentifier}</Typography>
+      <Typography className={classes.infoElement} variant="subtitle1">Product type: {product.category}</Typography>
+      <ValueDisplay name="Comfort" value={product.comfortLevel} max={5}/>
+      <Typography className={classes.name} variant="subtitle1">Description: {product.productDescription}</Typography>
+      <Typography className={classes.infoElement} variant="subtitle1">Produced by {product.supplier.companyName} - {product.supplier.country}</Typography>
       <SizesTableView rows={product.sizes} />
     </div>
   );
