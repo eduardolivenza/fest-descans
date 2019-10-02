@@ -12,6 +12,13 @@ const ProductEditFormValidationConstraints: ValidationConstraints = {
                  validator: validateValueMatchValidator, 
                  customParams: {stringToMatch: 'No city selected'} 
               }],*/
+        productIdentifier:[
+            { validator: Validators.required },
+            {
+                validator: Validators.minLength,
+                customParams: { length: 6 }
+            }
+        ],
         productDescription: [
             { validator: Validators.required },
             {

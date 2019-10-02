@@ -29,8 +29,14 @@ const styles = (theme: Theme) =>
     rightIcon: {
       marginLeft: theme.spacing(1),
     },
-    infoElement:{
+    titleElement:{
       marginTop: '3vh',
+      marginBottom: '3vh',
+    },
+    descriptionElement:{
+      marginTop: '3vh',
+    },
+    infoElement:{
       marginBottom: '3vh',
     },
   });
@@ -52,16 +58,24 @@ export const ProductEditComponentInner = (props: Props) => {
 
   return (
     <div className={classes.formContainer}>
-      <Typography className={classes.infoElement} variant="h4" id="productEditLabel">Product edition</Typography>
+      <Typography className={classes.titleElement} variant="h4" id="productEditLabel">Product edition</Typography>
       <ImagesSliderCard product={product}/>
+      <Typography className={classes.descriptionElement} variant="subtitle2">Product name</Typography>
       <TextFieldForm
-        placeholder="Insert the product name"
+        placeholder="Insert here the product name"
         name="productName"
         value={product.productName}
         onChange={onFieldUpdate}
         error={productFormErrors.productName.errorMessage}
       />
-      <Typography className={classes.infoElement} variant="subtitle2">Product identifier: {product.productIdentifier}</Typography>
+      <Typography className={classes.descriptionElement} variant="subtitle2">Product identifier</Typography>
+      <TextFieldForm
+        placeholder="Insert here external product identifier"
+        name="productIdentifier"
+        value={product.productIdentifier}
+        onChange={onFieldUpdate}
+        error={productFormErrors.productIdentifier.errorMessage}
+      />
       <RatingForm
         label="Comfort level"
         name="comfortLevel"
@@ -69,6 +83,7 @@ export const ProductEditComponentInner = (props: Props) => {
         max={5}
         onChange={onFieldUpdate}
       />
+      <Typography className={classes.descriptionElement} variant="subtitle2">Product description</Typography>
       <TextAreaForm
         className={classes.infoElement} 
         placeholder="Description"
@@ -78,6 +93,8 @@ export const ProductEditComponentInner = (props: Props) => {
         rows={1}
         error={productFormErrors.productDescription.errorMessage}
       />
+      <Typography className={classes.descriptionElement} variant="subtitle2">Category</Typography>
+      <Typography className={classes.descriptionElement} variant="subtitle2">Produced by</Typography>
       <SizesTable onChange={onFieldUpdate} rows={product.sizes}/>
       <FileUpload onChangeFile={onChangeFile} onConfirmSubmit={onConfirmSubmit} />
       <Button name="saveButton" className={classes.button} variant="contained" color="primary" onClick={onSave}>

@@ -12,7 +12,9 @@ const styles = (theme: Theme) =>
   createStyles({
     ratingComponent: {
       flex: 3, 
-      flexDirection: 'row'
+      flexDirection: 'row',
+      marginBottom: '1vh',
+      marginTop: '1vh',
     },
   });
 
@@ -34,7 +36,7 @@ export const RatingFormInner: React.StatelessComponent<Props> = props => {
   return (
     <>
     <div className={classes.ratingComponent}>
-        <Typography>{label}</Typography>
+        <Typography variant="subtitle2" style={{marginBottom:'1vh'}}>{label}</Typography>
         <Rating
           name={name}
           value={value}

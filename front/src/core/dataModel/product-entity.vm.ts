@@ -46,12 +46,14 @@ export const createDefaultProduct = (): ProductEntityVm => ({
 
 export interface ProductFormErrors {
   productName: FieldValidationResult;
+  productIdentifier: FieldValidationResult;
   // city: FieldValidationResult;
   productDescription: FieldValidationResult;
 }
 
 export const createDefaultProductFormErrors = (): ProductFormErrors => ({
   productName: new FieldValidationResult(),
+  productIdentifier: new FieldValidationResult(),
   // city: new FieldValidationResult(),
   productDescription: new FieldValidationResult()
 });
