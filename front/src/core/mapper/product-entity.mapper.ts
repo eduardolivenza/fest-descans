@@ -4,6 +4,7 @@ import {basePicturesUrl} from 'core';
 import {mapSupplierToVm, mapSupplierToApi} from 'core/mapper/supplier-entity.mapper';
 
 export const mapFromApiToVm = (apiEntity : ProductEntityApi) : ProductEntityVm => ({
+  internalIdentifier: apiEntity.internalIdentifier,
   category : apiEntity.category,
   productIdentifier : apiEntity.productIdentifier,
   productName: apiEntity.productName, 
@@ -16,6 +17,7 @@ export const mapFromApiToVm = (apiEntity : ProductEntityApi) : ProductEntityVm =
 });
 
 export const mapFromVmToApi = (vmEntity : ProductEntityVm) : ProductEntityApi => ({
+  internalIdentifier: vmEntity.internalIdentifier,
   category : vmEntity.category,
   productIdentifier : vmEntity.productIdentifier,
   productName: vmEntity.productName, 

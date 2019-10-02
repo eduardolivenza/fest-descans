@@ -2,6 +2,7 @@ import { SupplierVm } from "core/dataModel/supplier-entity.vm";
 import { FieldValidationResult } from "lc-form-validation";
 
 export interface ProductEntityVm {
+  internalIdentifier: string;
   category: CategoryEntityVm;
   productIdentifier: string;
   productName: string;
@@ -24,6 +25,7 @@ export interface CategoryEntityVm {
 }
 
 export const createDefaultProduct = (): ProductEntityVm => ({
+  internalIdentifier: "InternalUUID",
   category: {
     value: "",
     description: ""

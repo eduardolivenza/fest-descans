@@ -84,7 +84,7 @@ const ProductEditContainerInner = (props: Props) => {
 
   const handleFormValidation = (formValidation: FormValidationResult) => {
     if (formValidation.succeeded) {
-      patchProduct(product.productIdentifier, product).then( response =>
+      patchProduct(product).then( response =>
         history.back()
       )
     } 

@@ -28,7 +28,7 @@ public class ProductsResourceMapper implements ResourceMapper<Product, ProductRe
     public Product toFirstType(ProductResource object) {
         return new Product(
                 categoryMapper.toFirstType(object.category),
-                object.identifier,
+                object.internalIdentifier,
                 object.productName,
                 object.productDescription,
                 object.comfortLevel,

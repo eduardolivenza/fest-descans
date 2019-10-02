@@ -76,12 +76,8 @@ public class ProductsController {
     }
 
     @ApiOperation(value = " Modify values of an existing product")
-    @PatchMapping(path = "/products/{productIdentifier}")
-    public void modifyExistingProduct(
-            @ApiParam(required = true, value = "External identifier of the instrument", example = "800||1")
-            @PathVariable final String productIdentifier,
-            @RequestBody final ProductResource productResource) {
-
+    @PatchMapping(path = "/products")
+    public void modifyExistingProduct(@RequestBody final ProductResource productResource) {
         Set<AvailableProduct> sizesSet = new HashSet<>();
         if (productResource.sizes != null) {
             Stream<AvailableProduct> sizesStream = productResource.sizes.stream().map(availableProductResourceMapper::toFirstType);
@@ -89,6 +85,7 @@ public class ProductsController {
         }
         Supplier supplier = supplierResourceMapper.toFirstType(productResource.supplier);
         ModProductCommand modProductCommand = new ModProductCommand(
+                productResource.internalIdentifier,
                 productResource.productIdentifier,
                 productResource.productName,
                 productResource.category.value,

@@ -1,6 +1,7 @@
 import {SupplierApi} from "./supplier.api";
 
 export interface ProductEntityApi {
+    internalIdentifier: string;
     category: CategoryEntityApi;
     productIdentifier: string;
     productName: string;

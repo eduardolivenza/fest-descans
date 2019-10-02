@@ -15,6 +15,7 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import java.util.HashSet;
 import java.util.Optional;
+import java.util.UUID;
 
 @Named
 public class ModProductCommandHandler implements CommandHandler<ModProductCommand> {
@@ -33,16 +34,18 @@ public class ModProductCommandHandler implements CommandHandler<ModProductComman
     @DomainStrictTransactional
     @Override
     public void accept(ModProductCommand modProductCommand) {
-        Optional<Product> optionalProduct = productsRepository.retrieveByProductIdentifier(modProductCommand.productIdentifier);
-        if (optionalProduct.isPresent()) {
-            Product originalProduct = optionalProduct.get();
+
+
+        if (productsRepository.existsByuuid(modProductCommand.identifier)) {
+            Product originalProduct = productsRepository.retrieve(modProductCommand.identifier);
+
             Category category = Category.valueOf(modProductCommand.category);
             if (!suppliersRepository.existsBySupplierIdentifier(modProductCommand.supplier.getExternalIdentifier())){
                 logger.info("Supplier not found. Creating a new one");
                 suppliersRepository.create(modProductCommand.supplier);
             }
             Product product = new Product(
-                    originalProduct.getUuid(),
+                    UUID.fromString(modProductCommand.identifier),
                     category,
                     modProductCommand.productIdentifier,
                     modProductCommand.productName,

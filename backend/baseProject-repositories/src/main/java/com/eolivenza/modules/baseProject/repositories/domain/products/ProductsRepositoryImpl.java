@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 
@@ -48,6 +49,11 @@ public class ProductsRepositoryImpl implements ProductsRepository {
     @Override
     public boolean existsByProductIdentifier(String externalIdentifier) {
         return productsRepositoryJpaSpringData.existsByProductIdentifier(externalIdentifier);
+    }
+
+    @Override
+    public boolean existsByuuid(String internalIdentifier){
+        return productsRepositoryJpaSpringData.existsById(internalIdentifier);
     }
 
     @Override

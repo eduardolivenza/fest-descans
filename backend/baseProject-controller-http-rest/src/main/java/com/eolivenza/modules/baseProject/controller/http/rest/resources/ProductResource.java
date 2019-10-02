@@ -9,7 +9,7 @@ import java.util.Set;
 public class ProductResource {
 
     @ApiModelProperty(required = false, value = "Identifier", example = "", readOnly = true)
-    public String identifier;
+    public String internalIdentifier;
 
     @ApiModelProperty(required = true)
     public CategoryResource category;
@@ -38,7 +38,7 @@ public class ProductResource {
     public ProductResource(){}
 
     public ProductResource(String identifier, CategoryResource category, String productIdentifier, String productName, String productDescription, Integer comfortLevel, SupplierResource supplierResource, Set<AvailableSizeResource> sizes, Set<String> images) {
-        this.identifier = identifier;
+        this.internalIdentifier = identifier;
         this.category = category;
         this.productIdentifier = productIdentifier;
         this.productName = productName;

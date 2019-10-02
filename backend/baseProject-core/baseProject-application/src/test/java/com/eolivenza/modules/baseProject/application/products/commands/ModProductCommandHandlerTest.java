@@ -31,9 +31,6 @@ public class ModProductCommandHandlerTest {
     private Logger logger = LoggerFactory.getLogger(ModProductCommandHandler.class);
 
     @Mock
-    private Optional<Product> optionalProductMocked;
-
-    @Mock
     private Product productMocked;
     @Mock
     private Supplier supplierMocked;
@@ -48,18 +45,17 @@ public class ModProductCommandHandlerTest {
 
     @Test
     public void an_instrument_is_overwritten() {
+        String internalId = "821928d3-fdb2-43c7-8ac2-f4e7d163feec";
         String externalIdentifier = "externalIdentifier";
 
-        ModProductCommand modProductCommand = new ModProductCommand(externalIdentifier,"productName", "SOFA", "productDescription", 3, supplierMocked, new HashSet<AvailableProduct>() );
+        ModProductCommand modProductCommand = new ModProductCommand(internalId, externalIdentifier,"productName", "SOFA", "productDescription", 3, supplierMocked, new HashSet<AvailableProduct>() );
 
-        when(productsRepositoryMock.retrieveByProductIdentifier(externalIdentifier)).thenReturn(optionalProductMocked);
-        when(optionalProductMocked.isPresent()).thenReturn(true);
-        when(optionalProductMocked.get()).thenReturn(productMocked);
-        when(productMocked.getUuid()).thenReturn(UUID.fromString("821928d3-fdb2-43c7-8ac2-f4e7d163feec"));
+        when(productsRepositoryMock.existsByuuid(internalId)).thenReturn(true);
+        when(productsRepositoryMock.retrieve(internalId)).thenReturn(productMocked);
 
         modProductCommandHandler.accept(modProductCommand);
 
-        verify(productsRepositoryMock).retrieveByProductIdentifier(externalIdentifier);
+        verify(productsRepositoryMock).retrieve(internalId);
         verify(productsRepositoryMock).update(any(Product.class));
     }
 
