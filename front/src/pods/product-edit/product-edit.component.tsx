@@ -121,7 +121,7 @@ export const ProductEditComponentInner = (props: Props) => {
         rows={1}
         error={productFormErrors.productDescription.errorMessage}
       />
-        <Typography className={classes.descriptionElement} variant="subtitle2">
+      <Typography className={classes.descriptionElement} variant="subtitle2">
         Category
       </Typography>
       <DropdownForm

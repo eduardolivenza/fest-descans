@@ -1,8 +1,7 @@
 import * as React from "react";
 import { withRouter, RouteComponentProps } from "react-router-dom";
-import { productViewRouteParams } from "core";
+import { productViewRouteParams, LookupEntity, createLookupEmpty } from "core";
 import { ProductEditComponent } from "./product-edit.component";
-import { categoriesLookup } from "core";
 import { FormValidationResult } from "lc-form-validation";
 import { ProductEditFormValidation } from "./product-edit.validation";
 import { NotificationComponent } from "common/components";
@@ -11,6 +10,7 @@ import { getProductView } from "core/api/product-view.api";
 import { mapFromApiToVm } from "core/mapper/product-entity.mapper";
 import { postImageToProduct} from 'core/api/addProductImage.api';
 import { patchProduct } from "core/api/product-patch.api";
+import { getCategoriesCollection } from "core/api/categories-collection.api";
 
 interface Props extends RouteComponentProps {}
 
@@ -19,26 +19,33 @@ const useProductEdit = () => {
   const [product, setProduct] = React.useState<ProductEntityVm>(
     createDefaultProduct()
   );
+  const [categories, setCategories] = React.useState<LookupEntity[]>([createLookupEmpty()]);
 
   const loadProductEdit = (id: number) =>
     getProductView(id).then(result =>
       setProduct(mapFromApiToVm(result))
     );
 
-  return { product, setProduct, loadProductEdit };
+    const loadCategories = () =>
+    getCategoriesCollection().then(result =>
+      setCategories(result)
+    );
+
+  return { product, setProduct, loadProductEdit, categories, loadCategories };
 };
 
 interface Props extends RouteComponentProps { }
 
 const ProductEditContainerInner = (props: Props) => {
 
-  const [categories] = React.useState(categoriesLookup);
-  const {product, setProduct, loadProductEdit} = useProductEdit();
+
+  const {product, setProduct, loadProductEdit, categories, loadCategories} = useProductEdit();
   const [productFormErrors, setProductFormErrors] = React.useState<ProductFormErrors>(createDefaultProductFormErrors());
   const [showValidationFailedMessage, setShowValidationFailedMessage] = React.useState(false);
   const [file, setFile] = React.useState();
   
   React.useEffect(() => {
+    loadCategories();
     loadProductEdit(props.match.params[productViewRouteParams.id]);
   }, []);
 

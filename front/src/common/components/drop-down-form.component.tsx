@@ -35,9 +35,9 @@ export const DropdownForm: React.SFC<Props> = props => {
         onChange={onTextFieldChange(name, onChange)}
         disabled={isDisabled}
       >
-        {list.map(collection => (
-          <MenuItem key={collection.id} value={collection.id}>
-            {collection.value}
+        {list.map(item => (
+          <MenuItem key={item.value} value={item.value}>
+            {item.description}
           </MenuItem>
         ))}
       </TextField>
