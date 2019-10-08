@@ -1,18 +1,21 @@
 import * as React from "react";
-import { 
+import {
   createStyles,
   Theme,
   WithStyles,
   withStyles
 } from "@material-ui/core/styles";
-import { TextFieldForm, TextAreaForm } from "common/components";
+import { TextFieldForm, TextAreaForm, DropdownForm } from "common/components";
 import { Button } from "@material-ui/core";
-import { ProductEntityVm, ProductFormErrors } from "core/dataModel/product-entity.vm";
+import {
+  ProductEntityVm,
+  ProductFormErrors
+} from "core/dataModel/product-entity.vm";
 import { LookupEntity } from "core";
 import { RatingForm } from "common/components";
-import FileUpload from './upload.component';
+import FileUpload from "./upload.component";
 import SizesTable from "./product-edit-sizes-table.component";
-import Typography from '@material-ui/core/Typography';
+import Typography from "@material-ui/core/Typography";
 import { ImagesSliderCard } from "common/components/images-slider-card.component";
 
 const styles = (theme: Theme) =>
@@ -24,27 +27,28 @@ const styles = (theme: Theme) =>
     },
     button: {
       marginRight: theme.spacing(1),
-      marginBottom: theme.spacing(1),
+      marginBottom: theme.spacing(1)
     },
     rightIcon: {
-      marginLeft: theme.spacing(1),
+      marginLeft: theme.spacing(1)
     },
-    titleElement:{
-      marginTop: '3vh',
-      marginBottom: '3vh',
+    titleElement: {
+      marginTop: "3vh",
+      marginBottom: "3vh"
     },
-    descriptionElement:{
-      marginTop: '3vh',
+    descriptionElement: {
+      marginTop: "3vh"
     },
-    infoElement:{
-      marginBottom: '3vh',
-    },
+    infoElement: {
+      marginBottom: "3vh"
+    }
   });
 
 interface Props extends WithStyles<typeof styles> {
   product: ProductEntityVm;
-  cities: LookupEntity[];
+  categories: LookupEntity[];
   onFieldUpdate: (id: string, value: any) => void;
+  onChangeCategoryUpdate: (id: string, value: any) => void;
   onSave: () => void;
   onCancel: () => void;
   onChangeFile: (file: File) => void;
@@ -53,14 +57,34 @@ interface Props extends WithStyles<typeof styles> {
 }
 
 export const ProductEditComponentInner = (props: Props) => {
+  const {
+    classes,
+    product,
+    categories,
+    onFieldUpdate,
+    onChangeCategoryUpdate,
+    onSave,
+    onCancel,
+    onConfirmSubmit,
+    onChangeFile,
+    productFormErrors
+  } = props;
 
-  const { classes, product, cities, onFieldUpdate, onSave,onCancel, onConfirmSubmit, onChangeFile, productFormErrors } = props;
+  const onCategoryChange = () => {};
 
   return (
     <div className={classes.formContainer}>
-      <Typography className={classes.titleElement} variant="h4" id="productEditLabel">Product edition</Typography>
-      <ImagesSliderCard product={product}/>
-      <Typography className={classes.descriptionElement} variant="subtitle2">Product name</Typography>
+      <Typography
+        className={classes.titleElement}
+        variant="h4"
+        id="productEditLabel"
+      >
+        Product edition
+      </Typography>
+      <ImagesSliderCard product={product} />
+      <Typography className={classes.descriptionElement} variant="subtitle2">
+        Product name
+      </Typography>
       <TextFieldForm
         placeholder="Insert here the product name"
         name="productName"
@@ -68,7 +92,9 @@ export const ProductEditComponentInner = (props: Props) => {
         onChange={onFieldUpdate}
         error={productFormErrors.productName.errorMessage}
       />
-      <Typography className={classes.descriptionElement} variant="subtitle2">Product identifier</Typography>
+      <Typography className={classes.descriptionElement} variant="subtitle2">
+        Product identifier
+      </Typography>
       <TextFieldForm
         placeholder="Insert here external product identifier"
         name="productIdentifier"
@@ -83,9 +109,11 @@ export const ProductEditComponentInner = (props: Props) => {
         max={5}
         onChange={onFieldUpdate}
       />
-      <Typography className={classes.descriptionElement} variant="subtitle2">Product description</Typography>
+      <Typography className={classes.descriptionElement} variant="subtitle2">
+        Product description
+      </Typography>
       <TextAreaForm
-        className={classes.infoElement} 
+        className={classes.infoElement}
         placeholder="Description"
         name="productDescription"
         value={product.productDescription}
@@ -93,18 +121,45 @@ export const ProductEditComponentInner = (props: Props) => {
         rows={1}
         error={productFormErrors.productDescription.errorMessage}
       />
-      <Typography className={classes.descriptionElement} variant="subtitle2">Category</Typography>
-      <Typography className={classes.descriptionElement} variant="subtitle2">Produced by</Typography>
-      <SizesTable onChange={onFieldUpdate} rows={product.sizes}/>
-      <FileUpload onChangeFile={onChangeFile} onConfirmSubmit={onConfirmSubmit} />
-      <Button name="saveButton" className={classes.button} variant="contained" color="primary" onClick={onSave}>
+        <Typography className={classes.descriptionElement} variant="subtitle2">
+        Category
+      </Typography>
+      <DropdownForm
+        name="category"
+        list={categories}
+        value={product.category.value}
+        onChange={onChangeCategoryUpdate}
+      ></DropdownForm>
+      <Typography className={classes.descriptionElement} variant="subtitle2">
+        Produced by
+      </Typography>
+      <SizesTable onChange={onFieldUpdate} rows={product.sizes} />
+      <FileUpload
+        onChangeFile={onChangeFile}
+        onConfirmSubmit={onConfirmSubmit}
+      />
+      <Button
+        name="saveButton"
+        className={classes.button}
+        variant="contained"
+        color="primary"
+        onClick={onSave}
+      >
         Save
       </Button>
-      <Button name="cancelButton" className={classes.button} variant="contained" color="primary" onClick={onCancel}>
+      <Button
+        name="cancelButton"
+        className={classes.button}
+        variant="contained"
+        color="primary"
+        onClick={onCancel}
+      >
         Cancel edition
       </Button>
     </div>
   );
 };
 
-export const ProductEditComponent = withStyles(styles)(ProductEditComponentInner);
+export const ProductEditComponent = withStyles(styles)(
+  ProductEditComponentInner
+);

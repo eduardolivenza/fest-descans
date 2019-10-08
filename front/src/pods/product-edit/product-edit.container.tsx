@@ -2,7 +2,7 @@ import * as React from "react";
 import { withRouter, RouteComponentProps } from "react-router-dom";
 import { productViewRouteParams } from "core";
 import { ProductEditComponent } from "./product-edit.component";
-import { citiesLookup } from "core";
+import { categoriesLookup } from "core";
 import { FormValidationResult } from "lc-form-validation";
 import { ProductEditFormValidation } from "./product-edit.validation";
 import { NotificationComponent } from "common/components";
@@ -32,7 +32,7 @@ interface Props extends RouteComponentProps { }
 
 const ProductEditContainerInner = (props: Props) => {
 
-  const [cities] = React.useState(citiesLookup);
+  const [categories] = React.useState(categoriesLookup);
   const {product, setProduct, loadProductEdit} = useProductEdit();
   const [productFormErrors, setProductFormErrors] = React.useState<ProductFormErrors>(createDefaultProductFormErrors());
   const [showValidationFailedMessage, setShowValidationFailedMessage] = React.useState(false);
@@ -56,6 +56,14 @@ const ProductEditContainerInner = (props: Props) => {
           [fieldName]: fieldValidationResult
         });
       });
+  };
+
+  const  onChangeCategoryUpdate =  ( id: keyof ProductEntityVm, value: any) => {
+    const newValue = {
+      value: value,
+      description: "",
+    }
+    onFieldUpdate(id, newValue);
   };
 
   const doSave = () => {
@@ -106,8 +114,9 @@ const ProductEditContainerInner = (props: Props) => {
     <>
       <ProductEditComponent
         product={product}
-        cities={cities}
+        categories={categories}
         onFieldUpdate={onFieldUpdate}
+        onChangeCategoryUpdate={onChangeCategoryUpdate}
         onSave={doSave}
         onCancel={doCancel}
         productFormErrors={productFormErrors}

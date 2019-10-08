@@ -1,30 +1,26 @@
 import { LookupEntity } from "./model";
 
-export const noCitySelectedLiteral = "No city selected";
+export const noCategorySelectedLiteral = "No category selected";
 
-export const citiesLookup: LookupEntity[] = [
+export const categoriesLookup: LookupEntity[] = [
   {
-    id: noCitySelectedLiteral,
-    value: noCitySelectedLiteral
+    id: noCategorySelectedLiteral,
+    value: noCategorySelectedLiteral
   },
   {
-    id: "Seattle",
-    value: "Seattle"
+    id: "BED",
+    value: "Bed"
   },
   {
-    id: "Chicago",
-    value: "Chicago"
+    id: "SOFA",
+    value: "Sofa"
   },
   {
-    id: "New York",
-    value: "New York"
+    id: "MATTRESS",
+    value: "Mattress or canape"
   },
   {
-    id: "California",
-    value: "California"
-  },
-  {
-    id: "Burlingame",
-    value: "Burlingame"
+    id: "OTHER",
+    value: "Pillows/ other type"
   }
 ];

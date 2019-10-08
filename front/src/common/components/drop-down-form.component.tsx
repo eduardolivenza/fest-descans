@@ -6,12 +6,12 @@ import MenuItem from "@material-ui/core/MenuItem";
 
 interface Props {
   name: string;
-  label: string;
-  onChange: (id: string, value: any) => void;
+  label?: string;
+  onChange?: (id: string, value: any)  => void;
   value: string;
   error?: string;
   type?: string;
-  list?: LookupEntity[];
+  list: LookupEntity[];
   isDisabled?: boolean;
 }
 
@@ -26,7 +26,7 @@ export const DropdownForm: React.SFC<Props> = props => {
   const { name, label, onChange, value, error, type, list, isDisabled } = props;
   return (
     <>
-      <TextField
+      <TextField 
         label={label}
         margin="normal"
         value={value}
