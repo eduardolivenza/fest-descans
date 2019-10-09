@@ -8,6 +8,7 @@ import com.eolivenza.modules.baseProject.application.repositories.SuppliersRepos
 import com.eolivenza.modules.baseProject.domain.model.products.AvailableProduct;
 import com.eolivenza.modules.baseProject.domain.model.products.Category;
 import com.eolivenza.modules.baseProject.domain.model.products.Product;
+import com.eolivenza.modules.baseProject.domain.model.suppliers.Supplier;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -38,11 +39,14 @@ public class ModProductCommandHandler implements CommandHandler<ModProductComman
 
         if (productsRepository.existsByuuid(modProductCommand.identifier)) {
             Product originalProduct = productsRepository.retrieve(modProductCommand.identifier);
-
+            Supplier supplier = modProductCommand.supplier;
             Category category = Category.valueOf(modProductCommand.category);
             if (!suppliersRepository.existsBySupplierIdentifier(modProductCommand.supplier.getExternalIdentifier())){
                 logger.info("Supplier not found. Creating a new one");
                 suppliersRepository.create(modProductCommand.supplier);
+            }
+            else {
+                supplier = suppliersRepository.retrieve(modProductCommand.supplier.getExternalIdentifier());
             }
             Product product = new Product(
                     UUID.fromString(modProductCommand.identifier),
@@ -51,7 +55,7 @@ public class ModProductCommandHandler implements CommandHandler<ModProductComman
                     modProductCommand.productName,
                     modProductCommand.productDescription,
                     modProductCommand.comfortLevel,
-                    modProductCommand.supplier,
+                    supplier,
                     new HashSet<>(),
                     originalProduct.getProductImages()
             );
