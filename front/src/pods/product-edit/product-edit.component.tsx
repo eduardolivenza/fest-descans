@@ -47,8 +47,10 @@ const styles = (theme: Theme) =>
 interface Props extends WithStyles<typeof styles> {
   product: ProductEntityVm;
   categories: LookupEntity[];
+  suppliers: LookupEntity[];
   onFieldUpdate: (id: string, value: any) => void;
-  onChangeCategoryUpdate: (id: string, value: any) => void;
+  onCategoryUpdate: (id: string, value: any) => void;
+  onSupplierUpdate: (id: string, value: any) => void;
   onSave: () => void;
   onCancel: () => void;
   onChangeFile: (file: File) => void;
@@ -61,8 +63,10 @@ export const ProductEditComponentInner = (props: Props) => {
     classes,
     product,
     categories,
+    suppliers,
     onFieldUpdate,
-    onChangeCategoryUpdate,
+    onCategoryUpdate,
+    onSupplierUpdate,
     onSave,
     onCancel,
     onConfirmSubmit,
@@ -70,7 +74,6 @@ export const ProductEditComponentInner = (props: Props) => {
     productFormErrors
   } = props;
 
-  const onCategoryChange = () => {};
 
   return (
     <div className={classes.formContainer}>
@@ -128,11 +131,17 @@ export const ProductEditComponentInner = (props: Props) => {
         name="category"
         list={categories}
         value={product.category.value}
-        onChange={onChangeCategoryUpdate}
+        onChange={onCategoryUpdate}
       ></DropdownForm>
       <Typography className={classes.descriptionElement} variant="subtitle2">
         Produced by
       </Typography>
+      <DropdownForm
+        name="supplier"
+        list={suppliers}
+        value={product.supplier.id}
+        onChange={onSupplierUpdate}
+      ></DropdownForm>
       <SizesTable onChange={onFieldUpdate} rows={product.sizes} />
       <FileUpload
         onChangeFile={onChangeFile}

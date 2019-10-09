@@ -1,6 +1,6 @@
 import * as React from "react";
 import { ProductCollectionComponent } from "./product-collection.component";
-import { ProductEntityVm, createDefaultProduct } from "core/dataModel/product-entity.vm";
+import { ProductEntityVm } from "core/dataModel/product-entity.vm";
 import { routesLinks } from "core";
 import { withRouter, RouteComponentProps } from "react-router-dom";
 import { getProductsCollection } from "core/api/product-collection.api";

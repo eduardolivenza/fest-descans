@@ -1,4 +1,4 @@
-import {SupplierApi} from "./supplier.api";
+import {SupplierEntityApi} from "./supplier-entity.api";
 
 export interface ProductEntityApi {
     internalIdentifier: string;
@@ -8,7 +8,7 @@ export interface ProductEntityApi {
     productDescription: string;
     comfortLevel: number;
     images: string[];
-    supplier: SupplierApi;
+    supplier: SupplierEntityApi;
     sizes: ProductSizeEntityApi[];
   }
 
