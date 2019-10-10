@@ -3,6 +3,7 @@ package com.eolivenza.modules.baseProject.controller.http.rest;
 import com.eolivenza.modules.baseProject.application.CommandHandler;
 import com.eolivenza.modules.baseProject.application.QueryHandler;
 import com.eolivenza.modules.baseProject.application.products.commands.AddProductCommand;
+import com.eolivenza.modules.baseProject.application.products.commands.DeleteProductCommand;
 import com.eolivenza.modules.baseProject.application.products.commands.ModProductCommand;
 import com.eolivenza.modules.baseProject.application.products.commands.productImages.AddProductImageCommand;
 import com.eolivenza.modules.baseProject.application.security.BaseProjectGrantPermission;
@@ -48,6 +49,8 @@ public class ProductsController {
     private CommandHandler<AddProductCommand> addProductCommandHandler;
     @Autowired
     private CommandHandler<ModProductCommand> modProductCommandHandler;
+    @Autowired
+    private CommandHandler<DeleteProductCommand> deleteProductCommandhandler;
     @Autowired
     private CommandHandler<AddProductImageCommand> storeImageCommandHandler;
 
@@ -113,6 +116,15 @@ public class ProductsController {
         Product product = getProductQueryHandler.apply(productIdentifier);
         return productsResourceMapper.toSecondType(product);
     }
+
+    @ApiOperation(value = " Retrieve one product by its internal identifier")
+    @DeleteMapping(path = "/products/{identifier}")
+    public void deleteProduct(
+            @ApiParam(required = true, value = "External identifier of the instrument", example = "uuid")
+            @PathVariable("identifier") String identifier) {
+        deleteProductCommandhandler.accept(new DeleteProductCommand(identifier));
+    }
+
 
     @PostMapping(value = "/products/images/{productIdentifier}")
     public void handleFileUpload(@PathVariable("productIdentifier") String productIdentifier,
