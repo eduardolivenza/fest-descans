@@ -5,6 +5,7 @@ interface BaseRoutes {
   register: string;
   userAccount: string;
   productCollection : string;
+  productAdd: string;
   productView: string;
   productEdit: string;
   suppliersCollection: string;
@@ -15,6 +16,7 @@ const appBaseRoutes : BaseRoutes = {
   login: '/login',
   userAccount: '/myaccount',
   productCollection: '/product-collection',
+  productAdd: '/product-add',
   productView: '/product-view',
   productEdit: '/product-edit',
   suppliersCollection: '/suppliers-collection',

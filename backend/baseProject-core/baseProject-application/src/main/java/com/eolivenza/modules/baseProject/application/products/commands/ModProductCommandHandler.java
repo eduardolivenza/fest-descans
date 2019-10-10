@@ -48,6 +48,17 @@ public class ModProductCommandHandler implements CommandHandler<ModProductComman
             else {
                 supplier = suppliersRepository.retrieve(modProductCommand.supplier.getExternalIdentifier());
             }
+            Optional<Product> optionalOtherProduct =  productsRepository.retrieveByProductIdentifier(modProductCommand.productIdentifier);
+            if (optionalOtherProduct.isPresent())
+            {
+                Product otherProduct = optionalOtherProduct.get();
+                if (otherProduct.getUuid() != originalProduct.getUuid())
+                {
+                    throw new ProductExistsException("External ID already assigned to other product");
+                }
+            }
+
+
             Product product = new Product(
                     UUID.fromString(modProductCommand.identifier),
                     category,

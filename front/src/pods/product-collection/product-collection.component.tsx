@@ -13,6 +13,7 @@ interface Props {
   productCollection: ProductEntityVm[];
   viewProduct: (id: string) => void;
   editProduct: (id: string) => void;
+  removeProduct: (id: string) => void;
   addProduct: () => void;
   layout?: Layout;
   handleChangeComfortFilter: (name: string, value: boolean) => void;
@@ -33,6 +34,7 @@ export const ProductCollectionComponent: React.FunctionComponent<Props> = (props
     viewProduct,
     editProduct,
     addProduct,
+    removeProduct,
     layout,
     handleChangeComfortFilter,
     handleProductTypesFilter,
@@ -49,7 +51,7 @@ export const ProductCollectionComponent: React.FunctionComponent<Props> = (props
 
   let hotelCollectionComponent;
   if (componentLayout === Layout.Card) {
-    hotelCollectionComponent = <ProductCollectionCardsComponent productCollection={productCollection} viewProduct={viewProduct} editProduct={editProduct} />;
+    hotelCollectionComponent = <ProductCollectionCardsComponent productCollection={productCollection} viewProduct={viewProduct} editProduct={editProduct} removeProduct={removeProduct} />;
   } else if (componentLayout === Layout.Table) {
     hotelCollectionComponent = <ProductCollectionTableComponent productCollection={productCollection} viewProduct={viewProduct} />;
   }

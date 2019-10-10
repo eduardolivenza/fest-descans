@@ -24,18 +24,18 @@ describe('Product edit Validation tests', () => {
         });
 
         /*
-        it('should invalidate when city does not exist', (done) => {
+        it('should invalidate when category does not exist', (done) => {
 
             // Arrange
             const viewModel = {
                 productName: 'arts',
-                city: 'BED',
+                category: 'BED',
                 productDescription: 'productDescription'
             };
 
             // Act
             ProductEditFormValidation
-                .validateField(viewModel, 'city', "")
+                .validateField(viewModel, 'category', "")
                 .then(fieldValidationResult => {
                     // assert
                     expect(fieldValidationResult.succeeded).toBeFalsy();
@@ -50,7 +50,7 @@ describe('Product edit Validation tests', () => {
             // Arrange
             const viewModel = {
                 productName: 'arts',
-                city: 'BED',
+                category: 'BED',
                 productDescription: 'productDescription'
             };
 
@@ -86,18 +86,18 @@ describe('Product edit Validation tests', () => {
         });
 
         /*
-        it('should validate when city is correct', (done) => {
+        it('should validate when category is correct', (done) => {
 
             // Arrange
             const viewModel = {
                 productName: 'arts',
-                city: 'BED',
+                category: 'BED',
                 productDescription: 'productDescription'
             };
 
             // Act
             ProductEditFormValidation
-                .validateField(viewModel, 'city', "Berlin")
+                .validateField(viewModel, 'category', "Berlin")
                 .then(fieldValidationResult => {
                     // assert
                     expect(fieldValidationResult.succeeded).toBeTruthy();
