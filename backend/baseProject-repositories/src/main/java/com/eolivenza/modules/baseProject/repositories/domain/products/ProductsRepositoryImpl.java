@@ -51,6 +51,12 @@ public class ProductsRepositoryImpl implements ProductsRepository {
     }
 
     @Override
+    public Optional<Product> findByProductName(String productName) {
+        Optional<ProductJpa> optionalProductJpa = productsRepositoryJpaSpringData.findByProductName(productName);
+        return  optionalProductJpa.map(productMapper::toDomain);
+    }
+
+    @Override
     public boolean existsByuuid(String internalIdentifier){
         return productsRepositoryJpaSpringData.existsById(internalIdentifier);
     }

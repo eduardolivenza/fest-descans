@@ -3,6 +3,7 @@ package com.eolivenza.modules.baseProject.application.products.commands;
 import com.eolivenza.modules.baseProject.application.CommandHandler;
 import com.eolivenza.modules.baseProject.application.annotations.DomainStrictTransactional;
 import com.eolivenza.modules.baseProject.application.products.ProductExistsException;
+import com.eolivenza.modules.baseProject.application.products.ProductWithThisNameExistsException;
 import com.eolivenza.modules.baseProject.application.repositories.ProductsRepository;
 import com.eolivenza.modules.baseProject.application.repositories.SuppliersRepository;
 import com.eolivenza.modules.baseProject.domain.model.products.AvailableProduct;
@@ -48,7 +49,10 @@ public class ModProductCommandHandler implements CommandHandler<ModProductComman
             else {
                 supplier = suppliersRepository.retrieve(modProductCommand.supplier.getExternalIdentifier());
             }
-
+            Optional<Product> optionalOtherProduct = productsRepository.findByProductName(modProductCommand.productName);
+            if ((optionalOtherProduct.isPresent()) && (optionalOtherProduct.get().getUuid().toString() != modProductCommand.identifier )) {
+                    throw new ProductWithThisNameExistsException(modProductCommand.productName);
+            }
             Product product = new Product(
                     UUID.fromString(modProductCommand.identifier),
                     category,

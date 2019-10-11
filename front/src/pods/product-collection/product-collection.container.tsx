@@ -203,7 +203,7 @@ export const ProductCollectionContainerInner = (props: Props) => {
     newArray = newArray.filter(x =>
       x.sizes.some(
         y =>
-          parseInt(y.price) > priceFilter[0] &&
+          parseInt(y.price) >= priceFilter[0] &&
           parseInt(y.price) <= priceFilter[1]
       )
     );

@@ -15,4 +15,6 @@ public interface ProductsRepository extends Repository<Product, String>, Retriev
 
     boolean existsByProductName(String productName);
 
+    Optional<Product> findByProductName(String productName);
+
 }
