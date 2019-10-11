@@ -118,7 +118,7 @@ export const ProductCardInner = (props: Props) => {
             <IconButton aria-label="Edit" onClick={() => editProduct(product.productIdentifier)}>
               <EditIcon />
             </IconButton>
-            <IconButton aria-label="Remove" onClick={() => removeProduct(product.productIdentifier)}>
+            <IconButton aria-label="Remove" onClick={() => removeProduct(product.internalIdentifier)}>
               <DeleteIcon />
             </IconButton>
           </>

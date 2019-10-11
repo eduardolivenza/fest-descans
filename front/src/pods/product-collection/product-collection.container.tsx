@@ -7,6 +7,7 @@ import { getProductsCollection } from "core/api/product-collection.api";
 import { mapFromApiToVm } from "core/mapper/product-entity.mapper";
 import { mapFromAToBCollection } from "common";
 import { CheckBoxConfigValue } from "common/components";
+import { deleteProduct } from "core/api/product-delete.api";
 
 const useProductCollection = () => {
   const [productsCollection, setProductsCollection] = React.useState<
@@ -153,7 +154,11 @@ export const ProductCollectionContainerInner = (props: Props) => {
   };
 
   const removeProduct = (id: string) => {
-    alert ("trying to delete " + id)
+    deleteProduct(id).then(result => {
+        loadProductsCollection();
+    }).catch(error => {
+      alert("could not delete");
+    })
   };
   const addProduct = () => {
     props.history.push(routesLinks.productAdd);
