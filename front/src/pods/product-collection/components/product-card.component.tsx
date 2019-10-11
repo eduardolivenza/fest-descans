@@ -68,7 +68,7 @@ export const ProductCardInner = (props: Props) => {
   };
 
   return (
-    <Card className={classes.card} key={product.productIdentifier}>
+    <Card className={classes.card} key={product.internalIdentifier}>
       <CardHeader
         avatar={<Avatar aria-label="Product">{product.category.value}</Avatar>}
         title={product.productName}
@@ -86,7 +86,7 @@ export const ProductCardInner = (props: Props) => {
             image={product.thumbnail}
             title={product.productName}
             style={{ height: 0, paddingTop: "56.25%" }}
-            onClick={() => viewProduct(product.productIdentifier)}
+            onClick={() => viewProduct(product.internalIdentifier)}
           />
           <ValueDisplay name="Comfort" value={product.comfortLevel} max={5} />
           <Typography variant="subtitle1" gutterBottom>
@@ -100,7 +100,7 @@ export const ProductCardInner = (props: Props) => {
             <div className={classes.chips}>
               {product.sizes.map(size => (
                 <Chip
-                  key={product.productIdentifier + size.size}
+                  key={product.internalIdentifier + size.size}
                   className={classes.chip}
                   color="primary"
                   label={size.size}
@@ -115,7 +115,7 @@ export const ProductCardInner = (props: Props) => {
       <CardActions disableSpacing>
         {session.email ? (
           <>
-            <IconButton aria-label="Edit" onClick={() => editProduct(product.productIdentifier)}>
+            <IconButton aria-label="Edit" onClick={() => editProduct(product.internalIdentifier)}>
               <EditIcon />
             </IconButton>
             <IconButton aria-label="Remove" onClick={() => removeProduct(product.internalIdentifier)}>
@@ -127,7 +127,7 @@ export const ProductCardInner = (props: Props) => {
         )}
         <IconButton
           aria-label="More information"
-          onClick={() => viewProduct(product.productIdentifier)}
+          onClick={() => viewProduct(product.internalIdentifier)}
         >
           <DetailsIcon />
         </IconButton>

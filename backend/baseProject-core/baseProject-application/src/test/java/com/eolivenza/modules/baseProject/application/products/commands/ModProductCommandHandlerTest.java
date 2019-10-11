@@ -48,7 +48,7 @@ public class ModProductCommandHandlerTest {
         String internalId = "821928d3-fdb2-43c7-8ac2-f4e7d163feec";
         String externalIdentifier = "externalIdentifier";
 
-        ModProductCommand modProductCommand = new ModProductCommand(internalId, externalIdentifier,"productName", "SOFA", "productDescription", 3, supplierMocked, new HashSet<AvailableProduct>() );
+        ModProductCommand modProductCommand = new ModProductCommand(internalId, "productName", "SOFA", "productDescription", 3, supplierMocked, new HashSet<AvailableProduct>() );
 
         when(productsRepositoryMock.existsByuuid(internalId)).thenReturn(true);
         when(productsRepositoryMock.retrieve(internalId)).thenReturn(productMocked);

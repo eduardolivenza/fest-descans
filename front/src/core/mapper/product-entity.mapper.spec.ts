@@ -7,7 +7,6 @@ describe('Product entity mapper tests', () => {
         const productEntityApi : ProductEntityApi = {
           internalIdentifier: "string",
           category: null,
-          productIdentifier : "string",
           productName : "string",
           productDescription: "string",
           sizes: [],
@@ -23,7 +22,7 @@ describe('Product entity mapper tests', () => {
         // Act
         const product = mapFromApiToVm(productEntityApi);
 
-        expect(product.productIdentifier).toEqual(productEntityApi.productIdentifier);
+        expect(product.internalIdentifier).toEqual(productEntityApi.internalIdentifier);
         expect(product.supplier.id).toEqual(productEntityApi.supplier.companyId);
 
       });

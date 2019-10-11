@@ -25,7 +25,7 @@ export const ProductCollectionCardsComponentInner: React.FunctionComponent<Props
   return (
     <div className={classes.listLayout}>
       {productCollection.map(product => (
-        <ProductCard product={product} key={product.productIdentifier} viewProduct={viewProduct} editProduct={editProduct} removeProduct={removeProduct}/>
+        <ProductCard product={product} key={product.internalIdentifier} viewProduct={viewProduct} editProduct={editProduct} removeProduct={removeProduct}/>
       ))}
     </div>
   );

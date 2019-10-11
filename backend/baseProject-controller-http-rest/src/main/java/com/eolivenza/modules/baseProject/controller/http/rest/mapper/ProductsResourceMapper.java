@@ -28,7 +28,6 @@ public class ProductsResourceMapper implements ResourceMapper<Product, ProductRe
     public Product toFirstType(ProductResource object) {
         return new Product(
                 categoryMapper.toFirstType(object.category),
-                object.internalIdentifier,
                 object.productName,
                 object.productDescription,
                 object.comfortLevel,
@@ -42,7 +41,6 @@ public class ProductsResourceMapper implements ResourceMapper<Product, ProductRe
         return new ProductResource(
                 object.getUuid().toString(),
                 categoryMapper.toSecondType(object.getCategory()),
-                object.getProductIdentifier(),
                 object.getProductName(),
                 object.getDescription(), object.getComfortLevel(),
                 supplierResourceMapper.toSecondType(object.getSupplier()),

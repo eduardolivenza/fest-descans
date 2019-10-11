@@ -1,6 +1,7 @@
 package com.eolivenza.modules.baseProject.application.products.commands;
 
 import com.eolivenza.modules.baseProject.application.products.ProductExistsException;
+import com.eolivenza.modules.baseProject.application.products.ProductWithThisNameExistsException;
 import com.eolivenza.modules.baseProject.application.repositories.ProductsRepository;
 import com.eolivenza.modules.baseProject.application.repositories.SuppliersRepository;
 import com.eolivenza.modules.baseProject.domain.model.products.AvailableProduct;
@@ -42,25 +43,26 @@ public class AddProductCommandHandlerTest {
 
     @Test
     public void addingAProduct() {
-        String externalIdentifier = "extId";
+        String productName = "myProductName";
         Supplier dummySupplier = new Supplier("S1", "", "");
-        AddProductCommand addProductCommand = new AddProductCommand(externalIdentifier, "productName", "SOFA", "productDescription", 3, dummySupplier, new HashSet<>());
+        AddProductCommand addProductCommand = new AddProductCommand( productName, "SOFA", "productDescription", 3, dummySupplier, new HashSet<>());
         addProductCommandHandler.accept(addProductCommand);
 
-        verify(productsRepository).existsByProductIdentifier(externalIdentifier);
+        verify(productsRepository).existsByProductName(productName);
         verify(productsRepository).create(any(Product.class));
         verifyNoMoreInteractions(productsRepository);
     }
 
     @Test
-    public void addingAProductTwoTimesIsRejected() {
-        String externalIdentifier = "extId";
-        String expectedExceptionMessage = "Product with ID: ".concat(externalIdentifier).concat(" already exists");
-        Supplier dummySupplier = new Supplier("S1", "", "");
-        AddProductCommand addProductCommand = new AddProductCommand(externalIdentifier, "productName", "SOFA", "productDescription", 3, dummySupplier, new HashSet<>());
-        when(productsRepository.existsByProductIdentifier(externalIdentifier)).thenReturn(true);
+    public void addingAProductTwoTimesWithSameNameIsRejected() {
+        String productName = "currentProductName";
+        String expectedExceptionMessage = "Product with name: ".concat(productName).concat(" already exists");
 
-        assertThatExceptionOfType(ProductExistsException.class)
+        Supplier dummySupplier = new Supplier("S1", "", "");
+        AddProductCommand addProductCommand = new AddProductCommand( productName, "SOFA", "productDescription", 3, dummySupplier, new HashSet<>());
+        when(productsRepository.existsByProductName(productName)).thenReturn(true);
+
+        assertThatExceptionOfType(ProductWithThisNameExistsException.class)
                 .isThrownBy(() -> addProductCommandHandler.accept(addProductCommand))
                 .satisfies(e -> assertThat(e.getMessage()).as("Exception message").isEqualTo(expectedExceptionMessage));
     }

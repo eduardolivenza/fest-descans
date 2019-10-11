@@ -3,7 +3,6 @@ import {SupplierEntityApi} from "./supplier-entity.api";
 export interface ProductEntityApi {
     internalIdentifier: string;
     category: CategoryEntityApi;
-    productIdentifier: string;
     productName: string;
     productDescription: string;
     comfortLevel: number;

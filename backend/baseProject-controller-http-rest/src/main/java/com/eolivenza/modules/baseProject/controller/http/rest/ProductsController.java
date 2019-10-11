@@ -68,7 +68,6 @@ public class ProductsController {
         }
         Supplier supplier = supplierResourceMapper.toFirstType(productResource.supplier);
         AddProductCommand addProductCommand = new AddProductCommand(
-                productResource.productIdentifier,
                 productResource.productName,
                 productResource.category.value,
                 productResource.productDescription,
@@ -89,7 +88,6 @@ public class ProductsController {
         Supplier supplier = supplierResourceMapper.toFirstType(productResource.supplier);
         ModProductCommand modProductCommand = new ModProductCommand(
                 productResource.internalIdentifier,
-                productResource.productIdentifier,
                 productResource.productName,
                 productResource.category.value,
                 productResource.productDescription,
@@ -108,12 +106,12 @@ public class ProductsController {
         return productList.stream().map(productsResourceMapper::toSecondType).collect(Collectors.toList());
     }
 
-    @ApiOperation(value = " Retrieve one product by its external identifier")
-    @GetMapping(path = "/products/{productIdentifier}", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    @ApiOperation(value = " Retrieve one product by its internal identifier")
+    @GetMapping(path = "/products/{identifier}", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
    public ProductResource retrieveProduct(
-            @ApiParam(required = true, value = "External identifier of the instrument", example = "800||1")
-            @PathVariable final String productIdentifier) {
-        Product product = getProductQueryHandler.apply(productIdentifier);
+            @ApiParam(required = true, value = "Internal identifier of the instrument", example = "uuid")
+            @PathVariable final String identifier) {
+        Product product = getProductQueryHandler.apply(identifier);
         return productsResourceMapper.toSecondType(product);
     }
 
@@ -126,11 +124,11 @@ public class ProductsController {
     }
 
 
-    @PostMapping(value = "/products/images/{productIdentifier}")
-    public void handleFileUpload(@PathVariable("productIdentifier") String productIdentifier,
+    @PostMapping(value = "/products/images/{identifier}")
+    public void handleFileUpload(@PathVariable("identifier") String identifier,
                                  @RequestParam("file") MultipartFile file) {
         try{
-            AddProductImageCommand command = new AddProductImageCommand(productIdentifier, file.getOriginalFilename(), file.getInputStream());
+            AddProductImageCommand command = new AddProductImageCommand(identifier, file.getOriginalFilename(), file.getInputStream());
             storeImageCommandHandler.accept(command);
         } catch ( IOException e) {
             throw new RuntimeException("Failed to store file " + file.getOriginalFilename(), e);

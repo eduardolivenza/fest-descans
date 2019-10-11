@@ -43,16 +43,16 @@ public class AddProductImageCommandHandler implements CommandHandler<AddProductI
         if (!matcher.matches()) {
             throw new RuntimeException("Extension is not supported: " + addProductImageCommand.getFilename());
         }
-        Optional<Product> optionalProduct = productsRepository.retrieveByProductIdentifier(addProductImageCommand.getProductIdentifier());
-        if (optionalProduct.isPresent() && imageStorage.saveFile(addProductImageCommand.getFileContent(), addProductImageCommand.getFilename())){
-            Product product = optionalProduct.get();
+
+        if (productsRepository.existsByuuid(addProductImageCommand.getIdentifier()) && imageStorage.saveFile(addProductImageCommand.getFileContent(), addProductImageCommand.getFilename())){
+            Product product = productsRepository.retrieve(addProductImageCommand.getIdentifier());
             product.addProductImage(new ProductImage(addProductImageCommand.getFilename()));
             productsRepository.update(product);
         }
     }
 
     @Override
-    public String getName() { return "Store an image in the system"; }
+    public String getName() { return "Store an image in the system linked to a product"; }
 
 }
 

@@ -18,9 +18,6 @@ public class Product extends Entity<Product> {
 
     private Category category;
 
-    @NotBlank
-    private String productIdentifier;
-
     private String description;
 
     private  Integer comfortLevel;
@@ -33,14 +30,13 @@ public class Product extends Entity<Product> {
     @NotNull
     private Set<@NotBlank ProductImage> productImages;
 
-    public Product(Category category, String productIdentifier, String productName, String description,  Integer comfortLevel, Supplier supplier, HashSet<AvailableProduct> availableProducts, Set<ProductImage> productImages){
-        this(UUID.randomUUID(), category, productIdentifier, productName, description, comfortLevel, supplier, availableProducts, productImages);
+    public Product(Category category, String productName, String description,  Integer comfortLevel, Supplier supplier, HashSet<AvailableProduct> availableProducts, Set<ProductImage> productImages){
+        this(UUID.randomUUID(), category,  productName, description, comfortLevel, supplier, availableProducts, productImages);
     }
 
-    public Product(UUID uuid,  Category category, String productIdentifier, String productName, String description,  Integer comfortLevel, Supplier supplier, Set<AvailableProduct> availableProducts, Set<ProductImage> productImages){
+    public Product(UUID uuid,  Category category, String productName, String description,  Integer comfortLevel, Supplier supplier, Set<AvailableProduct> availableProducts, Set<ProductImage> productImages){
        this.uuid = uuid;
        this.category = category;
-       this.productIdentifier= productIdentifier;
        this.productName = productName;
        this.description = description;
        this.comfortLevel = comfortLevel;
@@ -55,15 +51,6 @@ public class Product extends Entity<Product> {
 
     public Product setUuid(UUID uuid) {
         this.uuid = uuid;
-        return this;
-    }
-
-    public String getProductIdentifier() {
-        return productIdentifier;
-    }
-
-    public Product setProductIdentifier(String productIdentifier) {
-        this.productIdentifier = productIdentifier;
         return this;
     }
 

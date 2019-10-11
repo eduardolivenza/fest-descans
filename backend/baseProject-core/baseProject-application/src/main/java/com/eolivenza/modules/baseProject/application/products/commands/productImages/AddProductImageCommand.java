@@ -4,18 +4,18 @@ import java.io.InputStream;
 
 public class AddProductImageCommand {
 
-    private String productIdentifier;
+    private String getIdentifier;
     private String filename;
     private InputStream fileContent;
 
-    public AddProductImageCommand(String productIdentifier, String filename, InputStream fileContent) {
-        this.productIdentifier= productIdentifier;
+    public AddProductImageCommand(String getIdentifier, String filename, InputStream fileContent) {
+        this.getIdentifier= getIdentifier;
         this.filename = filename;
         this.fileContent = fileContent;
     }
 
-    public String getProductIdentifier() {
-        return productIdentifier;
+    public String getIdentifier() {
+        return getIdentifier;
     }
 
     public String getFilename() {

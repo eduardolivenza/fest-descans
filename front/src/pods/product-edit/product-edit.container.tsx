@@ -135,7 +135,7 @@ const ProductEditContainerInner = (props: Props) => {
   };
 
   const onConfirmSubmit = () => {
-    postImageToProduct(product.productIdentifier, file)
+    postImageToProduct(product.internalIdentifier, file)
       .then(imagePosted => {
         loadProductEdit(props.match.params[productViewRouteParams.id]);
       })

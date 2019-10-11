@@ -7,9 +7,6 @@ import java.util.Set;
 
 public class AddProductCommand {
 
-
-    public String productIdentifier;
-
     public String productName;
 
     public String category;
@@ -22,8 +19,7 @@ public class AddProductCommand {
 
     public Set<AvailableProduct> sizes;
 
-    public AddProductCommand(String productIdentifier, String productName, String category, String productDescription, Integer comfortLevel, Supplier supplier, Set<AvailableProduct> sizesSet) {
-        this.productIdentifier = productIdentifier;
+    public AddProductCommand( String productName, String category, String productDescription, Integer comfortLevel, Supplier supplier, Set<AvailableProduct> sizesSet) {
         this.productName = productName;
         this.productDescription = productDescription;
         this.category = category;

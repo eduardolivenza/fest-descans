@@ -95,16 +95,6 @@ export const ProductEditComponentInner = (props: Props) => {
         onChange={onFieldUpdate}
         error={productFormErrors.productName.errorMessage}
       />
-      <Typography className={classes.descriptionElement} variant="subtitle2">
-        Product identifier
-      </Typography>
-      <TextFieldForm
-        placeholder="Insert here external product identifier"
-        name="productIdentifier"
-        value={product.productIdentifier}
-        onChange={onFieldUpdate}
-        error={productFormErrors.productIdentifier.errorMessage}
-      />
       <RatingForm
         label="Comfort level"
         name="comfortLevel"

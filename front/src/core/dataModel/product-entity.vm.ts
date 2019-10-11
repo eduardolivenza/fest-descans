@@ -4,7 +4,6 @@ import { FieldValidationResult } from "lc-form-validation";
 export interface ProductEntityVm {
   internalIdentifier: string;
   category: CategoryEntityVm;
-  productIdentifier: string;
   productName: string;
   productDescription: string;
   sizes: ProductEntitySizeVm[];
@@ -30,10 +29,12 @@ export const createDefaultProduct = (): ProductEntityVm => ({
     value: "",
     description: ""
   },
-  productIdentifier: "prod01",
   productName: "prodname",
-  productDescription: "desc",
-  sizes: [],
+  productDescription: "description",
+  sizes: [{
+    size: "90x190",
+    price: "100",
+  }],
   supplier: {
     companyName: "",
     id: "",
@@ -46,14 +47,12 @@ export const createDefaultProduct = (): ProductEntityVm => ({
 
 export interface ProductFormErrors {
   productName: FieldValidationResult;
-  productIdentifier: FieldValidationResult;
   category: FieldValidationResult;
   productDescription: FieldValidationResult;
 }
 
 export const createDefaultProductFormErrors = (): ProductFormErrors => ({
   productName: new FieldValidationResult(),
-  productIdentifier: new FieldValidationResult(),
   category: new FieldValidationResult(),
   productDescription: new FieldValidationResult()
 });
