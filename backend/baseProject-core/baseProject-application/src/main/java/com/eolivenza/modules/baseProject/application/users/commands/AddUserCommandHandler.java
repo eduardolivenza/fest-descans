@@ -4,6 +4,7 @@ package com.eolivenza.modules.baseProject.application.users.commands;
 import com.eolivenza.modules.baseProject.application.CommandHandler;
 import com.eolivenza.modules.baseProject.application.annotations.DomainStrictTransactional;
 import com.eolivenza.modules.baseProject.application.repositories.UsersRepository;
+import com.eolivenza.modules.baseProject.application.users.UserAlreadyExistsException;
 import com.eolivenza.modules.baseProject.domain.model.user.User;
 import com.eolivenza.modules.baseProject.domain.model.user.UserRights;
 import org.slf4j.Logger;
@@ -29,9 +30,10 @@ public class AddUserCommandHandler implements CommandHandler<AddUserCommand> {
         User newUser = toDomain(addUserCommand);
         logger.debug(" Element user validated");
         if (usersRepository.exists(newUser.getEmail())) {
-            User currentUser = usersRepository.retrieve(newUser.getEmail());
-            currentUser.overwriteWith(newUser);
-            usersRepository.update(currentUser);
+            //User currentUser = usersRepository.retrieve(newUser.getEmail());
+            //currentUser.overwriteWith(newUser);
+            //usersRepository.update(currentUser);
+            throw new UserAlreadyExistsException(newUser.getEmail());
         }
         else {
             usersRepository.create(newUser);
