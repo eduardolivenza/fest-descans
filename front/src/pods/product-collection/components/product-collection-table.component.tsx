@@ -24,7 +24,7 @@ export const ProductCollectionTableComponent = (props: Props) => {
             </TableHead>
             <TableBody>
             {
-                productCollection.map(product => (<ProductRowComponent key={product.productIdentifier} product={product} viewProduct={viewProduct}/>)   )
+                productCollection.map(product => (<ProductRowComponent key={product.internalIdentifier} product={product} viewProduct={viewProduct}/>)   )
             }
             </TableBody>
         </Table>

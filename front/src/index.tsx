@@ -44,6 +44,10 @@ const Routes = () => {
                         component={ProductViewPage}
                     />
                     <Route
+                        path={routerSwitchRoutes.productAdd}
+                        component={ProductEditPage}
+                    />
+                    <Route
                         path={routerSwitchRoutes.productEdit}
                         component={ProductEditPage}
                     />

@@ -9,13 +9,10 @@ import java.util.Set;
 public class ProductResource {
 
     @ApiModelProperty(required = false, value = "Identifier", example = "", readOnly = true)
-    public String identifier;
+    public String internalIdentifier;
 
-    @ApiModelProperty(required = true, value = "Category", example = "BED")
-    public String category;
-
-    @ApiModelProperty(required = true, value = "Product identifier", example = "Latex01")
-    public String productIdentifier;
+    @ApiModelProperty(required = true)
+    public CategoryResource category;
 
     @ApiModelProperty(required = true, value = "Product name", example = "Memory restore")
     public String productName;
@@ -37,10 +34,9 @@ public class ProductResource {
 
     public ProductResource(){}
 
-    public ProductResource(String identifier, String category, String productIdentifier, String productName, String productDescription, Integer comfortLevel, SupplierResource supplierResource, Set<AvailableSizeResource> sizes, Set<String> images) {
-        this.identifier = identifier;
+    public ProductResource(String identifier, CategoryResource category, String productName, String productDescription, Integer comfortLevel, SupplierResource supplierResource, Set<AvailableSizeResource> sizes, Set<String> images) {
+        this.internalIdentifier = identifier;
         this.category = category;
-        this.productIdentifier = productIdentifier;
         this.productName = productName;
         this.productDescription = productDescription;
         this.sizes = sizes;
@@ -49,9 +45,8 @@ public class ProductResource {
         this.images = images;
     }
 
-    public ProductResource( String category, String productIdentifier,  String productName, String productDescription,  Integer comfortLevel,  SupplierResource supplierResource, Set<AvailableSizeResource> sizes, Set<String> images) {
+    public ProductResource( CategoryResource category,  String productName, String productDescription,  Integer comfortLevel,  SupplierResource supplierResource, Set<AvailableSizeResource> sizes, Set<String> images) {
         this.category = category;
-        this.productIdentifier = productIdentifier;
         this.productName = productName;
         this.productDescription = productDescription;
         this.comfortLevel = comfortLevel;

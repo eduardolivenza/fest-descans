@@ -5,8 +5,8 @@ describe('Product entity mapper tests', () => {
 
     it('check product entity and its content is correctly mapped to domain objects', () => {
         const productEntityApi : ProductEntityApi = {
-          category: "string",
-          productIdentifier : "string",
+          internalIdentifier: "string",
+          category: null,
           productName : "string",
           productDescription: "string",
           sizes: [],
@@ -22,7 +22,7 @@ describe('Product entity mapper tests', () => {
         // Act
         const product = mapFromApiToVm(productEntityApi);
 
-        expect(product.productIdentifier).toEqual(productEntityApi.productIdentifier);
+        expect(product.internalIdentifier).toEqual(productEntityApi.internalIdentifier);
         expect(product.supplier.id).toEqual(productEntityApi.supplier.companyId);
 
       });

@@ -12,10 +12,6 @@ interface Props {
   type?: string;
 }
 
-const defaultProps: Partial<Props> = {
-  type: "text"
-};
-
 const onTextFieldChange = (
   fieldId: string,
   onChange: (fieldId, value) => void

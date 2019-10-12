@@ -1,9 +1,9 @@
 export interface LookupEntity {
-  id : string;
   value : string;
+  description : string;
 }
 
 export const createLookupEmpty = (): LookupEntity => ({
-  id: "",
   value: "",
+  description: "",
 });

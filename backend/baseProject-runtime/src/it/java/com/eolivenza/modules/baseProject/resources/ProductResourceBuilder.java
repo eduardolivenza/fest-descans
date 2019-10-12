@@ -8,7 +8,7 @@ import java.util.Set;
 public final class ProductResourceBuilder {
 
     private String description;
-    private String category;
+    private CategoryResource category;
     private String productIdentifier;
     private String productName;
     private Integer comfortLevel;
@@ -37,7 +37,7 @@ public final class ProductResourceBuilder {
         return this;
     }
 
-    public ProductResourceBuilder withCategory(String category) {
+    public ProductResourceBuilder withCategory(CategoryResource category) {
         this.category = category;
         return this;
     }
@@ -53,7 +53,7 @@ public final class ProductResourceBuilder {
     }
 
     public ProductResource build() {
-        return new ProductResource(category, productIdentifier, productName, description, comfortLevel, supplier, new HashSet<>(),  new HashSet<>());
+        return new ProductResource(category, productName, description, comfortLevel, supplier, new HashSet<>(),  new HashSet<>());
     }
 
 }

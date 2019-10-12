@@ -2,7 +2,7 @@ import { VALIDATION_TYPE, validateValueMatchValidator, CustomParams } from './st
 import { FieldValidationResult } from "lc-form-validation";
 
 const customParams : CustomParams = {
-  stringToMatch: 'No city selected'
+  stringToMatch: 'No category selected'
 };
 describe('validateStringMatch test', () => {
   describe('no match => ', () => {
@@ -24,7 +24,7 @@ describe('validateStringMatch test', () => {
   describe('values match => ', () => {
     it('should validate when values do match', () => {
   
-      const result = validateValueMatchValidator('No city selected', '', customParams);
+      const result = validateValueMatchValidator('No category selected', '', customParams);
 
       // Assert
       expect(result).toEqual({

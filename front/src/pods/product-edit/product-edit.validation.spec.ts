@@ -8,7 +8,7 @@ describe('Product edit Validation tests', () => {
             // Arrange
             const viewModel = {
                 productName: 'arts',
-                city: 'Barcelona',
+                category: 'BED',
                 productDescription: 'productDescription'
             };
 
@@ -24,18 +24,18 @@ describe('Product edit Validation tests', () => {
         });
 
         /*
-        it('should invalidate when city does not exist', (done) => {
+        it('should invalidate when category does not exist', (done) => {
 
             // Arrange
             const viewModel = {
                 productName: 'arts',
-                city: 'Barcelona',
+                category: 'BED',
                 productDescription: 'productDescription'
             };
 
             // Act
             ProductEditFormValidation
-                .validateField(viewModel, 'city', "")
+                .validateField(viewModel, 'category', "")
                 .then(fieldValidationResult => {
                     // assert
                     expect(fieldValidationResult.succeeded).toBeFalsy();
@@ -50,7 +50,7 @@ describe('Product edit Validation tests', () => {
             // Arrange
             const viewModel = {
                 productName: 'arts',
-                city: 'Barcelona',
+                category: 'BED',
                 productDescription: 'productDescription'
             };
 
@@ -70,7 +70,7 @@ describe('Product edit Validation tests', () => {
             // Arrange
             const viewModel = {
                 productName: 'arts',
-                city: 'Barcelona',
+                category: 'BED',
                 productDescription: 'productDescription'
             };
 
@@ -86,18 +86,18 @@ describe('Product edit Validation tests', () => {
         });
 
         /*
-        it('should validate when city is correct', (done) => {
+        it('should validate when category is correct', (done) => {
 
             // Arrange
             const viewModel = {
                 productName: 'arts',
-                city: 'Barcelona',
+                category: 'BED',
                 productDescription: 'productDescription'
             };
 
             // Act
             ProductEditFormValidation
-                .validateField(viewModel, 'city', "Berlin")
+                .validateField(viewModel, 'category', "Berlin")
                 .then(fieldValidationResult => {
                     // assert
                     expect(fieldValidationResult.succeeded).toBeTruthy();
@@ -110,7 +110,7 @@ describe('Product edit Validation tests', () => {
             // Arrange
             const viewModel = {
                 productName: 'arts',
-                city: 'Barcelona',
+                category: 'BED',
                 productDescription: 'productDescription'
             };
 
@@ -130,7 +130,7 @@ describe('Product edit Validation tests', () => {
             // Arrange
             const viewModel = {
                 productName: 'arts',
-                city: 'Barcelona',
+                category: 'BED',
                 productDescription: 'productDescription'
             };
 
@@ -152,7 +152,7 @@ describe('Product edit Validation tests', () => {
             // Arrange
             const viewModel = {
                 productName: 'arts',
-                city: 'Barcelona',
+                category: 'BED',
                 productDescription: 'productDescription'
             };
 
@@ -170,7 +170,7 @@ describe('Product edit Validation tests', () => {
             // Arrange
             const viewModel = {
                 productName: 'arts',
-                city: 'Barcelona',
+                category: 'BED',
                 productDescription: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum'
             };
 
@@ -188,7 +188,7 @@ describe('Product edit Validation tests', () => {
             // Arrange
             const viewModel = {
                 productName: '',
-                city: 'Barcelona',
+                category: 'BED',
                 productDescription: 'productDescription'
             };
 

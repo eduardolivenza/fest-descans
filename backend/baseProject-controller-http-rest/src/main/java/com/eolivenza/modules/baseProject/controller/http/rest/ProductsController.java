@@ -3,6 +3,7 @@ package com.eolivenza.modules.baseProject.controller.http.rest;
 import com.eolivenza.modules.baseProject.application.CommandHandler;
 import com.eolivenza.modules.baseProject.application.QueryHandler;
 import com.eolivenza.modules.baseProject.application.products.commands.AddProductCommand;
+import com.eolivenza.modules.baseProject.application.products.commands.DeleteProductCommand;
 import com.eolivenza.modules.baseProject.application.products.commands.ModProductCommand;
 import com.eolivenza.modules.baseProject.application.products.commands.productImages.AddProductImageCommand;
 import com.eolivenza.modules.baseProject.application.security.BaseProjectGrantPermission;
@@ -49,6 +50,8 @@ public class ProductsController {
     @Autowired
     private CommandHandler<ModProductCommand> modProductCommandHandler;
     @Autowired
+    private CommandHandler<DeleteProductCommand> deleteProductCommandhandler;
+    @Autowired
     private CommandHandler<AddProductImageCommand> storeImageCommandHandler;
 
     @Autowired
@@ -65,9 +68,8 @@ public class ProductsController {
         }
         Supplier supplier = supplierResourceMapper.toFirstType(productResource.supplier);
         AddProductCommand addProductCommand = new AddProductCommand(
-                productResource.productIdentifier,
                 productResource.productName,
-                productResource.category,
+                productResource.category.value,
                 productResource.productDescription,
                 productResource.comfortLevel,
                 supplier,
@@ -76,12 +78,8 @@ public class ProductsController {
     }
 
     @ApiOperation(value = " Modify values of an existing product")
-    @PatchMapping(path = "/products/{productIdentifier}")
-    public void modifyExistingProduct(
-            @ApiParam(required = true, value = "External identifier of the instrument", example = "800||1")
-            @PathVariable final String productIdentifier,
-            @RequestBody final ProductResource productResource) {
-
+    @PatchMapping(path = "/products")
+    public void modifyExistingProduct(@RequestBody final ProductResource productResource) {
         Set<AvailableProduct> sizesSet = new HashSet<>();
         if (productResource.sizes != null) {
             Stream<AvailableProduct> sizesStream = productResource.sizes.stream().map(availableProductResourceMapper::toFirstType);
@@ -89,9 +87,9 @@ public class ProductsController {
         }
         Supplier supplier = supplierResourceMapper.toFirstType(productResource.supplier);
         ModProductCommand modProductCommand = new ModProductCommand(
-                productResource.productIdentifier,
+                productResource.internalIdentifier,
                 productResource.productName,
-                productResource.category,
+                productResource.category.value,
                 productResource.productDescription,
                 productResource.comfortLevel,
                 supplier,
@@ -108,20 +106,29 @@ public class ProductsController {
         return productList.stream().map(productsResourceMapper::toSecondType).collect(Collectors.toList());
     }
 
-    @ApiOperation(value = " Retrieve one product by its external identifier")
-    @GetMapping(path = "/products/{productIdentifier}", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    @ApiOperation(value = " Retrieve one product by its internal identifier")
+    @GetMapping(path = "/products/{identifier}", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
    public ProductResource retrieveProduct(
-            @ApiParam(required = true, value = "External identifier of the instrument", example = "800||1")
-            @PathVariable final String productIdentifier) {
-        Product product = getProductQueryHandler.apply(productIdentifier);
+            @ApiParam(required = true, value = "Internal identifier of the instrument", example = "uuid")
+            @PathVariable final String identifier) {
+        Product product = getProductQueryHandler.apply(identifier);
         return productsResourceMapper.toSecondType(product);
     }
 
-    @PostMapping(value = "/products/images/{productIdentifier}")
-    public void handleFileUpload(@PathVariable("productIdentifier") String productIdentifier,
+    @ApiOperation(value = " Retrieve one product by its internal identifier")
+    @DeleteMapping(path = "/products/{identifier}")
+    public void deleteProduct(
+            @ApiParam(required = true, value = "External identifier of the instrument", example = "uuid")
+            @PathVariable("identifier") String identifier) {
+        deleteProductCommandhandler.accept(new DeleteProductCommand(identifier));
+    }
+
+
+    @PostMapping(value = "/products/images/{identifier}")
+    public void handleFileUpload(@PathVariable("identifier") String identifier,
                                  @RequestParam("file") MultipartFile file) {
         try{
-            AddProductImageCommand command = new AddProductImageCommand(productIdentifier, file.getOriginalFilename(), file.getInputStream());
+            AddProductImageCommand command = new AddProductImageCommand(identifier, file.getOriginalFilename(), file.getInputStream());
             storeImageCommandHandler.accept(command);
         } catch ( IOException e) {
             throw new RuntimeException("Failed to store file " + file.getOriginalFilename(), e);

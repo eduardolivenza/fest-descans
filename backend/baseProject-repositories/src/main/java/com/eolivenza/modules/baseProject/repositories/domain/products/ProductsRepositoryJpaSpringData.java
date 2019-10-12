@@ -5,12 +5,12 @@ import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 
+
 @Repository
 public interface ProductsRepositoryJpaSpringData extends JpaRepository<ProductJpa, String> {
 
-    Optional<ProductJpa> findByProductIdentifier(String externalIdentifier);
+    boolean existsByProductName(String productName);
 
-    boolean existsByProductIdentifier(String externalIdentifier);
-
+    Optional<ProductJpa> findByProductName(String identifier);
 
 }

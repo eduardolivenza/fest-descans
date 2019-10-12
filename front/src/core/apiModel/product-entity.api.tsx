@@ -1,16 +1,21 @@
-import {SupplierApi} from "./supplier.api";
+import {SupplierEntityApi} from "./supplier-entity.api";
 
 export interface ProductEntityApi {
-    category: string;
-    productIdentifier: string;
+    internalIdentifier: string;
+    category: CategoryEntityApi;
     productName: string;
     productDescription: string;
     comfortLevel: number;
     images: string[];
-    supplier: SupplierApi;
+    supplier: SupplierEntityApi;
     sizes: ProductSizeEntityApi[];
   }
-    
+
+  export interface CategoryEntityApi {
+    description : string;
+    value: string;
+  }
+
   export interface ProductSizeEntityApi {
     size: string;
     price : string;

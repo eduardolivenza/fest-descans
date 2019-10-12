@@ -46,14 +46,19 @@ public class ProductsRepositoryImpl implements ProductsRepository {
     }
 
     @Override
-    public boolean existsByProductIdentifier(String externalIdentifier) {
-        return productsRepositoryJpaSpringData.existsByProductIdentifier(externalIdentifier);
+    public boolean existsByProductName(String productName) {
+        return productsRepositoryJpaSpringData.existsByProductName(productName);
     }
 
     @Override
-    public Optional<Product> retrieveByProductIdentifier(String externalIdentifier) {
-        Optional<ProductJpa> optionalProductJpa = productsRepositoryJpaSpringData.findByProductIdentifier(externalIdentifier);
-        return optionalProductJpa.map(productMapper::toDomain);
+    public Optional<Product> findByProductName(String productName) {
+        Optional<ProductJpa> optionalProductJpa = productsRepositoryJpaSpringData.findByProductName(productName);
+        return  optionalProductJpa.map(productMapper::toDomain);
+    }
+
+    @Override
+    public boolean existsByuuid(String internalIdentifier){
+        return productsRepositoryJpaSpringData.existsById(internalIdentifier);
     }
 
     @Override
@@ -70,7 +75,7 @@ public class ProductsRepositoryImpl implements ProductsRepository {
     }
 
     @Override
-    public void delete(String email) {
-        productsRepositoryJpaSpringData.deleteById(email);
+    public void delete(String identifier) {
+        productsRepositoryJpaSpringData.deleteById(identifier);
     }
 }

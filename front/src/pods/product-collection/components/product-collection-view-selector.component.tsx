@@ -29,7 +29,7 @@ const getInfoFromLayout = (layout: Layout) => {
     }
 };
 
-export const HotelCollectionViewSelectorComponent: React.FunctionComponent<Props> = (props) => {
+export const ProductsViewSelectorComponent: React.FunctionComponent<Props> = (props) => {
     const { layout, onChangeView } = props;
     const {icon, nextLayout} = getInfoFromLayout(layout);
     const changeLayout = () => {

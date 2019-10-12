@@ -7,6 +7,7 @@ interface Props extends WithStyles<typeof styles> {
   productCollection: ProductEntityVm[];
   viewProduct: (id: string) => void;
   editProduct: (id: string) => void;
+  removeProduct: (id: string) => void;
 }
 
 const styles = () => createStyles({
@@ -19,12 +20,12 @@ const styles = () => createStyles({
 
 export const ProductCollectionCardsComponentInner: React.FunctionComponent<Props> = (props) => {
   
-  const { productCollection, classes, viewProduct, editProduct} = props;
+  const { productCollection, classes, viewProduct, editProduct, removeProduct} = props;
   
   return (
     <div className={classes.listLayout}>
       {productCollection.map(product => (
-        <ProductCard product={product} key={product.productIdentifier} viewProduct={viewProduct} editProduct={editProduct}/>
+        <ProductCard product={product} key={product.internalIdentifier} viewProduct={viewProduct} editProduct={editProduct} removeProduct={removeProduct}/>
       ))}
     </div>
   );

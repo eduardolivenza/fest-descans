@@ -14,7 +14,7 @@ public class Supplier extends Entity<Supplier> {
 
     private String country;
 
-    public Supplier(String externalIdentifier,   String companyName,String country){
+    public Supplier(String externalIdentifier, String companyName, String country){
         this.externalIdentifier = externalIdentifier;
         this.companyName = companyName;
         this.country= country;

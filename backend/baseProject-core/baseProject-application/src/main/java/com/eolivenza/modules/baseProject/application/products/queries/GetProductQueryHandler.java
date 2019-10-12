@@ -22,14 +22,19 @@ public class GetProductQueryHandler implements QueryHandler<String, Product> {
     /**
      * Retrieve the {@link Product}
      *
-     * @param productIdentifier string class
+     * @param identifier string class
      * @return a {@link Product}
      **/
     @DomainStrictTransactional
     @Override
-    public Product apply(String productIdentifier) {
-        Optional<Product> optionalProduct = pRepository.retrieveByProductIdentifier(productIdentifier);
-        return optionalProduct.orElseThrow(() -> new ProductNotFoundException(productIdentifier));
+    public Product apply(String identifier) {
+        if (pRepository.existsByuuid(identifier)){
+            Product product = pRepository.retrieve(identifier);
+            return product;
+        }
+        else {
+            throw  new ProductNotFoundException(identifier);
+        }
     }
 
     @Override

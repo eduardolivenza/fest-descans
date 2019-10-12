@@ -18,8 +18,6 @@ public class ProductJpa {
 
     private Category categoryJpa;
 
-    private String productIdentifier;
-
     private String productName;
 
     private String description;
@@ -42,10 +40,9 @@ public class ProductJpa {
         //JPA demands it
     }
 
-    public ProductJpa(String uuid, Category categoryJpa, String productIdentifier, String productName, String description, Integer comfortLevel, SupplierJpa supplierJpa, Set<AvailableProductSizeJpa> productSizes, Set<ProductImageJpa>imagesList ) {
+    public ProductJpa(String uuid, Category categoryJpa, String productName, String description, Integer comfortLevel, SupplierJpa supplierJpa, Set<AvailableProductSizeJpa> productSizes, Set<ProductImageJpa>imagesList ) {
         this.uuid = uuid;
         this.categoryJpa = categoryJpa;
-        this.productIdentifier = productIdentifier;
         this.productName = productName;
         this.description = description;
         this.comfortLevel = comfortLevel;
@@ -68,14 +65,6 @@ public class ProductJpa {
 
     public void setCategoryJpa(Category categoryJpa) {
         this.categoryJpa = categoryJpa;
-    }
-
-    public String getProductIdentifier() {
-        return productIdentifier;
-    }
-
-    public void setProductIdentifier(String productIdentifier) {
-        this.productIdentifier = productIdentifier;
     }
 
     public String getProductName() {
