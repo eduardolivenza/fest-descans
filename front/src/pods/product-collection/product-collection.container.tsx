@@ -107,6 +107,7 @@ export const ProductCollectionContainerInner = (props: Props) => {
     name: string,
     valueEnter: boolean
   ) => {
+    
     let itemIndex: number = productTypesFilterItems.findIndex(
       item => item.name === name
     );
@@ -184,7 +185,7 @@ export const ProductCollectionContainerInner = (props: Props) => {
     Object.keys(productTypesFilterItems).forEach(position => {
       if (productTypesFilterItems[position].value === false) {
         newArray = newArray.filter(
-          result => result.category != productTypesFilterItems[position].name
+          result => result.category.value != productTypesFilterItems[position].name
         );
       }
     });
