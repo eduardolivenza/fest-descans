@@ -1,16 +1,18 @@
 import * as React from "react";
+import { SuppliersCollectionCardsComponent } from "./suppliers-collection-cards.component";
+import { SupplierVm } from "core/dataModel/supplier-entity.vm";
 
 interface Props {
-
+    suppliersCollection: SupplierVm[];
 }
 
 export const SuppliersCollectionComponent = (props: Props) => {
 
-    const { } = props;
+    const { suppliersCollection} = props;
 
     return (
         <div>
-           Suppliers page is still empty but different of other pages
+           <SuppliersCollectionCardsComponent suppliersCollection={suppliersCollection} />;
         </div>
 
     );
