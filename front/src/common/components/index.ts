@@ -6,3 +6,4 @@ export * from './notification.component';
 export * from './value-field-display.component';
 export * from './checkbox-config-value.component';
 export * from './checkbox-group.component';
+export * from './adminAddIcon.component';

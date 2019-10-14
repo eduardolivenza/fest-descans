@@ -5,27 +5,41 @@ import { SupplierCard } from "./supplier-card.component"; // on next step we wil
 
 interface Props extends WithStyles<typeof styles> {
   suppliersCollection: SupplierVm[];
-  //viewProduct: (id: string) => void;
-  //editProduct: (id: string) => void;
-  //removeProduct: (id: string) => void;
+  viewSupplier: (id: string) => void;
+  editSupplier: (id: string) => void;
+  removeSupplier: (id: string) => void;
 }
 
-const styles = () => createStyles({
-  listLayout: {
-    display: "flex",
-    flexWrap: "wrap",
-    justifyContent: "space-between"
-  }
-});
+const styles = () =>
+  createStyles({
+    listLayout: {
+      display: "flex",
+      flexWrap: "wrap",
+      justifyContent: "space-between"
+    }
+  });
 
-export const SuppliersCollectionCardsComponentInner: React.FunctionComponent<Props> = (props) => {
-  
-  const { suppliersCollection, classes} = props;
-  
+export const SuppliersCollectionCardsComponentInner: React.FunctionComponent<
+  Props
+> = props => {
+  const {
+    suppliersCollection,
+    classes,
+    viewSupplier,
+    removeSupplier,
+    editSupplier
+  } = props;
+
   return (
     <div className={classes.listLayout}>
       {suppliersCollection.map(product => (
-        <SupplierCard supplierEntity={product} key={product.id} />
+        <SupplierCard
+          supplierEntity={product}
+          key={product.id}
+          viewSupplier={viewSupplier}
+          editSupplier={editSupplier}
+          removeSupplier={removeSupplier}
+        />
       ))}
     </div>
   );

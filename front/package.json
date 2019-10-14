@@ -9,6 +9,10 @@
     "test": "jest -c ./config/test/jest.json --verbose",
     "test:watch": "jest -c ./config/test/jest.json --verbose --watchAll -i"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/eduardolivenza/fest-descans.git"
+  },
   "keywords": [
     "react",
     "typescript",
