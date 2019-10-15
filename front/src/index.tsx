@@ -2,9 +2,8 @@ import React, { Suspense } from 'react';
 import * as ReactDOM from "react-dom";
 import { HashRouter, Switch, Route } from "react-router-dom";
 import { routerSwitchRoutes, SessionContext, getSessionCookie } from "core";
-import { LoginPage, ProductCollectionPage, RegisterPage, DefaultPage, ProductViewPage, SuppliersCollectionPage, ProductEditPage } from "scenes";
+import { LoginPage, ProductCollectionPage, RegisterPage, DefaultPage, ProductViewPage, SuppliersCollectionPage, ProductEditPage, SupplierEditPage } from "scenes";
 import 'config/i18n/i18n';
-
 
 const Routes = () => {
 
@@ -54,6 +53,14 @@ const Routes = () => {
                     <Route
                         path={routerSwitchRoutes.suppliersCollection}
                         component={SuppliersCollectionPage}
+                    />
+                    <Route
+                        path={routerSwitchRoutes.supplierAdd}
+                        component={SupplierEditPage}
+                    />
+                    <Route
+                        path={routerSwitchRoutes.supplierEdit}
+                        component={SupplierEditPage}
                     />
                 </Switch>
             </ HashRouter>

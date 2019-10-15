@@ -5,3 +5,4 @@ export * from './product-edit.page';
 export * from './register.page';
 export * from './default.page';
 export * from './suppliers-collection.page';
+export * from './supplier-edit.page';
