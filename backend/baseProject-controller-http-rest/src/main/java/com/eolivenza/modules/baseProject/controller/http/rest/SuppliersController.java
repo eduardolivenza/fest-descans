@@ -32,7 +32,7 @@ public class SuppliersController {
     public SuppliersController( ) {
     }
 
-    @ApiOperation(value = "Adds a new supplier")
+    @ApiOperation(value = "Adds or updates a supplier")
     @PostMapping(path = "/suppliers")
     public void addSupplier(@RequestBody final SupplierResource supplierResource) {
         AddSupplierCommand addSupplierCommand = new AddSupplierCommand(

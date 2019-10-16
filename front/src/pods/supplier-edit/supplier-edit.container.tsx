@@ -82,11 +82,7 @@ const SupplierEditContainerInner = (props: Props) => {
 
   const handleFormValidation = (formValidation: FormValidationResult) => {
     if (formValidation.succeeded) {
-      if (supplierId !== "") {
-        //patchProduct(supplier).then(() => history.back());
-      } else {
         postNewSupplier(supplier).then(() => history.back());
-      }
     } else {
       showErrorNotification(formValidation);
     }

@@ -31,7 +31,12 @@ public class AddSupplierCommandHandler implements CommandHandler<AddSupplierComm
                 addProductCommand.companyName,
                 addProductCommand.country
         );
-        suppliersRepository.create(supplier);
+        if (suppliersRepository.existsBySupplierIdentifier(addProductCommand.externalIdentifier)){
+            suppliersRepository.update(supplier);
+        }
+        else {
+            suppliersRepository.create(supplier);
+        }
     }
 
 
