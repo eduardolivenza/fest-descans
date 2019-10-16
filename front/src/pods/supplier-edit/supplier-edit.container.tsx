@@ -4,36 +4,38 @@ import { productViewRouteParams } from "core";
 import { SupplierEditComponent } from "./supplier-edit.component";
 import { FormValidationResult } from "lc-form-validation";
 import { NotificationComponent } from "common/components";
-import { SupplierVm, createDefaultSupplierFormErrors, SupplierFormErrors } from "core/dataModel/supplier-entity.vm";
+import {
+  SupplierVm,
+  createDefaultSupplierFormErrors,
+  SupplierFormErrors,
+  createDefaultSupplier
+} from "core/dataModel/supplier-entity.vm";
 import { getSupplier } from "core/api/supplier-get.api";
 import { mapSupplierToVm } from "core/mapper/supplier-entity.mapper";
 import { SupplierEditFormValidation } from "./supplier-edit.validation";
 
 interface Props extends RouteComponentProps {}
 
-const useProductEdit = () => {
+const useSupplierEdit = () => {
   const [supplier, setSupplier] = React.useState<SupplierVm>(
-    // create empty supplier
+    createDefaultSupplier()
   );
 
-  const loadProductEdit = (id: number) =>
-  getSupplier(id).then(result => setSupplier(mapSupplierToVm(result)));
-    
+  const loadSupplierEdit = (id: string) =>
+    getSupplier(id).then(result => setSupplier(mapSupplierToVm(result)));
+
   return {
     supplier,
     setSupplier,
-    loadProductEdit
+    loadSupplierEdit
   };
 };
 
 interface Props extends RouteComponentProps {}
 
 const SupplierEditContainerInner = (props: Props) => {
-  const {
-    supplier,
-    setSupplier,
-    loadProductEdit,
-  } = useProductEdit();
+  
+  const { supplier, setSupplier, loadSupplierEdit } = useSupplierEdit();
   const [supplierFormErrors, setSupplierFormErrors] = React.useState<
     SupplierFormErrors
   >(createDefaultSupplierFormErrors());
@@ -42,10 +44,10 @@ const SupplierEditContainerInner = (props: Props) => {
     showValidationFailedMessage,
     setShowValidationFailedMessage
   ] = React.useState(false);
-  
+
   React.useEffect(() => {
-    if (props.match.params[productViewRouteParams.id]){
-      loadProductEdit(props.match.params[productViewRouteParams.id]);
+    if (props.match.params[productViewRouteParams.id]) {
+      loadSupplierEdit(props.match.params[productViewRouteParams.id]);
     }
   }, []);
 
@@ -78,10 +80,9 @@ const SupplierEditContainerInner = (props: Props) => {
 
   const handleFormValidation = (formValidation: FormValidationResult) => {
     if (formValidation.succeeded) {
-      if (props.match.params[productViewRouteParams.id]){
+      if (props.match.params[productViewRouteParams.id]) {
         //patchProduct(supplier).then(() => history.back());
-      }
-      else{
+      } else {
         //postNewProduct(supplier).then(() => history.back());
       }
     } else {

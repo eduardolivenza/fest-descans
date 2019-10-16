@@ -9,10 +9,7 @@ import com.eolivenza.modules.baseProject.domain.model.suppliers.Supplier;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -26,6 +23,8 @@ public class SuppliersController {
     private CommandHandler<AddSupplierCommand> addSupplierCommandCommandHandler;
     @Autowired
     private QueryHandler<Class<Void>, List<Supplier>> getAllSuppliersQueryHandler;
+    @Autowired
+    private QueryHandler<String, Supplier> getSupplierQueryHandler;
     @Autowired
     private SupplierResourceMapper supplierResourceMapper;
 
@@ -51,6 +50,12 @@ public class SuppliersController {
     }
 
 
+    @ApiOperation(value = "Retrieves one specific supplier")
+    @GetMapping(path = "/suppliers/{identifier}")
+    public SupplierResource getSupplier(  @PathVariable final String identifier) {
+        Supplier supplier = getSupplierQueryHandler.apply(identifier);
+        return supplierResourceMapper.toSecondType(supplier);
+    }
 
 
 }

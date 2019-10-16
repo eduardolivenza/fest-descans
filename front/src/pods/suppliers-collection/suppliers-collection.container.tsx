@@ -4,6 +4,10 @@ import { SupplierVm } from "core/dataModel/supplier-entity.vm";
 import { mapFromAToBCollection } from "common";
 import { mapSupplierToVm } from "core/mapper/supplier-entity.mapper";
 import { getSuppliersCollection } from "core/api/suppliers-collection.api";
+import { routesLinks } from "core";
+import { withRouter, RouteComponentProps } from "react-router-dom";
+
+interface Props extends RouteComponentProps {}
 
 const useSuppliersCollection = () => {
   const [suppliersCollection, setSuppliersCollection] = React.useState<
@@ -25,7 +29,7 @@ const useSuppliersCollection = () => {
   };
 };
 
-export const SuppliersCollectionContainer = () => {
+export const SupplierCollectionContainerInner = (props: Props) => {
   const {
     suppliersCollection,
     loadSuppliersCollection
@@ -43,7 +47,7 @@ export const SuppliersCollectionContainer = () => {
     alert("viewing supplier details");
   };
   const editSupplier = (id: string) => {
-    alert("editing existing supplier");
+    props.history.push(routesLinks.supplierEdit(id));
   };
   const removeSupplier = (id: string) => {
     alert("removing existing supplier");
@@ -60,3 +64,7 @@ export const SuppliersCollectionContainer = () => {
     />
   );
 };
+
+export const SupplierCollectionContainer = withRouter(
+  SupplierCollectionContainerInner
+);

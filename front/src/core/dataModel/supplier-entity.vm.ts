@@ -16,3 +16,9 @@ export interface SupplierVm {
     companyName: new FieldValidationResult(),
     country: new FieldValidationResult(),
   });
+
+  export const createDefaultSupplier = (): SupplierVm => ({
+    id: "",
+    companyName: "string",
+    country: "string",
+  });

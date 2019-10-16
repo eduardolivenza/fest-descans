@@ -7,7 +7,7 @@ import {SupplierEntityApi} from 'core/apiModel/supplier-entity.api';
   
   // TODO: Just only managing the "happy path", adding error handling here or upper level 
   // would be a good idea
-  export const getSupplier = (id) : Promise<SupplierEntityApi> => { 
+  export const getSupplier = (id: string) : Promise<SupplierEntityApi> => { 
     const url = `${getSupplierUrl}/${id}`; 
     const promise = new Promise<SupplierEntityApi>((resolve, reject) => 
       Axios.get<SupplierEntityApi>(
