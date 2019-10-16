@@ -7,18 +7,20 @@ export interface SupplierVm {
   }
 
   export interface SupplierFormErrors {
+    id: FieldValidationResult;
     companyName: FieldValidationResult;
     country: FieldValidationResult;
     
   }
   
   export const createDefaultSupplierFormErrors = (): SupplierFormErrors => ({
+    id: new FieldValidationResult(),
     companyName: new FieldValidationResult(),
     country: new FieldValidationResult(),
   });
 
   export const createDefaultSupplier = (): SupplierVm => ({
     id: "",
-    companyName: "string",
-    country: "string",
+    companyName: "",
+    country: "",
   });

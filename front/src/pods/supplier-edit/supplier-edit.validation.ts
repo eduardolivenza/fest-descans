@@ -6,7 +6,9 @@ import {
 
 const SupplierEditFormValidationConstraints: ValidationConstraints = {
   fields: {
+    id: [{ validator: Validators.required }],
     companyName: [{ validator: Validators.required }],
+    country: [{ validator: Validators.required }],
   }
 };
 

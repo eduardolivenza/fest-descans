@@ -40,7 +40,7 @@ export const SupplierCollectionContainerInner = (props: Props) => {
   }, []);
 
   const addSupplier = () => {
-    alert("adding a new supplier");
+    props.history.push(routesLinks.supplierAdd);
   };
 
   const viewSupplier = (id: string) => {

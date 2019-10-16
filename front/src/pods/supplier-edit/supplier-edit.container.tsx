@@ -13,6 +13,7 @@ import {
 import { getSupplier } from "core/api/supplier-get.api";
 import { mapSupplierToVm } from "core/mapper/supplier-entity.mapper";
 import { SupplierEditFormValidation } from "./supplier-edit.validation";
+import { postNewSupplier } from "core/api/supplier-post.api";
 
 interface Props extends RouteComponentProps {}
 
@@ -34,8 +35,8 @@ const useSupplierEdit = () => {
 interface Props extends RouteComponentProps {}
 
 const SupplierEditContainerInner = (props: Props) => {
-  
   const { supplier, setSupplier, loadSupplierEdit } = useSupplierEdit();
+  const [supplierId, setSupplierId] = React.useState<string>("");
   const [supplierFormErrors, setSupplierFormErrors] = React.useState<
     SupplierFormErrors
   >(createDefaultSupplierFormErrors());
@@ -47,6 +48,7 @@ const SupplierEditContainerInner = (props: Props) => {
 
   React.useEffect(() => {
     if (props.match.params[productViewRouteParams.id]) {
+      setSupplierId(props.match.params[productViewRouteParams.id]);
       loadSupplierEdit(props.match.params[productViewRouteParams.id]);
     }
   }, []);
@@ -80,10 +82,10 @@ const SupplierEditContainerInner = (props: Props) => {
 
   const handleFormValidation = (formValidation: FormValidationResult) => {
     if (formValidation.succeeded) {
-      if (props.match.params[productViewRouteParams.id]) {
+      if (supplierId !== "") {
         //patchProduct(supplier).then(() => history.back());
       } else {
-        //postNewProduct(supplier).then(() => history.back());
+        postNewSupplier(supplier).then(() => history.back());
       }
     } else {
       showErrorNotification(formValidation);
@@ -105,6 +107,7 @@ const SupplierEditContainerInner = (props: Props) => {
     <>
       <SupplierEditComponent
         supplier={supplier}
+        supplierId={supplierId}
         onFieldUpdate={onFieldUpdate}
         onSave={doSave}
         onCancel={doCancel}
