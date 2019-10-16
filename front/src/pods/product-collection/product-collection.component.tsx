@@ -2,12 +2,14 @@ import * as React from "react";
 import { ProductEntityVm } from "core/dataModel/product-entity.vm";
 import { ProductCollectionCardsComponent } from "./components/product-collection-cards.component";
 import { ProductCollectionTableComponent } from "./components/product-collection-table.component";
-import { ProductsViewSelectorComponent, Layout } from "./components/product-collection-view-selector.component";
+import {
+  ProductsViewSelectorComponent,
+  Layout
+} from "./components/product-collection-view-selector.component";
 import { FilterCard } from "./components/filter-card.component";
 import { CheckBoxConfigValue } from "common/components";
 import { SessionContext } from "core";
-import { Tooltip, IconButton } from "@material-ui/core";
-import AddIcon from '@material-ui/icons/Add';
+import { AdminAddIcon } from "common/components";
 
 interface Props {
   productCollection: ProductEntityVm[];
@@ -22,13 +24,14 @@ interface Props {
   handleChangeFilterText: (value: string) => void;
   comfortLevelFilterState: CheckBoxConfigValue[];
   productTypesFilterState: CheckBoxConfigValue[];
-  maxPriceValue: number,
-  selectedPrice: number[],
-  filterTextValue: string,
+  maxPriceValue: number;
+  selectedPrice: number[];
+  filterTextValue: string;
 }
 
-export const ProductCollectionComponent: React.FunctionComponent<Props> = (props) => {
-
+export const ProductCollectionComponent: React.FunctionComponent<
+  Props
+> = props => {
   const {
     productCollection,
     viewProduct,
@@ -44,25 +47,28 @@ export const ProductCollectionComponent: React.FunctionComponent<Props> = (props
     productTypesFilterState,
     filterTextValue,
     maxPriceValue,
-    selectedPrice } = props;
+    selectedPrice
+  } = props;
 
   const [componentLayout, setComponentLayout] = React.useState(layout);
   const session = React.useContext(SessionContext);
 
   let hotelCollectionComponent;
   if (componentLayout === Layout.Card) {
-    hotelCollectionComponent = <ProductCollectionCardsComponent productCollection={productCollection} viewProduct={viewProduct} editProduct={editProduct} removeProduct={removeProduct} />;
+    hotelCollectionComponent = (
+      <ProductCollectionCardsComponent
+        productCollection={productCollection}
+        viewProduct={viewProduct}
+        editProduct={editProduct}
+        removeProduct={removeProduct}
+      />
+    );
   } else if (componentLayout === Layout.Table) {
-    hotelCollectionComponent = <ProductCollectionTableComponent productCollection={productCollection} viewProduct={viewProduct} />;
-  }
-  let adminComponents;
-  if (session.email) {
-    adminComponents = (
-      <Tooltip title="AddProduct" onClick={addProduct}>
-        <IconButton aria-label="add">
-          <AddIcon />
-        </IconButton>
-      </Tooltip>
+    hotelCollectionComponent = (
+      <ProductCollectionTableComponent
+        productCollection={productCollection}
+        viewProduct={viewProduct}
+      />
     );
   }
 
@@ -79,13 +85,18 @@ export const ProductCollectionComponent: React.FunctionComponent<Props> = (props
         maxPriceValue={maxPriceValue}
         selectedPrice={selectedPrice}
       />
-      <ProductsViewSelectorComponent onChangeView={setComponentLayout} layout={componentLayout} />
-      {adminComponents}
+      <div  style={{ display: "flex" }} >
+        <ProductsViewSelectorComponent
+          onChangeView={setComponentLayout}
+          layout={componentLayout}
+        />
+        <AdminAddIcon session={session} action={addProduct} />
+      </div>
       {hotelCollectionComponent}
     </>
   );
 };
 
 ProductCollectionComponent.defaultProps = {
-  layout: Layout.Card,
-} 
+  layout: Layout.Card
+};

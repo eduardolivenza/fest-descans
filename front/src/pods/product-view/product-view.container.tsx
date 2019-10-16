@@ -4,7 +4,7 @@ import { productViewRouteParams } from "core";
 import { ProductViewComponent } from "./product-view.component";
 import { mapFromApiToVm } from "core/mapper/product-entity.mapper";
 import { ProductEntityVm, createDefaultProduct } from "core/dataModel/product-entity.vm";
-import { getProductView } from "core/api/product-view.api";
+import { getProductView } from "core/api/product-get.api";
 
 interface Props extends RouteComponentProps { }
 

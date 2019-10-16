@@ -10,6 +10,8 @@ interface BaseRoutes {
   productEdit: string;
   suppliersCollection: string;
   default: string;
+  supplierAdd: string;
+  supplierEdit: string;
 }
 
 const appBaseRoutes : BaseRoutes = {
@@ -20,6 +22,8 @@ const appBaseRoutes : BaseRoutes = {
   productView: '/product-view',
   productEdit: '/product-edit',
   suppliersCollection: '/suppliers-collection',
+  supplierAdd: '/supplier-add',
+  supplierEdit: '/supplier-edit',
   register: '/register',
   default: '/',
 }
@@ -36,21 +40,14 @@ export const routerSwitchRoutes : RouterSwitchRoutes =  {
   ...appBaseRoutes,
   productView: `${appBaseRoutes.productView}/:${productViewRouteParams.id}`,
   productEdit: `${appBaseRoutes.productEdit}/:${productViewRouteParams.id}`,
+  supplierEdit: `${appBaseRoutes.supplierEdit}/:${productViewRouteParams.id}`,
 }
 
-// https://stackoverflow.com/questions/48215950/exclude-property-from-type
-type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>
-
-type RoutesLinks = Omit<BaseRoutes, 'productView'> & {productView : (id) => string};
-type RoutesLinksFinal = Omit<RoutesLinks, 'productEdit'> & {productEdit : (id) => string};
-
-
-// We need to create this because in future pages we will include parameters
-// e.g. 'hotel: (hotelId) => /hotel/{hotelId}' this will differ from the route definition
-export const routesLinks: RoutesLinksFinal  =  {
+export const routesLinks  =  {
   ...appBaseRoutes,  
-  productView: (id) => generatePath(routerSwitchRoutes.productView, {id}),
-  productEdit: (id) => generatePath(routerSwitchRoutes.productEdit, {id}),
+  productView:  (id) => generatePath(routerSwitchRoutes.productView, {id}),
+  productEdit:  (id) => generatePath(routerSwitchRoutes.productEdit, {id}),
+  supplierEdit: (id) => generatePath(routerSwitchRoutes.supplierEdit, {id}),
 }
 
 

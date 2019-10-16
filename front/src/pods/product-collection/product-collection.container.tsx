@@ -5,18 +5,17 @@ import { routesLinks } from "core";
 import { withRouter, RouteComponentProps } from "react-router-dom";
 import { getProductsCollection } from "core/api/product-collection.api";
 import { mapFromApiToVm } from "core/mapper/product-entity.mapper";
+import { mapToCheckBoxValue } from "core/mapper/category-entity.mapper";
 import { mapFromAToBCollection } from "common";
 import { CheckBoxConfigValue } from "common/components";
 import { deleteProduct } from "core/api/product-delete.api";
+import { getCategoriesCollection } from "core/api/categories-collection.api";
 
 const useProductCollection = () => {
-  const [productsCollection, setProductsCollection] = React.useState<
-    ProductEntityVm[]
-  >([]);
-  const [
-    productsCollectionFiltered,
-    setProductsCollectionFiltered
-  ] = React.useState<ProductEntityVm[]>([]);
+  const [productsCollection, setProductsCollection] = 
+    React.useState<ProductEntityVm[]>([]);
+  const [ productsCollectionFiltered, setProductsCollectionFiltered] =
+    React.useState<ProductEntityVm[]>([]);
   const [maxPrice, setMaxPrice] = React.useState<number>(0);
 
   const loadProductsCollection = () =>
@@ -37,6 +36,7 @@ const useProductCollection = () => {
       setProductsCollectionFiltered(products);
       setMaxPrice(maxPriceLocal);
     });
+
   return {
     productsCollection,
     loadProductsCollection,
@@ -74,29 +74,6 @@ const comfortLevelCheckboxes: CheckBoxConfigValue[] = [
   }
 ];
 
-const productTypesCheckBoxes: CheckBoxConfigValue[] = [
-  {
-    name: "BED",
-    label: "Beds and canapes",
-    value: true
-  },
-  {
-    name: "MATTRESS",
-    label: "Matresses",
-    value: true
-  },
-  {
-    name: "SOFA",
-    label: "Sofas",
-    value: true
-  },
-  {
-    name: "OTHER",
-    label: "Pillows and other products",
-    value: true
-  }
-];
-
 interface Props extends RouteComponentProps {}
 
 export const ProductCollectionContainerInner = (props: Props) => {
@@ -105,14 +82,15 @@ export const ProductCollectionContainerInner = (props: Props) => {
     loadProductsCollection,
     productsCollectionFiltered,
     setProductsCollectionFiltered,
-    maxPrice
+    maxPrice, 
   } = useProductCollection();
+
   const [comfortLevelFilterItems, setComfortLevelFilterItems] = React.useState(
     comfortLevelCheckboxes
   );
-  const [productTypesFilterItems, setProductTypesFilterItems] = React.useState(
-    productTypesCheckBoxes
-  );
+
+  const [productTypesFilterItems, setProductTypesFilterItems] = React.useState([]);
+
   const [priceFilter, setPriceFilter] = React.useState([0, maxPrice]);
   const [textFilterValue, setTextFilterValue] = React.useState("");
 
@@ -129,6 +107,7 @@ export const ProductCollectionContainerInner = (props: Props) => {
     name: string,
     valueEnter: boolean
   ) => {
+    
     let itemIndex: number = productTypesFilterItems.findIndex(
       item => item.name === name
     );
@@ -164,7 +143,17 @@ export const ProductCollectionContainerInner = (props: Props) => {
     props.history.push(routesLinks.productAdd);
   };
 
+  const loadCategories = () =>
+    getCategoriesCollection().then(result => {
+      const suppliersLookup: CheckBoxConfigValue[] = mapFromAToBCollection(
+        mapToCheckBoxValue,
+        result
+      );
+      setProductTypesFilterItems(suppliersLookup);
+    });
+
   React.useEffect(() => {
+    loadCategories()
     loadProductsCollection();
   }, []);
 
@@ -196,7 +185,7 @@ export const ProductCollectionContainerInner = (props: Props) => {
     Object.keys(productTypesFilterItems).forEach(position => {
       if (productTypesFilterItems[position].value === false) {
         newArray = newArray.filter(
-          result => result.category != productTypesFilterItems[position].name
+          result => result.category.value != productTypesFilterItems[position].name
         );
       }
     });

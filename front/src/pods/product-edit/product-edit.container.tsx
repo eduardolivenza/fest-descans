@@ -11,7 +11,7 @@ import {
   ProductFormErrors,
   createDefaultProductFormErrors
 } from "core/dataModel/product-entity.vm";
-import { getProductView } from "core/api/product-view.api";
+import { getProductView } from "core/api/product-get.api";
 import { mapFromApiToVm } from "core/mapper/product-entity.mapper";
 import { postImageToProduct } from "core/api/addProductImage.api";
 import { patchProduct } from "core/api/product-patch.api";

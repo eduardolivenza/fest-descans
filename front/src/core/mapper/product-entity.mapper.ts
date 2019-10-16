@@ -1,7 +1,7 @@
-import {ProductEntityApi} from 'core/apiModel/product-entity.api'
-import {ProductEntityVm} from '../dataModel/product-entity.vm';
-import {basePicturesUrl} from 'core';
-import {mapSupplierToVm, mapSupplierToApi} from 'core/mapper/supplier-entity.mapper';
+import { ProductEntityApi} from 'core/apiModel/product-entity.api'
+import { ProductEntityVm} from '../dataModel/product-entity.vm';
+import { basePicturesUrl} from 'core';
+import { mapSupplierToVm, mapSupplierToApi} from 'core/mapper/supplier-entity.mapper';
 
 export const mapFromApiToVm = (apiEntity : ProductEntityApi) : ProductEntityVm => ({
   internalIdentifier: apiEntity.internalIdentifier,
@@ -38,7 +38,5 @@ const formatPictures = ( filenames: string[]): string[] => {
   )
   return pictures;
 }
-
-
 
 
