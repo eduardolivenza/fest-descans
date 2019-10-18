@@ -58,8 +58,8 @@
                 <configuration>
                     <!--compile-->
                     <!--test-compile-->
-                    <source>12</source>
-                    <target>12</target>
+                    <source>11</source>
+                    <target>11</target>
                 </configuration>
             </plugin>
             <plugin>
