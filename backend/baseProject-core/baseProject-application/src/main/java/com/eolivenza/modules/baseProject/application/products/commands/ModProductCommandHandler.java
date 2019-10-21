@@ -50,7 +50,7 @@ public class ModProductCommandHandler implements CommandHandler<ModProductComman
                 supplier = suppliersRepository.retrieve(modProductCommand.supplier.getExternalIdentifier());
             }
             Optional<Product> optionalOtherProduct = productsRepository.findByProductName(modProductCommand.productName);
-            if ((optionalOtherProduct.isPresent()) && (optionalOtherProduct.get().getUuid().toString() != modProductCommand.identifier )) {
+            if ((optionalOtherProduct.isPresent()) && !(optionalOtherProduct.get().getUuid().toString().equals(modProductCommand.identifier ))) {
                     throw new ProductWithThisNameExistsException(modProductCommand.productName);
             }
             Product product = new Product(
