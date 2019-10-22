@@ -18,7 +18,11 @@ import NotificationsIcon from '@material-ui/icons/Notifications';
 import { Copyright } from "./copyright";
 import { MainMenu } from "./mainMenu.layout";
 import { LoginMenu } from "./loginMenu.layout";
+import { LanguageMenu} from "./languageMenu.layout";
 import Cookies from "js-cookie";
+import { useTranslation } from 'react-i18next';
+import PropTypes from 'prop-types';
+import useScrollTrigger from '@material-ui/core/useScrollTrigger';
 
 const logo = require("public/images/FEST_COLOR_3.png");
 const drawerWidth = 25;
@@ -102,7 +106,9 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-interface Props extends RouteComponentProps { }
+interface Props extends RouteComponentProps {
+  
+ }
 
 const AppLayoutInner: React.FunctionComponent<Props> = (props) => {
 
@@ -111,16 +117,24 @@ const AppLayoutInner: React.FunctionComponent<Props> = (props) => {
   const classes = useStyles({});
 
   const [open, setOpen] = React.useState(false);
+  
   const [anchorLoginMenu, setanchorLoginMenu] = React.useState(null);
-
   const openLoginMenu: boolean = Boolean(anchorLoginMenu);
+
+  const [anchorLanguageMenu, setAnchorLanguageMenu] = React.useState(null);
+  const openLanguageMenu: boolean = Boolean(anchorLanguageMenu);
 
   const handleClose = () => {
     setanchorLoginMenu(null);
+    setAnchorLanguageMenu(null);
   }
 
   const handleLoginMenu = (event: React.MouseEvent<HTMLElement>) => {
     setanchorLoginMenu(event.currentTarget);
+  }
+
+  const handleLanguageMenu = (event: React.MouseEvent<HTMLElement>) => {
+    setAnchorLanguageMenu(event.currentTarget);
   }
 
   const doLoginLogout = () => {
@@ -150,9 +164,16 @@ const AppLayoutInner: React.FunctionComponent<Props> = (props) => {
     history.push(routesLinks.suppliersCollection);
   }
 
+  const { t, i18n } = useTranslation();
+
+  const changeLanguage = lng => {
+      i18n.changeLanguage(lng);
+    };
+
   return (
     <div className={classes.root}>
       <CssBaseline />
+    
       <AppBar position="absolute" className={clsx(classes.appBar, open && classes.appBarShift)}>
         <Toolbar className={classes.toolbar}>
           <IconButton
@@ -169,7 +190,13 @@ const AppLayoutInner: React.FunctionComponent<Props> = (props) => {
           <Typography className = {classes.login} variant="h6" color="inherit" >
             {loginContext.email}
           </Typography>
-
+          <LanguageMenu
+            handleLanguageMenu={handleLanguageMenu}
+            openLanguageMenu={openLanguageMenu}
+            handleClose={handleClose}
+            anchorLoginMenu={anchorLanguageMenu}
+            setLanguage={changeLanguage}
+          />
           <LoginMenu
             handleLoginMenu={handleLoginMenu}
             openLoginMenu={openLoginMenu}
@@ -184,6 +211,7 @@ const AppLayoutInner: React.FunctionComponent<Props> = (props) => {
           </IconButton>
         </Toolbar>
       </AppBar>
+     
       <Drawer
         variant="permanent"
         classes={{
