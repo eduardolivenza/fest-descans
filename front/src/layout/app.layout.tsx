@@ -21,8 +21,7 @@ import { LoginMenu } from "./loginMenu.layout";
 import { LanguageMenu} from "./languageMenu.layout";
 import Cookies from "js-cookie";
 import { useTranslation } from 'react-i18next';
-import PropTypes from 'prop-types';
-import useScrollTrigger from '@material-ui/core/useScrollTrigger';
+
 
 const logo = require("public/images/FEST_COLOR_3.png");
 const drawerWidth = 25;

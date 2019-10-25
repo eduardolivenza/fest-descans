@@ -1,9 +1,19 @@
 import * as React from "react";
-import { AppLayout } from "layout";
-import { DefaultContainer } from "pods/default";
+import { NewDesignLayout } from "layout";
+
+import { TeamSection, WorkSection } from "pods/landing";
 
 export const DefaultPage = () => (
+  <>
+   {/*
     <AppLayout>
      <DefaultContainer/>
+      <LandingPage />
     </AppLayout>
-  );
+    */}
+    <NewDesignLayout>
+      <TeamSection />
+      <WorkSection />
+    </NewDesignLayout>
+  </>
+);
