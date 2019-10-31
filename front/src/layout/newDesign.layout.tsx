@@ -5,7 +5,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import styles from "common/styles/jss/material-kit-react/views/landingPage.js";
 import { Copyright } from "layout/copyright";
 import { Parallax } from "common/components/Parallax";
-import { Header } from "layout/Header";
+import { Header } from "layout/header";
 
 interface Props extends RouteComponentProps {}
 
@@ -18,10 +18,10 @@ const NewDesignLayoutInner: React.FunctionComponent<Props> = props => {
     <div>
       <Header
         color="transparent"
-        brand="Material Kit React"
+        brand="Fest Descans"
         fixed
         changeColorOnScroll={{
-          height: 300,
+          height: 250,
           color: "primary"
         }}
       />
@@ -39,7 +39,7 @@ const NewDesignLayoutInner: React.FunctionComponent<Props> = props => {
           <br />
           <br />
           <br />
-          <h1 className={classes.title}>Your Story Starts With Us.</h1>
+          <h1 className={classes.title}>Welcome to Fest Descans</h1>
           <br />
           <br />
           <br />

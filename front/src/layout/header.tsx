@@ -1,6 +1,5 @@
 import React from "react";
 import classNames from "classnames";
-import PropTypes from "prop-types";
 import { makeStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
@@ -8,19 +7,36 @@ import styles from "common/styles/jss/material-kit-react/components/headerStyle.
 import { LanguageMenu } from "layout/languageMenu.layout";
 import { LoginMenu } from "layout/loginMenu.layout";
 import { useTranslation } from "react-i18next";
-import Tabs from '@material-ui/core/Tabs';
-import Tab from '@material-ui/core/Tab';
+import { MainMenu } from "./mainMenu.layout";
+import { SessionContext, routesLinks } from "core";
+import { withRouter, RouteComponentProps } from "react-router-dom";
+import { EncapsulatedMainMenu } from "./encapuslated-menu.layout";
+import Cookies from "js-cookie";
 
 const logo = require("public/images/FEST_COLOR_3.png");
 const useStyles = makeStyles(styles);
 
-export function Header(props) {
+interface Props extends RouteComponentProps {
+  color: string;
+  brand: string;
+  fixed: boolean;
+  absolute?: boolean;
+  changeColorOnScroll?: {
+    height: number;
+    color: string;
+  };
+}
+
+const HeaderInner: React.FunctionComponent<Props> = props => {
+  const { history } = props;
   const classes = useStyles({});
 
   const [anchorLanguageMenu, setAnchorLanguageMenu] = React.useState(null);
   const openLanguageMenu: boolean = Boolean(anchorLanguageMenu);
   const [anchorLoginMenu, setanchorLoginMenu] = React.useState(null);
   const openLoginMenu: boolean = Boolean(anchorLoginMenu);
+  const [anchorMainMenu, setanchorMainMenu] = React.useState(null);
+  const openMainMenu: boolean = Boolean(anchorMainMenu);
 
   React.useEffect(() => {
     if (props.changeColorOnScroll) {
@@ -36,6 +52,7 @@ export function Header(props) {
   const handleClose = () => {
     setanchorLoginMenu(null);
     setAnchorLanguageMenu(null);
+    setanchorMainMenu(null);
   };
 
   const handleLoginMenu = (event: React.MouseEvent<HTMLElement>) => {
@@ -50,6 +67,10 @@ export function Header(props) {
 
   const handleLanguageMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorLanguageMenu(event.currentTarget);
+  };
+
+  const handleMainMenu = (event: React.MouseEvent<HTMLElement>) => {
+    setanchorMainMenu(event.currentTarget);
   };
 
   const headerColorChange = () => {
@@ -73,11 +94,11 @@ export function Header(props) {
   };
 
   const doLoginLogout = () => {
-    //Cookies.remove("session");
-    //history.push("/login");
+    Cookies.remove("session");
+    history.push("/login");
   };
 
-  const { color,  fixed, absolute } = props;
+  const { color, fixed, absolute } = props;
   const appBarClasses = classNames({
     [classes.appBar]: true,
     [classes[color]]: color,
@@ -85,17 +106,29 @@ export function Header(props) {
     [classes.fixed]: fixed
   });
 
-  const [value, setValue] = React.useState(0);
+  const goToProductsList = () => {
+    history.push(routesLinks.productCollection);
+  };
 
-  const handleChange = (event, newValue) => {
-    setValue(newValue);
+  const goToSuppliersPage = () => {
+    history.push(routesLinks.suppliersCollection);
   };
 
   return (
     <AppBar className={appBarClasses}>
       <Toolbar className={classes.container}>
-        <img src={logo} alt="Logo" height="100vh" />
-
+        <div className={classes.rightIcons}>
+          <EncapsulatedMainMenu
+            handleMenu = {handleMainMenu}
+            openMenu = {openMainMenu}
+            handleClose = {handleClose}
+            anchorMenu = {anchorMainMenu}
+            goToProducts={goToProductsList}
+            goToSuppliers={goToSuppliersPage}
+          />
+          <img src={logo} alt="Logo" height="100vh" />
+        </div>
+        
         <div className={classes.rightIcons}>
           <LanguageMenu
             handleLanguageMenu={handleLanguageMenu}
@@ -115,45 +148,6 @@ export function Header(props) {
       </Toolbar>
     </AppBar>
   );
-}
-
-Header.defaultProp = {
-  color: "white"
 };
 
-Header.propTypes = {
-  color: PropTypes.oneOf([
-    "primary",
-    "info",
-    "success",
-    "warning",
-    "danger",
-    "transparent",
-    "white",
-    "rose",
-    "dark"
-  ]),
-  brand: PropTypes.string,
-  fixed: PropTypes.bool,
-  absolute: PropTypes.bool,
-  // this will cause the sidebar to change the color from
-  // props.color (see above) to changeColorOnScroll.color
-  // when the window.pageYOffset is heigher or equal to
-  // changeColorOnScroll.height and then when it is smaller than
-  // changeColorOnScroll.height change it back to
-  // props.color (see above)
-  changeColorOnScroll: PropTypes.shape({
-    height: PropTypes.number.isRequired,
-    color: PropTypes.oneOf([
-      "primary",
-      "info",
-      "success",
-      "warning",
-      "danger",
-      "transparent",
-      "white",
-      "rose",
-      "dark"
-    ]).isRequired
-  })
-};
+export const Header = withRouter(HeaderInner);
