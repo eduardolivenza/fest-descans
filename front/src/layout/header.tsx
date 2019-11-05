@@ -117,19 +117,21 @@ const HeaderInner: React.FunctionComponent<Props> = props => {
   return (
     <AppBar className={appBarClasses}>
       <Toolbar className={classes.container}>
-        <div className={classes.rightIcons}>
+        <div className={classes.toolBarIcons}>
           <EncapsulatedMainMenu
-            handleMenu = {handleMainMenu}
-            openMenu = {openMainMenu}
-            handleClose = {handleClose}
-            anchorMenu = {anchorMainMenu}
+            handleMenu={handleMainMenu}
+            openMenu={openMainMenu}
+            handleClose={handleClose}
+            anchorMenu={anchorMainMenu}
             goToProducts={goToProductsList}
             goToSuppliers={goToSuppliersPage}
           />
-          <img src={logo} alt="Logo" height="100vh" />
+          <div style={{ marginLeft: '5vh'}}>
+            <img src={logo} alt="Logo" height="100vh" />
+          </div>
         </div>
-        
-        <div className={classes.rightIcons}>
+
+        <div className={classes.toolBarIcons}>
           <LanguageMenu
             handleLanguageMenu={handleLanguageMenu}
             openLanguageMenu={openLanguageMenu}

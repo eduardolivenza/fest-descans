@@ -49,8 +49,9 @@ const headerStyle = {
   flex: {
     flex: 1
   },
-  rightIcons: {
+  toolBarIcons: {
     display: "flex",
+    alignItems: "center",
   },
   title: {
     ...defaultFont,
