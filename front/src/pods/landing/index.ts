@@ -1,2 +1,1 @@
-export * from './TeamSection';
-export * from './WorkSection';
+export * from './landing.container';

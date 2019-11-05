@@ -7,24 +7,26 @@ import { Copyright } from "layout/copyright";
 import { Parallax } from "common/components/Parallax";
 import { Header } from "layout/header";
 
-interface Props extends RouteComponentProps {}
 
 const useStyles = makeStyles(styles);
 
-const NewDesignLayoutInner: React.FunctionComponent<Props> = props => {
+export const NewDesignLayout = props => {
   const classes = useStyles({});
 
   return (
     <div>
       <Header
-        color="transparent"
+        color="primary"
         brand="Fest Descans"
         fixed
-        changeColorOnScroll={{
-          height: 250,
-          color: "primary"
-        }}
       />
+       {/*
+          color="transparent"
+          changeColorOnScroll={{
+            height: 250,
+            color: "primary"
+          }}*/
+        }
       <Parallax filter image={require("public/images/landing-bg.jpg")}>
         <div className={classes.container}>
           <br />
@@ -49,6 +51,9 @@ const NewDesignLayoutInner: React.FunctionComponent<Props> = props => {
           <br />
           <br />
           <br />
+          <h2>
+           This is a short description
+          </h2>
           <br />
           <h4>
             Every landing page needs a small description after the big bold
@@ -73,4 +78,3 @@ const NewDesignLayoutInner: React.FunctionComponent<Props> = props => {
   );
 };
 
-export const NewDesignLayout = withRouter(NewDesignLayoutInner);

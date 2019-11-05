@@ -1,19 +1,8 @@
 import * as React from "react";
-import { NewDesignLayout } from "layout";
+import { LandingContainer }  from "pods/landing";
 
-import { TeamSection, WorkSection } from "pods/landing";
-
-export const DefaultPage = () => (
+export const LandingPage = () => (
   <>
-   {/*
-    <AppLayout>
-     <DefaultContainer/>
-      <LandingPage />
-    </AppLayout>
-    */}
-    <NewDesignLayout>
-      <TeamSection />
-      <WorkSection />
-    </NewDesignLayout>
+   <LandingContainer/>
   </>
 );

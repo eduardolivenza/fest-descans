@@ -7,11 +7,14 @@ import styles from "common/styles/jss/material-kit-react/components/headerStyle.
 import { LanguageMenu } from "layout/languageMenu.layout";
 import { LoginMenu } from "layout/loginMenu.layout";
 import { useTranslation } from "react-i18next";
-import { MainMenu } from "./mainMenu.layout";
-import { SessionContext, routesLinks } from "core";
+import { routesLinks } from "core";
 import { withRouter, RouteComponentProps } from "react-router-dom";
-import { EncapsulatedMainMenu } from "./encapuslated-menu.layout";
+
 import Cookies from "js-cookie";
+import { MenuItem, ListItemIcon, ListItemText } from "@material-ui/core";
+import DashboardIcon from "@material-ui/icons/Dashboard";
+import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
+import PeopleIcon from "@material-ui/icons/People";
 
 const logo = require("public/images/FEST_COLOR_3.png");
 const useStyles = makeStyles(styles);
@@ -35,8 +38,7 @@ const HeaderInner: React.FunctionComponent<Props> = props => {
   const openLanguageMenu: boolean = Boolean(anchorLanguageMenu);
   const [anchorLoginMenu, setanchorLoginMenu] = React.useState(null);
   const openLoginMenu: boolean = Boolean(anchorLoginMenu);
-  const [anchorMainMenu, setanchorMainMenu] = React.useState(null);
-  const openMainMenu: boolean = Boolean(anchorMainMenu);
+  const [, setanchorMainMenu] = React.useState(null);
 
   React.useEffect(() => {
     if (props.changeColorOnScroll) {
@@ -59,7 +61,7 @@ const HeaderInner: React.FunctionComponent<Props> = props => {
     setanchorLoginMenu(event.currentTarget);
   };
 
-  const { t, i18n } = useTranslation();
+  const { i18n } = useTranslation();
 
   const changeLanguage = lng => {
     i18n.changeLanguage(lng);
@@ -69,9 +71,6 @@ const HeaderInner: React.FunctionComponent<Props> = props => {
     setAnchorLanguageMenu(event.currentTarget);
   };
 
-  const handleMainMenu = (event: React.MouseEvent<HTMLElement>) => {
-    setanchorMainMenu(event.currentTarget);
-  };
 
   const headerColorChange = () => {
     const { color, changeColorOnScroll } = props;
@@ -118,17 +117,25 @@ const HeaderInner: React.FunctionComponent<Props> = props => {
     <AppBar className={appBarClasses}>
       <Toolbar className={classes.container}>
         <div className={classes.toolBarIcons}>
-          <EncapsulatedMainMenu
-            handleMenu={handleMainMenu}
-            openMenu={openMainMenu}
-            handleClose={handleClose}
-            anchorMenu={anchorMainMenu}
-            goToProducts={goToProductsList}
-            goToSuppliers={goToSuppliersPage}
-          />
-          <div style={{ marginLeft: '5vh'}}>
-            <img src={logo} alt="Logo" height="100vh" />
-          </div>
+          <img src={logo} alt="Logo" height="100vh" />
+          <MenuItem>
+            <ListItemIcon>
+              <DashboardIcon  className={classes.whiteIcon}/>
+            </ListItemIcon>
+            <ListItemText primary=" ABOUT" />
+          </MenuItem>
+          <MenuItem onClick={goToProductsList}>
+            <ListItemIcon>
+              <ShoppingCartIcon  className={classes.whiteIcon}/>
+            </ListItemIcon>
+            <ListItemText primary=" PRODUCTS" />
+          </MenuItem>
+          <MenuItem onClick={goToSuppliersPage}>
+            <ListItemIcon>
+              <PeopleIcon className={classes.whiteIcon}/>
+            </ListItemIcon>
+            <ListItemText primary=" SUPPLIERS" />
+          </MenuItem>
         </div>
 
         <div className={classes.toolBarIcons}>

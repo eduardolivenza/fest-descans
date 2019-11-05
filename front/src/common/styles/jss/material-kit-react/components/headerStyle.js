@@ -53,6 +53,9 @@ const headerStyle = {
     display: "flex",
     alignItems: "center",
   },
+  whiteIcon:{
+    color: "#fff",
+  },
   title: {
     ...defaultFont,
     lineHeight: "30px",
