@@ -31,7 +31,8 @@ const useStyles = makeStyles(theme => ({
     display: 'flex',
   },
   toolbar: {
-    paddingRight: '3vh', // keep right padding when drawer closed
+    paddingLeft: '20vh',
+    paddingRight: '10vh', // keep right padding when drawer closed
   },
   toolbarIcon: {
     display: 'flex',

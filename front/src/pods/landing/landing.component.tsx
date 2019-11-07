@@ -1,5 +1,4 @@
 import * as React from "react";
-import { withRouter, RouteComponentProps } from "react-router-dom";
 import classNames from "classnames";
 import { makeStyles } from "@material-ui/core/styles";
 import styles from "common/styles/jss/material-kit-react/views/landingPage.js";
@@ -11,6 +10,7 @@ import { Header } from "layout/header";
 const useStyles = makeStyles(styles);
 
 export const NewDesignLayout = props => {
+  
   const classes = useStyles({});
 
   return (
@@ -28,11 +28,7 @@ export const NewDesignLayout = props => {
           }}*/
         }
       <Parallax filter image={require("public/images/landing-bg.jpg")}>
-        <div className={classes.container}>
-          <br />
-          <br />
-          <br />
-          <br />
+        <div className={classes.container}>      
           <br />
           <br />
           <br />
@@ -42,8 +38,6 @@ export const NewDesignLayout = props => {
           <br />
           <br />
           <h1 className={classes.title}>Welcome to Fest Descans</h1>
-          <br />
-          <br />
           <br />
           <br />
           <br />

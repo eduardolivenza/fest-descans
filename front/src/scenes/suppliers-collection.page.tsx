@@ -1,9 +1,9 @@
 import * as React from "react";
-import { AppLayout } from "layout";
+import { AppLayout, AppUpperMenuLayout } from "layout";
 import { SupplierCollectionContainer } from "pods/suppliers-collection";
 
 export const SuppliersCollectionPage = () => (
-  <AppLayout>   
+  <AppUpperMenuLayout>   
     <SupplierCollectionContainer/>
-  </AppLayout>
+  </AppUpperMenuLayout>
 );

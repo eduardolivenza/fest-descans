@@ -46,6 +46,13 @@ const headerStyle = {
     display: "flex",
     flexWrap: "nowrap"
   },
+  toolBarContainer: {
+    width: "80%",
+    paddingLeft: '20vh',
+    paddingRight: '10vh',
+    alignItems: "center",
+    justifyContent: "space-between",
+  },
   flex: {
     flex: 1
   },

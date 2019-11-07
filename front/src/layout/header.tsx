@@ -105,6 +105,10 @@ const HeaderInner: React.FunctionComponent<Props> = props => {
     [classes.fixed]: fixed
   });
 
+  const goToLandingPage= () => {
+    history.push(routesLinks.default);
+  };
+
   const goToProductsList = () => {
     history.push(routesLinks.productCollection);
   };
@@ -115,26 +119,26 @@ const HeaderInner: React.FunctionComponent<Props> = props => {
 
   return (
     <AppBar className={appBarClasses}>
-      <Toolbar className={classes.container}>
+      <Toolbar className={classes.toolBarContainer}>
         <div className={classes.toolBarIcons}>
           <img src={logo} alt="Logo" height="100vh" />
-          <MenuItem>
+          <MenuItem onClick={goToLandingPage}>
             <ListItemIcon>
               <DashboardIcon  className={classes.whiteIcon}/>
             </ListItemIcon>
-            <ListItemText primary=" ABOUT" />
+            <ListItemText primary=" About us" />
           </MenuItem>
           <MenuItem onClick={goToProductsList}>
             <ListItemIcon>
               <ShoppingCartIcon  className={classes.whiteIcon}/>
             </ListItemIcon>
-            <ListItemText primary=" PRODUCTS" />
+            <ListItemText primary=" Products list" />
           </MenuItem>
           <MenuItem onClick={goToSuppliersPage}>
             <ListItemIcon>
               <PeopleIcon className={classes.whiteIcon}/>
             </ListItemIcon>
-            <ListItemText primary=" SUPPLIERS" />
+            <ListItemText primary=" Suppliers" />
           </MenuItem>
         </div>
 
