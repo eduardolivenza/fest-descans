@@ -6,10 +6,9 @@ import { Copyright } from "layout/copyright";
 import { Parallax } from "common/components/Parallax";
 import { Header } from "layout/header";
 
-
 const useStyles = makeStyles(styles);
 
-export const NewDesignLayout = props => {
+export const LandingComponentParent = props => {
   
   const classes = useStyles({});
 

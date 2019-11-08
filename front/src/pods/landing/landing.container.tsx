@@ -1,17 +1,17 @@
 import * as React from "react";
-import { NewDesignLayout } from "./landing.component";
-import { TeamSection } from "./TeamSection";
-import { WorkSection } from "./WorkSection";
+import { LandingComponentParent } from "./landing.component";
+import { TeamSection } from "./components/teamSection.component";
+import { WorkSection } from "./components/workSection.component";
 import { withRouter, RouteComponentProps } from "react-router-dom";
 
 interface Props extends RouteComponentProps { }
 
 const LandingContainerInner = (props: Props) => {
   return (
-    <NewDesignLayout>
+    <LandingComponentParent>
       <TeamSection />
       <WorkSection />
-    </NewDesignLayout>
+    </LandingComponentParent>
   );
 };
 
