@@ -5,10 +5,10 @@ import { CardContent, CardHeader, TextField, } from "@material-ui/core";
 import { CheckBoxConfigValue, CheckBoxGroup, TextAreaForm } from "common/components";
 import Typography from '@material-ui/core/Typography';
 import Slider from '@material-ui/core/Slider';
-import clsx from 'clsx';
 
 const useStyles = makeStyles(theme => ({
   card: {
+    textAlign: "left",
     marginTop: theme.spacing(1),
     marginRight: theme.spacing(1),
   },

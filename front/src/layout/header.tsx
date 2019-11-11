@@ -4,12 +4,11 @@ import { makeStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import styles from "common/styles/jss/material-kit-react/components/headerStyle.js";
-import { LanguageMenu } from "layout/languageMenu.layout";
-import { LoginMenu } from "layout/loginMenu.layout";
+import { LanguageMenu } from "layout/menus/languageMenu.layout";
+import { LoginMenu } from "layout/menus/loginMenu.layout";
 import { useTranslation } from "react-i18next";
 import { routesLinks } from "core";
 import { withRouter, RouteComponentProps } from "react-router-dom";
-
 import Cookies from "js-cookie";
 import { MenuItem, ListItemIcon, ListItemText } from "@material-ui/core";
 import DashboardIcon from "@material-ui/icons/Dashboard";

@@ -78,28 +78,30 @@ export const ProductCollectionComponent: React.FunctionComponent<
   }
 
   return (
-    <>
-      <h1 className={classes.title}>Products list</h1>
-      <FilterCard
-        handleChangeComfortFilter={handleChangeComfortFilter}
-        handleProductTypesFilter={handleProductTypesFilter}
-        handleChangePriceFilter={handleChangePriceFilter}
-        handleChangeFilterText={handleChangeFilterText}
-        comfortLevelFilterState={comfortLevelFilterState}
-        productTypesFilterState={productTypesFilterState}
-        filterTextValue={filterTextValue}
-        maxPriceValue={maxPriceValue}
-        selectedPrice={selectedPrice}
-      />
-      <div  style={{ display: "flex" }} >
-        <ProductsViewSelectorComponent
-          onChangeView={setComponentLayout}
-          layout={componentLayout}
+
+      <div className={classes.section}>
+        <h1 className={classes.title}>Products list</h1>
+        <FilterCard
+          handleChangeComfortFilter={handleChangeComfortFilter}
+          handleProductTypesFilter={handleProductTypesFilter}
+          handleChangePriceFilter={handleChangePriceFilter}
+          handleChangeFilterText={handleChangeFilterText}
+          comfortLevelFilterState={comfortLevelFilterState}
+          productTypesFilterState={productTypesFilterState}
+          filterTextValue={filterTextValue}
+          maxPriceValue={maxPriceValue}
+          selectedPrice={selectedPrice}
         />
-        <AdminAddIcon session={session} action={addProduct} />
+        <div style={{ display: "flex" }}>
+          <ProductsViewSelectorComponent
+            onChangeView={setComponentLayout}
+            layout={componentLayout}
+          />
+          <AdminAddIcon session={session} action={addProduct} />
+        </div>
+        {hotelCollectionComponent}
       </div>
-      {hotelCollectionComponent}
-    </>
+ 
   );
 };
 

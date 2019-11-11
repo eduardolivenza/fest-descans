@@ -16,9 +16,9 @@ import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import { Copyright } from "./copyright";
-import { MainMenu } from "./mainMenu.layout";
-import { LoginMenu } from "./loginMenu.layout";
-import { LanguageMenu} from "./languageMenu.layout";
+import { MainMenu } from "./menus/mainMenu.layout";
+import { LoginMenu } from "./menus/loginMenu.layout";
+import { LanguageMenu} from "./menus/languageMenu.layout";
 import Cookies from "js-cookie";
 import { useTranslation } from 'react-i18next';
 
