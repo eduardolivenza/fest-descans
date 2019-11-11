@@ -10,6 +10,10 @@ import { FilterCard } from "./components/filter-card.component";
 import { CheckBoxConfigValue } from "common/components";
 import { SessionContext } from "core";
 import { AdminAddIcon } from "common/components";
+import styles from "common/styles/jss/material-kit-react/views/productsPage.js";
+import { makeStyles } from "@material-ui/core/styles";
+
+const useStyles = makeStyles(styles);
 
 interface Props {
   productCollection: ProductEntityVm[];
@@ -52,6 +56,7 @@ export const ProductCollectionComponent: React.FunctionComponent<
 
   const [componentLayout, setComponentLayout] = React.useState(layout);
   const session = React.useContext(SessionContext);
+  const classes = useStyles({});
 
   let hotelCollectionComponent;
   if (componentLayout === Layout.Card) {
@@ -74,6 +79,7 @@ export const ProductCollectionComponent: React.FunctionComponent<
 
   return (
     <>
+      <h1 className={classes.title}>Products list</h1>
       <FilterCard
         handleChangeComfortFilter={handleChangeComfortFilter}
         handleProductTypesFilter={handleProductTypesFilter}

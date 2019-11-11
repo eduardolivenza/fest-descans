@@ -9,7 +9,7 @@ const teamStyle = {
   title: {
     ...title,
     marginBottom: "1rem",
-    marginTop: "30px",
+    marginTop: "20px",
     minHeight: "32px",
     textDecoration: "none"
   },
