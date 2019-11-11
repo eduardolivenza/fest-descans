@@ -10,6 +10,10 @@ import { FilterCard } from "./components/filter-card.component";
 import { CheckBoxConfigValue } from "common/components";
 import { SessionContext } from "core";
 import { AdminAddIcon } from "common/components";
+import styles from "common/styles/jss/material-kit-react/views/productsPage.js";
+import { makeStyles } from "@material-ui/core/styles";
+
+const useStyles = makeStyles(styles);
 
 interface Props {
   productCollection: ProductEntityVm[];
@@ -52,10 +56,11 @@ export const ProductCollectionComponent: React.FunctionComponent<
 
   const [componentLayout, setComponentLayout] = React.useState(layout);
   const session = React.useContext(SessionContext);
+  const classes = useStyles({});
 
-  let hotelCollectionComponent;
+  let productCollectionComponent;
   if (componentLayout === Layout.Card) {
-    hotelCollectionComponent = (
+    productCollectionComponent = (
       <ProductCollectionCardsComponent
         productCollection={productCollection}
         viewProduct={viewProduct}
@@ -64,7 +69,7 @@ export const ProductCollectionComponent: React.FunctionComponent<
       />
     );
   } else if (componentLayout === Layout.Table) {
-    hotelCollectionComponent = (
+    productCollectionComponent = (
       <ProductCollectionTableComponent
         productCollection={productCollection}
         viewProduct={viewProduct}
@@ -73,27 +78,30 @@ export const ProductCollectionComponent: React.FunctionComponent<
   }
 
   return (
-    <>
-      <FilterCard
-        handleChangeComfortFilter={handleChangeComfortFilter}
-        handleProductTypesFilter={handleProductTypesFilter}
-        handleChangePriceFilter={handleChangePriceFilter}
-        handleChangeFilterText={handleChangeFilterText}
-        comfortLevelFilterState={comfortLevelFilterState}
-        productTypesFilterState={productTypesFilterState}
-        filterTextValue={filterTextValue}
-        maxPriceValue={maxPriceValue}
-        selectedPrice={selectedPrice}
-      />
-      <div  style={{ display: "flex" }} >
-        <ProductsViewSelectorComponent
-          onChangeView={setComponentLayout}
-          layout={componentLayout}
+
+      <div className={classes.section}>
+        <h1 className={classes.title}>Products list</h1>
+        <FilterCard
+          handleChangeComfortFilter={handleChangeComfortFilter}
+          handleProductTypesFilter={handleProductTypesFilter}
+          handleChangePriceFilter={handleChangePriceFilter}
+          handleChangeFilterText={handleChangeFilterText}
+          comfortLevelFilterState={comfortLevelFilterState}
+          productTypesFilterState={productTypesFilterState}
+          filterTextValue={filterTextValue}
+          maxPriceValue={maxPriceValue}
+          selectedPrice={selectedPrice}
         />
-        <AdminAddIcon session={session} action={addProduct} />
+        <div style={{ display: "flex" }}>
+          <ProductsViewSelectorComponent
+            onChangeView={setComponentLayout}
+            layout={componentLayout}
+          />
+          <AdminAddIcon session={session} action={addProduct} />
+        </div>
+        {productCollectionComponent}
       </div>
-      {hotelCollectionComponent}
-    </>
+ 
   );
 };
 

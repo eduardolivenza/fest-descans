@@ -1,9 +1,8 @@
 import * as React from "react";
-import { AppLayout } from "layout";
-import { DefaultContainer } from "pods/default";
+import { LandingContainer }  from "pods/landing";
 
-export const DefaultPage = () => (
-    <AppLayout>
-     <DefaultContainer/>
-    </AppLayout>
-  );
+export const LandingPage = () => (
+  <>
+   <LandingContainer/>
+  </>
+);

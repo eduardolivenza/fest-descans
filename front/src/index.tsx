@@ -2,7 +2,7 @@ import React, { Suspense } from 'react';
 import * as ReactDOM from "react-dom";
 import { HashRouter, Switch, Route } from "react-router-dom";
 import { routerSwitchRoutes, SessionContext, getSessionCookie } from "core";
-import { LoginPage, ProductCollectionPage, RegisterPage, DefaultPage, ProductViewPage, SuppliersCollectionPage, ProductEditPage, SupplierEditPage } from "scenes";
+import { LoginPage, ProductCollectionPage, RegisterPage, LandingPage, ProductViewPage, SuppliersCollectionPage, ProductEditPage, SupplierEditPage } from "scenes";
 import 'config/i18n/i18n';
 
 const Routes = () => {
@@ -32,7 +32,7 @@ const Routes = () => {
                     <Route
                         exact={true}
                         path={routerSwitchRoutes.default}
-                        component={DefaultPage}
+                        component={LandingPage}
                     />
                     <Route
                         path={routerSwitchRoutes.productCollection}

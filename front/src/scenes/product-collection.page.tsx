@@ -1,9 +1,9 @@
 import * as React from "react";
-import { AppLayout } from "layout";
+import { AppLayout, AppUpperMenuLayout } from "layout";
 import { ProductCollectionContainer } from "pods/product-collection";
 
 export const ProductCollectionPage = () => (
-  <AppLayout>
+  <AppUpperMenuLayout>
     <ProductCollectionContainer />
-  </AppLayout>
+  </AppUpperMenuLayout>
 );

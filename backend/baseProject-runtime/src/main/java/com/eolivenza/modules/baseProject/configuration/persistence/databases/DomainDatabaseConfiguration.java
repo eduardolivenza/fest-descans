@@ -28,7 +28,7 @@ public class DomainDatabaseConfiguration {
     private static final String DOMAIN_PERSISTENCE_UNIT_NAME = "domainPersistenceUnit";
     private static final String DOMAIN_JPA_PROPERTIES_NAME = "domainJpaProperties";
 
-    @Profile(ProfileNames.DEVELOPMENT)
+    @Profile({ProfileNames.DEVELOPMENT, ProfileNames.DEV_LINUX})
     @Bean(DOMAIN_JPA_PROPERTIES_NAME)
     public Map<String, Object> jpaPropertiesDevelopment() {
         Map<String, Object> properties = new HashMap<>();

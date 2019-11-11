@@ -10,7 +10,7 @@ import { NotificationComponent } from "common/components";
 
 interface Props extends RouteComponentProps { }
 
-export const LoginContainerInner = (props: Props) => {
+const LoginContainerInner = (props: Props) => {
 
   const { history } = props;
 

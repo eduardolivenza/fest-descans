@@ -33,7 +33,7 @@ const styles = (theme: Theme) =>
   createStyles({
     card: {
       width: "43vh",
-      margin: theme.spacing(1)
+      textAlign: "left",
     },
     chip: {
       marginRight: theme.spacing(1),

@@ -3,7 +3,8 @@ h2:
   server:
     port: 9092
   databases:
-    path: /~/local_evironment/baseProject/databases
+    path: /~/local_evironment/festagence/databases
+
     domain:
       path: /domain
 
