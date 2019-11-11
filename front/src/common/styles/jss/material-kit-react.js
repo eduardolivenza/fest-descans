@@ -29,7 +29,7 @@ const conatinerFluid = {
   paddingLeft: "15px",
   marginRight: "auto",
   marginLeft: "auto",
-  width: "80%"
+  width: "90%"
 };
 const container = {
   ...conatinerFluid,

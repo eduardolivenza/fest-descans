@@ -58,9 +58,9 @@ export const ProductCollectionComponent: React.FunctionComponent<
   const session = React.useContext(SessionContext);
   const classes = useStyles({});
 
-  let hotelCollectionComponent;
+  let productCollectionComponent;
   if (componentLayout === Layout.Card) {
-    hotelCollectionComponent = (
+    productCollectionComponent = (
       <ProductCollectionCardsComponent
         productCollection={productCollection}
         viewProduct={viewProduct}
@@ -69,7 +69,7 @@ export const ProductCollectionComponent: React.FunctionComponent<
       />
     );
   } else if (componentLayout === Layout.Table) {
-    hotelCollectionComponent = (
+    productCollectionComponent = (
       <ProductCollectionTableComponent
         productCollection={productCollection}
         viewProduct={viewProduct}
@@ -99,7 +99,7 @@ export const ProductCollectionComponent: React.FunctionComponent<
           />
           <AdminAddIcon session={session} action={addProduct} />
         </div>
-        {hotelCollectionComponent}
+        {productCollectionComponent}
       </div>
  
   );
