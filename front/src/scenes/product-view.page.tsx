@@ -1,9 +1,9 @@
 import * as React from "react";
-import { AppLayout } from "layout";
+import { AppUpperMenuLayout } from "layout";
 import { ProductViewContainer } from "pods/product-view";
 
 export const ProductViewPage = () => (
-  <AppLayout>   
+  <AppUpperMenuLayout>   
     <ProductViewContainer/>
-  </AppLayout>
+  </AppUpperMenuLayout>
 );

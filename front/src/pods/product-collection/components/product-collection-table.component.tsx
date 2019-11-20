@@ -15,11 +15,11 @@ export const ProductCollectionTableComponent = (props: Props) => {
             <TableHead>
                 <TableRow>    
                     <TableCell align="left">Picture</TableCell>
-                    <TableCell align="left">Product identifier</TableCell>
                     <TableCell align="left">Product name</TableCell>
                     <TableCell align="left">Category</TableCell>
                     <TableCell align="left">Comfort level</TableCell>
                     <TableCell align="left">Product description</TableCell>
+                    <TableCell align="left">Supplier</TableCell>
                 </TableRow>
             </TableHead>
             <TableBody>

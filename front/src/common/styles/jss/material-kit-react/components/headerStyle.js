@@ -33,6 +33,10 @@ const headerStyle = {
     position: "absolute",
     zIndex: "1100"
   },
+  sideMenu: {
+    width: `24vh`,
+    paddingTop: `10vh`,
+  },
   fixed: {
     position: "fixed",
     zIndex: "1100"
@@ -48,20 +52,20 @@ const headerStyle = {
   },
   toolBarContainer: {
     width: "80%",
-    paddingLeft: '20vh',
-    paddingRight: '10vh',
+    paddingLeft: "20vh",
+    paddingRight: "10vh",
     alignItems: "center",
-    justifyContent: "space-between",
+    justifyContent: "space-between"
   },
   flex: {
     flex: 1
   },
   toolBarIcons: {
     display: "flex",
-    alignItems: "center",
+    alignItems: "center"
   },
-  whiteIcon:{
-    color: "#fff",
+  whiteIcon: {
+    color: "#fff"
   },
   title: {
     ...defaultFont,

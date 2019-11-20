@@ -28,11 +28,11 @@ const ProductRowComponentInner: React.FunctionComponent<Props> = (props) => {
              <TableCell align="left" >
                 <img  className={classes.picture} src={product.thumbnail} />
             </TableCell>
-            <TableCell align="left">{product.internalIdentifier}</TableCell>
             <TableCell align="left">{product.productName}</TableCell>
-            <TableCell align="left">{product.category}</TableCell>
+            <TableCell align="left">{product.category.description}</TableCell>
             <TableCell align="left">{product.comfortLevel}</TableCell>
             <TableCell align="left">{product.productDescription}</TableCell>
+            <TableCell align="left">{product.supplier.companyName}</TableCell>
         </TableRow>
     );
 };

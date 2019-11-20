@@ -3,6 +3,10 @@ import { SuppliersCollectionCardsComponent } from "./suppliers-collection-cards.
 import { SupplierVm } from "core/dataModel/supplier-entity.vm";
 import { SessionContext } from "core";
 import { AdminAddIcon } from "common/components";
+import styles from "common/styles/jss/material-kit-react/views/suppliersPage.js";
+import { makeStyles } from "@material-ui/core/styles";
+
+const useStyles = makeStyles(styles);
 interface Props {
   suppliersCollection: SupplierVm[];
   addSupplier: () => void;
@@ -20,8 +24,11 @@ export const SuppliersCollectionComponent = (props: Props) => {
     editSupplier
   } = props;
   const session = React.useContext(SessionContext);
+  const classes = useStyles({});
+
   return (
-    <div>
+    <div className={classes.section}>
+      <h1 className={classes.title}>Our suppliers</h1>
       <AdminAddIcon session={session} action={addSupplier} />
       <SuppliersCollectionCardsComponent
         suppliersCollection={suppliersCollection}
