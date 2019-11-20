@@ -80,7 +80,7 @@ export const ProductCollectionComponent: React.FunctionComponent<
   return (
 
       <div className={classes.section}>
-        <h1 className={classes.title}>Products list</h1>
+        <h1 className={classes.title}>Available products</h1>
         <FilterCard
           handleChangeComfortFilter={handleChangeComfortFilter}
           handleProductTypesFilter={handleProductTypesFilter}

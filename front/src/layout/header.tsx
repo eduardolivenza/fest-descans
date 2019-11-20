@@ -10,10 +10,11 @@ import { useTranslation } from "react-i18next";
 import { routesLinks } from "core";
 import { withRouter, RouteComponentProps } from "react-router-dom";
 import Cookies from "js-cookie";
-import { MenuItem, ListItemIcon, ListItemText } from "@material-ui/core";
-import DashboardIcon from "@material-ui/icons/Dashboard";
-import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
-import PeopleIcon from "@material-ui/icons/People";
+import SwipeableDrawer from "@material-ui/core/SwipeableDrawer";
+import Divider from "@material-ui/core/Divider";
+import MenuIcon from "@material-ui/icons/Menu";
+import IconButton from "@material-ui/core/IconButton";
+import { MainMenu } from "./menus/mainMenu.layout";
 
 const logo = require("public/images/FEST_COLOR_3.png");
 const useStyles = makeStyles(styles);
@@ -38,6 +39,10 @@ const HeaderInner: React.FunctionComponent<Props> = props => {
   const [anchorLoginMenu, setanchorLoginMenu] = React.useState(null);
   const openLoginMenu: boolean = Boolean(anchorLoginMenu);
   const [, setanchorMainMenu] = React.useState(null);
+  const [state, setState] = React.useState({
+    left: false,
+    right: false
+  });
 
   React.useEffect(() => {
     if (props.changeColorOnScroll) {
@@ -69,7 +74,6 @@ const HeaderInner: React.FunctionComponent<Props> = props => {
   const handleLanguageMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorLanguageMenu(event.currentTarget);
   };
-
 
   const headerColorChange = () => {
     const { color, changeColorOnScroll } = props;
@@ -104,7 +108,7 @@ const HeaderInner: React.FunctionComponent<Props> = props => {
     [classes.fixed]: fixed
   });
 
-  const goToLandingPage= () => {
+  const goToLandingPage = () => {
     history.push(routesLinks.default);
   };
 
@@ -116,49 +120,97 @@ const HeaderInner: React.FunctionComponent<Props> = props => {
     history.push(routesLinks.suppliersCollection);
   };
 
-  return (
-    <AppBar className={appBarClasses}>
-      <Toolbar className={classes.toolBarContainer}>
-        <div className={classes.toolBarIcons}>
-          <img src={logo} alt="Logo" height="100vh" />
-          <MenuItem onClick={goToLandingPage}>
-            <ListItemIcon>
-              <DashboardIcon  className={classes.whiteIcon}/>
-            </ListItemIcon>
-            <ListItemText primary=" About us" />
-          </MenuItem>
-          <MenuItem onClick={goToProductsList}>
-            <ListItemIcon>
-              <ShoppingCartIcon  className={classes.whiteIcon}/>
-            </ListItemIcon>
-            <ListItemText primary=" Products list" />
-          </MenuItem>
-          <MenuItem onClick={goToSuppliersPage}>
-            <ListItemIcon>
-              <PeopleIcon className={classes.whiteIcon}/>
-            </ListItemIcon>
-            <ListItemText primary=" Suppliers" />
-          </MenuItem>
-        </div>
+  const toggleDrawer = (side, open) => event => {
+    if (
+      event &&
+      event.type === "keydown" &&
+      (event.key === "Tab" || event.key === "Shift")
+    ) {
+      return;
+    }
+    setState({ ...state, [side]: open });
+  };
 
-        <div className={classes.toolBarIcons}>
-          <LanguageMenu
-            handleLanguageMenu={handleLanguageMenu}
-            openLanguageMenu={openLanguageMenu}
-            handleClose={handleClose}
-            anchorLoginMenu={anchorLanguageMenu}
-            setLanguage={changeLanguage}
-          />
-          <LoginMenu
-            handleLoginMenu={handleLoginMenu}
-            openLoginMenu={openLoginMenu}
-            handleClose={handleClose}
-            anchorLoginMenu={anchorLoginMenu}
-            doLoginLogout={doLoginLogout}
-          />
-        </div>
-      </Toolbar>
-    </AppBar>
+  const sideList = side => (
+    <div
+      className={classes.sideMenu}
+      role="presentation"
+      onClick={toggleDrawer(side, false)}
+      onKeyDown={toggleDrawer(side, false)}
+    >
+      <Divider />
+      <MainMenu goToDefault={goToLandingPage} goToProductsList={goToProductsList} goToSuppliersPage={goToSuppliersPage} />
+      <Divider />
+    </div>
+  );
+
+  return (
+    <>
+      <AppBar className={appBarClasses}>
+        <Toolbar className={classes.toolBarContainer}>
+          <div className={classes.toolBarIcons}>
+            <IconButton
+              edge="start"
+              color="inherit"
+              aria-label="open drawer"
+              onClick={toggleDrawer("left", true)}
+            >
+              <MenuIcon />
+            </IconButton>
+            <img src={logo} alt="Logo" height="100vh" />
+
+          </div>
+
+          <div className={classes.toolBarIcons}>
+            <LanguageMenu
+              handleLanguageMenu={handleLanguageMenu}
+              openLanguageMenu={openLanguageMenu}
+              handleClose={handleClose}
+              anchorLoginMenu={anchorLanguageMenu}
+              setLanguage={changeLanguage}
+            />
+            <LoginMenu
+              handleLoginMenu={handleLoginMenu}
+              openLoginMenu={openLoginMenu}
+              handleClose={handleClose}
+              anchorLoginMenu={anchorLoginMenu}
+              doLoginLogout={doLoginLogout}
+            />
+          </div>
+        </Toolbar>
+        {/*
+        <Toolbar className={classes.toolBarContainer}>
+          <div className={classes.toolBarIcons}>
+          <MenuItem onClick={goToLandingPage}>
+              <ListItemIcon>
+                <DashboardIcon className={classes.whiteIcon} />
+              </ListItemIcon>
+              <ListItemText primary=" About us" />
+            </MenuItem>
+            <MenuItem onClick={goToProductsList}>
+              <ListItemIcon>
+                <ShoppingCartIcon className={classes.whiteIcon} />
+              </ListItemIcon>
+              <ListItemText primary=" Products list" />
+            </MenuItem>
+            <MenuItem onClick={goToSuppliersPage}>
+              <ListItemIcon>
+                <PeopleIcon className={classes.whiteIcon} />
+              </ListItemIcon>
+              <ListItemText primary=" Suppliers" />
+            </MenuItem>
+          </div>
+          </Toolbar>
+        */}
+      </AppBar>
+      <SwipeableDrawer
+        open={state.left}
+        onClose={toggleDrawer("left", false)}
+        onOpen={toggleDrawer("left", true)}
+      >
+        {sideList("left")}
+      </SwipeableDrawer>
+    </>
   );
 };
 

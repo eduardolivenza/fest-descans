@@ -1,11 +1,11 @@
 import * as React from "react";
-import Card from "@material-ui/core/Card";
+import SearchIcon from '@material-ui/icons/Search';
 import { makeStyles } from "@material-ui/core/styles";
-import { CardContent, CardHeader, TextField } from "@material-ui/core";
+import { TextField } from "@material-ui/core";
 import {
   CheckBoxConfigValue,
   CheckBoxGroup,
-  TextAreaForm
+
 } from "common/components";
 import Typography from "@material-ui/core/Typography";
 import Slider from "@material-ui/core/Slider";
@@ -74,7 +74,8 @@ export const FilterCard = (props: Props) => {
         aria-controls="panel1a-content"
         id="panel1a-header"
       >
-        <Typography className={classes.heading}>Produ products</Typography>
+        <SearchIcon/>
+        <Typography className={classes.heading}>Filter by...</Typography>
       </ExpansionPanelSummary>
       <ExpansionPanelDetails>
         <div
