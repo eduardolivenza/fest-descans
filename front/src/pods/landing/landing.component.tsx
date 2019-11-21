@@ -6,11 +6,13 @@ import { Copyright } from "layout/copyright";
 import { Parallax } from "common/components/Parallax";
 import { Header } from "layout/header";
 import Grid from "@material-ui/core/Grid";
+import { useTranslation } from "react-i18next";
 
 const useStyles = makeStyles(styles);
 
 export const LandingComponentParent = props => {
   const classes = useStyles({});
+  const { t, i18n } = useTranslation();
 
   return (
     <div>
@@ -25,21 +27,18 @@ export const LandingComponentParent = props => {
         <div className={classes.containerParallax}>
           <Grid container spacing={3}>
             <Grid item xs={8}>
-              <h1 className={classes.title}>Welcome to Fest Descans</h1>
+              <h1 className={classes.title}>{t("landing.title")}</h1>
             </Grid>
             <Grid item xs={12}>
-              <h2>This is a short description</h2>
+              <h2>{t("landing.description1")}</h2>
             </Grid>
             <Grid item xs={12}>
-              <h4>
-                Every landing page needs a small description after the big bold
-                title, that{"'"}s why we added this text here. Add here all the
-                information that can make you or your product create the first
-                impression.
-              </h4>
+              <h4>{t("landing.description2")}</h4>
             </Grid>
-            <Grid item xs={12} sm={6}><h4>1st column</h4></Grid>
-            <Grid item xs={12} sm={6}><h4>2nd column</h4></Grid>
+            <Grid item xs={12} sm={6}>
+              <h4>{t("landing.description3")}</h4>
+            </Grid>
+            {/*<Grid item xs={12} sm={6}><h4>2nd column</h4></Grid>*/}
           </Grid>
         </div>
       </Parallax>

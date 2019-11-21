@@ -18,21 +18,16 @@
 // // // Variables - Styles that are used on more than one component
 // #############################
 
-const drawerWidth = 260;
-
 const transition = {
   transition: "all 0.33s cubic-bezier(0.685, 0.0473, 0.346, 1)"
 };
 
-const conatinerFluid = {
+const container = {
   paddingRight: "15px",
   paddingLeft: "15px",
   marginRight: "auto",
   marginLeft: "auto",
-  width: "90%"
-};
-const container = {
-  ...conatinerFluid,
+  width: "90%",
   /*
   "@media (min-width: 576px)": {
     maxWidth: "540px"
@@ -77,7 +72,8 @@ const dangerColor = "#f44336";
 const successColor = "#4caf50";
 const infoColor = "#00acc1";
 const roseColor = "#e91e63";
-const grayColor = "#999999";
+const greyColor = "#999999";
+const whiteColor = "#555";
 
 const primaryBoxShadow = {
   boxShadow:
@@ -183,10 +179,8 @@ const cardSubtitle = {
 
 export {
   //variables
-  drawerWidth,
   transition,
   container,
-  conatinerFluid,
   boxShadow,
   card,
   defaultFont,
@@ -196,7 +190,8 @@ export {
   successColor,
   infoColor,
   roseColor,
-  grayColor,
+  greyColor,
+  whiteColor,
   primaryBoxShadow,
   infoBoxShadow,
   successBoxShadow,

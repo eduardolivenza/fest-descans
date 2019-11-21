@@ -1,7 +1,15 @@
 {
-  "title": "Welcome to react using react-i18next",
-  "description": {
-    "part1": "To get started, edit <1>src/App.js</1> and save to reload.",
-    "part2": "Switch language between english and german using buttons above."
-  }
-}
+    "landing": {
+      "title": " Welcome to Fest Descans",
+      "description1": "In FEST Descans, we are working since more than two decades to supply ang give technical support to all kinds of components for the manufactures of the rest sector, in Spain and elsewhere in Europe. FEST Descans would like to give you the best service and advices, usign for it our big experience in this sector, and taking in account our specifical needs for each kind of product or application.",
+      "description2": "Our experience fill all kind of products and primary materials: standard and technical foams, sinthetic latex, natural latex, mattress tissues, special mattress components and other kind of accesories for all rest-products of the market. In summary we're in your service in orde to provide you the most updted range of products in the market",
+      "description3": "Our goal is offer to our customers the best collaboration in order to find a personalized and best solution for every case. Just in this way we can get best solution at best price!"
+    },
+    "productsList": {
+      "description": {
+        "part1": "Um loszulegen, ändere <1>src/App(DE).js</1> speicheren und neuladen.",
+        "part2": "Con los botones de arriba podemos canviar de idioma entre español y ingles"
+      }
+    }
+ }
+  
