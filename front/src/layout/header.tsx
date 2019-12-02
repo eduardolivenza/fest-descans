@@ -168,7 +168,7 @@ const HeaderInner: React.FunctionComponent<Props> = props => {
               handleLanguageMenu={handleLanguageMenu}
               openLanguageMenu={openLanguageMenu}
               handleClose={handleClose}
-              anchorLoginMenu={anchorLanguageMenu}
+              anchorLanguageMenu={anchorLanguageMenu}
               setLanguage={changeLanguage}
             />
             <LoginMenu

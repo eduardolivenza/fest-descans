@@ -12,13 +12,13 @@ interface Props {
     handleLanguageMenu : (event: React.MouseEvent<HTMLElement>)  => void;  
     openLanguageMenu : boolean;  
     handleClose : (event: React.MouseEvent<HTMLElement>) => void;  
-    anchorLoginMenu;
+    anchorLanguageMenu;
     setLanguage: (id: string) => void;
 }
 
 export const LanguageMenu = (props: Props) => {
 
-    const {anchorLoginMenu, openLanguageMenu, handleLanguageMenu, handleClose, setLanguage } = props;
+    const {anchorLanguageMenu, openLanguageMenu, handleLanguageMenu, handleClose, setLanguage } = props;
     return (
         <div>
             <IconButton
@@ -31,7 +31,7 @@ export const LanguageMenu = (props: Props) => {
             </IconButton>
             <Menu
                 id="languageMenu-appbar"
-                anchorEl={anchorLoginMenu}
+                anchorEl={anchorLanguageMenu}
                 anchorOrigin={{
                     vertical: 'top',
                     horizontal: 'right',
