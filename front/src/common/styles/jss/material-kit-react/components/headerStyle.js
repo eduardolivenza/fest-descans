@@ -9,8 +9,8 @@ import {
   dangerColor,
   roseColor,
   transition,
-  boxShadow,
-} from "common/styles/jss/material-kit-react.js";
+  boxShadow
+} from "common/styles/jss/mainStyle.js";
 
 const drawerWidth = 260;
 
@@ -37,7 +37,7 @@ const headerStyle = {
   },
   sideMenu: {
     width: `24vh`,
-    paddingTop: `10vh`,
+    paddingTop: `10vh`
   },
   fixed: {
     position: "fixed",

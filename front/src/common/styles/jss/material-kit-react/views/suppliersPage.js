@@ -1,4 +1,4 @@
-import { title } from "common/styles/jss/material-kit-react.js";
+import { title } from "common/styles/jss/mainStyle.js";
 
 const suppliersPageStyle = {
   section: {
@@ -14,7 +14,7 @@ const suppliersPageStyle = {
     color: "#000000 ",
     textDecoration: "none",
     textAlign: "center"
-  },
+  }
 };
 
 export default suppliersPageStyle;

@@ -1,18 +1,18 @@
-import { container, title } from "common/styles/jss/material-kit-react.js";
+import { container, title } from "common/styles/jss/mainStyle.js";
 
 const landingPageStyle = {
   container: {
     zIndex: "12",
     color: "#FFFFFF",
-    paddingBottom:"10vh",
+    paddingBottom: "10vh",
     marginBottom: "5vh",
     ...container
   },
-  containerParallax:{
+  containerParallax: {
     zIndex: "12",
     color: "#FFFFFF",
-    paddingTop:"12vh",
-    paddingBottom:"10vh",
+    paddingTop: "12vh",
+    paddingBottom: "10vh",
     marginBottom: "5vh",
     ...container
   },

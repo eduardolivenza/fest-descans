@@ -1,4 +1,4 @@
-import { title } from "common/styles/jss/material-kit-react.js";
+import { title } from "common/styles/jss/mainStyle.js";
 
 const workStyle = {
   section: {
