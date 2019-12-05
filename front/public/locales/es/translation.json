@@ -1,7 +1,14 @@
 {
-  "title": "esta es una pruba de traduccion al español",
-  "description": {
-    "part1": "Um loszulegen, ändere <1>src/App(DE).js</1> speicheren und neuladen.",
-    "part2": "Con los botones de arriba podemos canviar de idioma entre español y ingles"
+  "landing": {
+    "title": " Bienvenido a Fest Descans SL",
+    "description1": "En FEST Descans, nos dedicamos desde hace más de dos décadas a la  venta, suministro y soporte técnico de todo tipo de componentes para los fabricantes en el sector del descanso en España y resto de Europa. FEST Descans pretende principalmente darle el mejor servicio y consejo dentro del marco que abarca nuestra amplia experiencia en el sector, teniendo en cuenta sus necesidades específicas en cada tipo de producto y aplicación.",
+    "description2": "Nuestra experiencia abarca todo tipo de productos y materias primas: espumas standard, espumas técnicas, espumas especiales, latex sintético, latex Natural, tejidos para colchones y tapicería, tejidos tridimensionales especiales, components para colchones (Gel, cinta, etiquetas, aireadores, punzonados, etc..), accesorios para somieres (tacos de PE, SBS, plastímeros, hytrel, arquillos, sujeta colchones, etc..), fundas para colchón, mecanismos para fabricación de clic-clac y sofas, etc.. En definitiva sea cual sea su posible consulta acerca de materiales para fabricación de somieres y colchones, así como sof&aacute;s y mecanismos, ponemos a disposición de nuestros clientes nuestro mejor asesoramiento en materiales actuales y novedades que sin lugar a dudas van saliendo al mercado continuamente.",
+    "description3": "Nuestro objetivo es ofrecer a nuestros clientes una colaboración conjunta y encontrar la mejor solución para cada caso. Solo de esta forma, podremos pretender conseguir el mejor producto a los mejores precios."
+  },
+  "productsList": {
+    "description": {
+      "part1": "Um loszulegen, ändere <1>src/App(DE).js</1> speicheren und neuladen.",
+      "part2": "Con los botones de arriba podemos canviar de idioma entre español y ingles"
+    }
   }
 }

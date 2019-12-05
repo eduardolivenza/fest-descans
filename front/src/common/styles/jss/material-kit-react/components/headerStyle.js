@@ -2,15 +2,17 @@ import {
   container,
   defaultFont,
   primaryColor,
+  whiteColor,
   infoColor,
   successColor,
   warningColor,
   dangerColor,
   roseColor,
   transition,
-  boxShadow,
-  drawerWidth
-} from "common/styles/jss/material-kit-react.js";
+  boxShadow
+} from "common/styles/jss/mainStyle.js";
+
+const drawerWidth = 260;
 
 const headerStyle = {
   appBar: {
@@ -18,9 +20,9 @@ const headerStyle = {
     borderRadius: "3px",
     padding: "0.625rem 0",
     marginBottom: "20px",
-    color: "#555",
+    color: whiteColor,
     width: "100%",
-    backgroundColor: "#fff",
+    backgroundColor: primaryColor,
     boxShadow:
       "0 4px 18px 0px rgba(0, 0, 0, 0.12), 0 7px 10px -5px rgba(0, 0, 0, 0.15)",
     transition: "all 150ms ease 0s",
@@ -35,7 +37,7 @@ const headerStyle = {
   },
   sideMenu: {
     width: `24vh`,
-    paddingTop: `10vh`,
+    paddingTop: `10vh`
   },
   fixed: {
     position: "fixed",
@@ -51,9 +53,7 @@ const headerStyle = {
     flexWrap: "nowrap"
   },
   toolBarContainer: {
-    width: "80%",
-    paddingLeft: "20vh",
-    paddingRight: "10vh",
+    width: "90%",
     alignItems: "center",
     justifyContent: "space-between"
   },

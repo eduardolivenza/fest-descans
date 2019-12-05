@@ -139,7 +139,11 @@ const HeaderInner: React.FunctionComponent<Props> = props => {
       onKeyDown={toggleDrawer(side, false)}
     >
       <Divider />
-      <MainMenu goToDefault={goToLandingPage} goToProductsList={goToProductsList} goToSuppliersPage={goToSuppliersPage} />
+      <MainMenu
+        goToDefault={goToLandingPage}
+        goToProductsList={goToProductsList}
+        goToSuppliersPage={goToSuppliersPage}
+      />
       <Divider />
     </div>
   );
@@ -158,15 +162,13 @@ const HeaderInner: React.FunctionComponent<Props> = props => {
               <MenuIcon />
             </IconButton>
             <img src={logo} alt="Logo" height="100vh" />
-
           </div>
-
           <div className={classes.toolBarIcons}>
             <LanguageMenu
               handleLanguageMenu={handleLanguageMenu}
               openLanguageMenu={openLanguageMenu}
               handleClose={handleClose}
-              anchorLoginMenu={anchorLanguageMenu}
+              anchorLanguageMenu={anchorLanguageMenu}
               setLanguage={changeLanguage}
             />
             <LoginMenu
@@ -178,30 +180,6 @@ const HeaderInner: React.FunctionComponent<Props> = props => {
             />
           </div>
         </Toolbar>
-        {/*
-        <Toolbar className={classes.toolBarContainer}>
-          <div className={classes.toolBarIcons}>
-          <MenuItem onClick={goToLandingPage}>
-              <ListItemIcon>
-                <DashboardIcon className={classes.whiteIcon} />
-              </ListItemIcon>
-              <ListItemText primary=" About us" />
-            </MenuItem>
-            <MenuItem onClick={goToProductsList}>
-              <ListItemIcon>
-                <ShoppingCartIcon className={classes.whiteIcon} />
-              </ListItemIcon>
-              <ListItemText primary=" Products list" />
-            </MenuItem>
-            <MenuItem onClick={goToSuppliersPage}>
-              <ListItemIcon>
-                <PeopleIcon className={classes.whiteIcon} />
-              </ListItemIcon>
-              <ListItemText primary=" Suppliers" />
-            </MenuItem>
-          </div>
-          </Toolbar>
-        */}
       </AppBar>
       <SwipeableDrawer
         open={state.left}

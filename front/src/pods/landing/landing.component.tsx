@@ -6,40 +6,48 @@ import { Copyright } from "layout/copyright";
 import { Parallax } from "common/components/Parallax";
 import { Header } from "layout/header";
 import Grid from "@material-ui/core/Grid";
+import { useTranslation } from "react-i18next";
+import { Typography } from "@material-ui/core";
 
 const useStyles = makeStyles(styles);
 
 export const LandingComponentParent = props => {
   const classes = useStyles({});
+  const { t } = useTranslation();
 
   return (
     <div>
       <Header color="primary" brand="Fest Descans" fixed />
-      {/*
-          color="transparent"
+      {/*color="transparent"
           changeColorOnScroll={{
             height: 250,
             color: "primary"
-          }}*/}
+      }}*/}
       <Parallax filter image={require("public/images/landing-bg.jpg")}>
         <div className={classes.containerParallax}>
           <Grid container spacing={3}>
             <Grid item xs={8}>
-              <h1 className={classes.title}>Welcome to Fest Descans</h1>
+            <Typography variant="h4" align="justify" className={classes.title} >
+                {t("landing.title")}
+              </Typography>
             </Grid>
             <Grid item xs={12}>
-              <h2>This is a short description</h2>
+              <Typography variant="h5" align="justify" >
+                {t("landing.description1")}
+              </Typography>
             </Grid>
             <Grid item xs={12}>
-              <h4>
-                Every landing page needs a small description after the big bold
-                title, that{"'"}s why we added this text here. Add here all the
-                information that can make you or your product create the first
-                impression.
-              </h4>
+              <Typography variant="h6" align="justify">
+                {t("landing.description2")}
+              </Typography>
             </Grid>
-            <Grid item xs={12} sm={6}><h4>1st column</h4></Grid>
-            <Grid item xs={12} sm={6}><h4>2nd column</h4></Grid>
+             {/*
+            <Grid item xs={12} sm={6}>
+              <Typography variant="body1" align="justify">
+                {t("landing.description3")}
+              </Typography>
+            </Grid>
+           <Grid item xs={12} sm={6}><h4>2nd column</h4></Grid>*/}
           </Grid>
         </div>
       </Parallax>
