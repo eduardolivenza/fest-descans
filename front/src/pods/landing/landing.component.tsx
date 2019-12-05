@@ -41,12 +41,13 @@ export const LandingComponentParent = props => {
                 {t("landing.description2")}
               </Typography>
             </Grid>
+             {/*
             <Grid item xs={12} sm={6}>
               <Typography variant="body1" align="justify">
                 {t("landing.description3")}
               </Typography>
             </Grid>
-            {/*<Grid item xs={12} sm={6}><h4>2nd column</h4></Grid>*/}
+           <Grid item xs={12} sm={6}><h4>2nd column</h4></Grid>*/}
           </Grid>
         </div>
       </Parallax>

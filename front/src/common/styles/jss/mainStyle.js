@@ -33,17 +33,6 @@ const boxShadow = {
     "0 10px 30px -12px rgba(0, 0, 0, 0.42), 0 4px 25px 0px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.2)"
 };
 
-const card = {
-  display: "inline-block",
-  position: "relative",
-  width: "100%",
-  margin: "25px 0",
-  boxShadow: "0 1px 4px 0 rgba(0, 0, 0, 0.14)",
-  borderRadius: "3px",
-  color: "rgba(0, 0, 0, 0.87)",
-  background: "#fff"
-};
-
 const defaultFont = {
   fontFamily: '"Roboto", "Helvetica", "Arial", sans-serif',
   fontWeight: "300",
@@ -145,28 +134,11 @@ const title = {
   fontFamily: `"Roboto Slab", "Times New Roman", serif`
 };
 
-const cardTitle = {
-  ...title,
-  marginTop: ".625rem"
-};
-
-const cardLink = {
-  "& + $cardLink": {
-    marginLeft: "1.25rem"
-  }
-};
-
-const cardSubtitle = {
-  marginBottom: "0",
-  marginTop: "-.375rem"
-};
-
 export {
   //variables
   transition,
   container,
   boxShadow,
-  card,
   defaultFont,
   primaryColor,
   warningColor,
@@ -192,7 +164,4 @@ export {
   cardHeader,
   defaultBoxShadow,
   title,
-  cardTitle,
-  cardLink,
-  cardSubtitle
 };
