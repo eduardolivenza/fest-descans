@@ -11,7 +11,7 @@ const container = {
   paddingLeft: "15px",
   marginRight: "auto",
   marginLeft: "auto",
-  width: "90%",
+  width: "80%",
   /*
   "@media (min-width: 576px)": {
     maxWidth: "540px"
