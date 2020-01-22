@@ -34,10 +34,11 @@ const styles = (theme: Theme) =>
     card: {
       width: "43vh",
       textAlign: "left",
+      marginBottom: theme.spacing(2),
     },
     chip: {
       marginRight: theme.spacing(1),
-      marginBottom: theme.spacing(1)
+      marginBottom: theme.spacing(1),
     },
     chipParent: {
       display: "flex",
