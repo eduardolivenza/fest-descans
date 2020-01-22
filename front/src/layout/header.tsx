@@ -122,6 +122,10 @@ const HeaderInner: React.FunctionComponent<Props> = props => {
     history.push(routesLinks.suppliersCollection);
   };
 
+  const goToRegister = () => {
+    history.push(routesLinks.register);
+  };
+
   const toggleDrawer = (side, open) => event => {
     if (
       event &&
@@ -182,6 +186,7 @@ const HeaderInner: React.FunctionComponent<Props> = props => {
               handleClose={handleClose}
               anchorLoginMenu={anchorLoginMenu}
               doLoginLogout={doLoginLogout}
+              goToRegister={goToRegister}
             />
           </div>
         </Toolbar>
