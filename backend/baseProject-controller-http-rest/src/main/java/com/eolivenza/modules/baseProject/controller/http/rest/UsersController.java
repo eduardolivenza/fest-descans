@@ -56,7 +56,6 @@ public class UsersController {
      */
     @ApiOperation(value = "Adds a new user to the system")
     @PostMapping(path = "/users")
-    //@RolesAllowed(BaseProjectGrantPermission.MASTER_FILE_EDITION)
     public void addUser(
             @RequestBody UserResource userResource) {
         User  user = usersResourceMapper.toFirstType(userResource);
@@ -66,7 +65,6 @@ public class UsersController {
 
     @ApiOperation(value = "Validate an user to enter into the system")
     @PostMapping(path = "/users/authenticate")
-    //@RolesAllowed(BaseProjectGrantPermission.MASTER_FILE_EDITION)
     public SessionResource validateUser(
             @RequestBody ValUserResource userResource) {
         ValidateUserCommand command = new ValidateUserCommand(userResource.email, userResource.password);
@@ -78,7 +76,6 @@ public class UsersController {
 
     @ApiOperation(value = "Validate an user to enter into the system")
     @GetMapping(path = "/users", produces = {MediaType.APPLICATION_JSON_UTF8_VALUE})
-    //@RolesAllowed(BaseProjectGrantPermission.MASTER_FILE_EDITION)
     public List<UserResource> getAllUsers() {
         List<User> usersList = getAllUsersQueryHandler.apply(Void.TYPE);
         return usersList.stream().map(usersResourceMapper::toSecondType).collect(Collectors.toList());
@@ -86,7 +83,6 @@ public class UsersController {
 
     @ApiOperation(value = "Removes an user")
     @DeleteMapping(path = "/users/{email}")
-    @RolesAllowed(BaseProjectGrantPermission.MASTER_FILE_EDITION)
     public void removeInstrument(
             @ApiParam(required = true, value = "Email of the user to delete", example = "currentUser@mail.com")
             @PathVariable String email) {

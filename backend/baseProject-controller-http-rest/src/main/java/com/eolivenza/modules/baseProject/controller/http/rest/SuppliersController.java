@@ -2,6 +2,7 @@ package com.eolivenza.modules.baseProject.controller.http.rest;
 
 import com.eolivenza.modules.baseProject.application.CommandHandler;
 import com.eolivenza.modules.baseProject.application.QueryHandler;
+import com.eolivenza.modules.baseProject.application.security.BaseProjectGrantPermission;
 import com.eolivenza.modules.baseProject.application.suppliers.commands.AddSupplierCommand;
 import com.eolivenza.modules.baseProject.controller.http.rest.mapper.SupplierResourceMapper;
 import com.eolivenza.modules.baseProject.controller.http.rest.resources.SupplierResource;
@@ -11,6 +12,7 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.security.RolesAllowed;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -44,6 +46,7 @@ public class SuppliersController {
 
     @ApiOperation(value = "Retrieves all suppliers")
     @GetMapping(path = "/suppliers")
+    @RolesAllowed(BaseProjectGrantPermission.ADMIN)
     public List<SupplierResource> getSuppliers() {
         List<Supplier> supplierList = getAllSuppliersQueryHandler.apply(Void.TYPE);
         return supplierList.stream().map(supplierResourceMapper::toSecondType).collect(Collectors.toList());

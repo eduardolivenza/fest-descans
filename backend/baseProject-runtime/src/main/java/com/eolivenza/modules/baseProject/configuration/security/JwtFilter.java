@@ -1,14 +1,13 @@
 package com.eolivenza.modules.baseProject.configuration.security;
 
+import com.eolivenza.modules.baseProject.application.security.BaseProjectGrantPermission;
 import com.eolivenza.modules.baseProject.configuration.WebRestControllerAdvice;
-import com.eolivenza.modules.baseProject.domain.model.user.User;
 import io.jsonwebtoken.ExpiredJwtException;
-import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import javax.servlet.FilterChain;
@@ -16,7 +15,8 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.List;
 
 public class JwtFilter extends OncePerRequestFilter {
 
@@ -26,22 +26,37 @@ public class JwtFilter extends OncePerRequestFilter {
     protected void doFilterInternal(HttpServletRequest req, HttpServletResponse res, FilterChain chain) throws IOException, ServletException {
         try
         {
-            User user = new User();
-            user.setEmail("prova");
-            user.setPassword("");
 
-            UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(user, null, Arrays.asList(new SimpleGrantedAuthority("ROLE_ADMIN")));
-            authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(req));
-            Logger.info("authenticated user " + user.getEmail() + ", setting security context");
-            SecurityContextHolder.getContext().setAuthentication(authentication);
+
+
+            // 5. Create auth object
+            // UsernamePasswordAuthenticationToken: A built-in object, used by spring to represent the current authenticated / being authenticated user.
+            // It needs a list of authorities, which has type of GrantedAuthority interface, where SimpleGrantedAuthority is an implementation of that interface
+            UsernamePasswordAuthenticationToken auth = getAuthentication();
+
+            // 6. Authenticate the user
+            // Now, user is authenticated
+            SecurityContextHolder.getContext().setAuthentication(auth);
 
             chain.doFilter(req, res);
         } catch (ExpiredJwtException var12) {
             Logger.error("JWT no authorised", var12);
-            ((HttpServletResponse)res).setStatus(401);
+            res.setStatus(401);
         } finally {
             SecurityContextHolder.clearContext();
         }
     }
+
+    private UsernamePasswordAuthenticationToken getAuthentication() {
+            String user = "edu";
+            if (user != null) {
+                List<GrantedAuthority> authorities = new ArrayList();
+                authorities.add(new SimpleGrantedAuthority(BaseProjectGrantPermission.USER));
+                UsernamePasswordAuthenticationToken auth = new UsernamePasswordAuthenticationToken(user, "", authorities);
+                return auth;
+            }
+            return null;
+    }
+
 
 }
