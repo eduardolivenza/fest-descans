@@ -100,7 +100,6 @@ public class ProductsController {
 
     @ApiOperation(value = " Get all products of the system")
     @GetMapping(path = "/products", produces = {MediaType.APPLICATION_JSON_UTF8_VALUE})
-    @RolesAllowed(BaseProjectGrantPermission.USER)
     public List<ProductResource> getAllProducts() {
         List<Product> productList = getAllProductsQueryHandler.apply(Void.TYPE);
         return productList.stream().map(productsResourceMapper::toSecondType).collect(Collectors.toList());

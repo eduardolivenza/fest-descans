@@ -46,7 +46,7 @@ public class SuppliersController {
 
     @ApiOperation(value = "Retrieves all suppliers")
     @GetMapping(path = "/suppliers")
-    @RolesAllowed(BaseProjectGrantPermission.ADMIN)
+    @RolesAllowed(BaseProjectGrantPermission.USER)
     public List<SupplierResource> getSuppliers() {
         List<Supplier> supplierList = getAllSuppliersQueryHandler.apply(Void.TYPE);
         return supplierList.stream().map(supplierResourceMapper::toSecondType).collect(Collectors.toList());
