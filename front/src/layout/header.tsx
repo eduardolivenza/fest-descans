@@ -15,6 +15,8 @@ import Divider from "@material-ui/core/Divider";
 import MenuIcon from "@material-ui/icons/Menu";
 import IconButton from "@material-ui/core/IconButton";
 import { MainMenu } from "./menus/mainMenu.layout";
+import { SessionContext } from "core";
+import { Typography } from "@material-ui/core";
 
 const logo = require("public/images/FEST_COLOR_3.png");
 const useStyles = makeStyles(styles);
@@ -148,6 +150,8 @@ const HeaderInner: React.FunctionComponent<Props> = props => {
     </div>
   );
 
+  const session = React.useContext(SessionContext);
+
   return (
     <>
       <AppBar className={appBarClasses}>
@@ -164,6 +168,7 @@ const HeaderInner: React.FunctionComponent<Props> = props => {
             <img src={logo} alt="Logo" height="100vh" />
           </div>
           <div className={classes.toolBarIcons}>
+            <Typography>{session.email}</Typography>
             <LanguageMenu
               handleLanguageMenu={handleLanguageMenu}
               openLanguageMenu={openLanguageMenu}

@@ -4,7 +4,7 @@ import TranslateIcon from '@material-ui/icons/Translate';
 import IconButton from "@material-ui/core/IconButton";
 
 const menuButtonStyle = {
-    marginLeft: -12,
+    marginLeft: 10,
     marginRight: 20,
 };
 

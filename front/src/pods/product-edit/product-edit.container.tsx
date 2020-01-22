@@ -1,6 +1,6 @@
 import * as React from "react";
 import { withRouter, RouteComponentProps } from "react-router-dom";
-import { productViewRouteParams, LookupEntity, createLookupEmpty } from "core";
+import { productViewRouteParams, LookupEntity, createLookupEmpty, SessionContext } from "core";
 import { ProductEditComponent } from "./product-edit.component";
 import { FormValidationResult } from "lc-form-validation";
 import { ProductEditFormValidation } from "./product-edit.validation";
@@ -41,14 +41,16 @@ const useProductEdit = () => {
   const loadCategories = () =>
     getCategoriesCollection().then(result => setCategories(result));
 
-  const loadSuppliers = () =>
-    getSuppliersCollection().then(result => {
+  const loadSuppliers = () => {
+    const session = React.useContext(SessionContext);
+    getSuppliersCollection(session.token).then(result => {
       const suppliersLookup: LookupEntity[] = mapFromAToBCollection(
         mapToLookup,
         result
       );
       setSuppliers(suppliersLookup);
     });
+  }
 
   return {
     product,
