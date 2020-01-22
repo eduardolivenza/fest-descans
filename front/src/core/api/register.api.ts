@@ -4,9 +4,9 @@ import { RegisterEntityVm } from "pods/register/register.vm"
 
 const backendUsers = `${baseApiUrl}/users`;
 
-export const registerNewUser = (registerData: RegisterEntityVm) : Promise<AxiosResponse> => {  
+export const registerNewUser = (registerData: RegisterEntityVm, token: string) : Promise<AxiosResponse> => {  
     const promise = new Promise<AxiosResponse>((resolve, reject) => 
-      Axios.post(backendUsers, registerData).then((response) => resolve(response)
+      Axios.post(backendUsers, registerData, { headers: {"Authorization" : `Bearer ${token}`} }).then((response) => resolve(response)
     ));  
     return promise;
 }

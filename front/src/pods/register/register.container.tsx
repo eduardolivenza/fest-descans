@@ -5,6 +5,7 @@ import { RegisterComponent } from "./register.component";
 import { registerFormValidation } from "./register.validation";
 import { registerNewUser } from "core/api/register.api";
 import { NotificationComponent } from "common/components";
+import { SessionContext } from "core";
 
 interface Props extends RouteComponentProps { }
 
@@ -14,12 +15,13 @@ export const RegisterContainerInner = (props: Props) => {
   const [registerData, setRegisterData] = React.useState<RegisterEntityVm>(createRegisterEntity());
   const [registerFormErrors, setRegisterFormErrors] = React.useState<RegisterFormErrors>(createDefaultRegisterFormErrors());
   const [showRegisterSuccesfulMessage, setShowRegisterSuccesfulMessage] = React.useState<boolean>(false);
+  const session = React.useContext(SessionContext);
 
   const registerProduct = () => {
     registerFormValidation.validateForm(registerData).then(formValidationResult => {
       if (formValidationResult.succeeded) {
         console.log(" Register approved");
-        registerNewUser(registerData).then(result => {
+        registerNewUser(registerData, session.token).then(result => {
           if (result.status === 200) {
             setShowRegisterSuccesfulMessage(true);
           }

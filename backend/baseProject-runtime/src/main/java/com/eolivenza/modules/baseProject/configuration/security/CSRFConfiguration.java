@@ -1,4 +1,4 @@
-package com.eolivenza.modules.baseProject.configuration.security.config;
+package com.eolivenza.modules.baseProject.configuration.security;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;

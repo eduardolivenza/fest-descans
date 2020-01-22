@@ -2,7 +2,10 @@ package com.eolivenza.modules.baseProject.repositories.domain.users;
 
 import com.eolivenza.modules.baseProject.application.repositories.UsersRepository;
 import com.eolivenza.modules.baseProject.domain.model.user.User;
+import com.eolivenza.modules.baseProject.domain.model.user.UserRights;
+import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -21,6 +24,15 @@ public class UsersRepositoryImpl implements UsersRepository {
         this.usersMapper = usersMapper;
         this.usersRepositoryJpaSpringData = configurationRepositoryJpaSpringData;
     }
+
+    @Bean
+    InitializingBean sendDatabase() {
+        return () -> {
+            UserJpa userJpa = new UserJpa("xxx@mail.com", "Admin", "Admin", "123456", String.valueOf(UserRights.administrator));
+            usersRepositoryJpaSpringData.saveAndFlush(userJpa);
+        };
+    }
+
 
     @Override
     public User update(User entity) {
