@@ -15,20 +15,24 @@ export const RegisterContainerInner = (props: Props) => {
   const [registerData, setRegisterData] = React.useState<RegisterEntityVm>(createRegisterEntity());
   const [registerFormErrors, setRegisterFormErrors] = React.useState<RegisterFormErrors>(createDefaultRegisterFormErrors());
   const [showRegisterSuccesfulMessage, setShowRegisterSuccesfulMessage] = React.useState<boolean>(false);
+  const [showRegisterErrorMessage, setShowRegisterErrorMessage] = React.useState<boolean>(false);
   const session = React.useContext(SessionContext);
 
   const registerProduct = () => {
     registerFormValidation.validateForm(registerData).then(formValidationResult => {
       if (formValidationResult.succeeded) {
-        console.log(" Register approved");
+        console.log(" Register fields valid");
         registerNewUser(registerData, session.token).then(result => {
-          if (result.status === 200) {
-            setShowRegisterSuccesfulMessage(true);
-          }
+            if (result.status === 200) {
+              setShowRegisterSuccesfulMessage(true);
+            }
+            else {
+              setShowRegisterErrorMessage(true);
+            }
+        }).catch(error => {
+          setShowRegisterErrorMessage(true);
+          console.log(error);
         });
-      }
-      else {
-        console.log("register rejected");
       }
     });
   }
@@ -68,6 +72,11 @@ export const RegisterContainerInner = (props: Props) => {
         show={showRegisterSuccesfulMessage}
         onClose={() => {setShowRegisterSuccesfulMessage(false);
                         history.goBack()}}
+      />
+      <NotificationComponent
+        message="User register fail. Just administrators can create new users into the system"
+        show={showRegisterErrorMessage}
+        onClose={() => {setShowRegisterErrorMessage(false)}}
       />
     </>
   );
