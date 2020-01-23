@@ -12,7 +12,7 @@ import {
   boxShadow
 } from "common/styles/jss/mainStyle.js";
 
-const drawerWidth = 260;
+const drawerWidth = 300;
 
 const headerStyle = {
   appBar: {

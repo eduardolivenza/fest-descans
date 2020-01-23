@@ -15,11 +15,12 @@ interface Props {
     handleClose : (event: React.MouseEvent<HTMLElement>) => void;  
     anchorLoginMenu;
     doLoginLogout: () => void;
+    goToRegister: () => void;
 }
 
 export const LoginMenu = (props: Props) => {
 
-    const {anchorLoginMenu, openLoginMenu, handleLoginMenu, handleClose, doLoginLogout } = props;
+    const {anchorLoginMenu, openLoginMenu, handleLoginMenu, handleClose, doLoginLogout, goToRegister } = props;
     const session = React.useContext(SessionContext);
     return (
         <div>
@@ -46,7 +47,8 @@ export const LoginMenu = (props: Props) => {
                 onClose={handleClose}
             >
                 <MenuItem onClick={handleClose}>My account</MenuItem>
-                <MenuItem onClick={doLoginLogout}> { session.email ? "Logout": "Login/Register"}</MenuItem>
+                <MenuItem onClick={doLoginLogout}> { session.email ? "Logout": "User login"}</MenuItem>
+                { session.email ? <MenuItem onClick={goToRegister}>Register</MenuItem>: ''}
             </Menu>
         </div>
 

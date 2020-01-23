@@ -32,12 +32,13 @@ interface Props extends WithStyles<typeof styles> {
 const styles = (theme: Theme) =>
   createStyles({
     card: {
-      width: "43vh",
+      width: "40vh",
       textAlign: "left",
+      marginBottom: theme.spacing(2)
     },
     chip: {
       marginRight: theme.spacing(1),
-      marginBottom: theme.spacing(1)
+      marginBottom: theme.spacing(1),
     },
     chipParent: {
       display: "flex",

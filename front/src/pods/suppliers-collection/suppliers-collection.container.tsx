@@ -4,7 +4,7 @@ import { SupplierVm } from "core/dataModel/supplier-entity.vm";
 import { mapFromAToBCollection } from "common";
 import { mapSupplierToVm } from "core/mapper/supplier-entity.mapper";
 import { getSuppliersCollection } from "core/api/suppliers-collection.api";
-import { routesLinks } from "core";
+import { routesLinks, SessionContext } from "core";
 import { withRouter, RouteComponentProps } from "react-router-dom";
 
 interface Props extends RouteComponentProps {}
@@ -14,8 +14,8 @@ const useSuppliersCollection = () => {
     SupplierVm[]
   >([]);
 
-  const loadSuppliersCollection = () =>
-    getSuppliersCollection().then(result => {
+  const loadSuppliersCollection = (token:string) =>
+    getSuppliersCollection(token).then(result => {
       const suppliers: SupplierVm[] = mapFromAToBCollection(
         mapSupplierToVm,
         result
@@ -30,13 +30,14 @@ const useSuppliersCollection = () => {
 };
 
 export const SupplierCollectionContainerInner = (props: Props) => {
+  const session = React.useContext(SessionContext);
   const {
     suppliersCollection,
     loadSuppliersCollection
   } = useSuppliersCollection();
 
   React.useEffect(() => {
-    loadSuppliersCollection();
+    loadSuppliersCollection(session.token);
   }, []);
 
   const addSupplier = () => {

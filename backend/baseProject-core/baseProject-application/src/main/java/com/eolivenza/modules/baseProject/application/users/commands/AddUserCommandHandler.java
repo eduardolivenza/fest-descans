@@ -50,7 +50,7 @@ public class AddUserCommandHandler implements CommandHandler<AddUserCommand> {
             user.setRights(addUserCommand.getUserRights());
         }
         else{
-            user.setRights(UserRights.defaultUser);
+            user.setRights(UserRights.user);
         }
         return user;
     }
