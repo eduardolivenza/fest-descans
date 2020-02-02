@@ -4,6 +4,18 @@ import { HashRouter, Switch, Route } from "react-router-dom";
 import { routerSwitchRoutes, SessionContext, getSessionCookie } from "core";
 import { LoginPage, ProductCollectionPage, RegisterPage, LandingPage, ProductViewPage, SuppliersCollectionPage, ProductEditPage, SupplierEditPage } from "scenes";
 import 'config/i18n/i18n';
+import cartReducer from './redux/cartReducer';
+import { Provider } from 'react-redux';
+import { createStore, applyMiddleware } from 'redux'
+import createSagaMiddleware from 'redux-saga'
+import { mainSaga } from './redux/mySaga';
+
+const sagaMiddleware = createSagaMiddleware()
+const store = createStore(
+  cartReducer,
+  applyMiddleware(sagaMiddleware)
+)
+sagaMiddleware.run(mainSaga)
 
 const Routes = () => {
 
@@ -78,4 +90,4 @@ const App = () => (
 )
 
 
-ReactDOM.render(<App />, document.getElementById("root"));
+ReactDOM.render(<Provider store={store}><App /></Provider>, document.getElementById("root"));

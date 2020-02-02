@@ -1,5 +1,6 @@
 import { SupplierVm } from "core/dataModel/supplier-entity.vm";
 import { FieldValidationResult } from "lc-form-validation";
+import { formatPicture } from "core/mapper/product-entity.mapper";
 
 export interface ProductEntityVm {
   internalIdentifier: string;
@@ -41,8 +42,8 @@ export const createDefaultProduct = (): ProductEntityVm => ({
     country: ""
   },
   comfortLevel: 3,
-  pictures: [],
-  thumbnail: "",
+  pictures: [formatPicture("thumbnail", "defaultPic.jpg")],
+  thumbnail: formatPicture("thumbnail", "defaultPic.jpg"),
 });
 
 export interface ProductFormErrors {
