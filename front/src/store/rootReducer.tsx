@@ -109,7 +109,7 @@ const applyFilter = (state: modelState): modelState => {
   };
 };
 
-const cartReducer = (state: modelState = initState, action: BaseAction) => {
+const rootReducer = (state: modelState = initState, action: BaseAction) => {
   switch (action.type) {
     case actions.FETCHED_PRODUCTS:
       return handleFetchedProducts(state, action.payload);
@@ -128,4 +128,5 @@ const cartReducer = (state: modelState = initState, action: BaseAction) => {
   }
 };
 
-export default cartReducer;
+export default rootReducer;
+
