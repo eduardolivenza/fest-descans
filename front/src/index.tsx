@@ -6,14 +6,16 @@ import { LoginPage, ProductCollectionPage, RegisterPage, LandingPage, ProductVie
 import 'config/i18n/i18n';
 import cartReducer from 'store/cartReducer';
 import { Provider } from 'react-redux';
-import { createStore, applyMiddleware } from 'redux'
+import { createStore, applyMiddleware, compose } from 'redux'
 import createSagaMiddleware from 'redux-saga'
 import { mainSaga } from 'store/sagas';
 
-const sagaMiddleware = createSagaMiddleware()
+const composeEnhancer = window['__REDUX_DEVTOOLS_EXTENSION_COMPOSE__'] || compose;
+const sagaMiddleware = createSagaMiddleware();
+
 const store = createStore(
   cartReducer,
-  applyMiddleware(sagaMiddleware)
+  composeEnhancer(applyMiddleware(sagaMiddleware))
 )
 sagaMiddleware.run(mainSaga)
 
