@@ -18,6 +18,7 @@
       "@core": ["./core/*"],
       "@pods": ["./pods/*"],
       "@common": ["./common/*"],
+      "@store": ["./store/*"],
       "@images": ["./images/*"]
     }
   },

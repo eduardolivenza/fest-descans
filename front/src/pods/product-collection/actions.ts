@@ -1,4 +1,4 @@
-import { BaseAction } from "redux/base-actions";
+import { BaseAction } from "store/base-actions";
 import { ProductEntityVm } from "core/dataModel/product-entity.vm";
 import { actions } from "pods/product-collection/constants";
 import { CheckBoxConfigValue } from "common/components";

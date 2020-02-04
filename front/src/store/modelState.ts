@@ -36,7 +36,6 @@ export const initState: modelState = {
     maxPrice: 100,
     textFilterValue: "",
     addedItems:[],
-    total: 0
 }
 
 
@@ -50,5 +49,4 @@ export interface modelState {
     textFilterValue: string,
     //new for cart
     addedItems: ProductEntityVm[],
-    total: 0
 }

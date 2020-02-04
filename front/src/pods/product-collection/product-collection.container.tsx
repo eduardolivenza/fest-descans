@@ -6,7 +6,7 @@ import { withRouter, RouteComponentProps } from "react-router-dom";
 import { CheckBoxConfigValue } from "common/components";
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
-import { modelState } from "redux/modelState";
+import { modelState } from "store/modelState";
 import { fetchedProductsTriggerAction, handleProductTypesFilterAction, removeProductAction, handleChangeComfortFilterAction, handleChangeFilterTextAction, handleChangePriceFilter } from "pods/product-collection/actions";
 
 

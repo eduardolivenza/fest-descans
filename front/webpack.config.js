@@ -18,6 +18,7 @@ module.exports = {
       scenes: path.resolve(__dirname, "./src/scenes/"),
       core: path.resolve(__dirname, "./src/core/"),
       pods: path.resolve(__dirname, "./src/pods/"),
+      store: path.resolve(__dirname, "./src/store/"),
       common: path.resolve(__dirname, "./src/common/"),
     }
   },

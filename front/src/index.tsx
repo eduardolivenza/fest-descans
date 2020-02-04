@@ -4,11 +4,11 @@ import { HashRouter, Switch, Route } from "react-router-dom";
 import { routerSwitchRoutes, SessionContext, getSessionCookie } from "core";
 import { LoginPage, ProductCollectionPage, RegisterPage, LandingPage, ProductViewPage, SuppliersCollectionPage, ProductEditPage, SupplierEditPage } from "scenes";
 import 'config/i18n/i18n';
-import cartReducer from './redux/cartReducer';
+import cartReducer from 'store/cartReducer';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux'
 import createSagaMiddleware from 'redux-saga'
-import { mainSaga } from './redux/mySaga';
+import { mainSaga } from 'store/sagas';
 
 const sagaMiddleware = createSagaMiddleware()
 const store = createStore(
