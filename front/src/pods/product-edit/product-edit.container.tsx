@@ -1,6 +1,11 @@
 import * as React from "react";
 import { withRouter, RouteComponentProps } from "react-router-dom";
-import { productViewRouteParams, LookupEntity, createLookupEmpty, SessionContext } from "core";
+import {
+  productViewRouteParams,
+  LookupEntity,
+  createLookupEmpty,
+  SessionContext
+} from "core";
 import { ProductEditComponent } from "./product-edit.component";
 import { FormValidationResult } from "lc-form-validation";
 import { ProductEditFormValidation } from "./product-edit.validation";
@@ -36,21 +41,19 @@ const useProductEdit = () => {
 
   const loadProductEdit = (id: number) =>
     getProductView(id).then(result => setProduct(mapFromApiToVm(result)));
-    
 
   const loadCategories = () =>
     getCategoriesCollection().then(result => setCategories(result));
 
   const loadSuppliers = () => {
-    const session = React.useContext(SessionContext);
-    getSuppliersCollection(session.token).then(result => {
+    getSuppliersCollection().then(result => {
       const suppliersLookup: LookupEntity[] = mapFromAToBCollection(
         mapToLookup,
         result
       );
       setSuppliers(suppliersLookup);
     });
-  }
+  };
 
   return {
     product,
@@ -75,9 +78,11 @@ const ProductEditContainerInner = (props: Props) => {
     suppliers,
     loadSuppliers
   } = useProductEdit();
+
   const [productFormErrors, setProductFormErrors] = React.useState<
     ProductFormErrors
   >(createDefaultProductFormErrors());
+
   const [
     showValidationFailedMessage,
     setShowValidationFailedMessage
@@ -87,7 +92,7 @@ const ProductEditContainerInner = (props: Props) => {
   React.useEffect(() => {
     loadCategories();
     loadSuppliers();
-    if (props.match.params[productViewRouteParams.id]){
+    if (props.match.params[productViewRouteParams.id]) {
       loadProductEdit(props.match.params[productViewRouteParams.id]);
     }
   }, []);
@@ -152,10 +157,9 @@ const ProductEditContainerInner = (props: Props) => {
 
   const handleFormValidation = (formValidation: FormValidationResult) => {
     if (formValidation.succeeded) {
-      if (props.match.params[productViewRouteParams.id]){
+      if (props.match.params[productViewRouteParams.id]) {
         patchProduct(product).then(response => history.back());
-      }
-      else{
+      } else {
         postNewProduct(product).then(response => history.back());
       }
     } else {
