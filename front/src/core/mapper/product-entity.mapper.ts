@@ -26,7 +26,7 @@ export const mapFromVmToApi = (vmEntity : ProductEntityVm) : ProductEntityApi =>
   supplier: mapSupplierToApi(vmEntity.supplier),
 });
 
-const formatPicture = (type: string, filename: string): string =>{
+export const formatPicture = (type: string, filename: string): string =>{
   return (`${basePicturesUrl}` + "/image/"+ type+"/" + filename);
 }
 

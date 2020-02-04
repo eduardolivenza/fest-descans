@@ -14,8 +14,8 @@ const useSuppliersCollection = () => {
     SupplierVm[]
   >([]);
 
-  const loadSuppliersCollection = (token:string) =>
-    getSuppliersCollection(token).then(result => {
+  const loadSuppliersCollection = () =>
+    getSuppliersCollection().then(result => {
       const suppliers: SupplierVm[] = mapFromAToBCollection(
         mapSupplierToVm,
         result
@@ -37,7 +37,7 @@ export const SupplierCollectionContainerInner = (props: Props) => {
   } = useSuppliersCollection();
 
   React.useEffect(() => {
-    loadSuppliersCollection(session.token);
+    loadSuppliersCollection();
   }, []);
 
   const addSupplier = () => {
