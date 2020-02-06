@@ -9,17 +9,17 @@ import { Provider } from 'react-redux';
 import { createStore, applyMiddleware, compose } from 'redux'
 import createSagaMiddleware from 'redux-saga'
 import { mainSaga } from 'store/sagas';
+import { fetchedProductsTriggerAction } from 'pods/product-collection/actions';
 
 const composeEnhancer = window['__REDUX_DEVTOOLS_EXTENSION_COMPOSE__'] || compose;
 const sagaMiddleware = createSagaMiddleware();
-
-const initialState = {};
 
 const store = createStore(
   rootReducer,
   composeEnhancer(applyMiddleware(sagaMiddleware))
 )
 sagaMiddleware.run(mainSaga)
+store.dispatch(fetchedProductsTriggerAction());
 
 const Routes = () => {
 
