@@ -1,5 +1,5 @@
 export const actions = {
-    FETCHED_PRODUCTS_TRIGGER: 'FetchProductsTrigger',
+    FETCHED_DATA_TRIGGER: 'FetchDataTrigger',
     FETCHED_PRODUCTS: 'FetchProducts',
     FETCHED_CATEGORIES: 'FetchCategories',
     REMOVE_PRODUCT: 'RemoveProduct',
@@ -9,3 +9,5 @@ export const actions = {
     FILTER_TEXT: 'FilterText',
 
 };
+
+export const productsCollectionStateKey = 'productsCollectionStateKey';

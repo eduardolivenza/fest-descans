@@ -4,22 +4,22 @@ import { HashRouter, Switch, Route } from "react-router-dom";
 import { routerSwitchRoutes, SessionContext, getSessionCookie } from "core";
 import { LoginPage, ProductCollectionPage, RegisterPage, LandingPage, ProductViewPage, SuppliersCollectionPage, ProductEditPage, SupplierEditPage } from "scenes";
 import 'config/i18n/i18n';
-import rootReducer from 'store/rootReducer';
+import { rootReducer } from 'store/rootReducer';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware, compose } from 'redux'
 import createSagaMiddleware from 'redux-saga'
 import { mainSaga } from 'store/sagas';
-import { fetchedProductsTriggerAction } from 'pods/product-collection/actions';
+import { fetchedInitialDataAction } from 'pods/product-collection/actions';
 
 const composeEnhancer = window['__REDUX_DEVTOOLS_EXTENSION_COMPOSE__'] || compose;
 const sagaMiddleware = createSagaMiddleware();
 
 const store = createStore(
-  rootReducer,
+  rootReducer(),
   composeEnhancer(applyMiddleware(sagaMiddleware))
 )
 sagaMiddleware.run(mainSaga)
-store.dispatch(fetchedProductsTriggerAction());
+store.dispatch(fetchedInitialDataAction());
 
 const Routes = () => {
 

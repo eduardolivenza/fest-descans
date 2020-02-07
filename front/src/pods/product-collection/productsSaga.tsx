@@ -13,8 +13,8 @@ import { getCategoriesCollection } from "core/api/categories-collection.api";
 import { CheckBoxConfigValue } from "common/components";
 
 export function* productsSaga() {
-  yield takeLatest([actions.FETCHED_PRODUCTS_TRIGGER], fetchProductsData);
-  yield takeLatest([actions.FETCHED_PRODUCTS_TRIGGER], fetchCategoriesData);
+  yield takeLatest([actions.FETCHED_DATA_TRIGGER], fetchProductsData);
+  yield takeLatest([actions.FETCHED_DATA_TRIGGER], fetchCategoriesData);
 }
 
 export function* fetchProductsData() {
