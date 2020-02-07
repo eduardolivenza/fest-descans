@@ -1,7 +1,8 @@
 import { modelState, initState } from "./modelState";
 import { actions } from "pods/product-collection/constants";
-import { BaseAction, StringBoolean } from "./base-actions";
+import { BaseAction, StringBoolean } from "store/base-actions";
 import { CheckBoxConfigValue } from "common/components";
+
 
 function handleFetchedProducts(state: modelState, payload) {
   let maxPriceLocal = state.maxPrice;
@@ -109,7 +110,7 @@ const applyFilter = (state: modelState): modelState => {
   };
 };
 
-const cartReducer = (state: modelState = initState, action: BaseAction) => {
+export const productsCollectionReducer = (state: modelState = initState, action: BaseAction) => {
   switch (action.type) {
     case actions.FETCHED_PRODUCTS:
       return handleFetchedProducts(state, action.payload);
@@ -127,5 +128,3 @@ const cartReducer = (state: modelState = initState, action: BaseAction) => {
       return state;
   }
 };
-
-export default cartReducer;

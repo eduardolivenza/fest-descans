@@ -1,10 +1,10 @@
-import { BaseAction } from "redux/base-actions";
+import { BaseAction } from "store/base-actions";
 import { ProductEntityVm } from "core/dataModel/product-entity.vm";
 import { actions } from "pods/product-collection/constants";
 import { CheckBoxConfigValue } from "common/components";
 
-export const fetchedProductsTriggerAction = (): BaseAction => ({
-  type: actions.FETCHED_PRODUCTS_TRIGGER
+export const fetchedInitialDataAction = (): BaseAction => ({
+  type: actions.FETCHED_DATA_TRIGGER
 });
 
 export const fetchedProductsAction = (payload:  ProductEntityVm[]): BaseAction => ({

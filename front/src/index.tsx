@@ -4,18 +4,22 @@ import { HashRouter, Switch, Route } from "react-router-dom";
 import { routerSwitchRoutes, SessionContext, getSessionCookie } from "core";
 import { LoginPage, ProductCollectionPage, RegisterPage, LandingPage, ProductViewPage, SuppliersCollectionPage, ProductEditPage, SupplierEditPage } from "scenes";
 import 'config/i18n/i18n';
-import cartReducer from './redux/cartReducer';
+import { rootReducer } from 'store/rootReducer';
 import { Provider } from 'react-redux';
-import { createStore, applyMiddleware } from 'redux'
+import { createStore, applyMiddleware, compose } from 'redux'
 import createSagaMiddleware from 'redux-saga'
-import { mainSaga } from './redux/mySaga';
+import { mainSaga } from 'store/sagas';
+import { fetchedInitialDataAction } from 'pods/product-collection/actions';
 
-const sagaMiddleware = createSagaMiddleware()
+const composeEnhancer = window['__REDUX_DEVTOOLS_EXTENSION_COMPOSE__'] || compose;
+const sagaMiddleware = createSagaMiddleware();
+
 const store = createStore(
-  cartReducer,
-  applyMiddleware(sagaMiddleware)
+  rootReducer(),
+  composeEnhancer(applyMiddleware(sagaMiddleware))
 )
 sagaMiddleware.run(mainSaga)
+store.dispatch(fetchedInitialDataAction());
 
 const Routes = () => {
 
@@ -83,7 +87,7 @@ const Routes = () => {
 
 const App = () => (
     <div className="App" >
-        <Suspense fallback={(<div>Loading </div>)}>
+        <Suspense fallback={(<div>Loading application...</div>)}>
             < Routes />
         </Suspense>
     </div>

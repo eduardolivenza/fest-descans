@@ -6,11 +6,13 @@ import { withRouter, RouteComponentProps } from "react-router-dom";
 import { CheckBoxConfigValue } from "common/components";
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
-import { modelState } from "redux/modelState";
-import { fetchedProductsTriggerAction, handleProductTypesFilterAction, removeProductAction, handleChangeComfortFilterAction, handleChangeFilterTextAction, handleChangePriceFilter } from "pods/product-collection/actions";
+import { modelState } from "./modelState";
+import { handleProductTypesFilterAction, removeProductAction, handleChangeComfortFilterAction, handleChangeFilterTextAction, handleChangePriceFilter } from "pods/product-collection/actions";
+import { podProductsCollectionSelector } from "./selectors";
 
 
-const mapStateToProps = (state: modelState) => {
+const mapStateToProps = (originalState) => {
+  const state: modelState = podProductsCollectionSelector(originalState);
   return {
     productCollection: state.productsCollectionFiltered,
     comfortLevelFilterState: state.comfortLevelCheckboxes,
@@ -22,7 +24,6 @@ const mapStateToProps = (state: modelState) => {
 };
 const mapDispatchToProps = (dispatch: Dispatch) => {
   return {
-    fetchProductsTrigger: () => dispatch(fetchedProductsTriggerAction()),
     removeProduct: (id: string) => dispatch(removeProductAction(id)),
     handleChangeComfortFilter: (name: string, value: boolean) => dispatch(handleChangeComfortFilterAction(name, value)),
     handleProductTypesFilter: (name: string, value: boolean) =>dispatch(handleProductTypesFilterAction(name, value)),
@@ -32,7 +33,6 @@ const mapDispatchToProps = (dispatch: Dispatch) => {
 };
 
 interface Props extends RouteComponentProps {
-  fetchProductsTrigger: () => void;
   productCollection: ProductEntityVm[];
   removeProduct: (id: string) => void;
   handleChangeComfortFilter: (name: string, value: boolean) => void;
@@ -59,10 +59,6 @@ export const ProductCollectionComponentInner = (props: Props) => {
   const addProduct = () => {
     props.history.push(routesLinks.productAdd);
   };
-
-  React.useEffect(() => {
-    props.fetchProductsTrigger();
-  }, []);
 
   return (
     <ProductCollectionComponent
