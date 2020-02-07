@@ -9,7 +9,7 @@ import { Provider } from 'react-redux';
 import { createStore, applyMiddleware, compose } from 'redux'
 import createSagaMiddleware from 'redux-saga'
 import { mainSaga } from 'store/sagas';
-import { fetchedInitialDataAction } from 'pods/product-collection/actions';
+import { fetchedInitialDataAction } from 'pods/product-collection';
 
 const composeEnhancer = window['__REDUX_DEVTOOLS_EXTENSION_COMPOSE__'] || compose;
 const sagaMiddleware = createSagaMiddleware();

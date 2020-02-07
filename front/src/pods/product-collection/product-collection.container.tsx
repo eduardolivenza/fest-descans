@@ -6,9 +6,9 @@ import { withRouter, RouteComponentProps } from "react-router-dom";
 import { CheckBoxConfigValue } from "common/components";
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
-import { modelState } from "./modelState";
-import { handleProductTypesFilterAction, removeProductAction, handleChangeComfortFilterAction, handleChangeFilterTextAction, handleChangePriceFilter } from "pods/product-collection/actions";
-import { podProductsCollectionSelector } from "./selectors";
+import { modelState } from "./store/modelState";
+import { handleProductTypesFilterAction, removeProductAction, handleChangeComfortFilterAction, handleChangeFilterTextAction, handleChangePriceFilter } from "pods/product-collection";
+import { podProductsCollectionSelector } from "./store/selectors";
 
 
 const mapStateToProps = (originalState) => {

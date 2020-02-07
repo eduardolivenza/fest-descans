@@ -8,7 +8,7 @@ import { mapFromAToBCollection } from "common";
 import {
   fetchedProductsAction,
   fetchedCategoriesAction
-} from "pods/product-collection/actions";
+} from "pods/product-collection";
 import { getCategoriesCollection } from "core/api/categories-collection.api";
 import { CheckBoxConfigValue } from "common/components";
 
