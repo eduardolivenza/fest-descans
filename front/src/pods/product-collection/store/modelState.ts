@@ -1,4 +1,4 @@
-import { ProductEntityVm, createDefaultProduct } from "core/dataModel/product-entity.vm";
+import { ProductEntityVm, createDefaultProduct, ProductCartEntityVm } from "core";
 import { CheckBoxConfigValue } from "common/components";
 
 export const initState: modelState = {
@@ -48,5 +48,5 @@ export interface modelState {
     maxPrice: number,
     textFilterValue: string,
     //new for cart
-    addedItems: ProductEntityVm[],
+    addedItems: ProductCartEntityVm[],
 }

@@ -1,5 +1,5 @@
 import { BaseAction } from "store/base-actions";
-import { ProductEntityVm } from "core/dataModel/product-entity.vm";
+import { ProductEntityVm, ProductEntitySizeVm } from "core";
 import { actions } from "pods/product-collection/constants";
 import { CheckBoxConfigValue } from "common/components";
 
@@ -44,4 +44,12 @@ export const handleChangeComfortFilterAction = (name: string, value: boolean): B
 export const removeProductAction = (payload: string): BaseAction => ({
   type: actions.REMOVE_PRODUCT,
   payload
+});
+
+export const addToCartAction = (product: ProductEntityVm, selectedSize: ProductEntitySizeVm): BaseAction => ({
+  type: actions.ADD_TO_CART,
+  payload: {
+    product,
+    selectedSize,
+  },
 });

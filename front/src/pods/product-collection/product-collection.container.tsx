@@ -1,17 +1,24 @@
 import * as React from "react";
 import { ProductCollectionComponent } from "./product-collection.component";
-import { ProductEntityVm } from "core/dataModel/product-entity.vm";
+import { ProductEntityVm, ProductEntitySizeVm } from "core/dataModel/product-entity.vm";
 import { routesLinks } from "core";
 import { withRouter, RouteComponentProps } from "react-router-dom";
 import { CheckBoxConfigValue } from "common/components";
-import { connect } from 'react-redux';
-import { Dispatch } from 'redux';
+import { connect } from "react-redux";
+import { Dispatch } from "redux";
 import { modelState } from "./store/modelState";
-import { handleProductTypesFilterAction, removeProductAction, handleChangeComfortFilterAction, handleChangeFilterTextAction, handleChangePriceFilter } from "pods/product-collection";
+import {
+  handleProductTypesFilterAction,
+  removeProductAction,
+  handleChangeComfortFilterAction,
+  handleChangeFilterTextAction,
+  handleChangePriceFilter,
+  addToCartAction
+} from "pods/product-collection";
 import { podProductsCollectionSelector } from "./store/selectors";
+import { select } from "redux-saga/effects";
 
-
-const mapStateToProps = (originalState) => {
+const mapStateToProps = originalState => {
   const state: modelState = podProductsCollectionSelector(originalState);
   return {
     productCollection: state.productsCollectionFiltered,
@@ -24,16 +31,22 @@ const mapStateToProps = (originalState) => {
 };
 const mapDispatchToProps = (dispatch: Dispatch) => {
   return {
+    addToCart: (product: ProductEntityVm, selectedSize: ProductEntitySizeVm) => dispatch(addToCartAction(product, selectedSize)),
     removeProduct: (id: string) => dispatch(removeProductAction(id)),
-    handleChangeComfortFilter: (name: string, value: boolean) => dispatch(handleChangeComfortFilterAction(name, value)),
-    handleProductTypesFilter: (name: string, value: boolean) =>dispatch(handleProductTypesFilterAction(name, value)),
-    handleChangePriceFilter: (value: number[]) => dispatch(handleChangePriceFilter(value)),
-    handleChangeFilterText: (value: string) => dispatch(handleChangeFilterTextAction(value)),
+    handleChangeComfortFilter: (name: string, value: boolean) =>
+      dispatch(handleChangeComfortFilterAction(name, value)),
+    handleProductTypesFilter: (name: string, value: boolean) =>
+      dispatch(handleProductTypesFilterAction(name, value)),
+    handleChangePriceFilter: (value: number[]) =>
+      dispatch(handleChangePriceFilter(value)),
+    handleChangeFilterText: (value: string) =>
+      dispatch(handleChangeFilterTextAction(value))
   };
 };
 
 interface Props extends RouteComponentProps {
   productCollection: ProductEntityVm[];
+  addToCart: (product: ProductEntityVm) => void;
   removeProduct: (id: string) => void;
   handleChangeComfortFilter: (name: string, value: boolean) => void;
   handleProductTypesFilter: (name: string, value: boolean) => void;
@@ -63,6 +76,7 @@ export const ProductCollectionComponentInner = (props: Props) => {
   return (
     <ProductCollectionComponent
       productCollection={props.productCollection}
+      addToCart={props.addToCart}
       viewProduct={viewProduct}
       editProduct={editProduct}
       addProduct={addProduct}
@@ -78,11 +92,9 @@ export const ProductCollectionComponentInner = (props: Props) => {
       filterTextValue={props.filterTextValue}
     />
   );
-
-}
+};
 
 export const ProductCollectionContainer = connect(
   mapStateToProps,
   mapDispatchToProps
 )(withRouter(ProductCollectionComponentInner));
-

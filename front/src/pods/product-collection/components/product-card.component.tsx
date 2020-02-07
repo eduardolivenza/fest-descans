@@ -16,7 +16,8 @@ import {
   CardActions,
   Chip,
   Avatar,
-  CardMedia
+  CardMedia,
+  Button
 } from "@material-ui/core";
 import { withStyles, createStyles, WithStyles } from "@material-ui/core/styles";
 import { ValueDisplay } from "common/components";
@@ -24,6 +25,7 @@ import { SessionContext } from "core";
 
 interface Props extends WithStyles<typeof styles> {
   product: ProductEntityVm;
+  addToCart: (product: ProductEntityVm, selectedSize: ProductEntitySizeVm) => void;
   viewProduct: (id: string) => void;
   editProduct: (id: string) => void;
   removeProduct: (id: string) => void;
@@ -54,18 +56,14 @@ const styles = (theme: Theme) =>
     }
   });
 
-const manageProductPrice = () => {
-  const [currentPrice, setCurrentPrice] = React.useState<string>("--");
-  return { currentPrice, setCurrentPrice };
-};
 
 export const ProductCardInner = (props: Props) => {
-  const { product, classes, viewProduct, editProduct, removeProduct } = props;
-  const { currentPrice, setCurrentPrice } = manageProductPrice();
+  const { product, classes, viewProduct, editProduct, removeProduct, addToCart } = props;
+  const [selectedSize, setSelectedSize] = React.useState<ProductEntitySizeVm>(null);
   const session = React.useContext(SessionContext);
 
   const onSizeSelected = (size: ProductEntitySizeVm) => {
-    setCurrentPrice(size.price);
+    setSelectedSize(size);
   };
 
   return (
@@ -109,8 +107,9 @@ export const ProductCardInner = (props: Props) => {
                 />
               ))}
             </div>
-            <Typography className={classes.price}>{currentPrice}€</Typography>
+            <Typography className={classes.price}>{selectedSize ? selectedSize.price + '€': ''}</Typography>
           </div>
+          <Button variant="outlined" onClick={() => addToCart(product, selectedSize )}>Add to cart</Button>
         </div>
       </CardContent>
       <CardActions disableSpacing>

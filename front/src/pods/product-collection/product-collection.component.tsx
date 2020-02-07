@@ -1,5 +1,5 @@
 import * as React from "react";
-import { ProductEntityVm } from "core/dataModel/product-entity.vm";
+import { ProductEntityVm, ProductEntitySizeVm } from "core/dataModel/product-entity.vm";
 import { ProductCollectionCardsComponent } from "./components/product-collection-cards.component";
 import { ProductCollectionTableComponent } from "./components/product-collection-table.component";
 import {
@@ -17,6 +17,7 @@ const useStyles = makeStyles(styles);
 
 interface Props {
   productCollection: ProductEntityVm[];
+  addToCart: (product: ProductEntityVm, selectedSize: ProductEntitySizeVm) => void;
   viewProduct: (id: string) => void;
   editProduct: (id: string) => void;
   removeProduct: (id: string) => void;
@@ -38,6 +39,7 @@ export const ProductCollectionComponent: React.FunctionComponent<
 > = props => {
   const {
     productCollection,
+    addToCart,
     viewProduct,
     editProduct,
     addProduct,
@@ -63,6 +65,7 @@ export const ProductCollectionComponent: React.FunctionComponent<
     productCollectionComponent = (
       <ProductCollectionCardsComponent
         productCollection={productCollection}
+        addToCart={addToCart}
         viewProduct={viewProduct}
         editProduct={editProduct}
         removeProduct={removeProduct}

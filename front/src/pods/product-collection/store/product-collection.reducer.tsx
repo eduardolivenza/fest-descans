@@ -2,7 +2,7 @@ import { modelState, initState } from "./modelState";
 import { actions } from "pods/product-collection/constants";
 import { BaseAction, StringBoolean } from "store/base-actions";
 import { CheckBoxConfigValue } from "common/components";
-
+import { ProductCartEntityVm } from "core";
 
 function handleFetchedProducts(state: modelState, payload) {
   let maxPriceLocal = state.maxPrice;
@@ -49,9 +49,9 @@ function filterProductTypes(state: modelState, values: StringBoolean) {
   let itemIndex: number = state.productTypesFilterItems.findIndex(
     item => item.name === values.name
   );
-  let newProductTypes: CheckBoxConfigValue[] =[
-    ...state.productTypesFilterItems,
-  ]
+  let newProductTypes: CheckBoxConfigValue[] = [
+    ...state.productTypesFilterItems
+  ];
   newProductTypes[itemIndex].value = values.value;
   const newState = {
     ...state,
@@ -64,9 +64,9 @@ function filterComfortLevel(state: modelState, values: StringBoolean) {
   let itemIndex: number = state.comfortLevelCheckboxes.findIndex(
     item => item.name === values.name
   );
-  let newComfortLevelCheckboxes: CheckBoxConfigValue[] =[
-    ...state.comfortLevelCheckboxes,
-  ]
+  let newComfortLevelCheckboxes: CheckBoxConfigValue[] = [
+    ...state.comfortLevelCheckboxes
+  ];
   newComfortLevelCheckboxes[itemIndex].value = values.value;
   const newState = {
     ...state,
@@ -110,7 +110,36 @@ const applyFilter = (state: modelState): modelState => {
   };
 };
 
-export const productsCollectionReducer = (state: modelState = initState, action: BaseAction) => {
+function addToCart(state: modelState, productAdded: ProductCartEntityVm) {
+  if (productAdded.selectedSize === null){
+    console.error("size is null");
+    return {...state};
+  }
+  let existed_item = state.addedItems.find(
+    item =>
+      item.product.internalIdentifier ===
+        productAdded.product.internalIdentifier &&
+      item.selectedSize.size === productAdded.selectedSize.size
+  );
+  //check if the action id exists in the addedItem
+  if (existed_item) {
+    existed_item.quantity += 1;
+    return {
+      ...state
+    };
+  } else {
+    productAdded.quantity = 1;
+    return {
+      ...state,
+      addedItems: [...state.addedItems, productAdded]
+    };
+  }
+}
+
+export const productsCollectionReducer = (
+  state: modelState = initState,
+  action: BaseAction
+) => {
   switch (action.type) {
     case actions.FETCHED_PRODUCTS:
       return handleFetchedProducts(state, action.payload);
@@ -124,6 +153,8 @@ export const productsCollectionReducer = (state: modelState = initState, action:
       return filterProductTypes(state, action.payload);
     case actions.FILTER_COMFORT:
       return filterComfortLevel(state, action.payload);
+    case actions.ADD_TO_CART:
+      return addToCart(state, action.payload);
     default:
       return state;
   }
