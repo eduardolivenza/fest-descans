@@ -6,3 +6,4 @@ export * from './register.page';
 export * from './default.page';
 export * from './suppliers-collection.page';
 export * from './supplier-edit.page';
+export * from './cart-view.page';

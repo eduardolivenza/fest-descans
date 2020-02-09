@@ -2,7 +2,7 @@ import React, { Suspense } from 'react';
 import * as ReactDOM from "react-dom";
 import { HashRouter, Switch, Route } from "react-router-dom";
 import { routerSwitchRoutes, SessionContext, getSessionCookie } from "core";
-import { LoginPage, ProductCollectionPage, RegisterPage, LandingPage, ProductViewPage, SuppliersCollectionPage, ProductEditPage, SupplierEditPage } from "scenes";
+import { LoginPage, ProductCollectionPage, RegisterPage, LandingPage, ProductViewPage, SuppliersCollectionPage, ProductEditPage, SupplierEditPage, CartViewPage } from "scenes";
 import 'config/i18n/i18n';
 import { rootReducer } from 'store/rootReducer';
 import { Provider } from 'react-redux';
@@ -53,6 +53,10 @@ const Routes = () => {
                     <Route
                         path={routerSwitchRoutes.productCollection}
                         component={ProductCollectionPage}
+                    />
+                    <Route
+                        path={routerSwitchRoutes.cartView}
+                        component={CartViewPage}
                     />
                     <Route
                         path={routerSwitchRoutes.productView}

@@ -7,15 +7,15 @@ import styles from "common/styles/jss/material-kit-react/components/headerStyle.
 import { LanguageMenu } from "layout/menus/languageMenu.layout";
 import { LoginMenu } from "layout/menus/loginMenu.layout";
 import { useTranslation } from "react-i18next";
-import { routesLinks } from "core";
+import { routesLinks, SessionContext } from "core";
 import { withRouter, RouteComponentProps } from "react-router-dom";
 import Cookies from "js-cookie";
 import SwipeableDrawer from "@material-ui/core/SwipeableDrawer";
 import Divider from "@material-ui/core/Divider";
 import MenuIcon from "@material-ui/icons/Menu";
 import IconButton from "@material-ui/core/IconButton";
+import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import { MainMenu } from "./menus/mainMenu.layout";
-import { SessionContext } from "core";
 import { Typography } from "@material-ui/core";
 
 const logo = require("public/images/FEST_COLOR_3.png");
@@ -126,6 +126,10 @@ const HeaderInner: React.FunctionComponent<Props> = props => {
     history.push(routesLinks.register);
   };
 
+  const viewCart = () => event => {
+    history.push(routesLinks.cartView);
+  };
+
   const toggleDrawer = (side, open) => event => {
     if (
       event &&
@@ -173,6 +177,14 @@ const HeaderInner: React.FunctionComponent<Props> = props => {
           </div>
           <div className={classes.toolBarIcons}>
             <Typography>{session.email}</Typography>
+            <IconButton
+              edge="start"
+              color="inherit"
+              aria-label="open drawer"
+              onClick={viewCart()}
+            >
+              <ShoppingCartIcon />
+            </IconButton>
             <LanguageMenu
               handleLanguageMenu={handleLanguageMenu}
               openLanguageMenu={openLanguageMenu}
