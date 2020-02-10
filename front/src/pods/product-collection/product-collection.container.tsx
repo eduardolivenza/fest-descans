@@ -12,11 +12,10 @@ import {
   removeProductAction,
   handleChangeComfortFilterAction,
   handleChangeFilterTextAction,
-  handleChangePriceFilter,
-  addToCartAction
+  handleChangePriceFilter
 } from "pods/product-collection";
 import { podProductsCollectionSelector } from "./store/selectors";
-import { select } from "redux-saga/effects";
+import { addToCartAction } from "pods/cart-view";
 
 const mapStateToProps = originalState => {
   const state: modelState = podProductsCollectionSelector(originalState);

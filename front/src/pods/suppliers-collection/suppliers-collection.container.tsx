@@ -4,7 +4,7 @@ import { SupplierVm } from "core/dataModel/supplier-entity.vm";
 import { mapFromAToBCollection } from "common";
 import { mapSupplierToVm } from "core/mapper/supplier-entity.mapper";
 import { getSuppliersCollection } from "core/api/suppliers-collection.api";
-import { routesLinks, SessionContext } from "core";
+import { routesLinks } from "core";
 import { withRouter, RouteComponentProps } from "react-router-dom";
 
 interface Props extends RouteComponentProps {}
@@ -30,7 +30,6 @@ const useSuppliersCollection = () => {
 };
 
 export const SupplierCollectionContainerInner = (props: Props) => {
-  const session = React.useContext(SessionContext);
   const {
     suppliersCollection,
     loadSuppliersCollection

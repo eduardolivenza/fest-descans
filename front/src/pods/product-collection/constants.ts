@@ -7,7 +7,6 @@ export const actions = {
     FILTER_PRODUCTS_TYPES: 'FilterPoductTypes',
     FILTER_PRICES: 'FilterPrice',
     FILTER_TEXT: 'FilterText',
-    ADD_TO_CART: 'AddToCart',
 };
 
 export const productsCollectionStateKey = 'productsCollectionStateKey';
