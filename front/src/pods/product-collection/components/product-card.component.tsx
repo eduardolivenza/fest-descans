@@ -1,5 +1,6 @@
 import * as React from "react";
 import Card from "@material-ui/core/Card";
+import AddIcon from '@material-ui/icons/Add';
 import {
   ProductEntityVm,
   ProductEntitySizeVm
@@ -17,7 +18,7 @@ import {
   Chip,
   Avatar,
   CardMedia,
-  Button
+  Fab
 } from "@material-ui/core";
 import { withStyles, createStyles, WithStyles } from "@material-ui/core/styles";
 import { ValueDisplay } from "common/components";
@@ -53,6 +54,14 @@ const styles = (theme: Theme) =>
     price: {
       fontWeight: "bold",
       fontSize: 25
+    },
+    actions: {
+      width: "100%",
+      display: "flex",
+      alignItems: "center",
+    },
+    icons: {
+      flexBasis: "85%"
     }
   });
 
@@ -107,30 +116,36 @@ export const ProductCardInner = (props: Props) => {
                 />
               ))}
             </div>
-            <Typography className={classes.price}>{selectedSize ? selectedSize.price + '€': ''}</Typography>
+            <Typography className={classes.price}>{selectedSize ? selectedSize.price + '€' : ''}</Typography>
           </div>
-          <Button variant="outlined" onClick={() => addToCart(product, selectedSize )}>Add to cart</Button>
         </div>
       </CardContent>
       <CardActions disableSpacing>
-        {session.email ? (
-          <>
-            <IconButton aria-label="Edit" onClick={() => editProduct(product.internalIdentifier)}>
-              <EditIcon />
+        <div className={classes.actions}>
+          <div className={classes.icons}>
+            {session.email ? (
+              <>
+                <IconButton aria-label="Edit" onClick={() => editProduct(product.internalIdentifier)}>
+                  <EditIcon />
+                </IconButton>
+                <IconButton aria-label="Remove" onClick={() => removeProduct(product.internalIdentifier)}>
+                  <DeleteIcon />
+                </IconButton>
+              </>
+            ) : (
+                ""
+              )}
+            <IconButton
+              aria-label="More information"
+              onClick={() => viewProduct(product.internalIdentifier)}
+            >
+              <DetailsIcon />
             </IconButton>
-            <IconButton aria-label="Remove" onClick={() => removeProduct(product.internalIdentifier)}>
-              <DeleteIcon />
-            </IconButton>
-          </>
-        ) : (
-          ""
-        )}
-        <IconButton
-          aria-label="More information"
-          onClick={() => viewProduct(product.internalIdentifier)}
-        >
-          <DetailsIcon />
-        </IconButton>
+          </div>
+          <Fab color="inherit" aria-label="add" onClick={() => addToCart(product, selectedSize)}>
+            <AddIcon />
+          </Fab>
+        </div>
       </CardActions>
     </Card>
   );
