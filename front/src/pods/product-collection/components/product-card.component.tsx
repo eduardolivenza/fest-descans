@@ -37,7 +37,14 @@ const styles = (theme: Theme) =>
     card: {
       width: "40vh",
       textAlign: "left",
+      maxHeight: "70vh",
       marginBottom: theme.spacing(2)
+    },
+    cardContent: {
+      display: "flex",
+      flexDirection: "column",
+      justifyContent: "center",
+      height: "40vh",
     },
     chip: {
       marginRight: theme.spacing(1),
@@ -83,13 +90,7 @@ export const ProductCardInner = (props: Props) => {
         subheader={product.category.description}
       />
       <CardContent>
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "center"
-          }}
-        >
+        <div className={classes.cardContent}>
           <CardMedia
             image={product.thumbnail}
             title={product.productName}
